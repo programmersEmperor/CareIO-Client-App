@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingService(),
         scrollBehavior: const ScrollBehaviorModified(),
         getPages: AppRoutes.allRoutes,
-        locale: LanguagePreferenceCache.getLocale() as Locale,
+        locale: const Locale("en", "En"),
         fallbackLocale: const Locale("en", "En"),
         debugShowCheckedModeBanner: false,
         translations: LocalizationHelper(),
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }
