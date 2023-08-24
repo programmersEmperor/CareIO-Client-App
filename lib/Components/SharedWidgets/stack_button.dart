@@ -9,7 +9,7 @@ class StackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2.sp, horizontal: 10.sp),
+      padding: EdgeInsets.symmetric(vertical: 2.sp, horizontal: 5.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.sp),
         color: Theme.of(context).scaffoldBackgroundColor,
