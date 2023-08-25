@@ -2,9 +2,11 @@ import 'package:ai_health_assistance/Components/SharedWidgets/stack_button.dart'
 import 'package:ai_health_assistance/Pages/Home/animations/animation_handler.dart';
 import 'package:ai_health_assistance/Pages/Home/customs/ad_slider_card.dart';
 import 'package:ai_health_assistance/Pages/Home/customs/category_grid_element.dart';
+import 'package:ai_health_assistance/Pages/doctors/doctors_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_animations/carousel_animations.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
@@ -132,16 +134,27 @@ class HomeMainPage extends StatelessWidget {
                     mainAxisSpacing: 8.sp,
                     crossAxisSpacing: 30.sp,
                     mainAxisExtent: 25.h),
-                children: const [
+                children: [
                   CategoryGridElement(
-                      title: 'Doctors', desc: "Find your best doctor"),
+                    title: 'Doctors',
+                    desc: "Find your best doctor",
+                    onTap: () => Get.toNamed(DoctorsPage.id),
+                  ),
                   CategoryGridElement(
-                      title: 'Hospitals', desc: "Find your best Hospital"),
+                    title: 'Hospitals',
+                    desc: "Find your best Hospital",
+                    onTap: () {},
+                  ),
                   CategoryGridElement(
-                      title: 'Medicine', desc: "Explore medicine of your need"),
+                    title: 'Medicine',
+                    desc: "Explore medicine of your need",
+                    onTap: () {},
+                  ),
                   CategoryGridElement(
-                      title: 'clinics',
-                      desc: "Book your clinic appointment now"),
+                    title: 'clinics',
+                    desc: "Book your clinic appointment now",
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),

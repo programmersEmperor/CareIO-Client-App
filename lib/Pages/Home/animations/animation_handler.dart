@@ -22,7 +22,7 @@ class HomeAnimationHandler extends GetxController
       duration: 2000.milliseconds,
     );
     final curve1 = CurvedAnimation(
-        parent: _aiCardAnimationController, curve: Curves.fastOutSlowIn);
+        parent: _aiCardAnimationController, curve: Curves.linearToEaseOut);
     aiCardAnimation =
         Tween<Offset>(begin: const Offset(0, -10), end: const Offset(0, 0))
             .animate(curve1);
@@ -34,7 +34,7 @@ class HomeAnimationHandler extends GetxController
       duration: 2300.milliseconds,
     );
     final curve2 = CurvedAnimation(
-        parent: _adsCardAnimationController, curve: Curves.fastOutSlowIn);
+        parent: _adsCardAnimationController, curve: Curves.linearToEaseOut);
     adsCardAnimation =
         Tween<Offset>(begin: const Offset(-10, 0), end: const Offset(0, 0))
             .animate(curve2);
@@ -46,7 +46,7 @@ class HomeAnimationHandler extends GetxController
       duration: 2300.milliseconds,
     );
     final curve3 = CurvedAnimation(
-        parent: _catCardAnimationController, curve: Curves.fastOutSlowIn);
+        parent: _catCardAnimationController, curve: Curves.linearToEaseOut);
     catCardAnimation =
         Tween<Offset>(begin: const Offset(0, 10), end: const Offset(0, 0))
             .animate(curve3);

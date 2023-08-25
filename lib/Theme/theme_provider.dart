@@ -7,12 +7,29 @@ abstract class ThemeProvider {
   static ThemeData get lightTheme => ThemeData(
         scaffoldBackgroundColor: const Color(0xffF0F0F0),
         primaryColor: const Color(0xff302ac2),
+        splashFactory: NoSplash.splashFactory,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        iconButtonTheme: const IconButtonThemeData(
+            style: ButtonStyle(splashFactory: NoSplash.splashFactory)),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Color(0xff302ac2),
         ),
-        appBarTheme: const AppBarTheme(
+        tabBarTheme: TabBarTheme(
+          overlayColor: MaterialStatePropertyAll(
+            Colors.transparent,
+          ),
+          splashFactory: NoSplash.splashFactory,
+        ),
+        appBarTheme: AppBarTheme(
           color: Colors.transparent,
-          systemOverlayStyle: SystemUiOverlayStyle(
+          iconTheme: const IconThemeData(color: Colors.black54),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w700,
+          ),
+          systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
           ),

@@ -37,18 +37,26 @@ class MyAppointmentsPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.sp),
                 ),
-                child: TabBar(
-                  tabs: controller.tabs,
-                  controller: controller.tabController,
-                  indicator: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.circular(10.sp)),
-                  labelPadding: EdgeInsets.zero,
-                  padding: EdgeInsets.zero,
-                  indicatorPadding: EdgeInsets.all(4.sp),
-                  enableFeedback: true,
-                  unselectedLabelColor: Colors.black54,
-                  overlayColor: const MaterialStatePropertyAll(Colors.black87),
+                child: Theme(
+                  data: ThemeData(
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                  ),
+                  child: TabBar(
+                    tabs: controller.tabs,
+                    splashFactory: NoSplash.splashFactory,
+                    controller: controller.tabController,
+                    indicator: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        borderRadius: BorderRadius.circular(10.sp)),
+                    labelPadding: EdgeInsets.zero,
+                    padding: EdgeInsets.zero,
+                    indicatorPadding: EdgeInsets.all(4.sp),
+                    enableFeedback: true,
+                    unselectedLabelColor: Colors.black54,
+                    overlayColor:
+                        const MaterialStatePropertyAll(Colors.black87),
+                  ),
                 ),
               ),
             ),
