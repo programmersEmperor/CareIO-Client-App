@@ -8,11 +8,6 @@ import 'package:sizer/sizer.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
-  final List<IconData> icons = [
-    Boxicons.bx_list_check,
-    Boxicons.bx_home_circle,
-  ];
-
   @override
   Widget build(BuildContext context) {
     HomePageController homePageController = Get.put(HomePageController());
@@ -25,7 +20,7 @@ class HomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
         () => AnimatedBottomNavigationBar(
-          icons: icons,
+          icons: homePageController.icons,
           activeIndex: homePageController.activePage.value,
           activeColor: Theme.of(context).primaryColor,
           iconSize: 20.sp,
@@ -37,13 +32,16 @@ class HomePage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 15.sp),
+        padding: EdgeInsets.symmetric(
+          vertical: 10.sp,
+        ),
         child: Column(
           children: [
             SlideTransition(
               position: homePageController.animationHandler.aiCardAnimation,
               child: Padding(
-                padding: EdgeInsets.only(top: 25.sp, bottom: 5.sp),
+                padding: EdgeInsets.only(
+                    top: 25.sp, bottom: 5.sp, right: 10.sp, left: 10.sp),
                 child: SizedBox(
                   child: Row(
                     children: [
@@ -73,7 +71,9 @@ class HomePage extends StatelessWidget {
                               Text(
                                 "Good morning ",
                                 style: TextStyle(
-                                    fontSize: 11.sp, color: Colors.black54),
+                                    fontSize: 10.sp,
+                                    color: Colors.black38,
+                                    fontWeight: FontWeight.w500),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 1.sp),
@@ -101,14 +101,9 @@ class HomePage extends StatelessWidget {
             Expanded(
                 child: Obx(
               () => AnimatedSwitcher(
-                  duration: 750.milliseconds,
+                  duration: 3000.milliseconds,
                   switchOutCurve: Curves.fastEaseInToSlowEaseOut,
                   switchInCurve: Curves.fastLinearToSlowEaseIn,
-                  transitionBuilder: (child, animation) => ScaleTransition(
-                        scale: Tween<double>(end: 1.0, begin: 0.9)
-                            .animate(animation),
-                        child: FadeTransition(opacity: animation, child: child),
-                      ),
                   child: homePageController
                       .pages[homePageController.activePage.value]),
             )),

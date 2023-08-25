@@ -19,7 +19,7 @@ abstract class ThemeProvider {
           elevation: 0,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        textTheme: GoogleFonts.interTextTheme().copyWith(
+        textTheme: GoogleFonts.rubikTextTheme().copyWith(
           bodyLarge: TextStyle(fontSize: 16.sp, color: Colors.grey),
           titleLarge: TextStyle(
             fontSize: 24.sp,

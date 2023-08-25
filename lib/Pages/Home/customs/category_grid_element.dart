@@ -17,7 +17,7 @@ class CategoryGridElement extends StatelessWidget {
         SizedBox(
           width: 80.w,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.sp),
+            padding: EdgeInsets.symmetric(vertical: 20.sp),
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
@@ -30,7 +30,7 @@ class CategoryGridElement extends StatelessWidget {
                       title.capitalize!,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 15.sp,
+                        fontSize: 13.sp,
                       ),
                     ),
                     Padding(
