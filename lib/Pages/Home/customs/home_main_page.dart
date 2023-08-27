@@ -20,13 +20,37 @@ class HomeMainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10.sp),
-      child: ListView(
-        children: [
-          SlideTransition(
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: [
+        SlideTransition(
+          position: animationHandler.adsCardAnimation,
+          child: Padding(
+            padding: EdgeInsets.only(top: 10.sp),
+            child: SizedBox(
+              width: 100.w,
+              height: 23.h,
+              child: Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return const AdsSliderCard();
+                },
+                itemCount: 3,
+                autoplay: true,
+                outer: true,
+                loop: true,
+                autoplayDelay: 6000,
+                duration: 1000,
+                pagination:
+                    const SwiperPagination(builder: SwiperPagination.rect),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.sp),
+          child: SlideTransition(
             position: animationHandler.aiCardAnimation,
-            child: Container(
+            child: SizedBox(
               width: 100.w,
               height: 18.h,
               child: Stack(
@@ -99,68 +123,45 @@ class HomeMainPage extends StatelessWidget {
               ),
             ),
           ),
-          SlideTransition(
-            position: animationHandler.adsCardAnimation,
-            child: Padding(
+        ),
+        SlideTransition(
+          position: animationHandler.catCardAnimation,
+          child: SizedBox(
+            height: 16.h,
+            width: 100.w,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               padding: EdgeInsets.only(top: 10.sp),
-              child: SizedBox(
-                width: 100.w,
-                height: 23.h,
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return const AdsSliderCard();
-                  },
-                  itemCount: 3,
-                  autoplay: true,
-                  outer: true,
-                  loop: true,
-                  autoplayDelay: 6000,
-                  duration: 1000,
-                  pagination:
-                      const SwiperPagination(builder: SwiperPagination.rect),
+              children: [
+                CategoryGridElement(
+                  title: 'Doctors',
+                  desc: "Find your best doctor",
+                  onTap: () => Get.toNamed(DoctorsPage.id),
+                  iconPath: "assets/svgs/doctor_icon.svg",
                 ),
-              ),
+                CategoryGridElement(
+                  title: 'Hospitals',
+                  desc: "Find your best Hospital",
+                  onTap: () {},
+                  iconPath: "assets/svgs/hospital_icon.svg",
+                ),
+                CategoryGridElement(
+                  title: 'Medicine',
+                  desc: "Explore medicine of your need",
+                  onTap: () {},
+                  iconPath: "assets/svgs/medicine_icon.svg",
+                ),
+                CategoryGridElement(
+                  title: 'Medicine',
+                  desc: "Explore medicine of your need",
+                  onTap: () {},
+                  iconPath: "assets/svgs/medicine_icon.svg",
+                ),
+              ],
             ),
           ),
-          SlideTransition(
-            position: animationHandler.catCardAnimation,
-            child: SizedBox(
-              height: 50.h,
-              width: 100.w,
-              child: GridView(
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 8.sp,
-                    crossAxisSpacing: 30.sp,
-                    mainAxisExtent: 25.h),
-                children: [
-                  CategoryGridElement(
-                    title: 'Doctors',
-                    desc: "Find your best doctor",
-                    onTap: () => Get.toNamed(DoctorsPage.id),
-                  ),
-                  CategoryGridElement(
-                    title: 'Hospitals',
-                    desc: "Find your best Hospital",
-                    onTap: () {},
-                  ),
-                  CategoryGridElement(
-                    title: 'Medicine',
-                    desc: "Explore medicine of your need",
-                    onTap: () {},
-                  ),
-                  CategoryGridElement(
-                    title: 'clinics',
-                    desc: "Book your clinic appointment now",
-                    onTap: () {},
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

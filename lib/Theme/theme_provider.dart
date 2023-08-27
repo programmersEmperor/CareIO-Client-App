@@ -5,7 +5,7 @@ import 'package:sizer/sizer.dart';
 
 abstract class ThemeProvider {
   static ThemeData get lightTheme => ThemeData(
-        scaffoldBackgroundColor: const Color(0xffF0F0F0),
+        scaffoldBackgroundColor: const Color(0xfff8f8f8),
         primaryColor: const Color(0xff302ac2),
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
@@ -15,7 +15,7 @@ abstract class ThemeProvider {
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Color(0xff302ac2),
         ),
-        tabBarTheme: TabBarTheme(
+        tabBarTheme: const TabBarTheme(
           overlayColor: MaterialStatePropertyAll(
             Colors.transparent,
           ),

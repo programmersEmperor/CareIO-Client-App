@@ -29,7 +29,7 @@ class AdsSliderCard extends StatelessWidget {
               width: 100.w,
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                    colors: [Colors.black87, Colors.transparent],
+                    colors: [Colors.black38, Colors.transparent],
                     end: Alignment.topCenter,
                     begin: Alignment.bottomCenter),
                 borderRadius: BorderRadius.circular(20.sp),
@@ -41,8 +41,8 @@ class AdsSliderCard extends StatelessWidget {
                     child: AutoSizeText(
                       "Advertiser name",
                       style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w500,
                           color: Colors.white),
                     )),
               ),

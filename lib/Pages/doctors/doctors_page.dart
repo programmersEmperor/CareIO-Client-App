@@ -1,8 +1,8 @@
+import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Pages/doctors/UiController/DoctorsPageController.dart';
 import 'package:ai_health_assistance/Pages/doctors/customs/doctor_grid_view.dart';
 import 'package:ai_health_assistance/Pages/doctors/customs/doctor_list_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -36,61 +36,19 @@ class DoctorsPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.sp),
         child: Column(
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Card(
-                    elevation: 0,
-                    color: Colors.grey.shade300,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.sp)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 5.sp, vertical: 7.sp),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 2.w,
-                          ),
-                          const Icon(Boxicons.bx_search, color: Colors.black54),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const Text(
-                            "Find your doctor",
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10.sp,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    borderRadius: BorderRadius.circular(10.sp),
-                  ),
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 7.sp, vertical: 7.sp),
-                    child: const Icon(Boxicons.bx_filter_alt,
-                        color: Colors.black54),
-                  ),
-                ),
-              ],
-            ),
+            const CustomSearchBar(),
             Expanded(
-              child: Obx(() => AnimatedSwitcher(
+              child: Obx(
+                () => AnimatedSwitcher(
                   duration: 500.milliseconds,
                   switchInCurve: Curves.linearToEaseOut,
                   switchOutCurve: Curves.linearToEaseOut,
                   child: controller.isList.isTrue
                       ? const DoctorsListView()
-                      : const DoctorGridView())),
-            )
+                      : const DoctorGridView(),
+                ),
+              ),
+            ),
           ],
         ),
       ),

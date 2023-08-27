@@ -1,5 +1,7 @@
+import 'package:ai_health_assistance/Pages/doctors/doctor_profile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class DoctorGridView extends StatelessWidget {
@@ -19,7 +21,7 @@ class DoctorGridView extends StatelessWidget {
             crossAxisSpacing: 30.sp,
             mainAxisExtent: 25.h),
         itemBuilder: (_, index) => InkWell(
-          onTap: () {},
+          onTap: () => Get.toNamed(DoctorProfile.id),
           child: Stack(
             children: [
               SizedBox(

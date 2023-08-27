@@ -41,20 +41,13 @@ class HomePage extends StatelessWidget {
               position: homePageController.animationHandler.aiCardAnimation,
               child: Padding(
                 padding: EdgeInsets.only(
-                    top: 25.sp, bottom: 5.sp, right: 10.sp, left: 10.sp),
+                    top: 25.sp, bottom: 5.sp, right: 15.sp, left: 15.sp),
                 child: SizedBox(
                   child: Row(
                     children: [
                       Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 10,
-                              color: Colors.grey.shade400,
-                              spreadRadius: 5,
-                            )
-                          ],
                         ),
                         child: const CircleAvatar(
                           radius: 22.0,
@@ -64,7 +57,7 @@ class HomePage extends StatelessWidget {
                       ),
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                          padding: EdgeInsets.symmetric(horizontal: 10.sp),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

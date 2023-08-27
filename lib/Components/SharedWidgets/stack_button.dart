@@ -18,7 +18,7 @@ class StackButton extends StatelessWidget {
         onPressed: () {},
         style: ButtonStyle(
           backgroundColor: const MaterialStatePropertyAll(Colors.white),
-          elevation: MaterialStatePropertyAll(10.sp),
+          elevation: MaterialStatePropertyAll(5.sp),
           shadowColor: MaterialStatePropertyAll(
               Theme.of(context).primaryColor.withOpacity(0.3)),
           shape: MaterialStatePropertyAll(
