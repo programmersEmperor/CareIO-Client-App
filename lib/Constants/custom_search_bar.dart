@@ -24,13 +24,17 @@ class CustomSearchBar extends StatelessWidget {
                   SizedBox(
                     width: 2.w,
                   ),
-                  const Icon(Boxicons.bx_search, color: Colors.black54),
+                  Icon(
+                    Boxicons.bx_search,
+                    color: Colors.black54,
+                    size: 15.sp,
+                  ),
                   SizedBox(
                     width: 3.w,
                   ),
-                  const Text(
+                  Text(
                     "Find your doctor",
-                    style: TextStyle(color: Colors.black54),
+                    style: TextStyle(color: Colors.black54, fontSize: 11.sp),
                   ),
                 ],
               ),
@@ -46,8 +50,12 @@ class CustomSearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.sp),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 7.sp, vertical: 7.sp),
-            child: const Icon(Boxicons.bx_filter_alt, color: Colors.white),
+            padding: EdgeInsets.all(7.sp),
+            child: Icon(
+              Boxicons.bx_filter_alt,
+              color: Colors.white,
+              size: 15.sp,
+            ),
           ),
         ),
       ],

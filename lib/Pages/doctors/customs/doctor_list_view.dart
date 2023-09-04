@@ -11,26 +11,28 @@ class DoctorsListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 15.sp),
+      padding: EdgeInsets.only(bottom: 0.sp),
       child: ListView.builder(
         itemCount: 10,
-        padding: EdgeInsets.only(top: 10.sp),
         itemBuilder: (_, index) => Padding(
           padding: const EdgeInsets.only(
             top: 10.0,
           ),
           child: InkWell(
-            onTap: () => Get.toNamed(DoctorProfile.id),
+            onTap: () => Get.toNamed(DoctorProfile.id, arguments: [
+              {'index': index.toString()}
+            ]),
             child: SizedBox(
               child: Card(
                 elevation: 0.sp,
+                color: Colors.white,
                 shadowColor: Colors.grey.shade100,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.sp),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 8.sp, right: 8.sp, top: 10.sp, bottom: 10.sp),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 8.sp, vertical: 7.sp),
                   child: Row(
                     children: [
                       Hero(
@@ -58,7 +60,6 @@ class DoctorsListView extends StatelessWidget {
                               left: 8.0.sp, right: 5.0.sp, top: 0.sp),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
                                 "Doctor name",
@@ -68,44 +69,50 @@ class DoctorsListView extends StatelessWidget {
                               ),
                               Padding(
                                 padding: EdgeInsets.only(top: 3.5.sp),
-                                child: Text(
-                                  "Specialization",
-                                  style: TextStyle(
-                                    color: Colors.black38,
-                                    fontSize: 8.sp,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 3.5.sp),
                                 child: Row(
                                   children: [
                                     Icon(
                                       Icons.star,
-                                      color: Colors.yellow,
+                                      color: Colors.orange,
                                       size: 10.sp,
                                     ),
                                     Text(
-                                      "3.4",
+                                      "3.4 (134 Review)",
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.black38,
                                         fontSize: 8.sp,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 3.5.sp),
+                                child: Text(
+                                  "Specialization  Specialization  Specialization Specialization Specialization Specialization Specialization Specialization Specialization ",
+                                  style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
-                      CircleAvatar(
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 12.sp,
-                          color: Theme.of(context).primaryColor,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Center(
+                          child: CircleAvatar(
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                            radius: 12.sp,
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              size: 10.sp,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
                         ),
                       ),
                     ],

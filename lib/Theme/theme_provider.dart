@@ -5,15 +5,16 @@ import 'package:sizer/sizer.dart';
 
 abstract class ThemeProvider {
   static ThemeData get lightTheme => ThemeData(
-        scaffoldBackgroundColor: const Color(0xfff8f8f8),
-        primaryColor: const Color(0xff302ac2),
+        scaffoldBackgroundColor: const Color(0xffF6F7F7),
+        primaryColor: const Color(0xff129A7F),
+        cardColor: const Color(0xffE7F5F2),
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
         iconButtonTheme: const IconButtonThemeData(
             style: ButtonStyle(splashFactory: NoSplash.splashFactory)),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Color(0xff302ac2),
+          backgroundColor: Color(0xff129A7F),
         ),
         tabBarTheme: const TabBarTheme(
           overlayColor: MaterialStatePropertyAll(

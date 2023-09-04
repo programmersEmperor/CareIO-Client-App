@@ -2,6 +2,7 @@ import 'package:ai_health_assistance/Pages/doctors/doctor_profile.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
 
 class DoctorGridView extends StatelessWidget {
@@ -18,105 +19,112 @@ class DoctorGridView extends StatelessWidget {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 8.sp,
-            crossAxisSpacing: 30.sp,
-            mainAxisExtent: 25.h),
+            crossAxisSpacing: 10.sp,
+            mainAxisExtent: 35.h),
         itemBuilder: (_, index) => InkWell(
-          onTap: () => Get.toNamed(DoctorProfile.id),
-          child: Stack(
-            children: [
-              SizedBox(
-                width: 80.w,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.sp),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AutoSizeText(
-                            "Doctor",
+          onTap: () => Get.toNamed(DoctorProfile.id, arguments: [
+            {'index': index}
+          ]),
+          child: SizedBox(
+            height: 35.h,
+            width: 39.w,
+            child: Card(
+              elevation: 0,
+              color: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.sp),
+                      child: Container(
+                        height: 20.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image.asset(
+                            'assets/images/person.jpg',
+                            fit: BoxFit.cover,
+                            width: 31.w,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.only(left: 5.sp, right: 5.sp, top: 8.sp),
+                        child: AutoSizeText(
+                          "Dr haitham Hussien nnn",
+                          style: TextStyle(
+                            fontSize: 11.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          overflowReplacement: Marquee(
+                            text: "Dr haitham Hussien nnns",
+                            blankSpace: 20.0,
+                            accelerationCurve: Curves.easeOut,
+                            velocity: 50.0,
+                            startPadding: 2.0,
+                            showFadingOnlyWhenScrolling: true,
+                            startAfter: 5.seconds,
+                            fadingEdgeEndFraction: 0.5.sp,
+                            fadingEdgeStartFraction: 0.5.sp,
+                            pauseAfterRound: 5.seconds,
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13.sp,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.sp, left: 3.sp, right: 3.sp),
-                            child: AutoSizeText(
-                              "Specialization",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 8.5.sp, color: Colors.black54),
-                            ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsets.only(top: 3.5.sp, left: 5.sp, right: 5.sp),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: Colors.orange,
+                            size: 10.sp,
                           ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3.5.sp),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.star,
-                                  color: Colors.yellow,
-                                ),
-                                Text(
-                                  "3.4",
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                              ],
+                          Text(
+                            "3.4 (134 Review)",
+                            style: TextStyle(
+                              color: Colors.black38,
+                              fontSize: 8.sp,
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23),
-                    image: const DecorationImage(
-                      image: AssetImage(
-                        'assets/images/person.jpg',
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 5.sp,
+                          right: 5.sp,
+                          top: 2.sp,
+                        ),
+                        child: Text(
+                          "Specialization",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 8.sp,
+                              color: Colors.black45),
+                        ),
                       ),
-                      fit: BoxFit.cover,
                     ),
-                    border: Border.all(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        width: 3.sp),
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  height: 8.h,
-                  width: 17.w,
+                  ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: Theme.of(context).scaffoldBackgroundColor,
-                        width: 3.sp),
-                    color: Theme.of(context).primaryColor,
-                  ),
-                  height: 7.h,
-                  width: 10.w,
-                  child: const Icon(
-                    Icons.arrow_forward,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

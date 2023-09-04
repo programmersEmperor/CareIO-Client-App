@@ -18,14 +18,15 @@ class MyAppointmentsPage extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "My appointments",
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+              "My appointments".capitalize!,
+              style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
             ),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(top: 15.sp, left: 10.sp, right: 10.sp),
           child: Container(
+            height: 35.sp,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.sp),
               color: Colors.grey.shade300,
@@ -51,8 +52,9 @@ class MyAppointmentsPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.sp)),
                     labelPadding: EdgeInsets.zero,
                     padding: EdgeInsets.zero,
+                    labelStyle: TextStyle(fontSize: 10.sp),
+                    enableFeedback: false,
                     indicatorPadding: EdgeInsets.all(4.sp),
-                    enableFeedback: true,
                     unselectedLabelColor: Colors.black54,
                     overlayColor:
                         const MaterialStatePropertyAll(Colors.black87),
@@ -75,12 +77,13 @@ class MyAppointmentsPage extends StatelessWidget {
                   child: Card(
                     elevation: 15,
                     shadowColor: Colors.grey.shade100,
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Padding(
                       padding: EdgeInsets.only(
-                          top: 15.sp, left: 15.sp, right: 15.sp, bottom: 10.sp),
+                          top: 15.sp, left: 15.sp, right: 15.sp, bottom: 2.sp),
                       child: Column(
                         children: [
                           Row(
@@ -90,27 +93,33 @@ class MyAppointmentsPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   AutoSizeText(
-                                    "Doctor name",
+                                    "Dr Haitham Hussein",
                                     style: TextStyle(
-                                        fontSize: 12.5.sp,
+                                        fontSize: 11.sp,
                                         fontWeight: FontWeight.w600),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.only(top: 5.sp),
-                                    child: AutoSizeText(
-                                      "Specialization",
+                                    child: Text(
+                                      "Oncologist",
                                       style: TextStyle(
-                                        fontSize: 10.sp,
+                                        fontSize: 9.5.sp,
                                         color: Colors.black38,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              CircleAvatar(
-                                radius: 18.sp,
-                                backgroundImage: const AssetImage(
-                                    "assets/images/person.jpg"),
+                              Container(
+                                height: 32.sp,
+                                width: 32.sp,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.sp),
+                                    image: const DecorationImage(
+                                      image: AssetImage(
+                                          "assets/images/person.jpg"),
+                                      fit: BoxFit.cover,
+                                    )),
                               ),
                             ],
                           ),
@@ -119,99 +128,95 @@ class MyAppointmentsPage extends StatelessWidget {
                             child: const Divider(),
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Expanded(
-                                child: SizedBox(
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Icon(
-                                        Boxicons.bxs_calendar,
-                                        color: Colors.grey,
-                                        size: 15.sp,
+                              SizedBox(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Boxicons.bxs_calendar,
+                                      color: Theme.of(context).primaryColor,
+                                      size: 12.sp,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 2.sp, left: 2.sp, right: 2.sp),
+                                      child: Text(
+                                        "12/03/2021",
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 8.5.sp),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 2.sp, left: 2.sp, right: 2.sp),
-                                        child: Text(
-                                          "12/03/2021",
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 9.sp),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                child: SizedBox(
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Boxicons.bxs_time,
-                                        color: Colors.grey,
-                                        size: 15.sp,
+                              SizedBox(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Boxicons.bxs_time,
+                                      color: Theme.of(context).primaryColor,
+                                      size: 12.sp,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 2.sp, left: 2.sp, right: 2.sp),
+                                      child: Text(
+                                        "10:30 AM",
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 8.5.sp),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 2.sp, left: 2.sp, right: 2.sp),
-                                        child: Text(
-                                          "10:30 AM",
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 9.sp),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Expanded(
-                                child: SizedBox(
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Boxicons.bxs_circle,
-                                        color: index == 1
-                                            ? Colors.green
-                                            : Colors.orange,
-                                        size: 10.sp,
+                              SizedBox(
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Boxicons.bxs_circle,
+                                      color: index == 1
+                                          ? Colors.green
+                                          : Colors.orange,
+                                      size: 10.sp,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 1.sp, left: 2.sp, right: 2.sp),
+                                      child: Text(
+                                        index == 1 ? "confirmed" : "review",
+                                        style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 10.sp),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 1.sp, left: 2.sp, right: 2.sp),
-                                        child: Text(
-                                          index == 1 ? "confirmed" : "review",
-                                          style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 10.sp),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 10.sp),
+                            padding: EdgeInsets.only(top: 5.sp, bottom: 5.sp),
                             child: Row(
                               children: [
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {},
                                     style: ButtonStyle(
-                                        fixedSize: MaterialStatePropertyAll(
-                                            Size(100.w, 4.5.h)),
+                                        minimumSize: MaterialStatePropertyAll(
+                                          Size(100.w, 5.h),
+                                        ),
+                                        maximumSize: MaterialStatePropertyAll(
+                                          Size(100.w, 5.h),
+                                        ),
                                         elevation:
                                             const MaterialStatePropertyAll(0),
                                         backgroundColor:
@@ -222,12 +227,13 @@ class MyAppointmentsPage extends StatelessWidget {
                                             RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        7.sp)))),
-                                    child: const Text(
+                                                        10.sp)))),
+                                    child: Text(
                                       "Cancel",
                                       style: TextStyle(
                                           color: Colors.black54,
-                                          fontWeight: FontWeight.w800),
+                                          fontSize: 9.sp,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
@@ -238,8 +244,12 @@ class MyAppointmentsPage extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {},
                                     style: ButtonStyle(
-                                        fixedSize: MaterialStatePropertyAll(
-                                            Size(100.w, 4.5.h)),
+                                        minimumSize: MaterialStatePropertyAll(
+                                          Size(100.w, 5.h),
+                                        ),
+                                        maximumSize: MaterialStatePropertyAll(
+                                          Size(100.w, 5.h),
+                                        ),
                                         elevation:
                                             const MaterialStatePropertyAll(0),
                                         backgroundColor:
@@ -249,10 +259,11 @@ class MyAppointmentsPage extends StatelessWidget {
                                             RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(
-                                                        7.sp)))),
-                                    child: const Text(
+                                                        10.sp)))),
+                                    child: Text(
                                       "Reschedule",
                                       style: TextStyle(
+                                          fontSize: 9.sp,
                                           fontWeight: FontWeight.w800),
                                     ),
                                   ),

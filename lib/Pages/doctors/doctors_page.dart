@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
-import 'package:ai_health_assistance/Pages/doctors/UiController/DoctorsPageController.dart';
+import 'package:ai_health_assistance/Pages/doctors/UiController/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/doctors/customs/doctor_grid_view.dart';
 import 'package:ai_health_assistance/Pages/doctors/customs/doctor_list_view.dart';
 import 'package:flutter/material.dart';
@@ -28,8 +28,14 @@ class DoctorsPage extends StatelessWidget {
           IconButton(
               onPressed: () => controller.isList(!controller.isList.value),
               icon: Obx(() => controller.isList.isTrue
-                  ? const Icon(Icons.grid_view_rounded)
-                  : const Icon(Icons.list_rounded)))
+                  ? Icon(
+                      Icons.grid_view_rounded,
+                      size: 17.sp,
+                    )
+                  : Icon(
+                      Icons.list_rounded,
+                      size: 17.sp,
+                    )))
         ],
       ),
       body: Padding(

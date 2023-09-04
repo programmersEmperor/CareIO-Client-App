@@ -16,43 +16,37 @@ class CategoryGridElement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: SizedBox(
-        width: 30.w,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 8.0,
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        child: Card(
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
           ),
-          child: Card(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            color: Color(0xffeaeffc),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    iconPath,
-                    height: 30.sp,
-                    width: 15.sp,
-                    color: Color(0xff4e71a8),
+          color: Theme.of(context).cardColor,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconPath,
+                  height: 20.sp,
+                  width: 15.sp,
+                  color: Theme.of(context).primaryColor,
+                ),
+                SizedBox(
+                  height: 4.sp,
+                ),
+                Text(
+                  title.capitalize!,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                    fontSize: 9.sp,
                   ),
-                  SizedBox(
-                    height: 4.sp,
-                  ),
-                  Text(
-                    title.capitalize!,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 10.sp,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

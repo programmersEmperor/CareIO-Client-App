@@ -1,7 +1,6 @@
 import 'package:ai_health_assistance/Pages/Home/UiController/home_page_controller.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,9 +12,16 @@ class HomePage extends StatelessWidget {
     HomePageController homePageController = Get.put(HomePageController());
     return Scaffold(
       extendBody: true,
-      floatingActionButton: FloatingActionButton(
-        child: const Text("AI"),
-        onPressed: () {},
+      floatingActionButton: SizedBox(
+        height: 42.sp,
+        width: 42.sp,
+        child: FloatingActionButton(
+          child: Text(
+            "AI",
+            style: TextStyle(fontSize: 10.sp),
+          ),
+          onPressed: () => homePageController.showBottomSheet(context),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Obx(
@@ -23,17 +29,19 @@ class HomePage extends StatelessWidget {
           icons: homePageController.icons,
           activeIndex: homePageController.activePage.value,
           activeColor: Theme.of(context).primaryColor,
-          iconSize: 20.sp,
+          inactiveColor: Colors.black45,
+          iconSize: 17.sp,
           gapLocation: GapLocation.center,
-          notchSmoothness: NotchSmoothness.softEdge,
+          height: 40.sp,
+          notchSmoothness: NotchSmoothness.defaultEdge,
           leftCornerRadius: 10.sp,
           rightCornerRadius: 10.sp,
           onTap: homePageController.changePage,
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 10.sp,
+        padding: EdgeInsets.only(
+          bottom: 10.sp,
         ),
         child: Column(
           children: [
@@ -41,19 +49,19 @@ class HomePage extends StatelessWidget {
               position: homePageController.animationHandler.aiCardAnimation,
               child: Padding(
                 padding: EdgeInsets.only(
-                    top: 25.sp, bottom: 5.sp, right: 15.sp, left: 15.sp),
+                    top: 25.sp, bottom: 0.sp, right: 15.sp, left: 15.sp),
                 child: SizedBox(
                   child: Row(
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: const CircleAvatar(
-                          radius: 22.0,
-                          backgroundImage:
-                              AssetImage("assets/images/person.jpg"),
-                        ),
+                            borderRadius: BorderRadius.circular(10.sp),
+                            image: const DecorationImage(
+                              image: AssetImage("assets/images/person.jpg"),
+                              fit: BoxFit.cover,
+                            )),
+                        height: 30.sp,
+                        width: 30.sp,
                       ),
                       Expanded(
                         child: Padding(
@@ -64,16 +72,16 @@ class HomePage extends StatelessWidget {
                               Text(
                                 "Good morning ",
                                 style: TextStyle(
-                                    fontSize: 10.sp,
+                                    fontSize: 9.5.sp,
                                     color: Colors.black38,
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w300),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(top: 1.sp),
+                                padding: EdgeInsets.only(top: 3.sp),
                                 child: Text(
                                   "Haitham Hussien",
                                   style: TextStyle(
-                                      fontSize: 12.sp,
+                                      fontSize: 10.sp,
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -82,9 +90,22 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IconButton(
+                      TextButton(
                         onPressed: () {},
-                        icon: const Badge(child: Icon(Boxicons.bx_bell)),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Sana,a',
+                              style: TextStyle(
+                                  fontSize: 10.sp, color: Colors.black54),
+                            ),
+                            Icon(
+                              Icons.location_on_outlined,
+                              size: 15.sp,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),

@@ -7,6 +7,9 @@ class HomeAnimationHandler extends GetxController
   late Animation<Offset> aiCardAnimation;
   late AnimationController _aiCardAnimationController;
 
+  late Animation<double> dottedAnimation;
+  late AnimationController _dottedAnimationController;
+
   late Animation<Offset> adsCardAnimation;
   late AnimationController _adsCardAnimationController;
 
@@ -26,6 +29,16 @@ class HomeAnimationHandler extends GetxController
     aiCardAnimation =
         Tween<Offset>(begin: const Offset(0, -10), end: const Offset(0, 0))
             .animate(curve1);
+
+    _dottedAnimationController = AnimationController(
+      vsync: this,
+      duration: 10000.milliseconds,
+    );
+    final curve4 = CurvedAnimation(
+        parent: _dottedAnimationController, curve: Curves.linearToEaseOut);
+    dottedAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(curve4);
+
+    _dottedAnimationController.forward();
 
     _aiCardAnimationController.forward();
 
