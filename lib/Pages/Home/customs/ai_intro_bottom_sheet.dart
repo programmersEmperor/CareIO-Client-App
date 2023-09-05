@@ -1,6 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/ai_introduction_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/chatbot_page.dart';
+import 'package:ai_health_assistance/Pages/Home/customs/mainPages/chatbot_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

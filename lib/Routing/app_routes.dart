@@ -1,4 +1,4 @@
-import 'package:ai_health_assistance/Pages/Home/customs/chatbot_page.dart';
+import 'package:ai_health_assistance/Pages/Home/customs/mainPages/chatbot_page.dart';
 import 'package:ai_health_assistance/Pages/doctors/doctor_profile.dart';
 import 'package:ai_health_assistance/Pages/doctors/doctors_page.dart';
 import 'package:get/get.dart';

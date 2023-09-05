@@ -1,7 +1,7 @@
 import 'package:ai_health_assistance/Pages/Home/animations/animation_handler.dart';
 import 'package:ai_health_assistance/Pages/Home/customs/ai_intro_bottom_sheet.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/home_main_page.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/my_appoinments_page.dart';
+import 'package:ai_health_assistance/Pages/Home/customs/mainPages/home_main_page.dart';
+import 'package:ai_health_assistance/Pages/Home/customs/mainPages/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
 import 'package:ai_health_assistance/Pages/Search/search_page.dart';
 import 'package:flutter/material.dart';
