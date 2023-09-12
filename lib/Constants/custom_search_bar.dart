@@ -1,10 +1,15 @@
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomSearchBar extends StatelessWidget {
+  final bool showFilter;
+  final String title;
   const CustomSearchBar({
     super.key,
+    this.showFilter = true,
+    required this.title,
   });
 
   @override
@@ -33,31 +38,33 @@ class CustomSearchBar extends StatelessWidget {
                     width: 3.w,
                   ),
                   Text(
-                    "Find your doctor",
-                    style: TextStyle(color: Colors.black54, fontSize: 11.sp),
+                    title,
+                    style: TextStyle(color: Colors.black54, fontSize: 10.sp),
                   ),
                 ],
               ),
             ),
           ),
         ),
-        SizedBox(
-          width: 10.sp,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-            borderRadius: BorderRadius.circular(10.sp),
+        if (showFilter) ...[
+          SizedBox(
+            width: 10.sp,
           ),
-          child: Padding(
-            padding: EdgeInsets.all(7.sp),
-            child: Icon(
-              Boxicons.bx_filter_alt,
-              color: Colors.white,
-              size: 15.sp,
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.primaryColor,
+              borderRadius: BorderRadius.circular(10.sp),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(7.sp),
+              child: Icon(
+                Boxicons.bx_filter_alt,
+                color: Colors.white,
+                size: 15.sp,
+              ),
             ),
           ),
-        ),
+        ]
       ],
     );
   }

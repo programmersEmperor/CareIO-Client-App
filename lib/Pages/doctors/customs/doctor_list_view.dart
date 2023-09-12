@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Pages/doctors/doctor_profile.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -43,9 +44,7 @@ class DoctorsListView extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.sp),
                               border: Border.all(
-                                  color:
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                  width: 3.sp),
+                                  color: AppColors.scaffoldColor, width: 3.sp),
                               image: const DecorationImage(
                                 fit: BoxFit.cover,
                                 image: AssetImage(
@@ -104,13 +103,12 @@ class DoctorsListView extends StatelessWidget {
                         alignment: Alignment.center,
                         child: Center(
                           child: CircleAvatar(
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
+                            backgroundColor: AppColors.scaffoldColor,
                             radius: 12.sp,
                             child: Icon(
                               Icons.arrow_forward_ios,
                               size: 10.sp,
-                              color: Theme.of(context).primaryColor,
+                              color: AppColors.primaryColor,
                             ),
                           ),
                         ),

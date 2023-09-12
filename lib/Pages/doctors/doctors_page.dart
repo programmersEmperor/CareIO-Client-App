@@ -42,7 +42,9 @@ class DoctorsPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.sp),
         child: Column(
           children: [
-            const CustomSearchBar(),
+            const CustomSearchBar(
+              title: 'Find your doctor',
+            ),
             Expanded(
               child: Obx(
                 () => AnimatedSwitcher(

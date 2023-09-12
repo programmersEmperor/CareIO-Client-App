@@ -1,4 +1,7 @@
+import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class StackButton extends StatelessWidget {
@@ -9,17 +12,18 @@ class StackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        Get.toNamed(ChatBotPage.id);
+      },
       style: ButtonStyle(
         maximumSize: MaterialStatePropertyAll(Size(28.w, 4.h)),
         minimumSize: MaterialStatePropertyAll(Size(28.w, 4.h)),
         padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-        shadowColor: MaterialStatePropertyAll(
-            Theme.of(context).primaryColor.withOpacity(0.3)),
+        shadowColor:
+            MaterialStatePropertyAll(AppColors.primaryColor.withOpacity(0.3)),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
-            side: BorderSide(
-                color: Theme.of(context).scaffoldBackgroundColor, width: 1.sp),
+            side: BorderSide(color: AppColors.scaffoldColor, width: 1.sp),
             borderRadius: BorderRadius.circular(20.sp),
           ),
         ),

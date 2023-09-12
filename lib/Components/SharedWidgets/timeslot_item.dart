@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,7 +18,7 @@ class TimeSlotItem extends StatelessWidget {
       labelStyle: TextStyle(fontSize: 7.5.sp, color: Colors.black54),
       avatar: Icon(
         Icons.watch_later_outlined,
-        color: Theme.of(context).primaryColor,
+        color: AppColors.primaryColor,
         size: 15.sp,
       ),
       onPressed: isDisabled ? null : () {},

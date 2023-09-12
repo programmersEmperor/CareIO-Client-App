@@ -1,0 +1,78 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/rounded_text_field.dart';
+import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/UiController/chat_page_controller.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
+
+class ChatBotPage extends StatelessWidget {
+  const ChatBotPage({super.key});
+
+  static const id = "/chatBotPage";
+
+  @override
+  Widget build(BuildContext context) {
+    ChatUiController uiController = Get.put(ChatUiController());
+    return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 30.sp,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 15.sp,
+          ),
+          onPressed: () => Get.back(),
+        ),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Obx(
+              () => ListView.builder(
+                controller: uiController.listController,
+                physics: ClampingScrollPhysics(),
+                itemCount: uiController.messages.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return uiController.messages[index];
+                },
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 5.sp),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: AnimatedSwitcher(
+                    duration: 500.milliseconds,
+                    child: RoundedTextField(
+                      controller: uiController.textController,
+                      hint: "i have a cold ...",
+                      node: uiController.textFocusNode,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10.sp,
+                ),
+                CircularIconButton(
+                  onTap: () => uiController.sendMessage(true),
+                  onLongPress: () => uiController.sendMessage(false),
+                  width: 12.w,
+                  height: 7.5.h,
+                  backgroundColor: AppColors.primaryColor,
+                  iconColor: Colors.white,
+                  iconSize: 15.sp,
+                  icon: Icons.send_rounded,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

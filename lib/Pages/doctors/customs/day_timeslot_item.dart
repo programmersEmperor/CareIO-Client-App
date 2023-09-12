@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Models/WidgetModels/day_time_slot.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -32,10 +33,10 @@ class DayTimeSLotItem extends StatelessWidget {
                 width: 10.w,
                 decoration: BoxDecoration(
                     color: dayTimeSlot.isSelected
-                        ? Theme.of(context).primaryColor
-                        : Theme.of(context).cardColor,
+                        ? AppColors.primaryColor
+                        : AppColors.secondaryColor,
                     border: Border.all(
-                      color: Theme.of(context).primaryColor,
+                      color: AppColors.primaryColor,
                     ),
                     borderRadius: BorderRadius.circular(10.sp)),
                 child: Center(
@@ -44,7 +45,7 @@ class DayTimeSLotItem extends StatelessWidget {
                     style: TextStyle(
                         color: dayTimeSlot.isSelected
                             ? Colors.white
-                            : Theme.of(context).primaryColor,
+                            : AppColors.primaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 9.sp),
                   ),

@@ -1,7 +1,8 @@
 import 'package:ai_health_assistance/Pages/Home/animations/animation_handler.dart';
 import 'package:ai_health_assistance/Pages/Home/customs/ai_intro_bottom_sheet.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/mainPages/home_main_page.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/mainPages/my_appoinments_page.dart';
+import 'package:ai_health_assistance/Pages/Home/customs/map_bottom_sheet.dart';
+import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
+import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
 import 'package:ai_health_assistance/Pages/Search/search_page.dart';
 import 'package:flutter/material.dart';
@@ -30,16 +31,10 @@ class HomePageController extends GetxController
   void onInit() {
     super.onInit();
 
-    tabs = [
-      Theme(
-        data: ThemeData(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: Tab(
-          text: "Upcoming",
-          //  height: 30.sp,
-        ),
+    tabs = const [
+      Tab(
+        text: "Upcoming",
+        //  height: 30.sp,
       ),
       Tab(
         text: "Completed",
@@ -68,14 +63,39 @@ class HomePageController extends GetxController
     debugPrint(index.toString());
   }
 
+  void showMapBottomSheet(BuildContext context) {
+    AnimationController controller =
+        BottomSheet.createAnimationController(this);
+
+    controller.duration = const Duration(seconds: 1);
+
+    controller.reverseDuration = 300.milliseconds;
+
+    controller.drive(CurveTween(curve: Curves.fastEaseInToSlowEaseOut));
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.sp),
+              topRight: Radius.circular(15.sp))),
+      useSafeArea: true,
+      transitionAnimationController: controller,
+      constraints: BoxConstraints(maxHeight: 94.h),
+      builder: (BuildContext context) {
+        return const MapBottomSheet();
+      },
+    );
+  }
+
   void showBottomSheet(BuildContext context) {
     AnimationController controller =
         BottomSheet.createAnimationController(this);
-    // Animation duration for displaying the BottomSheet
+
     controller.duration = const Duration(seconds: 1);
-    // Animation duration for retracting the BottomSheet
+
     controller.reverseDuration = 300.milliseconds;
-    // Set animation curve duration for the BottomSheet
+
     controller.drive(CurveTween(curve: Curves.fastEaseInToSlowEaseOut));
     showModalBottomSheet(
       context: context,

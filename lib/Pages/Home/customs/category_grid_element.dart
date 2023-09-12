@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class CategoryGridElement extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          color: Theme.of(context).cardColor,
+          color: AppColors.secondaryColor,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,7 @@ class CategoryGridElement extends StatelessWidget {
                   iconPath,
                   height: 20.sp,
                   width: 15.sp,
-                  color: Theme.of(context).primaryColor,
+                  color: AppColors.primaryColor,
                 ),
                 SizedBox(
                   height: 4.sp,

@@ -23,7 +23,7 @@ class DoctorGridView extends StatelessWidget {
             mainAxisExtent: 35.h),
         itemBuilder: (_, index) => InkWell(
           onTap: () => Get.toNamed(DoctorProfile.id, arguments: [
-            {'index': index}
+            {'index': index.toString()}
           ]),
           child: SizedBox(
             height: 35.h,

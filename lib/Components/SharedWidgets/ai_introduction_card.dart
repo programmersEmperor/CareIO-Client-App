@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -24,7 +25,7 @@ class AiIntroductionCard extends StatelessWidget {
             Icon(
               icon,
               size: 32.sp,
-              color: Theme.of(context).primaryColor,
+              color: AppColors.primaryColor,
             ),
             SizedBox(
               width: 10.sp,

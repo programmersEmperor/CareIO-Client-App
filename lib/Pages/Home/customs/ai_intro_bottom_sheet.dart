@@ -1,6 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/ai_introduction_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/mainPages/chatbot_page.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,7 +46,7 @@ class AiIntroBottomSheet extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 20.0.sp,
                           fontWeight: FontWeight.w600,
-                          color: Theme.of(context).primaryColor),
+                          color: AppColors.primaryColor),
                     ),
                   ),
                 ],
@@ -84,7 +85,7 @@ class AiIntroBottomSheet extends StatelessWidget {
                 children: [
                   TextSpan(
                       text: " free trial",
-                      style: TextStyle(color: Theme.of(context).primaryColor),
+                      style: TextStyle(color: AppColors.primaryColor),
                       recognizer: TapGestureRecognizer()..onTap = () {}),
                   TextSpan(
                     text: " pricing and limitations",

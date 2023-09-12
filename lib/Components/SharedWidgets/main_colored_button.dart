@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,9 +20,8 @@ class MainColoredButton extends StatelessWidget {
           Size(100.w, 6.h),
         ),
         elevation: const MaterialStatePropertyAll(15),
-        shadowColor: MaterialStatePropertyAll(Theme.of(context).primaryColor),
-        backgroundColor:
-            MaterialStatePropertyAll(Theme.of(context).primaryColor),
+        shadowColor: MaterialStatePropertyAll(AppColors.primaryColor),
+        backgroundColor: MaterialStatePropertyAll(AppColors.primaryColor),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.sp),
