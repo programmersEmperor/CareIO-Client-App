@@ -4,11 +4,14 @@ import 'package:sizer/sizer.dart';
 
 class MainColoredButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPress;
+  final VoidCallback? onPress;
+  final double? elevation;
+
   const MainColoredButton({
     super.key,
     required this.text,
-    required this.onPress,
+    this.onPress,
+    this.elevation,
   });
 
   @override
@@ -19,9 +22,11 @@ class MainColoredButton extends StatelessWidget {
         fixedSize: MaterialStatePropertyAll(
           Size(100.w, 6.h),
         ),
-        elevation: const MaterialStatePropertyAll(15),
+        elevation:
+            MaterialStatePropertyAll(onPress == null ? 0 : elevation ?? 15),
         shadowColor: MaterialStatePropertyAll(AppColors.primaryColor),
-        backgroundColor: MaterialStatePropertyAll(AppColors.primaryColor),
+        backgroundColor: MaterialStatePropertyAll(
+            onPress == null ? Colors.black26 : AppColors.primaryColor),
         shape: MaterialStatePropertyAll(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.sp),

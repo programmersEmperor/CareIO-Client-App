@@ -3,7 +3,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
-import 'package:sizer/sizer.dart';
 
 class DoctorGridCard extends StatelessWidget {
   final int index;
@@ -19,21 +18,21 @@ class DoctorGridCard extends StatelessWidget {
         {'index': index.toString()}
       ]),
       child: SizedBox(
-        height: 35.h,
-        width: 39.w,
+        height: MediaQuery.of(context).size.height * 0.36,
+        width: MediaQuery.of(context).size.width * 0.39,
         child: Card(
           elevation: 0,
           color: Colors.white,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 10.sp),
+                  padding: const EdgeInsets.only(top: 10),
                   child: Container(
-                    height: 20.h,
+                    height: MediaQuery.of(context).size.height * 0.20,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -44,7 +43,7 @@ class DoctorGridCard extends StatelessWidget {
                         child: Image.asset(
                           'assets/images/person.jpg',
                           fit: BoxFit.cover,
-                          width: 31.w,
+                          width: MediaQuery.of(context).size.width * 0.31,
                         ),
                       ),
                     ),
@@ -52,47 +51,46 @@ class DoctorGridCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding:
-                        EdgeInsets.only(left: 5.sp, right: 5.sp, top: 8.sp),
+                    padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
                     child: AutoSizeText(
                       "Dr haitham Hussien",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 11.sp,
+                      style: const TextStyle(
+                        fontSize: 11,
                         fontWeight: FontWeight.w400,
                       ),
                       overflowReplacement: Marquee(
-                        text: "Dr haitham Hussien",
+                        text: "Dr haitham Hussein",
                         blankSpace: 20.0,
                         accelerationCurve: Curves.easeOut,
                         velocity: 50.0,
                         startPadding: 2.0,
                         showFadingOnlyWhenScrolling: true,
                         startAfter: 5.seconds,
-                        fadingEdgeEndFraction: 0.5.sp,
-                        fadingEdgeStartFraction: 0.5.sp,
+                        fadingEdgeEndFraction: 0.5,
+                        fadingEdgeStartFraction: 0.5,
                         pauseAfterRound: 5.seconds,
-                        style: TextStyle(
-                          fontSize: 10.sp,
+                        style: const TextStyle(
+                          fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      left: 5.sp,
-                      right: 5.sp,
-                      top: 2.sp,
+                      left: 5,
+                      right: 5,
+                      top: 0,
                     ),
                     child: Text(
                       "Specialization",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 8.sp,
+                          fontSize: 10,
                           color: Colors.black45),
                     ),
                   ),

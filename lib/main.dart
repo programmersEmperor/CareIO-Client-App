@@ -2,12 +2,11 @@ import 'package:ai_health_assistance/Localization/localization_helper.dart';
 import 'package:ai_health_assistance/Pages/Home/home_page.dart';
 import 'package:ai_health_assistance/Routing/app_routes.dart';
 import 'package:ai_health_assistance/Services/BindingService/bindings.dart';
-import 'package:ai_health_assistance/Services/CachingService/language_preferance_cache.dart';
 import 'package:ai_health_assistance/Theme/theme_provider.dart';
 import 'package:ai_health_assistance/Utils/scroll_behavior.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -20,7 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(
-      builder: (context, orientation, deviceType) => GetMaterialApp(
+      builder: (BuildContext context, Orientation orientation,
+              DeviceType deviceType) =>
+          GetMaterialApp(
         title: 'Health Ai Assistance',
         theme: ThemeProvider.lightTheme,
         initialBinding: BindingService(),
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: HomePage(),
+        home: const HomePage(),
       ),
     );
   }

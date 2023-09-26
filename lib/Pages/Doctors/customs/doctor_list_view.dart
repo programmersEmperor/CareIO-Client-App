@@ -42,15 +42,16 @@ class DoctorsListView extends StatelessWidget {
                           height: 50.sp,
                           width: 50.sp,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.sp),
-                              border: Border.all(
-                                  color: AppColors.scaffoldColor, width: 3.sp),
-                              image: const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  "assets/images/person.jpg",
-                                ),
-                              )),
+                            borderRadius: BorderRadius.circular(10.sp),
+                            border: Border.all(
+                                color: AppColors.scaffoldColor, width: 3.sp),
+                            image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(
+                                "assets/images/person.jpg",
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Expanded(
@@ -88,7 +89,7 @@ class DoctorsListView extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.only(top: 3.5.sp),
                                 child: Text(
-                                  "Specialization  Specialization  Specialization Specialization Specialization Specialization Specialization Specialization Specialization ",
+                                  "Specialization Specialization ",
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 8.sp,

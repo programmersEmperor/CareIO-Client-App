@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
-import 'package:ai_health_assistance/Pages/Search/customs/search_term_chip.dart';
+import 'package:ai_health_assistance/Pages/Search/custom/search_term_chip.dart';
 import 'package:ai_health_assistance/Pages/doctors/doctor_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +29,7 @@ class SearchPage extends StatelessWidget {
           child: const CustomSearchBar(
             title: "type anything",
             showFilter: false,
+            controller: GetxController,
           ),
         ),
         Padding(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sizer/sizer.dart';
 
 abstract class ThemeProvider {
   static ThemeData get lightTheme => ThemeData(
@@ -11,6 +10,7 @@ abstract class ThemeProvider {
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
+        textTheme: GoogleFonts.rubikTextTheme().copyWith(),
         iconButtonTheme: const IconButtonThemeData(
             style: ButtonStyle(splashFactory: NoSplash.splashFactory)),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -22,28 +22,15 @@ abstract class ThemeProvider {
           ),
           splashFactory: NoSplash.splashFactory,
         ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.transparent,
-          iconTheme: const IconThemeData(color: Colors.black54),
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w700,
-          ),
-          systemOverlayStyle: const SystemUiOverlayStyle(
+          iconTheme: IconThemeData(color: Colors.black54),
+          systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarIconBrightness: Brightness.dark,
           ),
           elevation: 0,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        textTheme: GoogleFonts.rubikTextTheme().copyWith(
-          bodyLarge: TextStyle(fontSize: 16.sp, color: Colors.grey),
-          titleLarge: TextStyle(
-            fontSize: 24.sp,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
       );
 }

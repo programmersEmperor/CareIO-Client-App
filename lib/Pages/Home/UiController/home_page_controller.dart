@@ -51,7 +51,7 @@ class HomePageController extends GetxController
     animationHandler = Get.put(HomeAnimationHandler());
 
     pages = [
-      HomeMainPage(animationHandler: animationHandler),
+      const HomeMainPage(),
       const SearchPage(),
       const MyAppointmentsPage(),
       const NotificationsPage(),
@@ -67,11 +67,11 @@ class HomePageController extends GetxController
     AnimationController controller =
         BottomSheet.createAnimationController(this);
 
-    controller.duration = const Duration(seconds: 1);
+    controller.duration = 600.milliseconds;
 
     controller.reverseDuration = 300.milliseconds;
 
-    controller.drive(CurveTween(curve: Curves.fastEaseInToSlowEaseOut));
+    controller.drive(CurveTween(curve: Curves.bounceInOut));
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -92,11 +92,11 @@ class HomePageController extends GetxController
     AnimationController controller =
         BottomSheet.createAnimationController(this);
 
-    controller.duration = const Duration(seconds: 1);
+    controller.duration = 600.milliseconds;
 
     controller.reverseDuration = 300.milliseconds;
 
-    controller.drive(CurveTween(curve: Curves.fastEaseInToSlowEaseOut));
+    controller.drive(CurveTween(curve: Curves.bounceInOut));
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,

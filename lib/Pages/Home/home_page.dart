@@ -4,7 +4,6 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -15,12 +14,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       floatingActionButton: SizedBox(
-        height: 42.sp,
-        width: 42.sp,
+        height: 42,
+        width: 42,
         child: FloatingActionButton(
-          child: Text(
+          child: const Text(
             "AI",
-            style: TextStyle(fontSize: 10.sp),
+            style: TextStyle(fontSize: 10),
           ),
           onPressed: () => homePageController.showBottomSheet(context),
         ),
@@ -32,25 +31,22 @@ class HomePage extends StatelessWidget {
           activeIndex: homePageController.activePage.value,
           activeColor: AppColors.primaryColor,
           inactiveColor: Colors.black45,
-          iconSize: 17.sp,
+          iconSize: 17,
           gapLocation: GapLocation.center,
-          height: 40.sp,
+          height: 45,
           notchSmoothness: NotchSmoothness.defaultEdge,
-          leftCornerRadius: 10.sp,
-          rightCornerRadius: 10.sp,
+          leftCornerRadius: 10,
+          rightCornerRadius: 10,
           onTap: homePageController.changePage,
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.only(
-          bottom: 10.sp,
+        padding: const EdgeInsets.only(
+          bottom: 10,
         ),
         child: Column(
           children: [
-            SlideTransition(
-              position: homePageController.animationHandler.aiCardAnimation,
-              child: const MainAppBar(),
-            ),
+            const MainAppBar(),
             Expanded(
               child: Obx(
                 () => AnimatedSwitcher(

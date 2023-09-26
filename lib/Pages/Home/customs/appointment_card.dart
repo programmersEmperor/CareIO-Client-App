@@ -137,65 +137,66 @@ class AppointmentCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 5.sp, bottom: 5.sp),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            minimumSize: MaterialStatePropertyAll(
-                              Size(100.w, 5.h),
-                            ),
-                            maximumSize: MaterialStatePropertyAll(
-                              Size(100.w, 5.h),
-                            ),
-                            elevation: const MaterialStatePropertyAll(0),
-                            backgroundColor: MaterialStatePropertyAll(
-                                Theme.of(context).scaffoldBackgroundColor),
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(10.sp)))),
-                        child: Text(
-                          "Cancel",
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 9.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+              SizedBox(
+                height: 10.sp,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          minimumSize: MaterialStatePropertyAll(
+                            Size(100.w, 5.h),
+                          ),
+                          maximumSize: MaterialStatePropertyAll(
+                            Size(100.w, 5.h),
+                          ),
+                          elevation: const MaterialStatePropertyAll(0),
+                          backgroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).scaffoldBackgroundColor),
+                          shape: MaterialStatePropertyAll(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.sp)))),
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 9.sp,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                            minimumSize: MaterialStatePropertyAll(
-                              Size(100.w, 5.h),
-                            ),
-                            maximumSize: MaterialStatePropertyAll(
-                              Size(100.w, 5.h),
-                            ),
-                            elevation: const MaterialStatePropertyAll(0),
-                            backgroundColor: MaterialStatePropertyAll(
-                                AppColors.primaryColor),
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(10.sp)))),
-                        child: Text(
-                          "Reschedule",
-                          style: TextStyle(
-                              fontSize: 9.sp, fontWeight: FontWeight.w800),
-                        ),
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          minimumSize: MaterialStatePropertyAll(
+                            Size(100.w, 5.h),
+                          ),
+                          maximumSize: MaterialStatePropertyAll(
+                            Size(100.w, 5.h),
+                          ),
+                          elevation: const MaterialStatePropertyAll(0),
+                          backgroundColor:
+                              MaterialStatePropertyAll(AppColors.primaryColor),
+                          shape: MaterialStatePropertyAll(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.sp)))),
+                      child: Text(
+                        "Reschedule",
+                        style: TextStyle(
+                            fontSize: 9.sp, fontWeight: FontWeight.w800),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10.sp,
               ),
             ],
           ),
