@@ -6,12 +6,14 @@ class MainColoredButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPress;
   final double? elevation;
+  final double fontSize;
 
   const MainColoredButton({
     super.key,
     required this.text,
     this.onPress,
     this.elevation,
+    this.fontSize = 14,
   });
 
   @override
@@ -35,7 +37,7 @@ class MainColoredButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 11.sp),
+        style: TextStyle(fontWeight: FontWeight.w600, fontSize: fontSize),
       ),
     );
   }

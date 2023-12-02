@@ -1,6 +1,6 @@
 import 'package:ai_health_assistance/Pages/Home/animations/animation_handler.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/ai_intro_bottom_sheet.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/map_bottom_sheet.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/ai_intro_bottom_sheet.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/map_bottom_sheet.dart';
 import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';

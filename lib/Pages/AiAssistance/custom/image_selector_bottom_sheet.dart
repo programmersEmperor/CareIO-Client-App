@@ -1,6 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
-import 'package:ai_health_assistance/Pages/AiAssistance/UiController/chat_page_controller.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
@@ -14,7 +14,7 @@ class ImageSelectorBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 100.w,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -156,7 +156,7 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                         color: Colors.black54,
                       ),
                       iconColor: AppColors.primaryColor,
-                      leading: Container(
+                      leading: SizedBox(
                         width: 10.w,
                         height: 10.h,
                         child: Icon(

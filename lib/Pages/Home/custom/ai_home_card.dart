@@ -1,8 +1,8 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/stack_button.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
 class AiHomeCard extends StatelessWidget {
@@ -28,7 +28,7 @@ class AiHomeCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                      left: -50,
+                      left: Get.locale == const Locale('ar', 'AR') ? 290 : -50,
                       top: -20,
                       child: Opacity(
                           opacity: 0.3,
@@ -43,7 +43,7 @@ class AiHomeCard extends StatelessWidget {
                               ))),
                     ),
                     Positioned(
-                      right: -90,
+                      right: Get.locale == const Locale('ar', 'AR') ? 110 : -90,
                       top: -40,
                       child: Opacity(
                         opacity: 0.3,
@@ -65,12 +65,12 @@ class AiHomeCard extends StatelessWidget {
                         children: [
                           Padding(
                             padding: EdgeInsets.only(top: 8),
-                            child: AutoSizeText(
+                            child: Text(
                               "Healio Ai",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17),
+                                  fontSize: 25),
                             ),
                           ),
                           Padding(
@@ -78,10 +78,13 @@ class AiHomeCard extends StatelessWidget {
                             child: Text(
                               "Experience the power of Ai now",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 11),
+                                  TextStyle(color: Colors.white, fontSize: 12),
                             ),
                           ),
-                          StackButton(),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5.0),
+                            child: StackButton(),
+                          ),
                         ],
                       ),
                     ),

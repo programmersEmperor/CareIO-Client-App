@@ -1,6 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
-import 'package:ai_health_assistance/Pages/Home/UiController/home_page_controller.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/appointment_card.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/appointment_card.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,6 +33,7 @@ class MyAppointmentsPage extends StatelessWidget {
                 child: Theme(
                   data: ThemeData().copyWith(
                     splashColor: Colors.transparent,
+                    useMaterial3: false,
                     highlightColor: Colors.transparent,
                   ),
                   child: TabBar(
@@ -58,7 +59,7 @@ class MyAppointmentsPage extends StatelessWidget {
             controller: controller.tabController,
             children: [
               ListView.builder(
-                itemCount: 2,
+                itemCount: 3,
                 padding: EdgeInsets.zero,
                 itemBuilder: (_, index) => AppointmentCard(
                   index: index,

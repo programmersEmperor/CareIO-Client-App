@@ -6,10 +6,14 @@ abstract class ThemeProvider {
   static ThemeData get lightTheme => ThemeData(
         scaffoldBackgroundColor: const Color(0xffF6F7F7),
         primaryColor: const Color(0xff129A7F),
+        useMaterial3: false,
         cardColor: const Color(0xffE7F5F2),
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
+        textButtonTheme: const TextButtonThemeData(
+            style: ButtonStyle(
+                overlayColor: MaterialStatePropertyAll(Colors.transparent))),
         textTheme: GoogleFonts.rubikTextTheme().copyWith(),
         iconButtonTheme: const IconButtonThemeData(
             style: ButtonStyle(splashFactory: NoSplash.splashFactory)),

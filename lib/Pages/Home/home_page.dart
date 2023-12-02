@@ -1,9 +1,11 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_app_bar.dart';
-import 'package:ai_health_assistance/Pages/Home/UiController/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,12 +16,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       floatingActionButton: SizedBox(
-        height: 42,
-        width: 42,
+        height: 39.sp,
+        width: 39.sp,
         child: FloatingActionButton(
-          child: const Text(
-            "AI",
-            style: TextStyle(fontSize: 10),
+          child: Lottie.asset(
+            'assets/animations/lines.json',
+            fit: BoxFit.fill,
+            height: 10.h,
           ),
           onPressed: () => homePageController.showBottomSheet(context),
         ),
@@ -31,9 +34,9 @@ class HomePage extends StatelessWidget {
           activeIndex: homePageController.activePage.value,
           activeColor: AppColors.primaryColor,
           inactiveColor: Colors.black45,
-          iconSize: 17,
+          iconSize: 23,
           gapLocation: GapLocation.center,
-          height: 45,
+          height: 51,
           notchSmoothness: NotchSmoothness.defaultEdge,
           leftCornerRadius: 10,
           rightCornerRadius: 10,

@@ -52,12 +52,12 @@ class PaymentMethodCard extends StatelessWidget {
                         top: 0,
                         child: AnimatedSlide(
                           offset:
-                              selected.isTrue ? Offset(0, 0) : Offset(-2, 0),
+                              selected.isTrue ? const Offset(0, 0) : const Offset(-2, 0),
                           duration: 200.milliseconds,
                           child: AnimatedOpacity(
                             opacity: selected.isTrue ? 1 : 0,
                             duration: 220.milliseconds,
-                            child: Icon(
+                            child: const Icon(
                               Icons.check,
                               color: Colors.white,
                             ),

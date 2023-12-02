@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
-import 'package:ai_health_assistance/Pages/Home/home_page.dart';
+import 'package:ai_health_assistance/Pages/splash/splashPage.dart';
 import 'package:ai_health_assistance/Routing/app_routes.dart';
 import 'package:ai_health_assistance/Services/BindingService/bindings.dart';
 import 'package:ai_health_assistance/Theme/theme_provider.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingService(),
         scrollBehavior: const ScrollBehaviorModified(),
         getPages: AppRoutes.allRoutes,
-        locale: const Locale("en", "En"),
+        locale: const Locale("en", "EN"),
         fallbackLocale: const Locale("en", "En"),
         debugShowCheckedModeBanner: false,
         translations: LocalizationHelper(),
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           Locale('en'),
           Locale('ar'),
         ],
-        home: const HomePage(),
+        home: const SplashPage(),
       ),
     );
   }

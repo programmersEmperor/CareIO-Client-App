@@ -1,5 +1,5 @@
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
-import 'package:ai_health_assistance/Pages/doctors/UiController/doctors_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -15,7 +15,7 @@ AppBar mainCategoryAppBar(GetxController? controller, String name) {
     ),
     title: Text(
       name,
-      style: TextStyle(color: Colors.black54, fontSize: 15.sp),
+      style: TextStyle(color: Colors.black, fontSize: 12.sp),
     ),
     centerTitle: true,
     actions: [

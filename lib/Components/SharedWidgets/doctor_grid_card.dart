@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
+import 'package:sizer/sizer.dart';
 
 class DoctorGridCard extends StatelessWidget {
   final int index;
@@ -18,13 +19,13 @@ class DoctorGridCard extends StatelessWidget {
         {'index': index.toString()}
       ]),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.36,
+        height: MediaQuery.of(context).size.height * 0.30,
         width: MediaQuery.of(context).size.width * 0.39,
         child: Card(
           elevation: 0,
           color: Colors.white,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +33,7 @@ class DoctorGridCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.20,
+                    height: MediaQuery.of(context).size.height * 0.15,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -55,9 +56,9 @@ class DoctorGridCard extends StatelessWidget {
                     child: AutoSizeText(
                       "Dr haitham Hussien",
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400,
+                      style: TextStyle(
+                        fontSize: 9.sp,
+                        fontWeight: FontWeight.w600,
                       ),
                       overflowReplacement: Marquee(
                         text: "Dr haitham Hussein",
@@ -70,27 +71,23 @@ class DoctorGridCard extends StatelessWidget {
                         fadingEdgeEndFraction: 0.5,
                         fadingEdgeStartFraction: 0.5,
                         pauseAfterRound: 5.seconds,
-                        style: const TextStyle(
-                          fontSize: 10,
+                        style: TextStyle(
+                          fontSize: 9.sp,
                           fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 5,
-                      right: 5,
-                      top: 0,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 5.sp),
                     child: Text(
                       "Specialization",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 10,
+                          fontSize: 8.sp,
                           color: Colors.black45),
                     ),
                   ),

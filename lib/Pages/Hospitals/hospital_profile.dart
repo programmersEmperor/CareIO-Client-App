@@ -1,11 +1,12 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
-import 'package:ai_health_assistance/Pages/Home/customs/category_grid_element.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/customs/top_requested_doctors_card.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
+import 'package:ai_health_assistance/Pages/Hospitals/custom/top_requested_doctors_card.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/day_timeslot_item.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_statics.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_statics_divider.dart';
+import 'package:ai_health_assistance/Pages/doctors/custom/day_timeslot_item.dart';
+import 'package:ai_health_assistance/Pages/doctors/custom/doctor_statics.dart';
+import 'package:ai_health_assistance/Pages/doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_animations/carousel_animations.dart';
@@ -41,30 +42,10 @@ class HospitalProfile extends StatelessWidget {
                     statusBarColor: AppColors.primaryColor,
                     statusBarIconBrightness: Brightness.light,
                   ),
-                  title: Row(
+                  title: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => Get.back(),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.secondaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          padding: EdgeInsets.only(
-                              left: 10.sp,
-                              top: 5.sp,
-                              bottom: 5.sp,
-                              right: 5.sp),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 12.sp,
-                          ),
-                        ),
-                      ),
-                      //AppIcon(icon: Icons.shopping_cart_outlined),
+                      BackCircleButton(),
                     ],
                   ),
                   backgroundColor: AppColors.primaryColor,
@@ -232,7 +213,7 @@ class HospitalProfile extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 25.h,
+                            height: 180,
                             child: Swiper(
                               itemCount: 3,
                               autoplayDelay: 6000,

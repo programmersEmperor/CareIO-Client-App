@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
-import 'package:ai_health_assistance/Pages/Notifications/customs/notification_card.dart';
+import 'package:ai_health_assistance/Pages/Notifications/custom/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 

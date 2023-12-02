@@ -1,8 +1,9 @@
-import 'package:ai_health_assistance/Pages/Home/UiController/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class MainAppBar extends StatelessWidget {
   const MainAppBar({
@@ -12,7 +13,7 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 25, bottom: 0, right: 5, left: 5),
+      padding: const EdgeInsets.only(top: 25, bottom: 5, right: 5, left: 5),
       child: SizedBox(
         child: Row(
           children: [
@@ -28,8 +29,8 @@ class MainAppBar extends StatelessWidget {
                       image: AssetImage("assets/images/person.jpg"),
                       fit: BoxFit.cover,
                     )),
-                height: 30,
-                width: 30,
+                height: 40,
+                width: 40,
               ),
             ),
             const Expanded(
@@ -39,22 +40,22 @@ class MainAppBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
+                      "Haitham Hussien",
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
                       "Good morning ",
                       style: TextStyle(
-                          fontSize: 9.5,
+                          fontSize: 10,
                           color: Colors.black38,
                           fontWeight: FontWeight.w300),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 3),
-                      child: Text(
-                        "Haitham Hussien",
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
                     ),
                   ],
                 ),
@@ -63,8 +64,12 @@ class MainAppBar extends StatelessWidget {
             TextButton(
               onPressed: () =>
                   Get.find<HomePageController>().showMapBottomSheet(context),
-              style: const ButtonStyle(
-                overlayColor: MaterialStatePropertyAll(
+              style: ButtonStyle(
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.sp))),
+                backgroundColor:
+                    MaterialStatePropertyAll(AppColors.secondaryColor),
+                overlayColor: const MaterialStatePropertyAll(
                   Colors.transparent,
                 ),
               ),

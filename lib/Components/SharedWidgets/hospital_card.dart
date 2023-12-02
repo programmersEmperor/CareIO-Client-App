@@ -18,15 +18,15 @@ class HospitalCard extends StatelessWidget {
       color: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
-        padding: EdgeInsets.all(3),
+        padding: const EdgeInsets.all(3),
         child: Center(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: SizedBox(
-                  height: 45,
+                  height: 50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Hero(
@@ -34,7 +34,7 @@ class HospitalCard extends StatelessWidget {
                       child: Image.asset(
                         'assets/images/hosptial.jpg',
                         fit: BoxFit.fill,
-                        width: 45,
+                        width: 50,
                       ),
                     ),
                   ),
@@ -42,20 +42,17 @@ class HospitalCard extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(
-                    left: 5,
-                    right: 5,
-                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       AutoSizeText(
                         "Yemen Saudi Hospitals",
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
                         ),
                         overflowReplacement: Marquee(
                           text: "Dr haitham Hussien",
@@ -68,14 +65,14 @@ class HospitalCard extends StatelessWidget {
                           fadingEdgeEndFraction: 0.5,
                           fadingEdgeStartFraction: 0.5,
                           pauseAfterRound: 5.seconds,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 2,
                         ),
                         child: Row(
@@ -85,21 +82,21 @@ class HospitalCard extends StatelessWidget {
                               color: AppColors.primaryColor,
                               size: 10,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 2,
                             ),
-                            Text(
+                            const Text(
                               "Sana'a Yemen",
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 8,
+                                  fontSize: 9,
                                   color: Colors.black45),
                             ),
                           ],
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(
                           top: 2,
                         ),
@@ -129,10 +126,10 @@ class HospitalCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Icon(
                   Icons.arrow_forward_ios,
-                  size: 10,
+                  size: 13,
                   color: AppColors.primaryColor,
                 ),
               ),

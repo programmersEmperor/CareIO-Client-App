@@ -210,7 +210,7 @@ class BookAppointment extends StatelessWidget {
               textAlign: TextAlign.center,
               text: TextSpan(
                 text:
-                    'when pricing \"Confirm booking\" button you agree to our',
+                    'when pricing "Confirm booking" button you agree to our',
                 style: TextStyle(color: Colors.black26, fontSize: 8.5.sp),
                 children: [
                   TextSpan(

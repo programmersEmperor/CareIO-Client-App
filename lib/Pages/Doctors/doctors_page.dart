@@ -1,8 +1,8 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
-import 'package:ai_health_assistance/Pages/doctors/UiController/doctors_page_controller.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_grid_view.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_list_view.dart';
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_grid_view.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';

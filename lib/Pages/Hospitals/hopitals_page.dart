@@ -1,7 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/customs/hosptials_grid_view.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/customs/hosptials_list_view.dart';
+import 'package:ai_health_assistance/Pages/Hospitals/custom/hosptials_grid_view.dart';
+import 'package:ai_health_assistance/Pages/Hospitals/custom/hosptials_list_view.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

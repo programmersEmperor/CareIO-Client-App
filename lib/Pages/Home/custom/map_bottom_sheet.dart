@@ -40,6 +40,9 @@ class MapBottomSheet extends StatelessWidget {
                       Get.toNamed(ChatBotPage.id);
                     }),
               ),
+              SizedBox(
+                width: 10.sp,
+              ),
               ElevatedButton(
                   onPressed: () {},
                   style: ButtonStyle(

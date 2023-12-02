@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:ai_health_assistance/Pages/AiAssistance/customs/chat_bot_notification_alert.dart';
-import 'package:ai_health_assistance/Pages/AiAssistance/customs/chat_bubble.dart';
-import 'package:ai_health_assistance/Pages/AiAssistance/customs/image_selector_bottom_sheet.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/custom/chat_bot_notification_alert.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/custom/chat_bubble.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/custom/image_selector_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:get/get.dart';

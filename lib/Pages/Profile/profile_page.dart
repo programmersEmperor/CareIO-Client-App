@@ -1,4 +1,6 @@
-import 'package:ai_health_assistance/Pages/Profile/customs/profile_item.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
+import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Profile/custom/profile_item.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,6 +14,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfilePageController uiController = Get.put(ProfilePageController());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 0),
@@ -82,31 +85,12 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Positioned(
+                        const Positioned(
                           left: 0,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 8),
-                            child: GestureDetector(
-                              onTap: () => Get.back(),
-                              child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: AppColors.secondaryColor,
-                                  shape: BoxShape.circle,
-                                ),
-                                padding: EdgeInsets.only(
-                                    left: 10.sp,
-                                    top: 5.sp,
-                                    bottom: 5.sp,
-                                    right: 5.sp),
-                                child: Icon(
-                                  Icons.arrow_back_ios,
-                                  color: AppColors.primaryColor,
-                                  size: 12.sp,
-                                ),
-                              ),
-                            ),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 8),
+                            child: BackCircleButton(),
                           ),
                         )
                       ],
@@ -258,7 +242,7 @@ class ProfilePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: uiController.showLogoutBottomSheet,
                         style: ButtonStyle(
                           fixedSize: MaterialStatePropertyAll(
                             Size(100.w, 6.h),
@@ -267,10 +251,11 @@ class ProfilePage extends StatelessWidget {
                           shadowColor:
                               const MaterialStatePropertyAll(Colors.red),
                           backgroundColor:
-                              MaterialStatePropertyAll(Colors.redAccent),
+                              const MaterialStatePropertyAll(Colors.redAccent),
                           shape: MaterialStatePropertyAll(
                             RoundedRectangleBorder(
-                              side: BorderSide(width: 1, color: Colors.red),
+                              side:
+                                  const BorderSide(width: 1, color: Colors.red),
                               borderRadius: BorderRadius.circular(10.sp),
                             ),
                           ),

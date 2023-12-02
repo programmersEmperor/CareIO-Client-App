@@ -1,30 +1,34 @@
-import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Pages/Pharmacies/pharmacy_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class TopRequestedDoctorsCard extends StatelessWidget {
-  const TopRequestedDoctorsCard({
-    super.key,
-    required this.index,
-  });
-
-  final String index;
+class PharmacyCard extends StatelessWidget {
+  final int index;
+  const PharmacyCard({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.sp)),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
+      padding: const EdgeInsets.only(
+        top: 10.0,
+      ),
+      child: InkWell(
+        onTap: () => Get.toNamed(PharmacyProfile.id, arguments: [
+          {'index': index}
+        ]),
+        child: SizedBox(
+          child: Card(
+            elevation: 0,
+            color: Colors.white,
+            shadowColor: Colors.grey.shade100,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.sp),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 7.sp),
+              child: Row(
                 children: [
                   Hero(
                     tag: "doc$index",
@@ -38,7 +42,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                         image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                            "assets/images/person.jpg",
+                            "assets/images/hosptial.jpg",
                           ),
                         ),
                       ),
@@ -52,7 +56,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Doctor name",
+                            "Pharmacy name",
                             style: TextStyle(
                                 fontSize: 10.sp, fontWeight: FontWeight.bold),
                           ),
@@ -78,7 +82,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Text(
-                              "Specialization  ",
+                              "location",
                               style: TextStyle(
                                 color: Colors.black38,
                                 fontSize: 8.sp,
@@ -89,14 +93,23 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.scaffoldColor,
+                        radius: 12.sp,
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          size: 10.sp,
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              MainColoredButton(
-                text: "Book appointment",
-                elevation: 0,
-                onPress: () {},
-              )
-            ],
+            ),
           ),
         ),
       ),

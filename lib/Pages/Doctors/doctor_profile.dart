@@ -1,10 +1,11 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/day_timeslot_item.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
-import 'package:ai_health_assistance/Pages/doctors/UiController/doctor_profile_ui_controller.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/day_timeslot_item.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_statics.dart';
-import 'package:ai_health_assistance/Pages/doctors/customs/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -34,30 +35,10 @@ class DoctorProfile extends StatelessWidget {
                 SliverAppBar(
                   automaticallyImplyLeading: false,
                   toolbarHeight: 30.sp,
-                  title: Row(
+                  title: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => Get.back(),
-                        child: Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.secondaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          padding: EdgeInsets.only(
-                              left: 10.sp,
-                              top: 5.sp,
-                              bottom: 5.sp,
-                              right: 5.sp),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.primaryColor,
-                            size: 12.sp,
-                          ),
-                        ),
-                      ),
-                      //AppIcon(icon: Icons.shopping_cart_outlined),
+                      BackCircleButton(),
                     ],
                   ),
                   pinned: true,
@@ -263,7 +244,7 @@ class DoctorProfile extends StatelessWidget {
                                   Get.toNamed(HospitalProfile.id, arguments: [
                                 {'index': '1'}
                               ]),
-                              child: HospitalCard(
+                              child: const HospitalCard(
                                 index: "1",
                               ),
                             ),

@@ -129,8 +129,9 @@ class FilterBottomSheet extends StatelessWidget {
                   itemCount: 5,
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index) =>
-                      RatingChip(title: "+${index + 1}")),
+                  itemBuilder: (_, index) => RatingChip(
+                        title: "+${index + 1}",
+                      )),
             ),
             SizedBox(
               height: 10.sp,

@@ -43,7 +43,9 @@ class SearchPage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.sp),
+          padding: EdgeInsets.symmetric(
+            horizontal: 10.sp,
+          ),
           child: Wrap(
             spacing: 7.sp,
             runSpacing: 7.sp,

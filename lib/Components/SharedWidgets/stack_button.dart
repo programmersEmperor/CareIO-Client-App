@@ -31,10 +31,10 @@ class StackButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(
+      child: const Text(
         "Start chat",
         style: TextStyle(
-            color: Colors.white, fontSize: 10, fontWeight: FontWeight.w900),
+            color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900),
       ),
     );
   }

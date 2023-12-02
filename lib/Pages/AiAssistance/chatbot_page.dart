@@ -1,6 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/rounded_text_field.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
-import 'package:ai_health_assistance/Pages/AiAssistance/UiController/chat_page_controller.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,7 +31,7 @@ class ChatBotPage extends StatelessWidget {
             child: Obx(
               () => ListView.builder(
                 controller: uiController.listController,
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 itemCount: uiController.messages.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -50,19 +50,20 @@ class ChatBotPage extends StatelessWidget {
                     duration: 500.milliseconds,
                     child: RoundedTextField(
                       controller: uiController.textController,
+                      onChange: (value) {},
                       hint: "i have a cold ...",
                       node: uiController.textFocusNode,
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: 10.sp,
+                  width: 8.sp,
                 ),
                 CircularIconButton(
                   onTap: () => uiController.sendMessage(true),
                   onLongPress: () => uiController.sendMessage(false),
                   width: 12.w,
-                  height: 7.5.h,
+                  height: 6.h,
                   backgroundColor: AppColors.primaryColor,
                   iconColor: Colors.white,
                   iconSize: 15.sp,

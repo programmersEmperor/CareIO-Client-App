@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class LatestSearchTermsChip extends StatelessWidget {
   const LatestSearchTermsChip({
@@ -12,11 +13,12 @@ class LatestSearchTermsChip extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.secondaryColor,
           borderRadius: BorderRadius.circular(15)),
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10),
       child: Text(
         "Search term one",
         style: TextStyle(
-          fontSize: 8.5,
+          fontSize: 8.sp,
+          fontWeight: FontWeight.w700,
           color: AppColors.primaryColor,
         ),
       ),

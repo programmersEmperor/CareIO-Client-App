@@ -1,6 +1,9 @@
+import 'package:ai_health_assistance/Pages/Search/specific_search_page.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final bool showFilter;
@@ -18,31 +21,35 @@ class CustomSearchBar extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: Card(
-            elevation: 0,
-            color: Colors.grey.shade200,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 2,
-                  ),
-                  const Icon(
-                    Boxicons.bx_search,
-                    color: Colors.black54,
-                    size: 15,
-                  ),
-                  const SizedBox(
-                    width: 3,
-                  ),
-                  Text(
-                    title,
-                    style: const TextStyle(color: Colors.black54, fontSize: 10),
-                  ),
-                ],
+          child: InkWell(
+            onTap: () => Get.toNamed(SpecificSearchPage.id),
+            child: Card(
+              elevation: 0,
+              color: Colors.grey.shade200,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 9.sp),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      Boxicons.bx_search,
+                      color: AppColors.primaryColor,
+                      size: 17,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      title,
+                      style:
+                          const TextStyle(color: Colors.black54, fontSize: 11),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -59,7 +66,7 @@ class CustomSearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Padding(
-                padding: EdgeInsets.all(7),
+                padding: EdgeInsets.all(11),
                 child: Icon(
                   Boxicons.bx_filter_alt,
                   color: Colors.white,
