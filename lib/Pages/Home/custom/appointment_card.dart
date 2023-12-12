@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 
 class AppointmentCard extends StatelessWidget {
   final int index;
-  var showDetails = true.obs;
+  final showDetails = true.obs;
   AppointmentCard({
     super.key,
     required this.index,
@@ -141,136 +141,132 @@ class AppointmentCard extends StatelessWidget {
                   duration: 600.milliseconds,
                   curve: Curves.linearToEaseOut,
                   child: Container(
-                    child: Container(
-                      width: 100.w,
-                      padding: EdgeInsets.only(top: 15.sp, bottom: 5.sp),
-                      child: showDetails.isFalse
-                          ? null
-                          : Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                AutoSizeText(
-                                  "Reservation in name",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w900,
-                                      color: Colors.black26,
-                                      fontSize: 10.sp),
-                                ),
-                                SizedBox(
-                                  height: 3.sp,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    AutoSizeText(
-                                      'Haitham Hussein Aleryani',
+                    width: 100.w,
+                    padding: EdgeInsets.only(top: 15.sp, bottom: 5.sp),
+                    child: showDetails.isFalse
+                        ? null
+                        : Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              AutoSizeText(
+                                "Reservation in name",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    color: Colors.black26,
+                                    fontSize: 10.sp),
+                              ),
+                              SizedBox(
+                                height: 3.sp,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  AutoSizeText(
+                                    'Haitham Hussein Aleryani',
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 7.sp, vertical: 5.sp),
+                                    decoration: BoxDecoration(
+                                        color: AppColors.secondaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(8.sp)),
+                                    child: AutoSizeText(
+                                      '771056641',
                                       style: TextStyle(
                                         fontSize: 10.sp,
-                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.primaryColor,
+                                        fontWeight: FontWeight.w300,
                                       ),
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 7.sp, vertical: 5.sp),
-                                      decoration: BoxDecoration(
-                                          color: AppColors.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(8.sp)),
-                                      child: AutoSizeText(
-                                        '771056641',
-                                        style: TextStyle(
-                                          fontSize: 10.sp,
-                                          color: AppColors.primaryColor,
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 10.sp, bottom: 10.sp),
-                                  child: Container(
-                                    padding: EdgeInsets.all(15.sp),
-                                    decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp),
-                                      color: AppColors.secondaryColor,
-                                    ),
-                                    child: Stack(
-                                      children: [
-                                        PositionedDirectional(
-                                          end: 0,
-                                          child: Opacity(
-                                            opacity: 0.2,
-                                            child: Icon(
-                                              Icons.check,
-                                              color: AppColors.primaryColor,
-                                              size: 55.sp,
-                                            ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsets.only(top: 10.sp, bottom: 10.sp),
+                                child: Container(
+                                  padding: EdgeInsets.all(15.sp),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.sp),
+                                    color: AppColors.secondaryColor,
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      PositionedDirectional(
+                                        end: 0,
+                                        child: Opacity(
+                                          opacity: 0.2,
+                                          child: Icon(
+                                            Icons.check,
+                                            color: AppColors.primaryColor,
+                                            size: 55.sp,
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            AutoSizeText(
-                                              'Paid',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: AppColors.primaryColor,
-                                                  fontSize: 15.sp),
-                                            ),
-                                            SizedBox(
-                                              height: 4.sp,
-                                            ),
-                                            AutoSizeText(
-                                              'You paid for this reservation amount 1500 YE.R using Jawali Wallet',
-                                              style: TextStyle(fontSize: 10.sp),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 5.sp),
-                                  child: AutoSizeText(
-                                    "Also find doctor at",
-                                    style: TextStyle(
-                                        color: Colors.black26,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 10.sp),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 10.0.sp,
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        color: AppColors.primaryColor
-                                            .withOpacity(0.2),
-                                        borderRadius:
-                                            BorderRadius.circular(15.sp)),
-                                    child: InkWell(
-                                      onTap: () => Get.toNamed(
-                                          HospitalProfile.id,
-                                          arguments: [
-                                            {'index': '1'}
-                                          ]),
-                                      child: const HospitalCard(
-                                        index: "1",
                                       ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          AutoSizeText(
+                                            'Paid',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.primaryColor,
+                                                fontSize: 15.sp),
+                                          ),
+                                          SizedBox(
+                                            height: 4.sp,
+                                          ),
+                                          AutoSizeText(
+                                            'You paid for this reservation amount 1500 YE.R using Jawali Wallet',
+                                            style: TextStyle(fontSize: 10.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 5.sp),
+                                child: AutoSizeText(
+                                  "Also find doctor at",
+                                  style: TextStyle(
+                                      color: Colors.black26,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 10.sp),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: 10.0.sp,
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primaryColor
+                                          .withOpacity(0.2),
+                                      borderRadius:
+                                          BorderRadius.circular(15.sp)),
+                                  child: InkWell(
+                                    onTap: () => Get.toNamed(HospitalProfile.id,
+                                        arguments: [
+                                          {'index': '1'}
+                                        ]),
+                                    child: const HospitalCard(
+                                      index: "1",
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                    ),
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ),

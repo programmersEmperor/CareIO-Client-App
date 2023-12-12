@@ -33,7 +33,6 @@ class MyAppointmentsPage extends StatelessWidget {
                 child: Theme(
                   data: ThemeData().copyWith(
                     splashColor: Colors.transparent,
-                    useMaterial3: false,
                     highlightColor: Colors.transparent,
                   ),
                   child: TabBar(
