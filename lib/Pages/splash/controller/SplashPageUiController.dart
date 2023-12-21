@@ -7,6 +7,6 @@ class SplashUiPageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    Timer(2.seconds, () => Get.offAll(const IntroductionPage()));
+    Timer(3.seconds, () => Get.offAll(() => const IntroductionPage()));
   }
 }

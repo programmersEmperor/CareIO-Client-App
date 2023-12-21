@@ -1,6 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
-import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
@@ -9,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
 class ImageSelectorBottomSheet extends StatelessWidget {
-  final ChatUiController uiController;
+  final dynamic uiController;
   const ImageSelectorBottomSheet({super.key, required this.uiController});
 
   @override

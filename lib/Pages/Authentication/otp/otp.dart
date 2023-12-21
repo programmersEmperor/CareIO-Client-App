@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
-import 'package:ai_health_assistance/Pages/Home/home_page.dart';
+import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,7 @@ class OTPPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationController controller = Get.find<AuthenticationController>();
     return Scaffold(
       body: ListView(
         children: [
@@ -78,7 +79,9 @@ class OTPPage extends StatelessWidget {
                         keyboardType: TextInputType.number,
                         borderRadius: BorderRadius.circular(10.sp),
                         onCodeChanged: (String code) {},
-                        onSubmit: (String verificationCode) {}, // end onSubmit
+                        onSubmit: (String verificationCode) {
+                          controller.otpCode = verificationCode;
+                        }, // end onSubmit
                       ),
                       SizedBox(
                         height: 30.sp,
@@ -86,7 +89,8 @@ class OTPPage extends StatelessWidget {
                       MainColoredButton(
                         text: "Confirm code",
                         fontSize: 12.sp,
-                        onPress: () => Get.offAll(const HomePage()),
+                        isLoading: controller.isLoading,
+                        onPress: controller.verifyOtp,
                       ),
                       SizedBox(
                         height: 15.sp,

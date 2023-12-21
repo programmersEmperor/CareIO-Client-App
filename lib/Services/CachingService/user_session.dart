@@ -1,3 +1,5 @@
 class UserSession {
-  String get token => '';
+  String firebaseDeviceToken = '';
+
+  String token = '';
 }

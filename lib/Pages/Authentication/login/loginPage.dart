@@ -1,11 +1,10 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/social_media_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Pages/Authentication/forgetPassword/forget_password_page.dart';
 import 'package:ai_health_assistance/Pages/Authentication/signup/signupPage.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -16,6 +15,7 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationController controller = Get.find<AuthenticationController>();
     return Scaffold(
       body: Column(
         children: [
@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -65,20 +65,22 @@ class LoginPage extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: 20.sp,
               ),
-              child: Column(
+              child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   FormBuilder(
+                    key: controller.loginFormKey,
                     child: Column(
                       children: [
                         const TextInputField(
-                          name: 'Phone',
+                          name: 'phone',
                           inputType: TextInputType.phone,
                         ),
                         SizedBox(
                           height: 15.sp,
                         ),
                         const TextInputField(
-                          name: 'Password',
+                          name: 'password',
                           inputType: TextInputType.text,
                           password: true,
                         ),
@@ -101,7 +103,8 @@ class LoginPage extends StatelessWidget {
                         MainColoredButton(
                           text: "Sign in",
                           fontSize: 12.sp,
-                          onPress: () {},
+                          isLoading: controller.isLoading,
+                          onPress: () => controller.login(),
                         ),
                         SizedBox(
                           height: 15.sp,
@@ -119,32 +122,32 @@ class LoginPage extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Text(
-                          "or continue with",
-                          style: TextStyle(
-                              fontSize: 10.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primaryColor),
-                        ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SocialMediaButton(
-                              icon: Boxicons.bxl_google,
-                              onTap: () {},
-                            ),
-                            SizedBox(
-                              width: 10.sp,
-                            ),
-                            SocialMediaButton(
-                              icon: Boxicons.bxl_facebook,
-                              onTap: () {},
-                            ),
-                          ],
-                        ),
+                        // Text(
+                        //   "or continue with",
+                        //   style: TextStyle(
+                        //       fontSize: 10.sp,
+                        //       fontWeight: FontWeight.w600,
+                        //       color: AppColors.primaryColor),
+                        // ),
+                        // SizedBox(
+                        //   height: 15.sp,
+                        // ),
+                        // Row(
+                        //   mainAxisSize: MainAxisSize.min,
+                        //   children: [
+                        //     SocialMediaButton(
+                        //       icon: Boxicons.bxl_google,
+                        //       onTap: () {},
+                        //     ),
+                        //     SizedBox(
+                        //       width: 10.sp,
+                        //     ),
+                        //     SocialMediaButton(
+                        //       icon: Boxicons.bxl_facebook,
+                        //       onTap: () {},
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

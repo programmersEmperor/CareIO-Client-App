@@ -7,9 +7,9 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class ForgetPasswordPage extends GetView<AuthenticationController> {
-  static const id = '/ForgetPasswordPage';
-  const ForgetPasswordPage({super.key});
+class NewPasswordPage extends GetView<AuthenticationController> {
+  static const id = '/newPassword';
+  const NewPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,35 +32,32 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                   ),
                 ),
                 Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Forget Your Password?",
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "New Password",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primaryColor,
+                            fontSize: 22.sp),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            top: 12.0.sp, right: 20.sp, left: 20.sp),
+                        child: Text(
+                          "Try to use a password that you can easily remember"
+                              .capitalize!,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.primaryColor,
-                              fontSize: 22.sp),
+                              height: 1.5,
+                              fontSize: 11.sp,
+                              fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 12.0.sp),
-                          child: SizedBox(
-                            width: 70.w,
-                            child: Text(
-                              "fill in your phone number and an OTP will be sent to your phone via SMS "
-                                  .capitalize!,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 11.sp, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 )
               ],
@@ -75,19 +72,30 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   FormBuilder(
+                    key: controller.newPasswordFormKey,
                     child: Column(
                       children: [
                         const TextInputField(
-                          name: 'phone',
-                          inputType: TextInputType.phone,
+                          name: 'new password',
+                          inputType: TextInputType.text,
+                          password: true,
                         ),
                         SizedBox(
                           height: 15.sp,
                         ),
+                        const TextInputField(
+                          name: 'confirm password',
+                          inputType: TextInputType.text,
+                          password: true,
+                        ),
+                        SizedBox(
+                          height: 10.sp,
+                        ),
                         MainColoredButton(
-                          text: "Send OTP",
+                          text: "save password",
                           fontSize: 12.sp,
-                          onPress: controller.sendOtp,
+                          isLoading: controller.isLoading,
+                          onPress: () => controller.login(),
                         ),
                         SizedBox(
                           height: 15.sp,

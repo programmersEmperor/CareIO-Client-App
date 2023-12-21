@@ -1,6 +1,8 @@
 import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
+import 'package:ai_health_assistance/Pages/Authentication/completeSetup/complete_setup.dart';
 import 'package:ai_health_assistance/Pages/Authentication/forgetPassword/forget_password_page.dart';
 import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
+import 'package:ai_health_assistance/Pages/Authentication/newPassword/newPassword.dart';
 import 'package:ai_health_assistance/Pages/Authentication/otp/otp.dart';
 import 'package:ai_health_assistance/Pages/Authentication/signup/signupPage.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
@@ -48,12 +50,20 @@ class AppRoutes {
       page: () => const ProfilePage(),
     ),
     GetPage(
+      name: CompleteSetup.id,
+      page: () => const CompleteSetup(),
+    ),
+    GetPage(
       name: PharmaciesPage.id,
       page: () => const PharmaciesPage(),
     ),
     GetPage(
       name: SpecificSearchPage.id,
       page: () => const SpecificSearchPage(),
+    ),
+    GetPage(
+      name: NewPasswordPage.id,
+      page: () => const NewPasswordPage(),
     ),
   ];
 }
