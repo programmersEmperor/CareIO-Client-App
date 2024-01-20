@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
 import 'package:ai_health_assistance/Pages/Authentication/signup/signupPage.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -55,7 +56,7 @@ class IntroductionPage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    "\"Your Health In Digital Hands\"",
+                    AppStrings.introductionHeading.tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -64,9 +65,9 @@ class IntroductionPage extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Ask, explore and book all online health services right in your fingertip",
+                    AppStrings.introductionSubHeading.tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 9.sp, color: Colors.black38),
+                    style: TextStyle(fontSize: 10.sp, color: Colors.black38),
                   ),
                   SizedBox(
                     height: 5.h,
@@ -75,16 +76,16 @@ class IntroductionPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: MainColoredButton(
-                          text: "Sign in ",
+                          text: AppStrings.login.tr,
                           onPress: () => Get.toNamed(LoginPage.id),
                         ),
                       ),
                       Expanded(
                         child: TextButton(
                           onPressed: () => Get.toNamed(SignupPage.id),
-                          child: const Text(
-                            "Register",
-                            style: TextStyle(
+                          child: Text(
+                            AppStrings.register.tr,
+                            style: const TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),

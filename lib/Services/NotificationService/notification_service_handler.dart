@@ -13,6 +13,7 @@ abstract class NotificationServiceHandler {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
     messaging = FirebaseMessaging.instance;
+    Get.put(UserSession(), permanent: true);
     Get.find<UserSession>().firebaseDeviceToken =
         await messaging.getToken() ?? "";
   }

@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Pages/Authentication/forgetPassword/forget_password_page.dart';
 import 'package:ai_health_assistance/Pages/Authentication/signup/signupPage.dart';
@@ -39,7 +40,7 @@ class LoginPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Login here",
+                        AppStrings.login.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -49,7 +50,7 @@ class LoginPage extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 12.0.sp),
                         child: Text(
-                          "fill in your credentials to continue".capitalize!,
+                          AppStrings.loginSubtitle.tr,
                           style: TextStyle(
                               fontSize: 11.sp, fontWeight: FontWeight.bold),
                         ),
@@ -89,7 +90,7 @@ class LoginPage extends StatelessWidget {
                           child: TextButton(
                             onPressed: () => Get.toNamed(ForgetPasswordPage.id),
                             child: Text(
-                              "Forget Your Password?",
+                              AppStrings.forgetPassword.tr,
                               style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 9.sp,
@@ -101,7 +102,7 @@ class LoginPage extends StatelessWidget {
                           height: 10.sp,
                         ),
                         MainColoredButton(
-                          text: "Sign in",
+                          text: AppStrings.login.tr,
                           fontSize: 12.sp,
                           isLoading: controller.isLoading,
                           onPress: () => controller.login(),
@@ -112,7 +113,7 @@ class LoginPage extends StatelessWidget {
                         TextButton(
                           onPressed: () => Get.toNamed(SignupPage.id),
                           child: Text(
-                            "Create new account",
+                            AppStrings.createNewAccount.tr,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 10.sp,

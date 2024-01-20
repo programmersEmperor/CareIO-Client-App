@@ -8,8 +8,7 @@ import 'package:flutter/material.dart';
 
 class BaseApi {
   late Dio _dio;
-  String _apiPreVersion = 'v1';
-  String _apiVersion = 'v1';
+  final String _apiVersion = 'v1';
   BaseApi() {
     _dio = _configureClient();
     (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
@@ -22,29 +21,29 @@ class BaseApi {
     Dio client = Dio();
 
     client.options = BaseOptions(
-      baseUrl: 'https://asp.careio.app/api/$_apiVersion/app/',
+      baseUrl: 'https://api.careio.app/api/$_apiVersion/app/',
     );
     client.interceptors.add(ApiInterceptors());
     client.interceptors.add(LogInterceptor(
-        responseBody: true, logPrint: (o) => debugPrint(o.toString())));
+        requestBody: true,
+        responseBody: true,
+        logPrint: (o) => debugPrint(o.toString())));
     return client;
   }
 
   Future<Response> getRequest(
       {required String url, Map<String, dynamic>? params}) async {
     Response response = await _dio.get(url, queryParameters: params ?? {});
-    return response.data;
+    return response;
   }
 
-  Future<Response> postRequest(
-      {required url, required Map<String, dynamic> body}) async {
+  Future<Response> postRequest({required url, required dynamic body}) async {
     Response response = await _dio.post(url, data: body);
     return response;
   }
 
-  Future<Response> putRequest(
-      {required url, required Map<String, dynamic> body}) async {
-    Response response = await _dio.put('/', data: body);
+  Future<Response> putRequest({required url, required dynamic body}) async {
+    Response response = await _dio.put(url, data: body);
     return response.data;
   }
 }

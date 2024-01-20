@@ -22,7 +22,7 @@ class MainColoredButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPress,
+        onPressed: isLoading == true.obs ? () => {} : onPress,
         style: ButtonStyle(
           fixedSize: MaterialStatePropertyAll(
             Size(100.w, 6.h),

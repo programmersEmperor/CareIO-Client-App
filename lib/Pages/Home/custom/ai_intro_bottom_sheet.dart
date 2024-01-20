@@ -1,6 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/ai_introduction_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
+import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,7 @@ class AiIntroBottomSheet extends StatelessWidget {
               text: "Cool, Let's start !",
               onPress: () {
                 Get.close(0);
+                Get.find<UserSession>().setUserOpenChat();
                 Get.toNamed(ChatBotPage.id);
               })
         ],

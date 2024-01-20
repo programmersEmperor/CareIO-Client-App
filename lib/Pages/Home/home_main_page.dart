@@ -1,6 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/doctor_grid_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/section_title.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/ad_slider_card.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/ai_home_card.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
@@ -25,7 +26,7 @@ class HomeMainPage extends StatelessWidget {
       children: [
         SizedBox(
           width: double.infinity,
-          height: 22.h,
+          height: 20.h,
           child: Swiper(
             itemBuilder: (BuildContext context, int index) {
               if (index > 0) {
@@ -44,7 +45,7 @@ class HomeMainPage extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 12.h,
+          height: 14.h,
           width: double.infinity,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -52,7 +53,7 @@ class HomeMainPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: CategoryGridElement(
-                    title: 'Doctors',
+                    title: AppStrings.doctors.tr,
                     desc: "Find your best doctor",
                     onTap: () => Get.toNamed(DoctorsPage.id),
                     iconPath: "assets/svgs/doctor_icon.svg",
@@ -60,7 +61,7 @@ class HomeMainPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: CategoryGridElement(
-                    title: 'Health Centers',
+                    title: AppStrings.healthCenters.tr,
                     desc: "Find your best Hospital",
                     onTap: () => Get.toNamed(HospitalsPage.id),
                     iconPath: "assets/svgs/hospital_icon.svg",
@@ -68,7 +69,7 @@ class HomeMainPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: CategoryGridElement(
-                    title: 'Pharmacies',
+                    title: AppStrings.pharmacies.tr,
                     desc: "Explore medicine of your need",
                     onTap: () => Get.toNamed(PharmaciesPage.id),
                     iconPath: "assets/svgs/hospital_icon.svg",
@@ -83,13 +84,13 @@ class HomeMainPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SectionTitle(
-                title: 'Top doctors',
+              SectionTitle(
+                title: AppStrings.topDoctors.tr,
               ),
               TextButton(
                   onPressed: () {},
                   child: Text(
-                    "View all",
+                    AppStrings.viewAll.tr,
                     style: TextStyle(
                         color: AppColors.primaryColor, fontSize: 9.sp),
                   )),
@@ -115,11 +116,11 @@ class HomeMainPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SectionTitle(title: "Top hospitals"),
+              SectionTitle(title: AppStrings.topHospitals.tr),
               TextButton(
                   onPressed: () {},
                   child: Text(
-                    "View all",
+                    AppStrings.viewAll.tr,
                     style: TextStyle(
                         color: AppColors.primaryColor, fontSize: 9.sp),
                   )),

@@ -1,3 +1,5 @@
+import 'package:ai_health_assistance/Models/client.dart';
+import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
 import 'package:ai_health_assistance/Pages/Home/animations/animation_handler.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/ai_intro_bottom_sheet.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/map_bottom_sheet.dart';
@@ -5,6 +7,7 @@ import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
 import 'package:ai_health_assistance/Pages/Search/search_page.dart';
+import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
@@ -13,15 +16,13 @@ import 'package:sizer/sizer.dart';
 class HomePageController extends GetxController
     with GetTickerProviderStateMixin {
   RxInt activePage = 0.obs;
+  Patient patient = Get.find<UserSession>().patient;
   final List<IconData> icons = [
     Boxicons.bx_home_circle,
     Boxicons.bx_search,
     Boxicons.bx_calendar,
     Boxicons.bx_bell,
   ];
-
-  late List<Widget> tabs;
-  late TabController tabController;
 
   late HomeAnimationHandler animationHandler;
 
@@ -30,23 +31,6 @@ class HomePageController extends GetxController
   @override
   void onInit() {
     super.onInit();
-
-    tabs = const [
-      Tab(
-        text: "Upcoming",
-        //  height: 30.sp,
-      ),
-      Tab(
-        text: "Completed",
-        //    height: 30.sp,
-      ),
-      Tab(
-        text: "Canceled",
-        //    height: 30.sp,
-      ),
-    ];
-
-    tabController = TabController(length: tabs.length, vsync: this);
 
     animationHandler = Get.put(HomeAnimationHandler());
 
@@ -89,6 +73,10 @@ class HomePageController extends GetxController
   }
 
   void showBottomSheet(BuildContext context) {
+    if (Get.find<UserSession>().userOpenedChat) {
+      Get.toNamed(ChatBotPage.id);
+      return;
+    }
     AnimationController controller =
         BottomSheet.createAnimationController(this);
 

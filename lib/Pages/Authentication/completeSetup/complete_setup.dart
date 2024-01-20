@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class CompleteSetup extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Complete Setup",
+                        AppStrings.finalSetup.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -50,8 +51,7 @@ class CompleteSetup extends StatelessWidget {
                         padding: EdgeInsets.only(
                             top: 12.0.sp, left: 10.sp, right: 10.sp),
                         child: Text(
-                          "Add your personal image and name for more personalized experience "
-                              .capitalize!,
+                          AppStrings.finalSetupSubtitle.tr.capitalize!,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 11.sp, fontWeight: FontWeight.bold),
@@ -72,7 +72,7 @@ class CompleteSetup extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   FormBuilder(
-                    // key: controller.loginFormKey,
+                    key: controller.completeSetupFormKey,
                     child: Column(
                       children: [
                         GestureDetector(
@@ -143,6 +143,7 @@ class CompleteSetup extends StatelessWidget {
                         ),
                         const TextInputField(
                           name: 'name',
+                          required: true,
                         )
                             .animate(
                               autoPlay: true,
@@ -157,10 +158,10 @@ class CompleteSetup extends StatelessWidget {
                           height: 15.sp,
                         ),
                         MainColoredButton(
-                          text: "Save & continue",
+                          text: AppStrings.saveAndContinue.tr,
                           fontSize: 12.sp,
-                          // isLoading: controller.isLoading,
-                          onPress: () => {},
+                          isLoading: controller.isLoading,
+                          onPress: controller.completeSetup,
                         )
                             .animate(
                               autoPlay: true,

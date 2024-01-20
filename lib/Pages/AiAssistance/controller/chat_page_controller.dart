@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:ai_health_assistance/Models/chat_message.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/custom/chat_bot_notification_alert.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/custom/chat_bubble.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/custom/image_selector_bottom_sheet.dart';
+import 'package:ai_health_assistance/Services/Api/aibot.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:get/get.dart';
@@ -16,6 +19,9 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
   final TextEditingController textController = TextEditingController();
   final ScrollController listController = ScrollController();
   final RxBool isPopUpAnimated = false.obs;
+  final List<ChatMessage> aiMessageList = [];
+  String summary = "";
+  final Map<String, dynamic> requestBody = {};
   Rx<XFile> image = XFile('').obs;
   late ImagePicker picker;
 
@@ -58,7 +64,7 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
   }
 
   void playNotificationSound() async {
-    await FlutterRingtonePlayer.play(fromAsset: 'assets/sounds/pop-up.mp3');
+    FlutterRingtonePlayer.play(fromAsset: 'assets/sounds/pop-up.mp3');
   }
 
   void uploadTheImage(ImageSource source) async {
@@ -76,9 +82,9 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
 
   void pushNoteNotification() {
     showNotificationTimer = Timer(
-      1.seconds,
+      500.milliseconds,
       () async {
-        playNotificationSound();
+        //playNotificationSound();
         initializeAnimation();
         messages.add(ChatBotNotificationAlert(controller: this));
         isPopUpAnimated(true);
@@ -86,16 +92,70 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
     );
   }
 
-  void sendMessage(bool isMe) {
-    playNotificationSound();
-    if (textController.text.isNotEmpty) {
-      messages.add(ChatBubble(
-        message: textController.text,
-        isMe: isMe,
-      ));
+  void addOrRemoveChatLoading({bool delete = false}) {
+    if (delete) {
+      messages.removeLast();
+      return;
+    }
+    messages.add(
+      const ChatBubble(
+        message: '',
+        isLoading: true,
+        isMe: 'dr',
+      ),
+    );
+  }
+
+  void appendToChat({required String content, required String role}) {
+    ChatMessage message = ChatMessage(content: content, role: role);
+    aiMessageList.add(message);
+    messages.add(
+      ChatBubble(
+        message: message.content,
+        isMe: message.role,
+      ),
+    );
+    moveListToBottom();
+  }
+
+  Future<void> sendMessage(String role) async {
+    try {
+      if (textController.text.isEmpty) return;
+
+      appendToChat(content: textController.text, role: 'patient');
+
+      addOrRemoveChatLoading();
+
+      requestBody.addIf(summary.isNotEmpty, 'summary', summary);
+      requestBody.addIf(
+          aiMessageList.isNotEmpty,
+          'chats',
+          aiMessageList.length == 1
+              ? aiMessageList
+              : aiMessageList.sublist(aiMessageList.length - 3));
+
+      debugPrint(requestBody.toString());
+      textController.clear();
+
+      var response = await Get.find<AiBotApiService>().sendMessage(requestBody);
+
+      addOrRemoveChatLoading(delete: true);
+
+      if (response == null) return;
+
+      summary = response.data['result']['summary'];
+
+      appendToChat(content: response.data['result']['response'], role: 'dr');
+    } on DioException catch (e) {
+      addOrRemoveChatLoading(delete: true);
+
+      if (e.response != null) {
+        appendToChat(content: e.response?.data['message'], role: 'dr');
+      }
+      appendToChat(content: e.message ?? "Error $e", role: 'dr');
+
       textController.clear();
     }
-    moveListToBottom();
   }
 
   void removeImage() {
@@ -106,7 +166,7 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
     playNotificationSound();
     messages.add(ChatBubble(
       message: '',
-      isMe: true,
+      isMe: 'true',
       image: getImage,
     ));
     Get.close(0);

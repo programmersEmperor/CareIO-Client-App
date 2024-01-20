@@ -1,7 +1,10 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/profile_item.dart';
+import 'package:ai_health_assistance/Pages/Profile/settings.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -14,7 +17,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProfilePageController uiController = Get.put(ProfilePageController());
+    ProfilePageController controller = Get.put(ProfilePageController());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 0),
@@ -69,24 +72,42 @@ class ProfilePage extends StatelessWidget {
                     Stack(
                       children: [
                         Lottie.asset('assets/animations/lines.json'),
-                        Align(
-                          alignment: Alignment.center,
-                          child: Container(
-                            width: 80.sp,
-                            height: 80.sp,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.sp),
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  'assets/images/person.jpg',
+                        if (controller.patient.avatar.isEmpty) ...[
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 80.sp,
+                              height: 80.sp,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.sp),
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                    'assets/images/person.jpg',
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
-                        ),
-                        const Positioned(
-                          left: 0,
+                        ] else ...[
+                          Align(
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: 80.sp,
+                              height: 80.sp,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.sp),
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                      controller.patient.avatar),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                        const PositionedDirectional(
+                          start: 0,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 15, vertical: 8),
@@ -95,9 +116,9 @@ class ProfilePage extends StatelessWidget {
                         )
                       ],
                     ),
-                    const Text(
-                      "Haitham Hussein",
-                      style: TextStyle(
+                    Text(
+                      controller.patient.name,
+                      style: const TextStyle(
                           color: Colors.black87, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
@@ -115,7 +136,7 @@ class ProfilePage extends StatelessWidget {
                           width: 5.sp,
                         ),
                         Text(
-                          "771056641",
+                          controller.patient.phone,
                           style: TextStyle(
                             color: Colors.black38,
                             fontSize: 10.sp,
@@ -126,93 +147,157 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(
                       height: 10.sp,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Card(
-                          color: AppColors.primaryColor,
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(11.sp)),
-                          shadowColor: AppColors.primaryColor,
-                          child: Stack(
-                            children: [
-                              Icon(
-                                Icons.check,
-                                color:
-                                    AppColors.secondaryColor.withOpacity(0.2),
-                                size: 70.sp,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 2.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Card(
+                              color: AppColors.primaryColor,
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11.sp)),
+                              shadowColor: AppColors.primaryColor,
+                              child: Stack(
+                                children: [
+                                  PositionedDirectional(
+                                    end: 0,
+                                    child: Icon(
+                                      Icons.messenger_outline_rounded,
+                                      color: Colors.white.withOpacity(0.1),
+                                      size: 70.sp,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "${controller.patient.messageBalance}",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 2.sp,
+                                        ),
+                                        Text(
+                                          AppStrings.messageCount.tr,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.sp),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      "253",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 2.sp,
-                                    ),
-                                    Text(
-                                      "Appointments booked",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 10.sp),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                        Card(
-                          color: AppColors.secondaryColor,
-                          elevation: 10,
-                          shadowColor: AppColors.secondaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(11.sp)),
-                          child: Stack(
-                            children: [
-                              Icon(
-                                Icons.access_alarm,
-                                color: AppColors.primaryColor.withOpacity(0.1),
-                                size: 70.sp,
+                          Expanded(
+                            child: Card(
+                              color: AppColors.secondaryColor,
+                              elevation: 10,
+                              shadowColor: AppColors.secondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11.sp)),
+                              child: Stack(
+                                children: [
+                                  PositionedDirectional(
+                                    end: 0,
+                                    child: Icon(
+                                      Icons.check,
+                                      color: AppColors.primaryColor
+                                          .withOpacity(0.1),
+                                      size: 70.sp,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "${controller.patient.appointmentBooked}",
+                                          style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 2.sp,
+                                        ),
+                                        Text(
+                                          AppStrings.appointmentBooked.tr,
+                                          style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontSize: 10.sp),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      "1",
-                                      style: TextStyle(
-                                          color: AppColors.primaryColor,
-                                          fontSize: 20.sp,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 2.sp,
-                                    ),
-                                    Text(
-                                      "Appointments waiting",
-                                      style: TextStyle(
-                                          color: AppColors.primaryColor,
-                                          fontSize: 10.sp),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Card(
+                              color: AppColors.secondaryColor,
+                              elevation: 10,
+                              shadowColor: AppColors.secondaryColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(11.sp)),
+                              child: Stack(
+                                children: [
+                                  PositionedDirectional(
+                                    end: 0,
+                                    child: Icon(
+                                      Icons.alarm,
+                                      color: AppColors.primaryColor
+                                          .withOpacity(0.1),
+                                      size: 70.sp,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          "${controller.patient.appointmentWaiting}",
+                                          style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 2.sp,
+                                        ),
+                                        Text(
+                                          AppStrings.appointmentWaiting.tr,
+                                          style: TextStyle(
+                                              color: AppColors.primaryColor,
+                                              fontSize: 10.sp),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 30.sp,
@@ -228,7 +313,7 @@ class ProfilePage extends StatelessWidget {
                     ProfileItem(
                       icon: Icons.settings,
                       title: "Settings",
-                      onTap: () {},
+                      onTap: () => Get.toNamed(SettingsPage.id),
                     ),
                     SizedBox(
                       height: 13.sp,
@@ -242,7 +327,7 @@ class ProfilePage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: ElevatedButton(
-                        onPressed: uiController.showLogoutBottomSheet,
+                        onPressed: controller.showLogoutBottomSheet,
                         style: ButtonStyle(
                           fixedSize: MaterialStatePropertyAll(
                             Size(100.w, 6.h),

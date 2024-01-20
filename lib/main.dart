@@ -8,11 +8,12 @@ import 'package:ai_health_assistance/Utils/scroll_behavior.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:sizer/sizer.dart';
 
 void main() async {
   NotificationServiceHandler.initializeFirebase();
-
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -30,8 +31,7 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingService(),
         scrollBehavior: const ScrollBehaviorModified(),
         getPages: AppRoutes.allRoutes,
-        locale: const Locale("en", "EN"),
-        fallbackLocale: const Locale("en", "En"),
+        fallbackLocale: const Locale("en", "US"),
         debugShowCheckedModeBanner: false,
         translations: LocalizationHelper(),
         localizationsDelegates: const [

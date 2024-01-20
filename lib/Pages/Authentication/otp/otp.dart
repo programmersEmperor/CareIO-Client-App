@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +18,7 @@ class OTPPage extends StatelessWidget {
     AuthenticationController controller = Get.find<AuthenticationController>();
     return Scaffold(
       body: ListView(
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           SizedBox(
             height: 30.h,
@@ -38,7 +40,7 @@ class OTPPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Code sent",
+                        AppStrings.codeSent.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -46,10 +48,11 @@ class OTPPage extends StatelessWidget {
                             fontSize: 22.sp),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 12.0.sp),
+                        padding: EdgeInsets.only(
+                            top: 12.0.sp, left: 20.sp, right: 20.sp),
                         child: Text(
-                          "Code has been sent to 771056641 via sms "
-                              .capitalize!,
+                          AppStrings.codeSentSubtitle.tr,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 11.sp, fontWeight: FontWeight.bold),
                         ),
@@ -87,7 +90,7 @@ class OTPPage extends StatelessWidget {
                         height: 30.sp,
                       ),
                       MainColoredButton(
-                        text: "Confirm code",
+                        text: AppStrings.confirmCode.tr,
                         fontSize: 12.sp,
                         isLoading: controller.isLoading,
                         onPress: controller.verifyOtp,
@@ -98,7 +101,7 @@ class OTPPage extends StatelessWidget {
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Code not sent ? resend",
+                          AppStrings.resendCode.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 10.sp,

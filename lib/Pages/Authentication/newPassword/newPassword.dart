@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "New Password",
+                        AutofillHints.newPassword.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -48,8 +49,7 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                         padding: EdgeInsets.only(
                             top: 12.0.sp, right: 20.sp, left: 20.sp),
                         child: Text(
-                          "Try to use a password that you can easily remember"
-                              .capitalize!,
+                          AppStrings.newPasswordSubtitle.tr.capitalize!,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               height: 1.5,
@@ -92,10 +92,10 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                           height: 10.sp,
                         ),
                         MainColoredButton(
-                          text: "save password",
+                          text: AppStrings.savePassword.tr,
                           fontSize: 12.sp,
                           isLoading: controller.isLoading,
-                          onPress: () => controller.login(),
+                          onPress: controller.login,
                         ),
                         SizedBox(
                           height: 15.sp,

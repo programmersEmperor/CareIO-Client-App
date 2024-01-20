@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 
 class AppointmentCard extends StatelessWidget {
   final int index;
-  final showDetails = true.obs;
+  final showDetails = false.obs;
   AppointmentCard({
     super.key,
     required this.index,

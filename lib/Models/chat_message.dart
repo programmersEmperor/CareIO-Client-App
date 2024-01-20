@@ -1,8 +1,10 @@
-class Chats {
+class ChatMessage {
   final String role;
   final String content;
 
-  Chats.fromJsonMap(Map<String, dynamic> map)
+  ChatMessage({required this.role, required this.content});
+
+  ChatMessage.fromJsonMap(Map<String, dynamic> map)
       : role = map["role"],
         content = map["content"];
 

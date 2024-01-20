@@ -8,6 +8,7 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class HomePage extends StatelessWidget {
+  static const id = '/Home';
   const HomePage({super.key});
 
   @override
@@ -49,7 +50,9 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const MainAppBar(),
+            MainAppBar(
+              patient: homePageController.patient,
+            ),
             Expanded(
               child: Obx(
                 () => AnimatedSwitcher(

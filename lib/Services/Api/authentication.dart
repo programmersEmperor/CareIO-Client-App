@@ -1,4 +1,6 @@
 import 'package:ai_health_assistance/Services/Api/base/base.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthenticationApiService {
@@ -8,11 +10,11 @@ class AuthenticationApiService {
     try {
       isLoading(true);
       var response = await _apiService.postRequest(
-        url: '/clients/login',
+        url: '/patients/login',
         body: body,
       );
-
       isLoading(false);
+      debugPrint('Status Code : ${response.statusCode}');
       return response;
     } catch (e) {
       isLoading(false);
@@ -21,9 +23,39 @@ class AuthenticationApiService {
 
   Future<dynamic> signup({required Map<String, dynamic> body}) async {
     try {
+      var requestBody = {
+        "name": body['name'],
+        "password": body['password'],
+        "phone": body['phone'],
+      };
+      isLoading(true);
+      var response = await _apiService.postRequest(
+          url: '/patients/register', body: requestBody);
+      isLoading(false);
+      return response;
+    } catch (e) {
+      isLoading(false);
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<dynamic> forgetPassword({required String password}) async {
+    var response = await _apiService.putRequest(
+        url: '/patients/resetPassword',
+        body: dio.FormData.fromMap({"newPassword": password}));
+    return response;
+  }
+
+  Future<dynamic> logout() async {
+    // var response = await _apiService.getRequest(url: '/patients/logout');
+    // return response;
+  }
+
+  Future<dynamic> sendOtp({required Map<String, dynamic> body}) async {
+    try {
       isLoading(true);
       var response =
-          await _apiService.postRequest(url: '/clients/register', body: body);
+          await _apiService.postRequest(url: '/users/SendOTP', body: body);
       isLoading(false);
       return response;
     } catch (e) {
@@ -31,30 +63,13 @@ class AuthenticationApiService {
     }
   }
 
-  Future<dynamic> forgetPassword({required String password}) async {
-    var response = await _apiService.putRequest(
-        url: '/clients/resetPassword', body: {"newPassword": password});
-    return response;
-  }
-
-  Future<dynamic> logout() async {
-    // var response = await _apiService.getRequest(url: '/clients/logout');
-    // return response;
-  }
-
-  Future<dynamic> sendOtp({required Map<String, dynamic> body}) async {
-    // var response =
-    //     await _apiService.postRequest(url: '/phone/sendOTP', body: body);
-    // return response;
-  }
-
   Future<dynamic> verifyOtp({required int otp, required bool isReset}) async {
     try {
       isLoading(true);
       var response =
-          await _apiService.postRequest(url: '/phone/VerifyOTP', body: {
+          await _apiService.postRequest(url: 'patients/phone/verifyOTP', body: {
         'otp': otp,
-        'isReset': isReset,
+        'is-forget': isReset,
       });
       isLoading(false);
       return response;

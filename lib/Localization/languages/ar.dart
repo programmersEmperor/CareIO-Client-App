@@ -1,1 +1,45 @@
-Map<String, String> ar = {};
+import 'package:ai_health_assistance/Localization/app_strings.dart';
+
+Map<String, String> ar = {
+  AppStrings.login: "تسجيل الدخول",
+  AppStrings.loginSubtitle: "قم بتعبئة بياناتك لتسجيل الدخول",
+  AppStrings.phone: "رقم الهاتف",
+  AppStrings.password: "كلمة المرور",
+  AppStrings.forgetPassword: "هل نسيت كلمة المرور؟",
+  AppStrings.createNewAccount: " ليس لديك حساب ؟ انشاء حساب جديد",
+  AppStrings.register: "انشاء حساب",
+  AppStrings.introductionSubHeading:
+      "اسأل, تصفح و احجز جميع الخدمات الصحية الممكنة متوفرة بلمسة زر",
+  AppStrings.introductionHeading: "صحتك في ايادي رقمية",
+  AppStrings.createNewAccountSubtitle:
+      "قم بانشاء حساب جديد لتتمكن من تصفح جميع مزايا التطبيق",
+  AppStrings.alreadyHaveAccount: "لديك حساب مسبق ؟ تسجيل الدخول",
+  AppStrings.forgetPasswordSubtitle:
+      "ادخل رقم الهاتف الخاص بك من ثم سيتم ارسال اليك رمز التأكيد عن طريق رسالة نصية ",
+  AppStrings.sendOtp: "ارسل الرمز",
+  AppStrings.codeSent: "تم ارسال رمز التحقق",
+  AppStrings.codeSentSubtitle: "تم ارسال رمز التحقق الى رقم الهاتف الخاص بك",
+  AppStrings.confirmCode: "تأكيد رمز التحقق",
+  AppStrings.resendCode: "لم يصلك رمز التحقق ؟ اعادة ارسال",
+  AppStrings.newPassword: "كلمة المرور الجديدة",
+  AppStrings.newPasswordSubtitle: "قم بإعداد كلمة مرور جديدة يسهل لك تذكرها",
+  AppStrings.savePassword: "حفظ كلمة المرور",
+  AppStrings.saveAndContinue: "حفظ و متابعة",
+  AppStrings.finalSetup: "الخطوة الاخيرة",
+  AppStrings.goodAfternoon: "مساء الخير",
+  AppStrings.goodMorning: "صباح الخير",
+  AppStrings.aiCardTitle: "قم بتجربة ذكائنا الاصطناعي الان",
+  AppStrings.startChat: "ابداء المحادثة",
+  AppStrings.pharmacies: "الصيدليات",
+  AppStrings.doctors: "الأطباء",
+  AppStrings.pickYourPreferredLanguage: "حدد لغتك المناسبة",
+  AppStrings.healthCenters: "المراكز الصحية",
+  AppStrings.topDoctors: "الدكاترة الاعلى تقييماً",
+  AppStrings.topHospitals: "المستشفيات الاعلى تقييماً",
+  AppStrings.viewAll: "عرض الكل",
+  AppStrings.appointmentBooked: "الحجوزات المكتملة",
+  AppStrings.appointmentWaiting: "الحجوزات القادمة",
+  AppStrings.messageCount: "الرسائل  \nالمتبقية",
+  AppStrings.finalSetupSubtitle:
+      "قم بإضافة صورتك الشخصية و اسمك لتجربة مخصصه اكثر ",
+};

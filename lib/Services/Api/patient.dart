@@ -1,21 +1,33 @@
 import 'dart:io';
 
 import 'package:ai_health_assistance/Services/Api/base/base.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' as dio;
+import 'package:flutter/cupertino.dart';
 
-class PatientApiService extends BaseApi {
-  Future<dynamic> update({required String name, File? avatar}) async {
-    var response = await putRequest(url: 'clients/update', body: {
-      'name': name,
-      'avatar': avatar != null ? MultipartFile.fromFile(avatar.path) : null,
-    });
-    return response;
+class PatientApiService {
+  final BaseApi _apiService = BaseApi();
+
+  Future<dynamic> update({required String name, required File avatar}) async {
+    try {
+      var response = await _apiService.postRequest(
+          url: 'patients/update',
+          body: dio.FormData.fromMap({
+            'name': name,
+            'avatar': avatar.path.isNotEmpty
+                ? await dio.MultipartFile.fromFile(avatar.path)
+                : null,
+          }));
+
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future<dynamic> resetPassword(
       {required String password, required String oldPassword}) async {
-    var response = await putRequest(
-        url: '/clients/resetPassword',
+    var response = await _apiService.putRequest(
+        url: 'patients/resetPassword',
         body: {"oldPassword": oldPassword, "newPassword": password});
     return response;
   }

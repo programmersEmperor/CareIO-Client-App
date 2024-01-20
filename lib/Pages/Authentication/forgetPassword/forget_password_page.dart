@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "Forget Your Password?",
+                          AppStrings.forgetPassword.tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -51,8 +52,7 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                           child: SizedBox(
                             width: 70.w,
                             child: Text(
-                              "fill in your phone number and an OTP will be sent to your phone via SMS "
-                                  .capitalize!,
+                              AppStrings.forgetPasswordSubtitle.tr,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 11.sp, fontWeight: FontWeight.bold),
@@ -75,6 +75,7 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
                   FormBuilder(
+                    key: controller.sendOtpFormKey,
                     child: Column(
                       children: [
                         const TextInputField(
@@ -85,8 +86,9 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                           height: 15.sp,
                         ),
                         MainColoredButton(
-                          text: "Send OTP",
+                          text: AppStrings.sendOtp.tr,
                           fontSize: 12.sp,
+                          isLoading: controller.isLoading,
                           onPress: controller.sendOtp,
                         ),
                         SizedBox(

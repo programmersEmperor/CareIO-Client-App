@@ -92,7 +92,7 @@ class TextInputField extends StatelessWidget {
             suffixIconColor: Colors.grey,
             floatingLabelStyle:
                 TextStyle(color: AppColors.primaryColor, fontSize: 13.sp),
-            hintText: name.capitalize,
+            hintText: name.tr,
             hintStyle: TextStyle(fontSize: 10.sp),
             fillColor: CupertinoColors.systemGrey5,
             filled: true,

@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
+import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,7 +45,7 @@ class ChatBotNotificationAlert extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Dear, Haitham",
+                                "Dear, ${Get.find<UserSession>().patient.name}",
                                 style: TextStyle(
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.bold,

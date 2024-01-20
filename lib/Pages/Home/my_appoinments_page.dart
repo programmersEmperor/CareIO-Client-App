@@ -1,5 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
-import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_card.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +11,16 @@ class MyAppointmentsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<HomePageController>();
+    AppointmentController controller = Get.put(AppointmentController());
     return Column(
       children: [
         const PageHeader(heading: "My Appointments"),
         Padding(
-          padding: EdgeInsets.only(top: 15.sp, left: 10.sp, right: 10.sp),
+          padding: EdgeInsets.only(
+            top: 15.sp,
+            left: 10.sp,
+            right: 10.sp,
+          ),
           child: Container(
             height: 35.sp,
             decoration: BoxDecoration(
@@ -33,15 +37,18 @@ class MyAppointmentsPage extends StatelessWidget {
                 child: Theme(
                   data: ThemeData().copyWith(
                     splashColor: Colors.transparent,
+                    useMaterial3: false,
                     highlightColor: Colors.transparent,
                   ),
                   child: TabBar(
                     tabs: controller.tabs,
                     controller: controller.tabController,
                     indicator: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(10.sp)),
+                      color: AppColors.primaryColor,
+                      borderRadius: BorderRadius.circular(10.sp),
+                    ),
                     labelPadding: EdgeInsets.zero,
+                    labelColor: Colors.white,
                     padding: EdgeInsets.zero,
                     labelStyle: TextStyle(fontSize: 10.sp),
                     enableFeedback: false,
@@ -59,21 +66,21 @@ class MyAppointmentsPage extends StatelessWidget {
             children: [
               ListView.builder(
                 itemCount: 3,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(bottom: 9.h),
                 itemBuilder: (_, index) => AppointmentCard(
                   index: index,
                 ),
               ),
               ListView.builder(
                 itemCount: 2,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(bottom: 9.h),
                 itemBuilder: (_, index) => AppointmentCard(
                   index: index,
                 ),
               ),
               ListView.builder(
                 itemCount: 2,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(bottom: 9.h),
                 itemBuilder: (_, index) => AppointmentCard(
                   index: index,
                 ),

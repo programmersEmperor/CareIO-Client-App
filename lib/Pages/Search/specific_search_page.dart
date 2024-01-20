@@ -24,6 +24,7 @@ class SpecificSearchPage extends StatelessWidget {
               controller: uiController.textEditingController,
               onChange: uiController.filterSearchResults,
               showAttachment: false,
+              name: "search",
               hint: "search for anything",
             ),
             Padding(

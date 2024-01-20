@@ -8,11 +8,13 @@ class RoundedTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
   final FocusNode? node;
+  final String name;
   final bool showAttachment;
   final Function(String) onChange;
   const RoundedTextField(
       {super.key,
       required this.controller,
+      required this.name,
       required this.hint,
       this.node,
       this.showAttachment = true,
@@ -21,7 +23,8 @@ class RoundedTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
-      name: 'search',
+      name: name,
+      controller: controller,
       cursorRadius: const Radius.circular(15),
       cursorColor: AppColors.primaryColor,
       style: TextStyle(fontSize: 9.sp, color: Colors.black54),
@@ -29,7 +32,7 @@ class RoundedTextField extends StatelessWidget {
         counter: const SizedBox(),
         floatingLabelStyle:
             TextStyle(color: AppColors.primaryColor, fontSize: 12.sp),
-        hintText: "search for anything",
+        hintText: hint,
         hintStyle: TextStyle(fontSize: 9.5.sp),
         fillColor: Colors.white,
         filled: true,

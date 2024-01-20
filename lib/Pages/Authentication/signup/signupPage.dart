@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -38,7 +39,7 @@ class SignupPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Create Account",
+                        AppStrings.register.tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -49,8 +50,7 @@ class SignupPage extends StatelessWidget {
                         padding: EdgeInsets.only(
                             top: 12.0.sp, left: 40.sp, right: 40.sp),
                         child: Text(
-                          "Create account so you can explore and use all features of Healio app"
-                              .capitalize!,
+                          AppStrings.createNewAccountSubtitle.tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.black87,
@@ -75,12 +75,6 @@ class SignupPage extends StatelessWidget {
                   key: controller.signupFormKey,
                   child: Column(
                     children: [
-                      const TextInputField(
-                        name: 'name',
-                      ),
-                      SizedBox(
-                        height: 15.sp,
-                      ),
                       const TextInputField(
                         name: 'phone',
                         inputType: TextInputType.phone,
@@ -116,7 +110,7 @@ class SignupPage extends StatelessWidget {
                       TextButton(
                         onPressed: () => Get.toNamed(LoginPage.id),
                         child: Text(
-                          "Already have an account",
+                          AppStrings.alreadyHaveAccount.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 10.sp,

@@ -13,7 +13,8 @@ class ChatBotPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ChatUiController uiController = Get.put(ChatUiController());
+    ChatUiController uiController =
+        Get.put(ChatUiController(), permanent: true);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 30.sp,
@@ -49,6 +50,7 @@ class ChatBotPage extends StatelessWidget {
                   child: AnimatedSwitcher(
                     duration: 500.milliseconds,
                     child: RoundedTextField(
+                      name: "chat",
                       controller: uiController.textController,
                       onChange: (value) {},
                       hint: "i have a cold ...",
@@ -60,8 +62,8 @@ class ChatBotPage extends StatelessWidget {
                   width: 8.sp,
                 ),
                 CircularIconButton(
-                  onTap: () => uiController.sendMessage(true),
-                  onLongPress: () => uiController.sendMessage(false),
+                  onTap: () => uiController.sendMessage('patient'),
+                  onLongPress: () => uiController.sendMessage('dr'),
                   width: 12.w,
                   height: 6.h,
                   backgroundColor: AppColors.primaryColor,

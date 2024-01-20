@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,9 @@ class StackButton extends StatelessWidget {
           ),
         ),
       ),
-      child: const Text(
-        "Start chat",
-        style: TextStyle(
+      child: Text(
+        AppStrings.startChat.tr,
+        style: const TextStyle(
             color: Colors.white, fontSize: 11, fontWeight: FontWeight.w900),
       ),
     );

@@ -1,5 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Pages/Authentication/controllers/authentication_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class LogoutBottomSheet extends StatelessWidget {
@@ -7,6 +9,8 @@ class LogoutBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationController controller = Get.put(AuthenticationController());
+    var isLoading = false.obs;
     return SizedBox(
       width: 100.w,
       child: Padding(
@@ -24,7 +28,12 @@ class LogoutBottomSheet extends StatelessWidget {
             ),
             MainColoredButton(
               text: "Logout",
-              onPress: () {},
+              isLoading: isLoading,
+              onPress: () async {
+                isLoading(true);
+                await controller.logOut();
+                isLoading(false);
+              },
             ),
           ],
         ),

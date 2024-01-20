@@ -1,7 +1,12 @@
 import 'dart:io';
 
+import 'package:ai_health_assistance/Pages/Authentication/completeSetup/complete_setup.dart';
+import 'package:ai_health_assistance/Pages/Authentication/introduction.dart';
+import 'package:ai_health_assistance/Pages/Authentication/newPassword/newPassword.dart';
 import 'package:ai_health_assistance/Pages/Authentication/otp/otp.dart';
+import 'package:ai_health_assistance/Pages/Home/home_page.dart';
 import 'package:ai_health_assistance/Services/Api/authentication.dart';
+import 'package:ai_health_assistance/Services/Api/patient.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:ai_health_assistance/Utils/snackbar.dart';
@@ -19,6 +24,12 @@ class AuthenticationController extends GetxController
   final GlobalKey<FormBuilderState> signupFormKey =
       GlobalKey<FormBuilderState>();
   final GlobalKey<FormBuilderState> newPasswordFormKey =
+      GlobalKey<FormBuilderState>();
+
+  final GlobalKey<FormBuilderState> completeSetupFormKey =
+      GlobalKey<FormBuilderState>();
+
+  final GlobalKey<FormBuilderState> sendOtpFormKey =
       GlobalKey<FormBuilderState>();
   final apiService = Get.find<AuthenticationApiService>();
   String otpCode = '';
@@ -142,11 +153,24 @@ class AuthenticationController extends GetxController
 
   Future<void> login() async {
     if (!_isFormValid(login: true)) return;
+
     final response = await apiService.login(body: formValues);
     if (response == null) return;
 
-    Get.find<UserSession>().token = response.data['result'];
-    Get.toNamed(OTPPage.id);
+    if (response.data['temp-token'] != null) {
+      Get.find<UserSession>().token = response.data['temp-token'];
+      Get.toNamed(OTPPage.id);
+    } else {
+      if (await Get.find<UserSession>()
+          .savePatient(response.data['result']['patient'])) {
+        Get.find<UserSession>().token = response.data['result']['token'];
+        if (Get.find<UserSession>().patient.name == "") {
+          Get.toNamed(CompleteSetup.id);
+          return;
+        }
+        Get.toNamed(HomePage.id);
+      }
+    }
   }
 
   Future<void> signup() async {
@@ -155,21 +179,24 @@ class AuthenticationController extends GetxController
       showSnack(title: "Password", description: "Password is not identical");
       return;
     }
+
     final response = await apiService.signup(body: formValues);
     debugPrint("The response ${response.toString()}");
     if (response == null) return;
-    Get.find<UserSession>().token = response.data['result'];
+    Get.find<UserSession>().token = response.data['result']['temp-token'];
     Get.toNamed(OTPPage.id);
   }
 
   Future<void> sendOtp() async {
-    if (!_isFormValid()) return;
-    isLoading(true);
+    if (!sendOtpFormKey.currentState!.saveAndValidate()) return;
+
+    formValues = sendOtpFormKey.currentState!.value;
     final response = await apiService.sendOtp(body: formValues);
+    if (response == null) return;
+    Get.toNamed(NewPasswordPage.id);
   }
 
   Future<void> verifyOtp() async {
-    debugPrint("Code $otpCode");
     if (otpCode.isEmpty || otpCode.length != 6) {
       showSnack(title: "OTP", description: "OTP must be 6 digit");
       return;
@@ -178,5 +205,34 @@ class AuthenticationController extends GetxController
     final response =
         await apiService.verifyOtp(otp: int.parse(otpCode), isReset: false);
     if (response == null) return;
+    if (await Get.find<UserSession>()
+        .savePatient(response.data['result']['patient'])) {
+      Get.find<UserSession>().token = response.data['result']['token'];
+      if (Get.find<UserSession>().patient.name == "") {
+        Get.toNamed(CompleteSetup.id);
+        return;
+      }
+    }
+  }
+
+  Future<void> completeSetup() async {
+    if (!completeSetupFormKey.currentState!.saveAndValidate()) return;
+    isLoading(true);
+    var response = await Get.find<PatientApiService>().update(
+        name: completeSetupFormKey.currentState!.value['name'],
+        avatar: File(image.value.path));
+    if (response == null) return;
+
+    Get.find<UserSession>().patient.avatar = response.data['result']['avatar'];
+    Get.find<UserSession>().patient.name = response.data['result']['name'];
+    Get.find<UserSession>().updatePatient();
+    Get.toNamed(HomePage.id);
+    isLoading(false);
+  }
+
+  Future<void> logOut() async {
+    if (await Get.find<UserSession>().logoutPatient()) {
+      Get.offAll(() => const IntroductionPage());
+    }
   }
 }
