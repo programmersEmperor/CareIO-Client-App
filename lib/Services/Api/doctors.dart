@@ -1,0 +1,24 @@
+import 'package:ai_health_assistance/Services/Api/base/base.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+
+class DoctorsApiService {
+  final BaseApi _apiService = BaseApi();
+
+  final isLoading = false.obs;
+
+  Future<dynamic> fetchDoctors({Map<String, dynamic>? params}) async {
+    try {
+      isLoading(true);
+      var response = await _apiService.getRequest(
+        url: 'patients/doctors',
+        params: params,
+      );
+      isLoading(false);
+      return response;
+    } catch (e) {
+      isLoading(false);
+      debugPrint(e.toString());
+    }
+  }
+}

@@ -212,6 +212,7 @@ class AuthenticationController extends GetxController
         Get.toNamed(CompleteSetup.id);
         return;
       }
+      Get.toNamed(HomePage.id);
     }
   }
 

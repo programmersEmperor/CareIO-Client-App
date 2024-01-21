@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
+import 'package:ai_health_assistance/Pages/Authentication/introduction.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Utils/snackbar.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -38,7 +39,7 @@ class ApiInterceptors extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) async {
     debugPrint(
         'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
     // Get.snackbar(
@@ -49,6 +50,12 @@ class ApiInterceptors extends Interceptor {
     var response = err.response.toString().isEmpty
         ? err.message
         : err.response!.data['message'];
+
+    if (err.response != null && err.response?.statusCode == 401) {
+      if (await Get.find<UserSession>().logoutPatient()) {
+        Get.offAll(() => const IntroductionPage());
+      }
+    }
 
     showSnack(
         title: "Oops ${err.response?.statusCode}",

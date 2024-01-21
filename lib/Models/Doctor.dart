@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Models/Degree.dart';
 import 'package:ai_health_assistance/Models/Specialism.dart';
 
 class Doctor {
@@ -22,6 +23,7 @@ class Doctor {
     _rating = json['rating'];
     _completedAppointments = json['completedAppointments'];
     _specialism = Specialism.fromJson(json['specialism']);
+    _degree = Degree.fromJson(json['degree']);
   }
   int? _id;
   String? _name;
@@ -29,6 +31,7 @@ class Doctor {
   int? _rating;
   int? _completedAppointments;
   Specialism? _specialism;
+  Degree? _degree;
 
   int? get id => _id;
   String? get name => _name;
@@ -36,6 +39,7 @@ class Doctor {
   int? get rating => _rating;
   int? get completedAppointments => _completedAppointments;
   Specialism? get specialism => _specialism;
+  Degree? get degree => _degree;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

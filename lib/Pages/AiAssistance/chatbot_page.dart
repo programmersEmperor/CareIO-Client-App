@@ -32,7 +32,8 @@ class ChatBotPage extends StatelessWidget {
             child: Obx(
               () => ListView.builder(
                 controller: uiController.listController,
-                physics: const ClampingScrollPhysics(),
+                physics: const BouncingScrollPhysics(
+                    parent: ClampingScrollPhysics()),
                 itemCount: uiController.messages.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {

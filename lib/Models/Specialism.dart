@@ -34,6 +34,7 @@ class Specialism {
   int get id => _id;
   String get nameAr => _nameAr;
   String get nameEn => _nameEn;
+  String get name => _nameAr;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

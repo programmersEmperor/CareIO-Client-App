@@ -27,26 +27,25 @@ class CustomSearchBar extends StatelessWidget {
               elevation: 0,
               color: Colors.grey.shade200,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(15)),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.sp, vertical: 9.sp),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 2.w,
                     ),
                     Icon(
                       Boxicons.bx_search,
                       color: AppColors.primaryColor,
-                      size: 17,
+                      size: 17.sp,
                     ),
-                    const SizedBox(
-                      width: 5,
+                    SizedBox(
+                      width: 2.w,
                     ),
                     Text(
                       title,
-                      style:
-                          const TextStyle(color: Colors.black54, fontSize: 11),
+                      style: TextStyle(color: Colors.black54, fontSize: 10.sp),
                     ),
                   ],
                 ),
@@ -63,14 +62,14 @@ class CustomSearchBar extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(11),
+              child: Padding(
+                padding: EdgeInsets.all(9.sp),
                 child: Icon(
                   Boxicons.bx_filter_alt,
                   color: Colors.white,
-                  size: 15,
+                  size: 15.sp,
                 ),
               ),
             ),

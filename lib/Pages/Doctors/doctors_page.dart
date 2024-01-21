@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_grid_view.dart';
@@ -30,9 +31,17 @@ class DoctorsPage extends StatelessWidget {
                   duration: 500.milliseconds,
                   switchInCurve: Curves.linearToEaseOut,
                   switchOutCurve: Curves.linearToEaseOut,
-                  child: controller.isList.isTrue
-                      ? const DoctorsListView()
-                      : const DoctorGridView(),
+                  child: RefreshWidget(
+                    isLoading: controller.isLoading,
+                    onRefresh: controller.fetchDoctors,
+                    child: controller.isList.isTrue
+                        ? DoctorsListView(
+                            doctors: controller.doctors,
+                          )
+                        : DoctorGridView(
+                            doctors: controller.doctors,
+                          ),
+                  ),
                 ),
               ),
             ),

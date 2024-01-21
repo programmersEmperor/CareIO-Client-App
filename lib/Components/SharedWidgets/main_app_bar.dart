@@ -4,6 +4,7 @@ import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class MainAppBar extends StatelessWidget {
   final Patient patient;
@@ -12,7 +13,7 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 35, bottom: 5, right: 5, left: 5),
+      padding: EdgeInsets.only(top: 35, bottom: 5, right: 5, left: 5),
       child: SizedBox(
         child: Row(
           children: [
@@ -32,8 +33,8 @@ class MainAppBar extends StatelessWidget {
                               image: AssetImage("assets/images/person.jpg"),
                               fit: BoxFit.cover,
                             )),
-                        height: 40,
-                        width: 40,
+                        height: 6.h,
+                        width: 10.w,
                       ),
                     ] else ...[
                       Container(
@@ -43,8 +44,8 @@ class MainAppBar extends StatelessWidget {
                               image: CachedNetworkImageProvider(patient.avatar),
                               fit: BoxFit.cover,
                             )),
-                        height: 40,
-                        width: 40,
+                        height: 6.h,
+                        width: 10.w,
                       ),
                     ],
                     Expanded(
@@ -55,8 +56,8 @@ class MainAppBar extends StatelessWidget {
                           children: [
                             Text(
                               patient.name,
-                              style: const TextStyle(
-                                fontSize: 12,
+                              style: TextStyle(
+                                fontSize: 10.sp,
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -66,8 +67,8 @@ class MainAppBar extends StatelessWidget {
                             ),
                             Text(
                               AppStrings.goodMorning.tr,
-                              style: const TextStyle(
-                                  fontSize: 10,
+                              style: TextStyle(
+                                  fontSize: 8.sp,
                                   color: Colors.black38,
                                   fontWeight: FontWeight.w300),
                             ),

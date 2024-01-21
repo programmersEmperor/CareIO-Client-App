@@ -1,7 +1,8 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
-import 'package:ai_health_assistance/Pages/Home/custom/appointment_card.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/AppointmentsWidget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -64,26 +65,26 @@ class MyAppointmentsPage extends StatelessWidget {
           child: TabBarView(
             controller: controller.tabController,
             children: [
-              ListView.builder(
-                itemCount: 3,
-                padding: EdgeInsets.only(bottom: 9.h),
-                itemBuilder: (_, index) => AppointmentCard(
-                  index: index,
-                ),
+              AppointmentsWidget(
+                appointments: controller.upcomingAppointments,
+                onRefresh: () => controller.initializeAppointments(
+                    status: AppointmentStatus.upcoming),
+                isLoading:
+                    controller.isLoading[AppointmentStatus.upcoming.index],
               ),
-              ListView.builder(
-                itemCount: 2,
-                padding: EdgeInsets.only(bottom: 9.h),
-                itemBuilder: (_, index) => AppointmentCard(
-                  index: index,
-                ),
+              AppointmentsWidget(
+                appointments: controller.completedAppointments,
+                onRefresh: () => controller.initializeAppointments(
+                    status: AppointmentStatus.completed),
+                isLoading:
+                    controller.isLoading[AppointmentStatus.completed.index],
               ),
-              ListView.builder(
-                itemCount: 2,
-                padding: EdgeInsets.only(bottom: 9.h),
-                itemBuilder: (_, index) => AppointmentCard(
-                  index: index,
-                ),
+              AppointmentsWidget(
+                appointments: controller.canceledAppointments,
+                onRefresh: () => controller.initializeAppointments(
+                    status: AppointmentStatus.canceled),
+                isLoading:
+                    controller.isLoading[AppointmentStatus.canceled.index],
               ),
             ],
           ),

@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
+import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -10,9 +11,11 @@ import 'package:sizer/sizer.dart';
 class AppointmentCard extends StatelessWidget {
   final int index;
   final showDetails = false.obs;
+  final Appointment appointment;
   AppointmentCard({
     super.key,
     required this.index,
+    required this.appointment,
   });
 
   @override

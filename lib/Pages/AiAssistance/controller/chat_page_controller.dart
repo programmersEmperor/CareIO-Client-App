@@ -41,7 +41,7 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
     if (listController.position.pixels <=
         listController.position.maxScrollExtent) {
       listController.animateTo(
-        listController.position.maxScrollExtent + 55,
+        listController.position.maxScrollExtent + 100,
         duration: 1.seconds,
         curve: Curves.fastOutSlowIn,
       );
