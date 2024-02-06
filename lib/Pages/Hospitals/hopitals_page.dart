@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/custom/hosptials_grid_view.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/custom/hosptials_list_view.dart';
@@ -30,9 +31,18 @@ class HospitalsPage extends StatelessWidget {
                   duration: 500.milliseconds,
                   switchInCurve: Curves.linearToEaseOut,
                   switchOutCurve: Curves.linearToEaseOut,
-                  child: uiController.isList.isTrue
-                      ? const HospitalListVIew()
-                      : const HospitalGridView(),
+                  child: RefreshWidget(
+                    isLoading: uiController.isLoading,
+                    onRefresh: () =>
+                        uiController.fetchHealthCenters(isPagination: false),
+                    child: uiController.isList.isTrue
+                        ? HospitalListVIew(
+                            healthCenters: uiController.healthCenters,
+                          )
+                        : HospitalGridView(
+                            healthCenters: uiController.healthCenters,
+                          ),
+                  ),
                 ),
               ),
             ),

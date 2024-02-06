@@ -33,7 +33,8 @@ class DoctorsPage extends StatelessWidget {
                   switchOutCurve: Curves.linearToEaseOut,
                   child: RefreshWidget(
                     isLoading: controller.isLoading,
-                    onRefresh: controller.fetchDoctors,
+                    onRefresh: () =>
+                        controller.fetchDoctors(isPagination: false),
                     child: controller.isList.isTrue
                         ? DoctorsListView(
                             doctors: controller.doctors,

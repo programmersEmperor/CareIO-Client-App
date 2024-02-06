@@ -1,6 +1,9 @@
-import 'package:ai_health_assistance/Components/SharedWidgets/timeslot_item.dart';
+import 'dart:developer';
+
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Models/WidgetModels/day_time_slot.dart';
 import 'package:ai_health_assistance/Pages/Search/filter_bottom_sheet.dart';
+import 'package:ai_health_assistance/Services/Api/hospitals.dart';
 import 'package:ai_health_assistance/Utils/bottom_sheet_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +16,12 @@ class HospitalsUiController extends GetxController {
   RxBool enableAnimation = false.obs;
   int preSelectedIndex = 0;
 
+  final apiService = Get.find<HospitalApiService>();
+  List<HealthCenter> healthCenters = [];
+  late HealthCenter healthCenter;
+  RxBool get isLoading => apiService.isLoading;
+  RxBool profileLoading = true.obs;
+
   var activeTimeSlotWidget = const Wrap().obs;
 
   void showFilter() {
@@ -20,78 +29,7 @@ class HospitalsUiController extends GetxController {
         .showBottomSheet(const FilterBottomSheet(), 100.h);
   }
 
-  List<Wrap> timeslotsWidgets = [
-    Wrap(
-      key: const ValueKey<int>(0),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(1),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(2),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(isDisabled: true),
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(3),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(4),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(5),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-      ],
-    ),
-    Wrap(
-      key: const ValueKey<int>(6),
-      spacing: 7.sp,
-      children: const [
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-        TimeSlotItem(),
-      ],
-    ),
-  ];
+  List<Wrap> timeslotsWidgets = [];
 
   final List<DayTimeSlot> dayTimeSlotList = [
     DayTimeSlot('Sat', true.obs),
@@ -115,7 +53,29 @@ class HospitalsUiController extends GetxController {
   void onInit() {
     super.onInit();
     scrollController = ScrollController();
-    activeTimeSlotWidget.value = timeslotsWidgets[0];
+    //activeTimeSlotWidget.value = timeslotsWidgets[0];
+    fetchHealthCenters(isPagination: false);
+  }
+
+  void fetchHealthCenters({required bool isPagination}) async {
+    if (!isPagination) {
+      healthCenters.clear();
+    }
+    var response = await apiService.fetchHospitals();
+    if (response == null) return;
+    for (var healthCenter in response.data['result']['data']) {
+      healthCenters.add(HealthCenter.fromJson(healthCenter));
+    }
+  }
+
+  Future<void> showHealthCenter(String id) async {
+    profileLoading(true);
+    var response = await apiService.showHospital(id: id);
+    profileLoading(false);
+    if (response == null) return;
+
+    log(response.toString());
+    healthCenter = HealthCenter.fromJson(response.data['result']);
   }
 
   @override

@@ -15,40 +15,37 @@ class DayTimeSLotItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.sp),
-      child: InkWell(
-        onTap: onTap,
-        child: Obx(
-          () => AnimatedOpacity(
-            opacity: dayTimeSlot.isSelected ? 1.0 : 0.5,
+    return InkWell(
+      onTap: onTap,
+      child: Obx(
+        () => AnimatedOpacity(
+          opacity: dayTimeSlot.isSelected ? 1.0 : 0.5,
+          duration: 300.milliseconds,
+          curve: Curves.fastEaseInToSlowEaseOut,
+          child: AnimatedPadding(
+            padding: dayTimeSlot.isSelected
+                ? EdgeInsets.symmetric(horizontal: 4.sp)
+                : EdgeInsets.symmetric(horizontal: 3.sp),
             duration: 300.milliseconds,
-            curve: Curves.fastEaseInToSlowEaseOut,
-            child: AnimatedPadding(
-              padding: dayTimeSlot.isSelected
-                  ? EdgeInsets.symmetric(horizontal: 3.sp)
-                  : EdgeInsets.symmetric(horizontal: 0.sp),
-              duration: 300.milliseconds,
-              child: Container(
-                width: 10.w,
-                decoration: BoxDecoration(
-                    color: dayTimeSlot.isSelected
-                        ? AppColors.primaryColor
-                        : AppColors.secondaryColor,
-                    border: Border.all(
-                      color: AppColors.primaryColor,
-                    ),
-                    borderRadius: BorderRadius.circular(10.sp)),
-                child: Center(
-                  child: Text(
-                    dayTimeSlot.day,
-                    style: TextStyle(
-                        color: dayTimeSlot.isSelected
-                            ? Colors.white
-                            : AppColors.primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 9.sp),
+            child: Container(
+              width: 10.w,
+              decoration: BoxDecoration(
+                  color: dayTimeSlot.isSelected
+                      ? AppColors.primaryColor
+                      : AppColors.secondaryColor,
+                  border: Border.all(
+                    color: AppColors.primaryColor,
                   ),
+                  borderRadius: BorderRadius.circular(10.sp)),
+              child: Center(
+                child: Text(
+                  dayTimeSlot.day,
+                  style: TextStyle(
+                      color: dayTimeSlot.isSelected
+                          ? Colors.white
+                          : AppColors.primaryColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 9.sp),
                 ),
               ),
             ),

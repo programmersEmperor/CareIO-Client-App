@@ -25,7 +25,7 @@ class CircularIconButton extends StatelessWidget {
       onLongPress: onLongPress,
       child: Container(
         alignment: Alignment.center,
-        padding:  EdgeInsets.only(left: 3),
+        padding: EdgeInsets.only(left: 2),
         decoration: BoxDecoration(
           color: backgroundColor,
           shape: BoxShape.circle,

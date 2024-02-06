@@ -8,8 +8,8 @@ class Degree {
   }
 
   Degree.fromJson(dynamic json) {
-    _nameAr = json['nameAr'];
-    _nameEn = json['nameEn'];
+    _nameAr = json['NameAr'];
+    _nameEn = json['NameEn'];
   }
   String? _nameAr;
   String? _nameEn;

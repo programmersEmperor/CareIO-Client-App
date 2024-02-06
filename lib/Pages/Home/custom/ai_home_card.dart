@@ -5,6 +5,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:sizer/sizer.dart';
 
 class AiHomeCard extends StatelessWidget {
   const AiHomeCard({
@@ -22,12 +23,13 @@ class AiHomeCard extends StatelessWidget {
             Card(
               color: AppColors.primaryColor,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20.sp),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(5.0),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
+                  height: 18.h,
                   child: Stack(
                     children: [
                       Positioned(

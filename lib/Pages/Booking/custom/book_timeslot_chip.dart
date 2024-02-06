@@ -1,11 +1,16 @@
+import 'package:ai_health_assistance/Models/BookAvailableTime.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class BookTimeSlot extends StatelessWidget {
+  final BookAvailableTime time;
+  final Function onTapTime;
   const BookTimeSlot({
     super.key,
+    required this.time,
+    required this.onTapTime,
   });
 
   @override
@@ -34,8 +39,8 @@ class BookTimeSlot extends StatelessWidget {
               SizedBox(
                 width: 3.sp,
               ),
-              const Text(
-                "12:30 PM",
+              Text(
+                time.time,
               ),
               SizedBox(
                 width: 8.sp,
@@ -50,7 +55,12 @@ class BookTimeSlot extends StatelessWidget {
           visualDensity: VisualDensity.comfortable,
           padding: EdgeInsets.zero,
           labelPadding: EdgeInsets.zero,
-          onPressed: () => isSelected(!isSelected.value),
+          onPressed: time.isAvailable
+              ? () {
+                  isSelected(!isSelected.value);
+                  onTapTime(time);
+                }
+              : null,
           backgroundColor:
               isSelected.isTrue ? AppColors.primaryColor : Colors.white,
           disabledColor: Colors.grey.shade200,

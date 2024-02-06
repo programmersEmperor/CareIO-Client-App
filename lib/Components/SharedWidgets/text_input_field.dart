@@ -10,15 +10,18 @@ class TextInputField extends StatelessWidget {
   final String name;
   final TextInputType inputType;
   final bool password;
+  final bool enableLabel;
   final bool required;
+  final Color backgroundColor;
 
-  const TextInputField({
-    super.key,
-    required this.name,
-    this.required = false,
-    this.inputType = TextInputType.text,
-    this.password = false,
-  });
+  const TextInputField(
+      {super.key,
+      required this.name,
+      this.required = false,
+      this.inputType = TextInputType.text,
+      this.password = false,
+      this.backgroundColor = CupertinoColors.systemGrey5,
+      this.enableLabel = true});
 
   @override
   Widget build(BuildContext context) {
@@ -93,14 +96,14 @@ class TextInputField extends StatelessWidget {
             floatingLabelStyle:
                 TextStyle(color: AppColors.primaryColor, fontSize: 13.sp),
             hintText: name.tr,
-            hintStyle: TextStyle(fontSize: 10.sp),
-            fillColor: CupertinoColors.systemGrey5,
+            hintStyle: TextStyle(fontSize: 10.sp, color: Colors.grey),
+            fillColor: backgroundColor,
             filled: true,
             focusColor: AppColors.primaryColor,
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.sp),
                 borderSide: const BorderSide(color: Colors.redAccent)),
-            labelText: name.capitalize,
+            labelText: enableLabel ? name.capitalize : null,
             errorStyle: TextStyle(
               fontSize: 10.sp,
             ),

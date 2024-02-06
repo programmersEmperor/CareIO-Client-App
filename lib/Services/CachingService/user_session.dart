@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
+import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Models/client.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class UserSession {
 
   String token = '';
   late Patient patient;
+  List<Wallet> wallets = [];
   late Box box;
   bool userOpenedChat = false;
 

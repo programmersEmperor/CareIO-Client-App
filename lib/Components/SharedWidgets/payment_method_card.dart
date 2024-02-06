@@ -1,18 +1,23 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Models/Wallet.dart';
+import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class PaymentMethodCard extends StatelessWidget {
-  final String title, subtitle, image;
+  final Wallet wallet;
   final RxBool selected;
-
+  final Function onTap;
   const PaymentMethodCard({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.image,
+    required this.wallet,
     required this.selected,
+    required this.onTap,
   });
 
   @override
@@ -20,78 +25,126 @@ class PaymentMethodCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 15.sp),
       child: InkWell(
-        onTap: () => selected(!selected.value),
+        onTap: () {
+          onTap();
+        },
         child: Obx(
           () => AnimatedContainer(
-            duration: 100.milliseconds,
+            duration: GetNumUtils(100).milliseconds,
             padding: EdgeInsets.all(10.sp),
             decoration: BoxDecoration(
-                color: selected.isTrue ? AppColors.primaryColor : Colors.white,
+                color: wallet.selected.isTrue
+                    ? AppColors.primaryColor
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(10.sp)),
-            child: Row(
+            child: Column(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      image: DecorationImage(
-                        image: AssetImage(image),
-                        fit: BoxFit.cover,
-                      )),
-                  height: 30.sp,
-                  width: 30.sp,
-                ),
-                SizedBox(
-                  width: 10.sp,
-                ),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        top: 0,
-                        child: AnimatedSlide(
-                          offset:
-                              selected.isTrue ? const Offset(0, 0) : const Offset(-2, 0),
-                          duration: 200.milliseconds,
-                          child: AnimatedOpacity(
-                            opacity: selected.isTrue ? 1 : 0,
-                            duration: 220.milliseconds,
-                            child: const Icon(
-                              Icons.check,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.sp),
+                          image: wallet.logo != null
+                              ? DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                      wallet.logo ?? ""))
+                              : const DecorationImage(
+                                  image: AssetImage("assets/images/person.jpg"),
+                                  fit: BoxFit.cover,
+                                )),
+                      height: 30.sp,
+                      width: 30.sp,
+                    ),
+                    SizedBox(
+                      width: 10.sp,
+                    ),
+                    Expanded(
+                      child: Stack(
                         children: [
-                          Text(
-                            title,
-                            style: TextStyle(
-                                color: selected.isTrue
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontSize: 11.sp,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 4.sp,
-                          ),
-                          Text(
-                            subtitle,
-                            style: TextStyle(
-                              fontSize: 8.5.sp,
-                              color: selected.isTrue
-                                  ? Colors.white
-                                  : Colors.black38,
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            top: 0,
+                            child: AnimatedSlide(
+                              offset: wallet.selected.isTrue
+                                  ? const Offset(0, 0)
+                                  : const Offset(-2, 0),
+                              duration: GetNumUtils(200).milliseconds,
+                              child: AnimatedOpacity(
+                                opacity: wallet.selected.isTrue ? 1 : 0,
+                                duration: GetNumUtils(220).milliseconds,
+                                child: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                wallet.name,
+                                style: TextStyle(
+                                    color: wallet.selected.isTrue
+                                        ? Colors.white
+                                        : Colors.black,
+                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 500),
+                  child: selected.isTrue
+                      ? Padding(
+                          padding: EdgeInsets.only(top: 10.sp),
+                          child: FormBuilder(
+                              key: Get.find<BookAppointmentController>().key,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Please fill the fields with required details to complete the process successfully",
+                                    style: TextStyle(
+                                      fontSize: 9.sp,
+                                      color: Colors.white,
+                                    ),
+                                  ).animate().fade().slideY(
+                                      curve: Curves.ease,
+                                      duration: GetNumUtils(400).milliseconds),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  const TextInputField(
+                                    backgroundColor: Colors.white,
+                                    inputType: TextInputType.phone,
+                                    enableLabel: false,
+                                    name: 'phone',
+                                    required: true,
+                                  ).animate().fade().slideY(
+                                      curve: Curves.ease,
+                                      duration: GetNumUtils(500).milliseconds),
+                                  SizedBox(
+                                    height: 1.h,
+                                  ),
+                                  const TextInputField(
+                                    backgroundColor: Colors.white,
+                                    name: 'code',
+                                    inputType: TextInputType.number,
+                                    required: true,
+                                    enableLabel: false,
+                                  ).animate().fade().slideY(
+                                      curve: Curves.ease,
+                                      duration: GetNumUtils(600).milliseconds),
+                                ],
+                              )),
+                        )
+                      : SizedBox(),
                 ),
               ],
             ),

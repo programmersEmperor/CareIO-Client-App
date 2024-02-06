@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/AppointmentsWidget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -65,26 +66,38 @@ class MyAppointmentsPage extends StatelessWidget {
           child: TabBarView(
             controller: controller.tabController,
             children: [
-              AppointmentsWidget(
-                appointments: controller.upcomingAppointments,
-                onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.upcoming),
-                isLoading:
-                    controller.isLoading[AppointmentStatus.upcoming.index],
+              Obx(
+                () => RefreshWidget(
+                  onRefresh: () => controller.initializeAppointments(
+                      status: AppointmentStatus.upcoming),
+                  isLoading:
+                      controller.isLoading[AppointmentStatus.upcoming.index],
+                  child: AppointmentsWidget(
+                    appointments: controller.upcomingAppointments,
+                    onRefresh: () => controller.initializeAppointments(
+                        status: AppointmentStatus.upcoming),
+                    isLoading:
+                        controller.isLoading[AppointmentStatus.upcoming.index],
+                  ),
+                ),
               ),
-              AppointmentsWidget(
-                appointments: controller.completedAppointments,
-                onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.completed),
-                isLoading:
-                    controller.isLoading[AppointmentStatus.completed.index],
+              Obx(
+                () => AppointmentsWidget(
+                  appointments: controller.completedAppointments,
+                  onRefresh: () => controller.initializeAppointments(
+                      status: AppointmentStatus.completed),
+                  isLoading:
+                      controller.isLoading[AppointmentStatus.completed.index],
+                ),
               ),
-              AppointmentsWidget(
-                appointments: controller.canceledAppointments,
-                onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.canceled),
-                isLoading:
-                    controller.isLoading[AppointmentStatus.canceled.index],
+              Obx(
+                () => AppointmentsWidget(
+                  appointments: controller.canceledAppointments,
+                  onRefresh: () => controller.initializeAppointments(
+                      status: AppointmentStatus.canceled),
+                  isLoading:
+                      controller.isLoading[AppointmentStatus.canceled.index],
+                ),
               ),
             ],
           ),

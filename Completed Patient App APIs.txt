@@ -474,7 +474,9 @@
 			 "phone": "string",
 			 "isRecommended": boolean,
 			 "description":"string",
-			 "completedAppointments": int
+			 "completedAppointments": int,
+			 "totalExperiences": int,
+			 "totalQualifications": int,
 			 "degree": {
 				"nameAr": "string",
 				"nameEn": "string"
@@ -483,7 +485,7 @@
 				"nameAr": "string",
 				"nameEn": "string"
 				},
-			 "experience":[
+			 "experiences":[
 					{
 					 "id": int,
 					 "place":"string",
@@ -509,14 +511,21 @@
 					 "avatar":"string",
 					 "rating":"string",
 					 "price": float,
-					 "activeTimes":[
-					 {
-					  "id": int,
-					  "day": int,
-					  "from": DateTime,
-					  "to": DateTime
-					 }
-					],
+					 "type": int, => 0 hosptial, 1 healthCenter, 2 clinic
+					 "clinics":[
+						{
+						 "id": int,
+						 "name": "string",
+						 "activeTimes":[
+					 	     	{
+					  		"id": int,
+					  		"day": int,
+					  		"from": Time,
+					 		 "to": Time
+					 		}
+						  }
+					 	],
+					 ],
 					},
 				],
 
@@ -579,6 +588,7 @@
 			 "address":"string",
 			 "avatar":"string",
 			 "rating":"string",
+			 "isRecommended": boolean,
 			 "completedAppointment": int,
 			 "type": int,
 			 "city" : {
@@ -623,7 +633,7 @@
 =================================================
 23- Fetch Sections:
 	Method: GET,
-	URL: /api/v1/app/patients/sections?page=[int]&health-center=[int],
+	URL: /api/v1/app/patients/sections?page=[int]&	health-center=[int],
 	headers: {
 		"Content-Type": "application/json",
 		"Accept-Language": "en-US" or "ar-AR",
@@ -731,9 +741,10 @@
 		"name" : "string",
 		"doctorId": int,
 		"clinicId": int,
-		"date":Date,
+		"time": Time, // "16:00:00"
+		"date":Date, // "2024-02-05"
 		"walletId": int || null,
-		"phone" : int || null,
+		"walletNumber" : int || null,
 		"paymentCode: "string" || null,
 		},
 	Sucessful Code: 200,
@@ -795,3 +806,50 @@
     		"message": "the Appointment Was Rated Successfully",
     		"result": {}
 		}
+=================================================
+30- Doctor Available Times:
+	Method: GET,
+	URL: /api/v1/app/patients/available-doctor-times?doctorId=int&clinicId=int&date=2024-02-05,
+	headers: {
+		"Content-Type": "application/json",
+		"Accept-Language": "en-US" or "ar-AR",
+ 		"DeviceToken":"string",
+		"Fingerprint": "string",
+		"Authorization":"string"
+		},
+	Sucessful Code: 200,
+	Sucessful Response: {
+    		"message": "the Appointment Was Rated Successfully",
+    		"result":  [
+        			{
+            				"time": "16:00:00",
+            				"isAvailable": boolean
+        			}]
+			}
+
+=================================================
+31- Home:
+	Method: GET,
+	URL: /api/v1/app/patients/home,
+	headers: {
+		"Content-Type": "application/json",
+		"Accept-Language": "en-US" or "ar-AR",
+ 		"DeviceToken":"string",
+		"Fingerprint": "string",
+		"Authorization":"string"
+		},
+	Sucessful Code: 200,
+	Sucessful Response: {
+    		"message": "the Appointment Was Rated Successfully",
+    		"result":  {
+			"doctors":[...],
+			"healthCenters":[...],
+			"advertisments":[
+				{
+				"id": int,
+                		"image": "url",
+                		"description": "string" || null,
+            			}
+			],
+			}
+			}

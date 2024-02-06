@@ -245,9 +245,7 @@ class PharmacyProfile extends StatelessWidget {
                                         arguments: [
                                           {'index': '1'}
                                         ]),
-                                    child: const HospitalCard(
-                                      index: "1",
-                                    ),
+                                    child: const HospitalCard(),
                                   ),
                                 ),
                               ],

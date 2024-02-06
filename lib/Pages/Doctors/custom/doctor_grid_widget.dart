@@ -15,10 +15,9 @@ class DoctorGridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => Get.toNamed(DoctorProfile.id, arguments: [
-        {'index': doctor.id}
+        {'index': doctor.id.toString()}
       ]),
       child: SizedBox(
-        height: 35.h,
         width: 39.w,
         child: Card(
           elevation: 0,
@@ -28,28 +27,34 @@ class DoctorGridWidget extends StatelessWidget {
           child: Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: EdgeInsets.only(top: 10.sp),
                   child: Container(
-                    height: 20.h,
+                    height: 15.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        width: 31.w,
-                        imageUrl: doctor.avatar!,
-                      ),
+                      child: doctor.avatar == null
+                          ? Icon(
+                              Icons.person,
+                              size: 30.sp,
+                            )
+                          : CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              width: 31.w,
+                              imageUrl: doctor.avatar!,
+                            ),
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
                     padding:
-                        EdgeInsets.only(left: 5.sp, right: 5.sp, top: 8.sp),
+                        EdgeInsets.only(left: 5.sp, right: 5.sp, top: 2.sp),
                     child: AutoSizeText(
                       doctor.name!,
                       style: TextStyle(
@@ -104,7 +109,7 @@ class DoctorGridWidget extends StatelessWidget {
                       top: 2.sp,
                     ),
                     child: Text(
-                      doctor.specialism!.name,
+                      doctor.specialism?.name ?? "",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w400,

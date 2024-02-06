@@ -21,4 +21,14 @@ class DoctorsApiService {
       debugPrint(e.toString());
     }
   }
+
+  Future<dynamic> showDoctor({required String id}) async {
+    try {
+      var response = await _apiService.getRequest(url: 'patients/doctors/$id');
+
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

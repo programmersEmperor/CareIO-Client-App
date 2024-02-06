@@ -13,7 +13,7 @@ class MainAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 35, bottom: 5, right: 5, left: 5),
+      padding: EdgeInsets.only(top: 6.h, bottom: 5, right: 5, left: 5),
       child: SizedBox(
         child: Row(
           children: [
@@ -44,7 +44,7 @@ class MainAppBar extends StatelessWidget {
                               image: CachedNetworkImageProvider(patient.avatar),
                               fit: BoxFit.cover,
                             )),
-                        height: 6.h,
+                        height: 5.h,
                         width: 10.w,
                       ),
                     ],

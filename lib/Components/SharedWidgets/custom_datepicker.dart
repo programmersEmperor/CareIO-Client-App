@@ -1,11 +1,12 @@
-import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomDatePicker extends StatelessWidget {
+  final Function onDateChange;
   const CustomDatePicker({
     super.key,
+    required this.onDateChange,
   });
 
   @override
@@ -31,15 +32,14 @@ class CustomDatePicker extends StatelessWidget {
                     const ButtonThemeData(textTheme: ButtonTextTheme.normal),
               ),
               child: CalendarDatePicker(
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(DateTime.now().year),
-                  lastDate: DateTime(DateTime.now().year + 50),
-                  onDateChanged: (date) {}),
+                initialDate: DateTime.now(),
+                firstDate: DateTime(DateTime.now().year),
+                lastDate: DateTime(DateTime.now().year + 50),
+                onDateChanged: (date) {
+                  onDateChange(date);
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15.sp),
-            child: MainColoredButton(text: "Apply date", onPress: () {}),
           ),
           SizedBox(
             height: 10.sp,

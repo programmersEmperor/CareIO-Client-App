@@ -1,15 +1,16 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class TopRequestedDoctorsCard extends StatelessWidget {
+  final Doctor doctor;
   const TopRequestedDoctorsCard({
     super.key,
-    required this.index,
+    required this.doctor,
   });
-
-  final String index;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
               Row(
                 children: [
                   Hero(
-                    tag: "doc$index",
+                    tag: "doc${doctor.id}",
                     child: Container(
                       height: 50.sp,
                       width: 50.sp,
@@ -36,12 +37,18 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
                             color: AppColors.scaffoldColor, width: 3.sp),
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            "assets/images/person.jpg",
-                          ),
-                        ),
+                        image: doctor.avatar == null
+                            ? const DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  "assets/images/person.jpg",
+                                ),
+                              )
+                            : DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                  '${doctor.avatar}',
+                                ),
+                              ),
                       ),
                     ),
                   ),
@@ -53,7 +60,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Doctor name",
+                            "${doctor.name}",
                             style: TextStyle(
                                 fontSize: 10.sp, fontWeight: FontWeight.bold),
                           ),
@@ -67,7 +74,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                                   size: 10.sp,
                                 ),
                                 Text(
-                                  "3.4 (134 Review)",
+                                  "${doctor.rating}",
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 8.sp,
@@ -79,7 +86,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Text(
-                              "Specialization  ",
+                              "${doctor.specialism?.name}",
                               style: TextStyle(
                                 color: Colors.black38,
                                 fontSize: 8.sp,

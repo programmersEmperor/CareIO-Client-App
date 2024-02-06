@@ -2,7 +2,6 @@ import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Search/filter_bottom_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/doctors.dart';
 import 'package:ai_health_assistance/Utils/bottom_sheet_handle.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -18,17 +17,18 @@ class DoctorsPageController extends GetxController {
 
   @override
   void onInit() {
-    fetchDoctors();
+    fetchDoctors(isPagination: false);
     super.onInit();
   }
 
-  void fetchDoctors() async {
-    try {
-      debugPrint('Locale ${Get.locale}');
-      var response = await apiService.fetchDoctors();
-      debugPrint("Doctor response is $response");
-    } catch (e) {
-      debugPrint(e.toString());
+  void fetchDoctors({required bool isPagination}) async {
+    if (!isPagination) {
+      doctors.clear();
+    }
+    var response = await apiService.fetchDoctors();
+    if (response == null) return;
+    for (var doctor in response.data['result']['data']) {
+      doctors.add(Doctor.fromJson(doctor));
     }
   }
 }

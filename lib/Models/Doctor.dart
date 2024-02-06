@@ -6,7 +6,7 @@ class Doctor {
     int? id,
     String? name,
     String? avatar,
-    int? rating,
+    dynamic rating,
     int? completedAppointments,
   }) {
     _id = id;
@@ -22,13 +22,17 @@ class Doctor {
     _avatar = json['avatar'];
     _rating = json['rating'];
     _completedAppointments = json['completedAppointments'];
-    _specialism = Specialism.fromJson(json['specialism']);
-    _degree = Degree.fromJson(json['degree']);
+    if (json['specialism'] != null) {
+      _specialism = Specialism.fromJson(json['specialism']);
+    }
+    if (json['degree'] != null) {
+      _degree = Degree.fromJson(json['degree']);
+    }
   }
   int? _id;
   String? _name;
   String? _avatar;
-  int? _rating;
+  dynamic _rating;
   int? _completedAppointments;
   Specialism? _specialism;
   Degree? _degree;
@@ -36,7 +40,7 @@ class Doctor {
   int? get id => _id;
   String? get name => _name;
   String? get avatar => _avatar;
-  int? get rating => _rating;
+  dynamic get rating => _rating;
   int? get completedAppointments => _completedAppointments;
   Specialism? get specialism => _specialism;
   Degree? get degree => _degree;

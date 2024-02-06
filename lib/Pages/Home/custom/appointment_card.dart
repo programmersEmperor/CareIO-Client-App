@@ -1,12 +1,13 @@
-import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
+import 'appointment_cancel_button.dart';
 
 class AppointmentCard extends StatelessWidget {
   final int index;
@@ -41,14 +42,14 @@ class AppointmentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "Dr Haitham Hussein",
+                        "Dr ${appointment.doctor.name}",
                         style: TextStyle(
                             fontSize: 11.sp, fontWeight: FontWeight.w600),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 5.sp),
                         child: Text(
-                          "Oncologist",
+                          appointment.doctor.specialism!.name,
                           style: TextStyle(
                             fontSize: 9.5.sp,
                             color: Colors.black38,
@@ -89,7 +90,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              "12/03/2021",
+                              appointment.bookedAt,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -111,7 +112,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              "10:30 AM",
+                              appointment.bookedAt,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -124,14 +125,16 @@ class AppointmentCard extends StatelessWidget {
                           horizontal: 8.sp, vertical: 2.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.sp),
-                        color: index == 1
+                        color: appointment.status == 1
                             ? Colors.green.withOpacity(0.2)
                             : Colors.orange.withOpacity(0.2),
                       ),
                       child: Text(
-                        index == 1 ? "confirmed" : "in review",
+                        appointment.status == 1 ? "confirmed" : "in review",
                         style: TextStyle(
-                            color: index == 1 ? Colors.green : Colors.orange,
+                            color: appointment.status == 1
+                                ? Colors.green
+                                : Colors.orange,
                             fontWeight: FontWeight.bold,
                             fontSize: 10.sp),
                       ),
@@ -167,7 +170,7 @@ class AppointmentCard extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   AutoSizeText(
-                                    'Haitham Hussein Aleryani',
+                                    appointment.patientName,
                                     style: TextStyle(
                                       fontSize: 10.sp,
                                       fontWeight: FontWeight.bold,
@@ -181,7 +184,7 @@ class AppointmentCard extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(8.sp)),
                                     child: AutoSizeText(
-                                      '771056641',
+                                      appointment.price.toString(),
                                       style: TextStyle(
                                         fontSize: 10.sp,
                                         color: AppColors.primaryColor,
@@ -247,27 +250,25 @@ class AppointmentCard extends StatelessWidget {
                                       fontSize: 10.sp),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 10.0.sp,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: AppColors.primaryColor
-                                          .withOpacity(0.2),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  child: InkWell(
-                                    onTap: () => Get.toNamed(HospitalProfile.id,
-                                        arguments: [
-                                          {'index': '1'}
-                                        ]),
-                                    child: const HospitalCard(
-                                      index: "1",
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.only(
+                              //     top: 10.0.sp,
+                              //   ),
+                              //   child: Container(
+                              //     decoration: BoxDecoration(
+                              //         color: AppColors.primaryColor
+                              //             .withOpacity(0.2),
+                              //         borderRadius:
+                              //             BorderRadius.circular(15.sp)),
+                              //     child: InkWell(
+                              //       onTap: () => Get.toNamed(HospitalProfile.id,
+                              //           arguments: [
+                              //             {'index': '1'}
+                              //           ]),
+                              //       child: const HospitalCard(),
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                   ),
@@ -302,7 +303,8 @@ class AppointmentCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => Get.find<AppointmentController>()
+                          .confirmRescheduleAppointment(id: appointment.id),
                       style: ButtonStyle(
                           elevation: const MaterialStatePropertyAll(0),
                           backgroundColor:
@@ -321,22 +323,9 @@ class AppointmentCard extends StatelessWidget {
                     width: 10,
                   ),
                   Expanded(
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                          elevation: const MaterialStatePropertyAll(0),
-                          backgroundColor: MaterialStatePropertyAll(
-                              Colors.red.withOpacity(0.2)),
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.sp)))),
-                      child: Text(
-                        "Cancel",
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 9.sp,
-                            fontWeight: FontWeight.bold),
-                      ),
+                    child: AppointmentCancelButton(
+                      onTap: () => Get.find<AppointmentController>()
+                          .confirmCancelAppointment(id: appointment.id),
                     ),
                   ),
                 ],

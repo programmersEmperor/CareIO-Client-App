@@ -1,10 +1,14 @@
+import 'package:ai_health_assistance/Models/Advertisment.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class AdsSliderCard extends StatelessWidget {
+  final Advertisement advertisement;
   const AdsSliderCard({
     super.key,
+    required this.advertisement,
   });
 
   @override
@@ -15,8 +19,8 @@ class AdsSliderCard extends StatelessWidget {
         children: [
           Container(
             decoration: BoxDecoration(
-              image: const DecorationImage(
-                image: AssetImage('assets/images/person.jpg'),
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(advertisement.image!),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(20.sp),
@@ -39,7 +43,7 @@ class AdsSliderCard extends StatelessWidget {
                 child: Align(
                     alignment: Alignment.bottomLeft,
                     child: AutoSizeText(
-                      "Advertiser name",
+                      "${advertisement.description}",
                       style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.w500,

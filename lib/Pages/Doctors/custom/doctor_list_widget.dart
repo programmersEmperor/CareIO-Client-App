@@ -18,7 +18,7 @@ class DoctorListWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () => Get.toNamed(DoctorProfile.id, arguments: [
-          {'index': doctor.id}
+          {'index': doctor.id.toString()}
         ]),
         child: SizedBox(
           child: Card(
@@ -41,12 +41,14 @@ class DoctorListWidget extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
                             color: AppColors.scaffoldColor, width: 3.sp),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: CachedNetworkImageProvider(
-                            doctor.avatar!,
-                          ),
-                        ),
+                        image: doctor.avatar != null
+                            ? DecorationImage(
+                                fit: BoxFit.cover,
+                                image: CachedNetworkImageProvider(
+                                  doctor.avatar!,
+                                ),
+                              )
+                            : null,
                       ),
                     ),
                   ),

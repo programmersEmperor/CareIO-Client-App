@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 /// id : 10
 /// nameAr : "string"
 /// nameEn : "string"
@@ -34,7 +37,7 @@ class Specialism {
   int get id => _id;
   String get nameAr => _nameAr;
   String get nameEn => _nameEn;
-  String get name => _nameAr;
+  String get name => Get.locale == const Locale('en', 'US') ? _nameEn : _nameAr;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

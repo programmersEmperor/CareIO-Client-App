@@ -1,23 +1,27 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/no_data_widget.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class HospitalListVIew extends StatelessWidget {
-  const HospitalListVIew({super.key});
+  final List<HealthCenter> healthCenters;
+  const HospitalListVIew({super.key, required this.healthCenters});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      padding: EdgeInsets.symmetric(vertical: 10.sp),
-      itemCount: 10,
-      itemBuilder: (_, index) => InkWell(
-        onTap: () => Get.toNamed(HospitalProfile.id, arguments: [
-          {'index': index.toString()}
-        ]),
-        child: HospitalCard(index: index.toString()),
-      ),
-    );
+        padding: EdgeInsets.symmetric(vertical: 10.sp),
+        itemCount: healthCenters.isEmpty ? 1 : healthCenters.length,
+        itemBuilder: (_, index) {
+          if (healthCenters.isEmpty) {
+            return const NoDataWidget(
+                message: "No health centers found, Please try again latter ");
+          } else {
+            return HospitalCard(
+              healthCenter: healthCenters[index],
+            );
+          }
+        });
   }
 }

@@ -1,0 +1,64 @@
+import 'package:ai_health_assistance/Models/ActiveTime.dart';
+import 'package:ai_health_assistance/Models/Clinic.dart';
+import 'package:ai_health_assistance/Models/Doctor.dart';
+
+class HealthCenter {
+  HealthCenter.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _address = json['address'] ?? "";
+    _avatar = json['avatar'];
+    _rating = json['rating'];
+    if (json['clinics'] != null) {
+      _clinics = [];
+      json['clinics'].forEach((v) {
+        _clinics.add(Clinic.fromJson(v));
+      });
+    }
+    if (json['doctors'] != null) {
+      _doctor = [];
+      json['doctors'].forEach((v) {
+        _doctor.add(Doctor.fromJson(v));
+      });
+    }
+    if (json['activeTimes'] != null) {
+      _activeTimes = [];
+      json['activeTimes'].forEach((v) {
+        _activeTimes?.add(ActiveTimes.fromJson(v));
+      });
+    }
+  }
+  late int _id;
+  late String _name;
+  late String _address;
+  String? _avatar;
+  dynamic _rating;
+  late List<Clinic> _clinics;
+  late List<Doctor> _doctor;
+
+  List<ActiveTimes>? _activeTimes;
+
+  int? get id => _id;
+  String? get name => _name;
+  String? get address => _address;
+  String? get avatar => _avatar;
+  dynamic get rating => _rating;
+
+  List<ActiveTimes>? get activeTimes => _activeTimes;
+  List<Clinic> get clinics => _clinics;
+  List<Doctor> get doctor => _doctor;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['address'] = _address;
+    map['avatar'] = _avatar;
+    map['rating'] = _rating;
+
+    if (_activeTimes != null) {
+      map['activeTimes'] = _activeTimes?.map((v) => v.toJson()).toList();
+    }
+    return map;
+  }
+}

@@ -40,27 +40,36 @@ class ApiInterceptors extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    debugPrint(
-        'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
-    // Get.snackbar(
-    //     'Error ${err.response?.statusCode}',
-    //     duration: 5.seconds,
-    //     "In Path ${err.requestOptions.path} \n Message : ${err.message}");
+    try {
+      debugPrint(
+          'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
+      // Get.snackbar(
+      //     'Error ${err.response?.statusCode}',
+      //     duration: 5.seconds,
+      //     "In Path ${err.requestOptions.path} \n Message : ${err.message}");
 
-    var response = err.response.toString().isEmpty
-        ? err.message
-        : err.response!.data['message'];
-
-    if (err.response != null && err.response?.statusCode == 401) {
-      if (await Get.find<UserSession>().logoutPatient()) {
-        Get.offAll(() => const IntroductionPage());
+      var response;
+      if (err.message != null) {
+        response = err.message;
       }
+      if (err.response != null) {
+        response = err.response!.data['message'].toString();
+      }
+
+      if (err.response != null && err.response?.statusCode == 401) {
+        if (await Get.find<UserSession>().logoutPatient()) {
+          Get.offAll(() => const IntroductionPage());
+        }
+      }
+
+      showSnack(
+          title: "Oops ${err.response?.statusCode}",
+          description: response.toString());
+
+      super.onError(err, handler);
+    } catch (e) {
+      showSnack(
+          title: "Oops ${err.response?.statusCode}", description: e.toString());
     }
-
-    showSnack(
-        title: "Oops ${err.response?.statusCode}",
-        description: response.toString());
-
-    super.onError(err, handler);
   }
 }

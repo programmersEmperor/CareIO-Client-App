@@ -4,16 +4,18 @@ import 'package:sizer/sizer.dart';
 
 class TimeSlotItem extends StatelessWidget {
   final bool isDisabled;
+  final String time;
   const TimeSlotItem({
     super.key,
     this.isDisabled = false,
+    required this.time,
   });
 
   @override
   Widget build(BuildContext context) {
     return ActionChip(
-      label: const Text(
-        "12:30 PM",
+      label: Text(
+        time,
       ),
       labelStyle: TextStyle(fontSize: 7.5.sp, color: Colors.black54),
       avatar: Icon(

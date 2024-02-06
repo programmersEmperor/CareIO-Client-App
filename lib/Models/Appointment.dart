@@ -52,7 +52,7 @@ class Appointment {
   late String _healthCenter;
   late String _section;
   late String _clinic;
-  late String _wallet;
+  late String? _wallet;
   late int _price;
   late Doctor _doctor;
 
@@ -63,7 +63,7 @@ class Appointment {
   String get healthCenter => _healthCenter;
   String get section => _section;
   String get clinic => _clinic;
-  String get wallet => _wallet;
+  String get wallet => _wallet ?? "";
   int get price => _price;
   Doctor get doctor => _doctor;
 
