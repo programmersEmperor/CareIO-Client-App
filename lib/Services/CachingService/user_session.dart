@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
+import 'package:ai_health_assistance/Models/Specialism.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Models/client.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +19,18 @@ class UserSession {
   String token = '';
   late Patient patient;
   List<Wallet> wallets = [];
+  List<Specialism> specializations = [];
   late Box box;
   bool userOpenedChat = false;
 
   Future<bool> savePatient(Map<String, dynamic> data) async {
     box = await Hive.openBox(_patientBox);
     if (!box.isOpen) return false;
-    patient = Patient.fromJsonMap(data);
+    patient = Patient.fromJsonMap(data['patient']);
     debugPrint("UserPhone is ${patient.phone}");
-    await box.put(_patientKey, jsonEncode(data));
+    await box.put(_patientKey, jsonEncode(data['patient']));
+    debugPrint("Saved token $token");
+    token = data['token'];
     await box.put(_tokenKey, token);
     await box.close();
     return true;

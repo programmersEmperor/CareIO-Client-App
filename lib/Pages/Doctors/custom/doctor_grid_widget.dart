@@ -1,8 +1,10 @@
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/doctor_profile.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -35,13 +37,16 @@ class DoctorGridWidget extends StatelessWidget {
                     height: 15.h,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
+                      color: AppColors.secondaryColor,
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: doctor.avatar == null
-                          ? Icon(
-                              Icons.person,
-                              size: 30.sp,
+                          ? SvgPicture.asset(
+                              'assets/svgs/doctor-male.svg',
+                              height: 80.sp,
+                              width: 80.sp,
+                              color: AppColors.primaryColor,
                             )
                           : CachedNetworkImage(
                               fit: BoxFit.cover,

@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:ai_health_assistance/Components/SharedWidgets/timeslot_item.dart';
+import 'package:ai_health_assistance/Models/ActiveTime.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Models/WidgetModels/day_time_slot.dart';
@@ -35,31 +37,49 @@ class DoctorProfileUiController extends GetxController {
 
   List<Wrap> timeslotsWidgets = [];
   List<TimeSlotItem> timeslotsItems = [];
+  List<ActiveTimes> timeSlots = [];
+
+  RxList activeDayTimeSlot = [].obs;
 
   void addTimeSlot({required int id, required List<String> timeSlots}) {}
 
   final List<DayTimeSlot> dayTimeSlotList = [
-    DayTimeSlot('Sun', false.obs),
+    DayTimeSlot('Sun', true.obs),
     DayTimeSlot('Mon', false.obs),
     DayTimeSlot('Tue', false.obs),
     DayTimeSlot('Wed', false.obs),
     DayTimeSlot('Thu', false.obs),
     DayTimeSlot('Fri', false.obs),
-    DayTimeSlot('Sat', true.obs),
+    DayTimeSlot('Sat', false.obs),
   ];
 
+  Wrap setTimeSlots(int index) {
+    timeslotsItems.clear();
+    for (var time in timeSlots) {
+      if (time.day == index) {
+        timeslotsItems.add(TimeSlotItem(time: "${time.from} - ${time.to}"));
+      }
+    }
+
+    return Wrap(
+      children: timeslotsItems,
+    );
+  }
+
   void onTapDayTimeSlot(int index) {
+    //if (preSelectedIndex == index) return;
+    debugPrint("it is clicked");
+
+    activeTimeSlotWidget(setTimeSlots(index));
     if (preSelectedIndex == index) return;
     dayTimeSlotList[index].setIsSelected = true;
     dayTimeSlotList[preSelectedIndex].setIsSelected = false;
-    activeTimeSlotWidget(timeslotsWidgets[index]);
     preSelectedIndex = index;
   }
 
   @override
   void onInit() {
     scrollController = ScrollController();
-
     super.onInit();
   }
 
@@ -71,30 +91,28 @@ class DoctorProfileUiController extends GetxController {
 
   void showTimeslots({required HealthCenter healthCenter}) {
     if (healthCenter.activeTimes == null) return;
+  }
 
-    // timeslotsWidgets.add(
-    //   Wrap(
-    //     key: const ValueKey<int>(0),
-    //     spacing: 7.sp,
-    //     children: healthCenter.activeTimes!.map((e) {
-    //      if(e.)
-    //     }).toList(),
-    //   ),
-    // );
+  void getData() async {
+    await showDoctor();
+    onTapDayTimeSlot(0);
   }
 
   Future<void> showDoctor() async {
     isLoading(true);
     var response = await apiService.showDoctor(id: Get.arguments[0]['index']);
-    log(response.data['result']['healthCenters'].toString());
+    log(response.data['result'].toString());
     if (response == null) return;
     doctor = DoctorDetails.fromJson(response.data['result']);
-    for (var time in doctor.healthCenters!.first.clinics) {
-      if (time.activeTimes.isNotEmpty) {
-        debugPrint("Hello");
-        debugPrint(time.activeTimes.map((e) => e.id.toString()).toString());
+    debugPrint("experience length ${doctor.experience.length}");
+    for (var healthCenter in doctor.healthCenters) {
+      for (var clinic in healthCenter.clinics) {
+        for (var timeSlot in clinic.activeTimes) {
+          timeSlots.add(timeSlot);
+        }
       }
     }
+
     isLoading(false);
   }
 

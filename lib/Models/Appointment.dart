@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Models/Doctor.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 
 /// id : 10
 /// status : 10
@@ -16,7 +17,7 @@ class Appointment {
     required int status,
     required String bookedAt,
     required String patientName,
-    required String healthCenter,
+    required HealthCenter healthCenter,
     required String section,
     required String clinic,
     required String wallet,
@@ -38,9 +39,9 @@ class Appointment {
     _status = json['status'];
     _bookedAt = json['bookedAt'];
     _patientName = json['patientName'];
-    _healthCenter = json['healthCenter'];
+    _healthCenter = HealthCenter.fromJson(json['healthCenter']);
     _section = json['section'];
-    _clinic = json['clinic'];
+    _clinic = json['clinic'] ?? "";
     _wallet = json['wallet'];
     _price = json['price'];
     _doctor = Doctor.fromJson(json['doctor']);
@@ -49,7 +50,7 @@ class Appointment {
   late int _status;
   late String _bookedAt;
   late String _patientName;
-  late String _healthCenter;
+  late HealthCenter _healthCenter;
   late String _section;
   late String _clinic;
   late String? _wallet;
@@ -60,7 +61,7 @@ class Appointment {
   int get status => _status;
   String get bookedAt => _bookedAt;
   String get patientName => _patientName;
-  String get healthCenter => _healthCenter;
+  HealthCenter get healthCenter => _healthCenter;
   String get section => _section;
   String get clinic => _clinic;
   String get wallet => _wallet ?? "";

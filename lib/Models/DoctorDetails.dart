@@ -90,9 +90,9 @@ class DoctorDetails {
   int? get completedAppointments => _completedAppointments;
   Degree? get degree => _degree;
   Specialism? get specialism => _specialism;
-  List<Experience>? get experience => _experience;
+  List<Experience> get experience => _experience ?? [];
   List<Qualifications>? get qualifications => _qualifications;
-  List<HealthCenter>? get healthCenters => _healthCenters;
+  List<HealthCenter> get healthCenters => _healthCenters ?? [];
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -161,9 +161,9 @@ class AuthenticationController extends GetxController
       Get.find<UserSession>().token = response.data['temp-token'];
       Get.toNamed(OTPPage.id);
     } else {
-      if (await Get.find<UserSession>()
-          .savePatient(response.data['result']['patient'])) {
-        Get.find<UserSession>().token = response.data['result']['token'];
+      if (await Get.find<UserSession>().savePatient(response.data['result'])) {
+        debugPrint(
+            'Token  var is ${Get.find<UserSession>().token} and api is ${response.data['result']['token']}');
         if (Get.find<UserSession>().patient.name == "") {
           Get.toNamed(CompleteSetup.id);
           return;

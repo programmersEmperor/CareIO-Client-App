@@ -15,7 +15,7 @@ class Experience {
 
   Experience.fromJson(dynamic json) {
     _id = json['id'];
-    _place = json['place'];
+    _place = json['palce'];
     _position = json['position'];
     _from = json['from'];
     _to = json['to'];
@@ -29,8 +29,8 @@ class Experience {
   int? get id => _id;
   String? get place => _place;
   String? get position => _position;
-  String? get from => _from;
-  String? get to => _to;
+  String get from => _from ?? "";
+  String get to => _to ?? "";
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

@@ -27,10 +27,8 @@ class AppointmentController extends GetxController
       .toList()
       .obs;
 
-  RxList<Appointment> get canceledAppointments => appointments
-      .where((element) => element.status == AppointmentStatus.canceled.index)
-      .toList()
-      .obs;
+  RxList<Appointment> get canceledAppointments =>
+      appointments.where((element) => element.status == 4).toList().obs;
 
   List<int> pages = [1, 1, 1];
   List<RxBool> isLoading = [false.obs, false.obs, false.obs];
@@ -64,7 +62,7 @@ class AppointmentController extends GetxController
       appointments.removeWhere((element) => element.status == status.index);
       await fetchAppointments(
           loading: isLoading[status.index],
-          params: {'page': 1, 'status': status.index});
+          params: {'page': 1, 'status': status.index == 2 ? 4 : status.index});
       return;
     }
     await fetchAppointments(

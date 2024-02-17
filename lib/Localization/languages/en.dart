@@ -38,6 +38,8 @@ Map<String, String> en = {
   AppStrings.healthCenters: "Health Centers",
   AppStrings.startChat: "Start Chat",
   AppStrings.viewAll: "View All",
+  AppStrings.topDoctors: "Top doctors",
+  AppStrings.topHospitals: "Top hospitals",
   AppStrings.aiCardTitle: "Experience the power of Ai now",
   AppStrings.pickYourPreferredLanguage: "Pick Your Preferred Language",
   AppStrings.appointmentBooked: "Completed appointments",

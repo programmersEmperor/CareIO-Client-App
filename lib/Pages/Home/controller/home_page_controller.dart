@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ai_health_assistance/Models/HomeInfo.dart';
+import 'package:ai_health_assistance/Models/Specialism.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Models/client.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
@@ -12,6 +13,7 @@ import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
 import 'package:ai_health_assistance/Pages/Search/search_page.dart';
 import 'package:ai_health_assistance/Services/Api/home.dart';
+import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,8 @@ class HomePageController extends GetxController
 
   HomeApiService apiService = Get.find<HomeApiService>();
   WalletsApiService walletsApiService = Get.find<WalletsApiService>();
+  SpecializationApiService specializationApiService =
+      Get.find<SpecializationApiService>();
 
   RxBool get isLoading => apiService.isLoading;
   RxBool get walletIsLoading => walletsApiService.isLoading;
@@ -54,6 +58,7 @@ class HomePageController extends GetxController
 
     await fetchHomeInfo();
     await fetchWallets();
+    await fetchSpecializations();
   }
 
   void changePage(int index) {
@@ -77,6 +82,17 @@ class HomePageController extends GetxController
     List<Wallet> wallets = [];
     response.data['result'].forEach((e) => wallets.add(Wallet.fromJson(e)));
     Get.find<UserSession>().wallets = wallets;
+  }
+
+  Future<void> fetchSpecializations() async {
+    var response = await specializationApiService.fetchSpecializations();
+    log(response.toString());
+    if (response == null) return;
+
+    List<Specialism> specializations = [];
+    response.data['result']
+        .forEach((e) => specializations.add(Specialism.fromJson(e)));
+    Get.find<UserSession>().specializations = specializations;
   }
 
   void showMapBottomSheet(BuildContext context) {

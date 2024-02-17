@@ -26,7 +26,11 @@ class HospitalsUiController extends GetxController {
 
   void showFilter() {
     Get.put(BottomSheetController())
-        .showBottomSheet(const FilterBottomSheet(), 100.h);
+        .showBottomSheet( FilterBottomSheet(onTapFilter: ()=>filterHospitals(),), 100.h);
+  }
+
+  void filterHospitals({int? rating, int? clinicId, bool? isNearby}) {
+    debugPrint("Hello");
   }
 
   List<Wrap> timeslotsWidgets = [];

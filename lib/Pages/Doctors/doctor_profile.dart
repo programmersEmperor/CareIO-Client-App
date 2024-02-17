@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_
 import 'package:ai_health_assistance/Pages/Doctors/custom/day_timeslot_item.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/experience_card.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -22,7 +23,7 @@ class DoctorProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DoctorProfileUiController controller = Get.put(DoctorProfileUiController());
-    controller.showDoctor();
+    //controller.getData();
     return Scaffold(
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overflow) {
@@ -150,6 +151,42 @@ class DoctorProfile extends StatelessWidget {
                                               ],
                                             ),
                                           ),
+                                          Visibility(
+                                            visible:
+                                                controller.doctor.isRecommended,
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsets.only(top: 4.sp),
+                                              child: Chip(
+                                                backgroundColor:
+                                                    AppColors.secondaryColor,
+                                                label: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.thumb_up,
+                                                      color: AppColors
+                                                          .primaryColor,
+                                                      size: 10.sp,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 1.w,
+                                                    ),
+                                                    Text(
+                                                      "Recommended",
+                                                      style: TextStyle(
+                                                          fontSize: 9.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          color: AppColors
+                                                              .primaryColor),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -168,10 +205,9 @@ class DoctorProfile extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        DoctorStatics(
+                                        const DoctorStatics(
                                           title: 'Experience',
-                                          info:
-                                              "+${controller.doctor.experience![0].id} years",
+                                          info: "+ years",
                                         ),
                                         const DoctorStaticsDivider(),
                                         DoctorStatics(
@@ -214,6 +250,35 @@ class DoctorProfile extends StatelessWidget {
                                         color: Colors.black45),
                                   ),
                                 ),
+                                AutoSizeText(
+                                  "Experiences",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                                Visibility(
+                                  visible:
+                                      controller.doctor.experience.isNotEmpty,
+                                  child: Container(
+                                    height: 24.h,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 10.sp),
+                                    child: GridView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount:
+                                          controller.doctor.experience.length,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 1,
+                                              mainAxisExtent: 60.w,
+                                              mainAxisSpacing: 10),
+                                      itemBuilder: (_, index) => ExperienceCard(
+                                          experience: controller
+                                              .doctor.experience[index]),
+                                    ),
+                                  ),
+                                ),
                                 Container(
                                   padding: EdgeInsets.all(12.sp),
                                   decoration: BoxDecoration(
@@ -242,10 +307,14 @@ class DoctorProfile extends StatelessWidget {
                                                 arguments: [
                                                   {'index': '1'}
                                                 ]),
-                                            child: HospitalCard(
-                                              healthCenter: controller
-                                                  .doctor.healthCenters![0],
-                                            ),
+                                            child: controller.doctor
+                                                    .healthCenters.isNotEmpty
+                                                ? HospitalCard(
+                                                    healthCenter: controller
+                                                        .doctor
+                                                        .healthCenters![0],
+                                                  )
+                                                : const SizedBox(),
                                           ),
                                         ),
                                       ),
@@ -278,7 +347,7 @@ class DoctorProfile extends StatelessWidget {
                                         ),
                                       ),
                                       Padding(
-                                        padding: EdgeInsets.only(top: 10.sp),
+                                        padding: EdgeInsets.only(top: 5.sp),
                                         child: Obx(
                                           () => AnimatedSwitcher(
                                             duration: 300.milliseconds,

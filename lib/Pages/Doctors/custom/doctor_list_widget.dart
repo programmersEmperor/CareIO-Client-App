@@ -3,6 +3,7 @@ import 'package:ai_health_assistance/Pages/Doctors/doctor_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -50,6 +51,14 @@ class DoctorListWidget extends StatelessWidget {
                               )
                             : null,
                       ),
+                      child: doctor.avatar == null
+                          ? SvgPicture.asset(
+                              'assets/svgs/doctor-male.svg',
+                              height: 80.sp,
+                              width: 80.sp,
+                              color: AppColors.primaryColor,
+                            )
+                          : null,
                     ),
                   ),
                   Expanded(

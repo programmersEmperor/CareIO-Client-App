@@ -101,12 +101,15 @@ class HomeMainPage extends StatelessWidget {
                   title: AppStrings.topDoctors.tr,
                 ),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      AppStrings.viewAll.tr,
-                      style: TextStyle(
-                          color: AppColors.primaryColor, fontSize: 9.sp),
-                    )),
+                  onPressed: () {
+                    Get.toNamed(DoctorsPage.id);
+                  },
+                  child: Text(
+                    AppStrings.viewAll.tr,
+                    style: TextStyle(
+                        color: AppColors.primaryColor, fontSize: 9.sp),
+                  ),
+                ),
               ],
             ),
           ),
@@ -135,7 +138,9 @@ class HomeMainPage extends StatelessWidget {
               children: [
                 SectionTitle(title: AppStrings.topHospitals.tr),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(HospitalsPage.id);
+                    },
                     child: Text(
                       AppStrings.viewAll.tr,
                       style: TextStyle(

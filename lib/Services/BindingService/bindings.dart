@@ -11,6 +11,7 @@ import 'package:ai_health_assistance/Services/Api/home.dart';
 import 'package:ai_health_assistance/Services/Api/hospitals.dart';
 import 'package:ai_health_assistance/Services/Api/notification.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';
+import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
 import 'package:get/get.dart';
 
@@ -30,6 +31,7 @@ class BindingService extends Bindings {
     Get.lazyPut(() => BookAppointmentApiService(), fenix: true);
     Get.lazyPut(() => WalletsApiService(), fenix: true);
     Get.lazyPut(() => BookAppointmentController(), fenix: true);
+    Get.lazyPut(() => SpecializationApiService(), fenix: true);
     Get.put(LocalizationHelper());
   }
 }

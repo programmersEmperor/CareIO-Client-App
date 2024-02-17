@@ -5,10 +5,11 @@ import 'package:sizer/sizer.dart';
 
 class RatingChip extends StatelessWidget {
   final String title;
-
+  final VoidCallback onTap;
   const RatingChip({
     super.key,
     required this.title,
+    required this.onTap,
   });
 
   @override
@@ -53,7 +54,10 @@ class RatingChip extends StatelessWidget {
           visualDensity: VisualDensity.comfortable,
           padding: EdgeInsets.zero,
           labelPadding: EdgeInsets.zero,
-          onPressed: () => isSelected(!isSelected.value),
+          onPressed: () {
+            isSelected(!isSelected.value);
+            onTap();
+          },
           backgroundColor:
               isSelected.isTrue ? AppColors.primaryColor : Colors.white,
           disabledColor: Colors.grey.shade200,
