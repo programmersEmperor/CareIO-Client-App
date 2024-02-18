@@ -15,8 +15,15 @@ class AppointmentApiService {
   }
 
   Future<dynamic> rescheduleAppointment(
-      {required int id, required String date}) async {
+      {required int id, required String date, required String time}) async {
     return await _apiService.postRequest(
-        url: 'patients/appointments/reschedule/$id', body: {'date': date});
+        url: 'patients/appointments/reschedule/$id',
+        body: {'date': date, 'time': time});
+  }
+
+  Future<dynamic> rateAppointment(
+      {required int id, required int rating}) async {
+    return await _apiService.postRequest(
+        url: 'patients/appointments/rate/$id', body: {'rating': rating});
   }
 }

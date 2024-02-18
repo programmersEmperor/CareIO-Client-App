@@ -6,7 +6,9 @@ import 'package:ai_health_assistance/Pages/Search/filter_bottom_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/hospitals.dart';
 import 'package:ai_health_assistance/Utils/bottom_sheet_handle.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
 
 class HospitalsUiController extends GetxController {
@@ -14,23 +16,75 @@ class HospitalsUiController extends GetxController {
   late ScrollController scrollController;
   RxDouble height = 63.h.obs;
   RxBool enableAnimation = false.obs;
+  final _pageSize = 10;
   int preSelectedIndex = 0;
+  Position? _position;
 
   final apiService = Get.find<HospitalApiService>();
   List<HealthCenter> healthCenters = [];
   late HealthCenter healthCenter;
+  final PagingController<int, HealthCenter> pagingController =
+      PagingController(firstPageKey: 0);
   RxBool get isLoading => apiService.isLoading;
   RxBool profileLoading = true.obs;
 
   var activeTimeSlotWidget = const Wrap().obs;
 
   void showFilter() {
-    Get.put(BottomSheetController())
-        .showBottomSheet( FilterBottomSheet(onTapFilter: ()=>filterHospitals(),), 100.h);
+    Get.put(BottomSheetController()).showBottomSheet(
+        FilterBottomSheet(
+          onTapFilter: (rating, clinic, nearby) => filterHospitals(
+              rating: rating, clinicId: clinic, isNearby: nearby),
+        ),
+        100.h);
   }
 
-  void filterHospitals({int? rating, int? clinicId, bool? isNearby}) {
-    debugPrint("Hello");
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  void filterHospitals({int? rating, int? clinicId, bool? isNearby}) async {
+    debugPrint("Hello $rating $clinicId $isNearby");
+    Map<String, dynamic> data = {};
+    if (isNearby != null) {
+      if (isNearby) {
+        _position = await _determinePosition();
+        data.addIf(_position != null, "longitude", _position?.longitude);
+        data.addIf(_position != null, "latitude", _position?.latitude);
+      } else {
+        _position = null;
+        debugPrint("Location ${_position?.latitude} ${_position?.longitude}");
+      }
+    } else {
+      _position = null;
+      debugPrint("Location ${_position?.latitude} ${_position?.longitude}");
+    }
+
+    data.addIf(clinicId != null, "specilism", clinicId);
+    data.addIf(rating != null, "order-by-rating", rating);
+    Get.close(0);
+    fetchHealthCenters(pageKey: 0, params: data);
   }
 
   List<Wrap> timeslotsWidgets = [];
@@ -57,18 +111,37 @@ class HospitalsUiController extends GetxController {
   void onInit() {
     super.onInit();
     scrollController = ScrollController();
+
+    pagingController.addPageRequestListener((pageKey) {
+      fetchHealthCenters(pageKey: pageKey);
+    });
+
     //activeTimeSlotWidget.value = timeslotsWidgets[0];
-    fetchHealthCenters(isPagination: false);
+    // fetchHealthCenters(isPagination: false);
   }
 
-  void fetchHealthCenters({required bool isPagination}) async {
-    if (!isPagination) {
-      healthCenters.clear();
-    }
-    var response = await apiService.fetchHospitals();
-    if (response == null) return;
-    for (var healthCenter in response.data['result']['data']) {
-      healthCenters.add(HealthCenter.fromJson(healthCenter));
+  void fetchHealthCenters(
+      {required int pageKey, Map<String, dynamic>? params}) async {
+    try {
+      healthCenters = [];
+      debugPrint("Fetch healthCenters");
+      var response = await apiService.fetchHospitals(params: params);
+      if (response == null) return;
+
+      for (var healthCenter in response.data['result']['data']) {
+        healthCenters.add(HealthCenter.fromJson(healthCenter));
+      }
+      final isLastPage = healthCenters.length < _pageSize;
+
+      if (isLastPage) {
+        pagingController.appendLastPage(healthCenters);
+      } else {
+        final nextPageKey = pageKey + healthCenters.length;
+        pagingController.appendPage(healthCenters, nextPageKey);
+      }
+    } catch (error) {
+      debugPrint("Error in healthCenter is $error");
+      pagingController.error = error;
     }
   }
 

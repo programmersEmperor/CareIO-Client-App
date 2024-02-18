@@ -84,10 +84,10 @@ class MyAppointmentsPage extends StatelessWidget {
               Obx(
                 () => RefreshWidget(
                   onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.canceled,
+                    status: AppointmentStatus.completed,
                   ),
                   isLoading:
-                      controller.isLoading[AppointmentStatus.canceled.index],
+                      controller.isLoading[AppointmentStatus.completed.index],
                   child: AppointmentsWidget(
                     appointments: controller.completedAppointments,
                     onRefresh: () => controller.initializeAppointments(

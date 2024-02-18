@@ -1,5 +1,7 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
+import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -125,14 +127,16 @@ class AppointmentCard extends StatelessWidget {
                           horizontal: 8.sp, vertical: 2.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.sp),
-                        color: appointment.status == 1
-                            ? Colors.green.withOpacity(0.2)
-                            : Colors.orange.withOpacity(0.2),
+                        color:
+                            appointment.status == 5 || appointment.status == 6
+                                ? Colors.green.withOpacity(0.2)
+                                : Colors.orange.withOpacity(0.2),
                       ),
                       child: Text(
-                        appointment.status == 1 ? "confirmed" : "in review",
+                        appointment.appointmentStatusTitle,
                         style: TextStyle(
-                            color: appointment.status == 1
+                            color: appointment.status == 5 ||
+                                    appointment.status == 6
                                 ? Colors.green
                                 : Colors.orange,
                             fontWeight: FontWeight.bold,
@@ -198,10 +202,14 @@ class AppointmentCard extends StatelessWidget {
                                 padding:
                                     EdgeInsets.only(top: 10.sp, bottom: 10.sp),
                                 child: Container(
+                                  width: double.infinity,
                                   padding: EdgeInsets.all(15.sp),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.sp),
-                                    color: AppColors.secondaryColor,
+                                    color: appointment.wallet.isEmpty &&
+                                            appointment.status < 3
+                                        ? Colors.orangeAccent.withOpacity(0.5)
+                                        : AppColors.secondaryColor,
                                   ),
                                   child: Stack(
                                     children: [
@@ -210,8 +218,14 @@ class AppointmentCard extends StatelessWidget {
                                         child: Opacity(
                                           opacity: 0.2,
                                           child: Icon(
-                                            Icons.check,
-                                            color: AppColors.primaryColor,
+                                            appointment.wallet.isEmpty &&
+                                                    appointment.status < 3
+                                                ? Icons.timer
+                                                : Icons.check,
+                                            color: appointment.wallet.isEmpty &&
+                                                    appointment.status < 3
+                                                ? Colors.orange
+                                                : AppColors.primaryColor,
                                             size: 55.sp,
                                           ),
                                         ),
@@ -221,17 +235,30 @@ class AppointmentCard extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           AutoSizeText(
-                                            'Paid',
+                                            appointment.wallet.isEmpty &&
+                                                    appointment.status < 3
+                                                ? 'Unpaid'
+                                                : "Paid",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
-                                                color: AppColors.primaryColor,
+                                                color: appointment
+                                                            .wallet.isEmpty &&
+                                                        appointment.status < 3
+                                                    ? Colors.orange
+                                                    : AppColors.primaryColor,
                                                 fontSize: 15.sp),
                                           ),
                                           SizedBox(
                                             height: 4.sp,
                                           ),
                                           AutoSizeText(
-                                            'You paid for this reservation amount 1500 YE.R using Jawali Wallet',
+                                            appointment.status < 3
+                                                ? appointment.wallet.isEmpty
+                                                    ? "You have completed the payment using"
+                                                    : "You have completed the payment using the wallet ${appointment.wallet}"
+                                                : appointment.wallet.isEmpty
+                                                    ? "Payment will be when visit"
+                                                    : "",
                                             style: TextStyle(fontSize: 10.sp),
                                           ),
                                         ],
@@ -250,25 +277,30 @@ class AppointmentCard extends StatelessWidget {
                                       fontSize: 10.sp),
                                 ),
                               ),
-                              // Padding(
-                              //   padding: EdgeInsets.only(
-                              //     top: 10.0.sp,
-                              //   ),
-                              //   child: Container(
-                              //     decoration: BoxDecoration(
-                              //         color: AppColors.primaryColor
-                              //             .withOpacity(0.2),
-                              //         borderRadius:
-                              //             BorderRadius.circular(15.sp)),
-                              //     child: InkWell(
-                              //       onTap: () => Get.toNamed(HospitalProfile.id,
-                              //           arguments: [
-                              //             {'index': '1'}
-                              //           ]),
-                              //       child: const HospitalCard(),
-                              //     ),
-                              //   ),
-                              // ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: 10.0.sp,
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: AppColors.primaryColor
+                                          .withOpacity(0.2),
+                                      borderRadius:
+                                          BorderRadius.circular(15.sp)),
+                                  child: InkWell(
+                                    onTap: () => Get.toNamed(HospitalProfile.id,
+                                        arguments: [
+                                          {
+                                            'index': appointment.healthCenter.id
+                                                .toString()
+                                          }
+                                        ]),
+                                    child: HospitalCard(
+                                      healthCenter: appointment.healthCenter,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                   ),
@@ -301,31 +333,70 @@ class AppointmentCard extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: () => Get.find<AppointmentController>()
-                          .confirmRescheduleAppointment(id: appointment.id),
-                      style: ButtonStyle(
-                          elevation: const MaterialStatePropertyAll(0),
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.primaryColor),
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.sp)))),
-                      child: Text(
-                        "Reschedule",
-                        style: TextStyle(
-                            fontSize: 9.sp, fontWeight: FontWeight.w800),
+                  Visibility(
+                    visible: appointment.status < 3,
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => Get.find<AppointmentController>()
+                            .confirmRescheduleAppointment(id: appointment.id),
+                        style: ButtonStyle(
+                            elevation: const MaterialStatePropertyAll(0),
+                            backgroundColor: MaterialStatePropertyAll(
+                                AppColors.primaryColor),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.sp)))),
+                        child: Text(
+                          "Reschedule",
+                          style: TextStyle(
+                              fontSize: 9.sp, fontWeight: FontWeight.w800),
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
+                  Visibility(
+                    visible: appointment.status < 3,
+                    child: const SizedBox(
+                      width: 10,
+                    ),
                   ),
-                  Expanded(
-                    child: AppointmentCancelButton(
-                      onTap: () => Get.find<AppointmentController>()
-                          .confirmCancelAppointment(id: appointment.id),
+                  Visibility(
+                    visible: appointment.status == 5 || appointment.status == 6,
+                    child: Expanded(
+                      child: ElevatedButton(
+                        onPressed: () => Get.find<AppointmentController>()
+                            .showRatingBottomSheet(
+                                appointmentId: appointment.id),
+                        style: ButtonStyle(
+                            elevation: const MaterialStatePropertyAll(0),
+                            backgroundColor: MaterialStatePropertyAll(
+                                AppColors.primaryColor),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10.sp)))),
+                        child: Text(
+                          "Rate",
+                          style: TextStyle(
+                              fontSize: 9.sp, fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: appointment.status < 3,
+                    child: const SizedBox(
+                      width: 10,
+                    ),
+                  ),
+                  Visibility(
+                    visible: appointment.status < 3,
+                    child: Expanded(
+                      child: AppointmentCancelButton(
+                        onTap: () => Get.find<AppointmentController>()
+                            .confirmCancelAppointment(id: appointment.id),
+                      ),
                     ),
                   ),
                 ],

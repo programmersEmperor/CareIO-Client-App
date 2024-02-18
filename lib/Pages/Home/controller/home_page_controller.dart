@@ -11,7 +11,7 @@ import 'package:ai_health_assistance/Pages/Home/custom/map_bottom_sheet.dart';
 import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
-import 'package:ai_health_assistance/Pages/Search/search_page.dart';
+import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:ai_health_assistance/Services/Api/home.dart';
 import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
@@ -27,9 +27,9 @@ class HomePageController extends GetxController
   Patient patient = Get.find<UserSession>().patient;
   final List<IconData> icons = [
     Boxicons.bx_home_circle,
-    Boxicons.bx_search,
     Boxicons.bx_calendar,
     Boxicons.bx_bell,
+    Boxicons.bx_user,
   ];
 
   HomeApiService apiService = Get.find<HomeApiService>();
@@ -44,9 +44,9 @@ class HomePageController extends GetxController
 
   List<dynamic> pages = [
     const HomeMainPage(),
-    const SearchPage(),
     const MyAppointmentsPage(),
     const NotificationsPage(),
+    const ProfilePage(),
   ];
   late HomeInfo homeInfo;
 

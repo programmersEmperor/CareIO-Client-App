@@ -1,10 +1,12 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/custom_datepicker.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/payment_method_card.dart';
+import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
+import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
@@ -25,6 +27,7 @@ class BookAppointment extends StatelessWidget {
     controller.getTimes(
         id: doctor.id!,
         clinicId: doctor.healthCenters!.first.clinics.first.id!);
+
     return Scaffold(
       body: SizedBox(
         height: 100.h,
@@ -185,13 +188,21 @@ class BookAppointment extends StatelessWidget {
                               : Wrap(
                                   key: const ValueKey<int>(5),
                                   spacing: 7.sp,
-                                  children: controller.times
-                                      .map((e) => BookTimeSlot(
-                                            time: e,
-                                            onTapTime: (time) =>
-                                                controller.onTapTime(time),
-                                          ))
-                                      .toList(),
+                                  children: [
+                                    for (var i = 0;
+                                        i < controller.times.length;
+                                        i++) ...[
+                                      BookTimeSlot(
+                                        time: controller.times[i],
+                                        onTapTime: (time) =>
+                                            controller.onTapTime(time),
+                                        isSelected:
+                                            (controller.selectedTime.value ==
+                                                    controller.times[i])
+                                                .obs,
+                                      ),
+                                    ]
+                                  ],
                                 ).animate().fade(
                                   duration: const Duration(milliseconds: 500)),
                         ),
@@ -217,6 +228,55 @@ class BookAppointment extends StatelessWidget {
                 wallet: controller.wallets[index],
                 selected: controller.wallets[index].selected,
                 onTap: () => controller.selectWallet(index),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15.sp),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20.sp,
+                  ),
+                  AutoSizeText(
+                    "Reservation in name ",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.sp,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: TextInputField(
+                          name: 'name',
+                          controller: controller.nameController,
+                          required: true,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextButton(
+                          child: Text(
+                            'use my name',
+                            style: TextStyle(
+                                color: AppColors.primaryColor, fontSize: 10.sp),
+                          ),
+                          onPressed: () {
+                            controller.nameController.text =
+                                Get.find<UserSession>().patient.name;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
             Padding(
@@ -250,7 +310,6 @@ class BookAppointment extends StatelessWidget {
               text: "Confirm booking",
               isLoading: controller.bookLoading,
               onPress: () => controller.bookAppointment(
-                  name: doctor.name ?? "",
                   doctorId: doctor.id!,
                   clinicId: doctor.healthCenters!.first.clinics.first.id!),
             )

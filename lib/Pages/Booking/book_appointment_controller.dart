@@ -12,7 +12,9 @@ class BookAppointmentController extends GetxController {
   List<Wallet> wallets = Get.find<UserSession>().wallets;
   List<BookAvailableTime> times = [];
   List<String> selectedTimes = [];
+  Rx<BookAvailableTime> selectedTime = BookAvailableTime().obs;
   GlobalKey<FormBuilderState> key = GlobalKey<FormBuilderState>();
+  TextEditingController nameController = TextEditingController();
 
   final BookAppointmentApiService _apiService =
       Get.find<BookAppointmentApiService>();
@@ -33,13 +35,15 @@ class BookAppointmentController extends GetxController {
   }
 
   void onTapTime(BookAvailableTime time) {
-    if (selectedTimes.contains(time.time)) {
-      selectedTimes.remove(time.time);
-    } else {
-      selectedTimes.add(time.time);
-    }
+    selectedTime(time);
+    debugPrint(selectedTime.value.time);
+    // if (selectedTimes.contains(time.time)) {
+    //   selectedTimes.remove(time.time);
+    // } else {
+    //   selectedTimes.add(time.time);
+    // }
 
-    debugPrint(selectedTimes.length.toString());
+    // debugPrint(selectedTimes.length.toString());
   }
 
   void selectWallet(int index) {
@@ -69,20 +73,21 @@ class BookAppointmentController extends GetxController {
   }
 
   void bookAppointment({
-    required String name,
     required int doctorId,
     required int clinicId,
   }) async {
     try {
+      if (nameController.text.isEmpty) {
+        showSnack(title: "Name Field ", description: "Name Field is Required");
+        return;
+      }
       if (!key.currentState!.saveAndValidate()) return;
 
-      bookLoading(true);
-
       var body = {
-        "name": name,
+        "name": nameController.text,
         "doctorId": doctorId,
         "clinicId": clinicId,
-        "time": selectedTimes.first,
+        "time": selectedTime.value.time,
         "date": selectDate,
         "walletId": wallets.map((e) {
           if (e.selected.isTrue) {
@@ -94,6 +99,7 @@ class BookAppointmentController extends GetxController {
       };
       debugPrint(body.toString());
 
+      bookLoading(true);
       var response = await _apiService.bookAppointment(body: body);
       bookLoading(false);
 
@@ -106,11 +112,11 @@ class BookAppointmentController extends GetxController {
         showSnack(
             title: "Payment completed",
             description:
-                "You have booked new appointment with Dr.$name in $selectDate at ${selectedTimes.first}  ");
+                "You have booked new appointment in $selectDate at ${selectedTime.value.time}  ");
       }
     } catch (e) {
       bookLoading(false);
-      if (selectedTimes.isEmpty) {
+      if (selectedTime.value.time.isEmpty) {
         showSnack(
             title: "No time selected",
             description: "you have to pick at least one time ");

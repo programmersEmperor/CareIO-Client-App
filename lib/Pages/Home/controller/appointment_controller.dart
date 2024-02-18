@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/cancel_appointment_confirm_sheet.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/rating_bottom_sheet_widget.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/reschedule_appointment_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/appointment.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
@@ -16,19 +17,23 @@ class AppointmentController extends GetxController
   final AppointmentApiService _apiService = Get.find<AppointmentApiService>();
 
   RxBool cancelLoading = false.obs;
+  RxBool ratingLoading = false.obs;
 
   RxList<Appointment> get upcomingAppointments => appointments
-      .where((element) => element.status == AppointmentStatus.upcoming.index)
+      .where((element) =>
+          element.status == 0 || element.status == 2 || element.status == 1)
       .toList()
       .obs;
 
   RxList<Appointment> get completedAppointments => appointments
-      .where((element) => element.status == AppointmentStatus.completed.index)
+      .where((element) => element.status == 5 || element.status == 6)
       .toList()
       .obs;
 
-  RxList<Appointment> get canceledAppointments =>
-      appointments.where((element) => element.status == 4).toList().obs;
+  RxList<Appointment> get canceledAppointments => appointments
+      .where((element) => element.status == 4 || element.status == 3)
+      .toList()
+      .obs;
 
   List<int> pages = [1, 1, 1];
   List<RxBool> isLoading = [false.obs, false.obs, false.obs];
@@ -57,25 +62,48 @@ class AppointmentController extends GetxController
     super.onInit();
   }
 
+  void showRatingBottomSheet({required int appointmentId}) {
+    Get.bottomSheet(RatingWidget(
+      appointmentId: appointmentId,
+    ));
+  }
+
+  void rateAppointment(
+      {required int appointmentId, required int rating}) async {
+    try {
+      ratingLoading(true);
+      var response =
+          await _apiService.rateAppointment(id: appointmentId, rating: rating);
+      ratingLoading(false);
+      if (response == null) return;
+
+      if (response.data['result'].isEmpty) {
+        Get.close(0);
+        showSnack(
+            title: "Rating posted",
+            description: "We appreciate your feedback thank you :)");
+      }
+    } catch (e) {
+      ratingLoading(false);
+    }
+  }
+
   void initializeAppointments({AppointmentStatus? status}) async {
     if (status != null) {
       appointments.removeWhere((element) => element.status == status.index);
       await fetchAppointments(
           loading: isLoading[status.index],
-          params: {'page': 1, 'status': status.index == 2 ? 4 : status.index});
+          params: {'page': 1, 'type': status.index + 1});
       return;
     }
     await fetchAppointments(
         loading: isLoading[AppointmentStatus.upcoming.index],
-        params: {
-          'page': 1,
-          'status': AppointmentStatus.upcoming.index
-        }).whenComplete(() => fetchAppointments(
+        params: {'page': 1, 'type': 1}).whenComplete(() => fetchAppointments(
             loading: isLoading[AppointmentStatus.completed.index],
-            params: {'page': 1, 'status': AppointmentStatus.completed.index})
+            params: {'page': 1, 'type': 2})
         .whenComplete(() => fetchAppointments(
             loading: isLoading[AppointmentStatus.canceled.index],
-            params: {'page': 1, 'status': AppointmentStatus.canceled.index})));
+            params: {'page': 1, 'type': 3})));
   }
 
   Future<List<dynamic>> fetchAppointments(
@@ -108,7 +136,8 @@ class AppointmentController extends GetxController
     Get.bottomSheet(
       RescheduleAppointmentConfirmSheet(
           loading: cancelLoading,
-          onTap: () => cancelAppointment(id: id),
+          onTap: (date, time) =>
+              rescheduleAppointment(id: id, date: date, time: time),
           appointment: appointments.where((p0) => id == p0.id).first),
       isScrollControlled: true,
     );
@@ -128,6 +157,37 @@ class AppointmentController extends GetxController
       showSnack(
           title: "Appointment canceled",
           description: "Your appointment has been canceled");
+    }
+  }
+
+  void rescheduleAppointment(
+      {required int id, required String date, required String time}) async {
+    try {
+      if (cancelLoading.isTrue) return;
+
+      if (time.isEmpty) {
+        showSnack(
+            title: "Time not selected",
+            description: "Please select a time slot to reschedule");
+        return;
+      }
+
+      cancelLoading(true);
+
+      var response = await _apiService.rescheduleAppointment(
+          id: id, date: date, time: time);
+      cancelLoading(false);
+      if (response == null) return;
+
+      if (response.data['result'].isEmpty) {
+        Get.close(0);
+        showSnack(
+            title: "Appointment Rescheduled",
+            description:
+                "Your appointment has been rescheduled to $date at $time");
+      }
+    } catch (e) {
+      cancelLoading(false);
     }
   }
 }

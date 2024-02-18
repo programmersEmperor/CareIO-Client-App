@@ -9,13 +9,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class FilterBottomSheet extends StatelessWidget {
-  final Function onTapFilter;
+  final Function(int?, int?, bool?) onTapFilter;
   const FilterBottomSheet({super.key, required this.onTapFilter});
 
   @override
   Widget build(BuildContext context) {
     int rating = 0;
     int clinicId = 0;
+    var selectedIdIndex = RxInt(-1);
+    var selectedRatingIndex = RxInt(-1);
+
     RxBool showNearby = false.obs;
     return SizedBox(
       width: 100.w,
@@ -93,15 +96,22 @@ class FilterBottomSheet extends StatelessWidget {
         Wrap(
           key: const ValueKey<int>(5),
           spacing: 7.sp,
-          children: Get.find<UserSession>()
-              .specializations
-              .map((e) => ClinicChip(
-                    title: e.name,
-                    onTap: () {
-                      clinicId = e.id;
-                    },
-                  ))
-              .toList(),
+          children: [
+            for (var i = 0;
+                i < Get.find<UserSession>().specializations.length;
+                i++) ...[
+              Obx(
+                () => ClinicChip(
+                  isSelected: (selectedIdIndex.value == i).obs,
+                  title: Get.find<UserSession>().specializations[i].name,
+                  onTap: () {
+                    selectedIdIndex(i);
+                    clinicId = Get.find<UserSession>().specializations[i].id;
+                  },
+                ),
+              ),
+            ]
+          ],
         ),
         SizedBox(
           height: 10.sp,
@@ -116,11 +126,15 @@ class FilterBottomSheet extends StatelessWidget {
             itemCount: 5,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) => RatingChip(
-              title: "+${index + 1}",
-              onTap: () {
-                rating = index + 1;
-              },
+            itemBuilder: (_, index) => Obx(
+              () => RatingChip(
+                title: "+${index + 1}",
+                onTap: () {
+                  selectedRatingIndex(index);
+                  rating = index + 1;
+                },
+                isSelected: (selectedRatingIndex.value == index).obs,
+              ),
             ),
           ),
         ),
@@ -131,10 +145,10 @@ class FilterBottomSheet extends StatelessWidget {
           text: "See results",
           onPress: () {
             onTapFilter(
-                rating: rating != 0 ? rating : null,
-                clinicId: clinicId != 0 ? clinicId : null,
-                isNearby:showNearby.isTrue?showNearby.value:null,
-                );
+              rating != 0 ? rating : null,
+              clinicId != 0 ? clinicId : null,
+              showNearby.isTrue ? showNearby.value : null,
+            );
           },
         )
       ]),

@@ -23,7 +23,7 @@ class DoctorProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DoctorProfileUiController controller = Get.put(DoctorProfileUiController());
-    //controller.getData();
+    controller.getData();
     return Scaffold(
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overflow) {

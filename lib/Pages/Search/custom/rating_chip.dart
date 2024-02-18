@@ -6,15 +6,16 @@ import 'package:sizer/sizer.dart';
 class RatingChip extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  const RatingChip({
+  RxBool isSelected = false.obs;
+  RatingChip({
     super.key,
     required this.title,
     required this.onTap,
+    required this.isSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    var isSelected = false.obs;
     return Obx(
       () => AnimatedPadding(
         padding: isSelected.isTrue
@@ -55,7 +56,6 @@ class RatingChip extends StatelessWidget {
           padding: EdgeInsets.zero,
           labelPadding: EdgeInsets.zero,
           onPressed: () {
-            isSelected(!isSelected.value);
             onTap();
           },
           backgroundColor:

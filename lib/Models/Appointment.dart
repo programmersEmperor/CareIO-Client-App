@@ -68,6 +68,18 @@ class Appointment {
   int get price => _price;
   Doctor get doctor => _doctor;
 
+  String get appointmentStatusTitle => _getAppointment();
+
+  String _getAppointment() {
+    if (status == 5) {
+      return "completed";
+    }
+    if (status == 6) {
+      return "Rated";
+    }
+    return "";
+  }
+
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = _id;

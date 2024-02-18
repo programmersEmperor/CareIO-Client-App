@@ -474,9 +474,7 @@
 			 "phone": "string",
 			 "isRecommended": boolean,
 			 "description":"string",
-			 "completedAppointments": int,
-			 "totalExperiences": int,
-			 "totalQualifications": int,
+			 "completedAppointments": int
 			 "degree": {
 				"nameAr": "string",
 				"nameEn": "string"
@@ -485,7 +483,7 @@
 				"nameAr": "string",
 				"nameEn": "string"
 				},
-			 "experiences":[
+			 "experience":[
 					{
 					 "id": int,
 					 "place":"string",
@@ -511,21 +509,14 @@
 					 "avatar":"string",
 					 "rating":"string",
 					 "price": float,
-					 "type": int, => 0 hosptial, 1 healthCenter, 2 clinic
-					 "clinics":[
-						{
-						 "id": int,
-						 "name": "string",
-						 "activeTimes":[
-					 	     	{
-					  		"id": int,
-					  		"day": int,
-					  		"from": Time,
-					 		 "to": Time
-					 		}
-						  }
-					 	],
-					 ],
+					 "activeTimes":[
+					 {
+					  "id": int,
+					  "day": int,
+					  "from": DateTime,
+					  "to": DateTime
+					 }
+					],
 					},
 				],
 
@@ -585,10 +576,10 @@
 			 {
 			 "id": int,
 			 "name":"string",
+			 "phones": "string",
 			 "address":"string",
 			 "avatar":"string",
 			 "rating":"string",
-			 "isRecommended": boolean,
 			 "completedAppointment": int,
 			 "type": int,
 			 "city" : {
@@ -633,7 +624,7 @@
 =================================================
 23- Fetch Sections:
 	Method: GET,
-	URL: /api/v1/app/patients/sections?page=[int]&	health-center=[int],
+	URL: /api/v1/app/patients/sections?page=[int]&health-center=[int],
 	headers: {
 		"Content-Type": "application/json",
 		"Accept-Language": "en-US" or "ar-AR",
@@ -715,12 +706,30 @@
 						}
 					},
 				 "status": int,
-				 "bookedAt" : DateTime,
+				 "date" : Date,
+				 "time" : Time,
 				 "patientName" : "string",
-				 "healthCenter": "string", ==> health Center Name
-				 "section": "string",
-				 "clinic": "string",
-				 "wallet": "string",
+				 "healthCenter": {
+			 		"id": int,
+					 "name":"string",
+					 "address":"string",
+					 "avatar":"string",
+					 "rating":"string",
+					 "completedAppointment": int,
+					 "type": int,
+					 "city" : {
+						"nameAr" : "string",
+						"nameEn" : "string",
+						},
+					"clinics": [
+						{
+				 		"id": int,
+				 		"name": "string",
+				 		"description": "string",
+						}
+						],
+					 }, ==> health Center Name
+				 "wallet": int,
 				 "price": float
 			 	}
 				]
@@ -741,10 +750,10 @@
 		"name" : "string",
 		"doctorId": int,
 		"clinicId": int,
-		"time": Time, // "16:00:00"
-		"date":Date, // "2024-02-05"
+		"date":Date,
+		"time":Time,
 		"walletId": int || null,
-		"walletNumber" : int || null,
+		"phone" : int || null,
 		"paymentCode: "string" || null,
 		},
 	Sucessful Code: 200,
@@ -764,7 +773,8 @@
 		"Authorization":"string"
 		},
 	body: {
-		"date":Date
+		"date":Date,
+		"time": Time
 		},
 	Sucessful Code: 200,
 	Sucessful Response: {
@@ -806,50 +816,3 @@
     		"message": "the Appointment Was Rated Successfully",
     		"result": {}
 		}
-=================================================
-30- Doctor Available Times:
-	Method: GET,
-	URL: /api/v1/app/patients/available-doctor-times?doctorId=int&clinicId=int&date=2024-02-05,
-	headers: {
-		"Content-Type": "application/json",
-		"Accept-Language": "en-US" or "ar-AR",
- 		"DeviceToken":"string",
-		"Fingerprint": "string",
-		"Authorization":"string"
-		},
-	Sucessful Code: 200,
-	Sucessful Response: {
-    		"message": "the Appointment Was Rated Successfully",
-    		"result":  [
-        			{
-            				"time": "16:00:00",
-            				"isAvailable": boolean
-        			}]
-			}
-
-=================================================
-31- Home:
-	Method: GET,
-	URL: /api/v1/app/patients/home,
-	headers: {
-		"Content-Type": "application/json",
-		"Accept-Language": "en-US" or "ar-AR",
- 		"DeviceToken":"string",
-		"Fingerprint": "string",
-		"Authorization":"string"
-		},
-	Sucessful Code: 200,
-	Sucessful Response: {
-    		"message": "the Appointment Was Rated Successfully",
-    		"result":  {
-			"doctors":[...],
-			"healthCenters":[...],
-			"advertisments":[
-				{
-				"id": int,
-                		"image": "url",
-                		"description": "string" || null,
-            			}
-			],
-			}
-			}

@@ -22,13 +22,14 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
 
   final Appointment appointment;
   final RxBool loading;
-  final VoidCallback onTap;
+  final Function(String, String) onTap;
 
   @override
   Widget build(BuildContext context) {
     BookAppointmentController controller =
         Get.put(BookAppointmentController(), tag: "reschedule");
     controller.getTimes(id: appointment.doctor.id!, clinicId: 2);
+
     return AnimatedSize(
       duration: const Duration(milliseconds: 1500),
       curve: Curves.ease,
@@ -40,9 +41,9 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15.sp),
                 topRight: Radius.circular(15.sp))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
           children: [
             AutoSizeText(
               "Reschedule appointment",
@@ -230,7 +231,6 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                           day: date,
                                           id: appointment.doctor.id!,
                                           clinicId: 2);
-
                                       Get.close(0);
                                     },
                                   ),
@@ -261,13 +261,26 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                               : Wrap(
                                   key: const ValueKey<int>(5),
                                   spacing: 7.sp,
-                                  children: controller.times
-                                      .map((e) => BookTimeSlot(
-                                            time: e,
-                                            onTapTime: (time) =>
-                                                controller.onTapTime(time),
-                                          ))
-                                      .toList(),
+                                  children: [
+                                    for (var i = 0;
+                                        i < controller.times.length;
+                                        i++) ...[
+                                      Obx(
+                                        () => BookTimeSlot(
+                                          time: controller.times[i],
+                                          onTapTime: (time) =>
+                                              controller.onTapTime(time),
+                                          isSelected:
+                                              controller.selectedTime == null
+                                                  ? false.obs
+                                                  : (controller.selectedTime!
+                                                              .value ==
+                                                          controller.times[i])
+                                                      .obs,
+                                        ),
+                                      ),
+                                    ]
+                                  ],
                                 ).animate().fade(
                                   duration: const Duration(milliseconds: 500)),
                         ),
@@ -283,7 +296,10 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
             MainColoredButton(
               isLoading: loading,
               text: "Confirm reschedule",
-              onPress: onTap,
+              onPress: () {
+                onTap(
+                    controller.selectDate, controller.selectedTime.value.time);
+              },
             ),
           ],
         ),

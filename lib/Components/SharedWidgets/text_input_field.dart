@@ -13,6 +13,7 @@ class TextInputField extends StatelessWidget {
   final bool enableLabel;
   final bool required;
   final Color backgroundColor;
+  final TextEditingController? controller;
 
   const TextInputField(
       {super.key,
@@ -21,7 +22,8 @@ class TextInputField extends StatelessWidget {
       this.inputType = TextInputType.text,
       this.password = false,
       this.backgroundColor = CupertinoColors.systemGrey5,
-      this.enableLabel = true});
+      this.enableLabel = true,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,7 @@ class TextInputField extends StatelessWidget {
       child: Obx(
         () => FormBuilderTextField(
           name: name.trim(),
+          controller: controller,
           obscureText: showPassword.value,
           maxLength: inputType == TextInputType.phone ? 9 : null,
           cursorRadius: const Radius.circular(10),

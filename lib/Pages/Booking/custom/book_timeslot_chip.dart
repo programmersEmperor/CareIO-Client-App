@@ -7,15 +7,16 @@ import 'package:sizer/sizer.dart';
 class BookTimeSlot extends StatelessWidget {
   final BookAvailableTime time;
   final Function onTapTime;
-  const BookTimeSlot({
+  RxBool isSelected = false.obs;
+  BookTimeSlot({
     super.key,
     required this.time,
     required this.onTapTime,
+    required this.isSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    var isSelected = false.obs;
     return Obx(
       () => AnimatedPadding(
         padding: isSelected.isTrue
@@ -57,7 +58,7 @@ class BookTimeSlot extends StatelessWidget {
           labelPadding: EdgeInsets.zero,
           onPressed: time.isAvailable
               ? () {
-                  isSelected(!isSelected.value);
+                  // isSelected(!isSelected.value);
                   onTapTime(time);
                 }
               : null,

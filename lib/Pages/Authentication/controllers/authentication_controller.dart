@@ -205,9 +205,7 @@ class AuthenticationController extends GetxController
     final response =
         await apiService.verifyOtp(otp: int.parse(otpCode), isReset: false);
     if (response == null) return;
-    if (await Get.find<UserSession>()
-        .savePatient(response.data['result']['patient'])) {
-      Get.find<UserSession>().token = response.data['result']['token'];
+    if (await Get.find<UserSession>().savePatient(response.data['result'])) {
       if (Get.find<UserSession>().patient.name == "") {
         Get.toNamed(CompleteSetup.id);
         return;

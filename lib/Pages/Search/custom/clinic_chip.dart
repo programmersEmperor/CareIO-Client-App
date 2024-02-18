@@ -5,16 +5,17 @@ import 'package:sizer/sizer.dart';
 
 class ClinicChip extends StatelessWidget {
   final String title;
+  RxBool isSelected = false.obs;
   final VoidCallback onTap;
-  const ClinicChip({
+  ClinicChip({
     super.key,
     required this.title,
     required this.onTap,
+    required this.isSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    var isSelected = false.obs;
     return Obx(
       () => AnimatedPadding(
         padding: isSelected.isTrue
@@ -39,7 +40,6 @@ class ClinicChip extends StatelessWidget {
           padding: EdgeInsets.zero,
           labelPadding: EdgeInsets.zero,
           onPressed: () {
-            isSelected(!isSelected.value);
             onTap();
           },
           backgroundColor:

@@ -1,11 +1,11 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
+import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
-import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_grid_view.dart';
-import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_view.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
 
 class DoctorsPage extends StatelessWidget {
@@ -26,23 +26,16 @@ class DoctorsPage extends StatelessWidget {
               controller: controller,
             ),
             Expanded(
-              child: Obx(
-                () => AnimatedSwitcher(
-                  duration: 500.milliseconds,
-                  switchInCurve: Curves.linearToEaseOut,
-                  switchOutCurve: Curves.linearToEaseOut,
-                  child: RefreshWidget(
-                    isLoading: controller.isLoading,
-                    onRefresh: () =>
-                        controller.fetchDoctors(isPagination: false),
-                    child: controller.isList.isTrue
-                        ? DoctorsListView(
-                            doctors: controller.doctors,
-                          )
-                        : DoctorGridView(
-                            doctors: controller.doctors,
-                          ),
+              child: RefreshIndicator(
+                onRefresh: () =>
+                    Future.sync(() => controller.pagingController.refresh()),
+                child: PagedListView<int, Doctor>(
+                  builderDelegate: PagedChildBuilderDelegate<Doctor>(
+                    itemBuilder: (context, item, index) => DoctorListWidget(
+                      doctor: item,
+                    ),
                   ),
+                  pagingController: controller.pagingController,
                 ),
               ),
             ),
