@@ -102,7 +102,6 @@ class BookAppointmentController extends GetxController {
       bookLoading(true);
       var response = await _apiService.bookAppointment(body: body);
       bookLoading(false);
-
       if (response == null) return;
 
       debugPrint(response.data['result'].toString());

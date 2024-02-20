@@ -1,11 +1,11 @@
-import 'package:ai_health_assistance/Models/Subscription.dart';
+import 'package:ai_health_assistance/Models/Plan.dart';
 
 class Patient {
   String name;
   final String phone;
   final String email;
   String avatar;
-  final Subscription subscription;
+  final Plan subscription;
   final int messageBalance;
   final int appointmentWaiting;
   final int appointmentBooked;
@@ -15,7 +15,7 @@ class Patient {
         phone = map["phone"],
         email = map["email"] ?? "",
         avatar = map["avatar"] ?? "",
-        subscription = Subscription.fromJson(map["subscription"]),
+        subscription = Plan.fromJson(map["subscription"]),
         messageBalance = map["messageBalance"] ?? 0,
         appointmentWaiting = map["appointmentWating"] ?? 0,
         appointmentBooked = map["appointmentBooked"] ?? 0;

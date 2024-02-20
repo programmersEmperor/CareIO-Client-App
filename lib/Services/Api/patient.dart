@@ -7,7 +7,11 @@ import 'package:flutter/cupertino.dart';
 class PatientApiService {
   final BaseApi _apiService = BaseApi();
 
-  Future<dynamic> update({required String name, required File avatar}) async {
+  Future<dynamic> update(
+      {required String name,
+      required File avatar,
+      String? phone,
+      String? email}) async {
     try {
       var response = await _apiService.postRequest(
           url: 'patients/update',
@@ -17,6 +21,17 @@ class PatientApiService {
                 ? await dio.MultipartFile.fromFile(avatar.path)
                 : null,
           }));
+
+      return response;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<dynamic> getPlans() async {
+    try {
+      var response =
+          await _apiService.getRequest(url: 'patients/subscription-plans');
 
       return response;
     } catch (e) {

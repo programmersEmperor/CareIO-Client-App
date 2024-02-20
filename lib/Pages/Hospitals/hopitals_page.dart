@@ -3,7 +3,9 @@ import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appb
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
+import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sizer/sizer.dart';
@@ -27,10 +29,15 @@ class HospitalsPage extends StatelessWidget {
             ),
             Expanded(
               child: RefreshIndicator(
+                color: AppColors.primaryColor,
                 onRefresh: () =>
                     Future.sync(() => controller.pagingController.refresh()),
                 child: PagedListView<int, HealthCenter>(
                   builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
+                    firstPageProgressIndicatorBuilder: (_) =>
+                        SpinKitFadingCircle(
+                      color: AppColors.primaryColor,
+                    ),
                     itemBuilder: (context, item, index) => HospitalCard(
                       healthCenter: item,
                     ),

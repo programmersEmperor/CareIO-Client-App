@@ -11,6 +11,7 @@ import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Pages/Pharmacies/medicine_profile.dart';
 import 'package:ai_health_assistance/Pages/Pharmacies/pharmacies_page.dart';
 import 'package:ai_health_assistance/Pages/Pharmacies/pharmacy_profile.dart';
+import 'package:ai_health_assistance/Pages/Profile/profile_edit.dart';
 import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:ai_health_assistance/Pages/Profile/settings.dart';
 import 'package:ai_health_assistance/Pages/Search/specific_search_page.dart';
@@ -23,6 +24,7 @@ class AppRoutes {
     GetPage(name: DoctorsPage.id, page: () => const DoctorsPage()),
     GetPage(name: HomePage.id, page: () => const HomePage()),
     GetPage(name: LoginPage.id, page: () => const LoginPage()),
+    GetPage(name: ProfileEditPage.id, page: () => const ProfileEditPage()),
     GetPage(name: MedicineProfile.id, page: () => const MedicineProfile()),
     GetPage(
         name: ForgetPasswordPage.id, page: () => const ForgetPasswordPage()),

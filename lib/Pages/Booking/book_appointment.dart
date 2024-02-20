@@ -27,7 +27,6 @@ class BookAppointment extends StatelessWidget {
     controller.getTimes(
         id: doctor.id!,
         clinicId: doctor.healthCenters!.first.clinics.first.id!);
-
     return Scaffold(
       body: SizedBox(
         height: 100.h,

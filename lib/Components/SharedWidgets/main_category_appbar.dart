@@ -20,24 +20,5 @@ AppBar mainCategoryAppBar(dynamic controller, String name) {
       style: TextStyle(color: Colors.black, fontSize: 12.sp),
     ),
     centerTitle: true,
-    actions: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.w),
-        child: IconButton(
-          onPressed: () => controller.isList(!controller.isList.value),
-          icon: Obx(
-            () => controller.isList == true.obs
-                ? Icon(
-                    Icons.grid_view_rounded,
-                    size: 20.sp,
-                  )
-                : Icon(
-                    Icons.list_rounded,
-                    size: 20.sp,
-                  ),
-          ),
-        ),
-      ),
-    ],
   );
 }

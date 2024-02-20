@@ -10,7 +10,13 @@ import 'package:sizer/sizer.dart';
 
 class FilterBottomSheet extends StatelessWidget {
   final Function(int?, int?, bool?) onTapFilter;
-  const FilterBottomSheet({super.key, required this.onTapFilter});
+  final Function() onTapClearFilter;
+  final bool isDoctor;
+  const FilterBottomSheet(
+      {super.key,
+      required this.isDoctor,
+      required this.onTapFilter,
+      required this.onTapClearFilter});
 
   @override
   Widget build(BuildContext context) {
@@ -45,42 +51,45 @@ class FilterBottomSheet extends StatelessWidget {
             ),
           ],
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.sp),
-          child: InkWell(
-            onTap: () {
-              showNearby(!showNearby.value);
-            },
-            child: Container(
-              height: 7.h,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.sp)),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0.sp),
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        "Show nearby results",
-                        style: TextStyle(
-                          fontSize: 10.sp,
-                          color: Colors.black54,
+        Visibility(
+          visible: !isDoctor,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 10.sp),
+            child: InkWell(
+              onTap: () {
+                showNearby(!showNearby.value);
+              },
+              child: Container(
+                height: 7.h,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.sp)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.sp),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          "Show nearby results",
+                          style: TextStyle(
+                            fontSize: 10.sp,
+                            color: Colors.black54,
+                          ),
                         ),
                       ),
-                    ),
-                    Obx(
-                      () => Checkbox(
-                        value: showNearby.value,
-                        activeColor: AppColors.primaryColor,
-                        overlayColor:
-                            const MaterialStatePropertyAll(Colors.transparent),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.sp)),
-                        onChanged: (newValue) {},
+                      Obx(
+                        () => Checkbox(
+                          value: showNearby.value,
+                          activeColor: AppColors.primaryColor,
+                          overlayColor: const MaterialStatePropertyAll(
+                              Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5.sp)),
+                          onChanged: (newValue) {},
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -89,29 +98,35 @@ class FilterBottomSheet extends StatelessWidget {
         SizedBox(
           height: 10.sp,
         ),
-        Text(
-          "By clinic",
-          style: TextStyle(fontSize: 12.sp),
+        Visibility(
+          visible: isDoctor,
+          child: Text(
+            "By clinic",
+            style: TextStyle(fontSize: 12.sp),
+          ),
         ),
-        Wrap(
-          key: const ValueKey<int>(5),
-          spacing: 7.sp,
-          children: [
-            for (var i = 0;
-                i < Get.find<UserSession>().specializations.length;
-                i++) ...[
-              Obx(
-                () => ClinicChip(
-                  isSelected: (selectedIdIndex.value == i).obs,
-                  title: Get.find<UserSession>().specializations[i].name,
-                  onTap: () {
-                    selectedIdIndex(i);
-                    clinicId = Get.find<UserSession>().specializations[i].id;
-                  },
+        Visibility(
+          visible: isDoctor,
+          child: Wrap(
+            key: const ValueKey<int>(5),
+            spacing: 7.sp,
+            children: [
+              for (var i = 0;
+                  i < Get.find<UserSession>().specializations.length;
+                  i++) ...[
+                Obx(
+                  () => ClinicChip(
+                    isSelected: (selectedIdIndex.value == i).obs,
+                    title: Get.find<UserSession>().specializations[i].name,
+                    onTap: () {
+                      selectedIdIndex(i);
+                      clinicId = Get.find<UserSession>().specializations[i].id;
+                    },
+                  ),
                 ),
-              ),
-            ]
-          ],
+              ]
+            ],
+          ),
         ),
         SizedBox(
           height: 10.sp,
@@ -141,15 +156,32 @@ class FilterBottomSheet extends StatelessWidget {
         SizedBox(
           height: 10.sp,
         ),
-        MainColoredButton(
-          text: "See results",
-          onPress: () {
-            onTapFilter(
-              rating != 0 ? rating : null,
-              clinicId != 0 ? clinicId : null,
-              showNearby.isTrue ? showNearby.value : null,
-            );
-          },
+        Row(
+          children: [
+            Expanded(
+              child: MainColoredButton(
+                text: "See results",
+                onPress: () {
+                  onTapFilter(
+                    rating != 0 ? rating : null,
+                    clinicId != 0 ? clinicId : null,
+                    showNearby.isTrue ? showNearby.value : null,
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              width: 10.sp,
+            ),
+            Expanded(
+              child: MainColoredButton(
+                text: "clear filter",
+                onPress: () {
+                  onTapClearFilter();
+                },
+              ),
+            ),
+          ],
         )
       ]),
     );

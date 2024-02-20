@@ -22,6 +22,8 @@ class HospitalsUiController extends GetxController {
 
   final apiService = Get.find<HospitalApiService>();
   List<HealthCenter> healthCenters = [];
+  Map<String, dynamic> data = {};
+
   late HealthCenter healthCenter;
   final PagingController<int, HealthCenter> pagingController =
       PagingController(firstPageKey: 0);
@@ -33,10 +35,19 @@ class HospitalsUiController extends GetxController {
   void showFilter() {
     Get.put(BottomSheetController()).showBottomSheet(
         FilterBottomSheet(
+          isDoctor: false,
+          onTapClearFilter: () {
+            clearFilter();
+          },
           onTapFilter: (rating, clinic, nearby) => filterHospitals(
               rating: rating, clinicId: clinic, isNearby: nearby),
         ),
         100.h);
+  }
+
+  void clearFilter() {
+    Get.close(0);
+    pagingController.refresh();
   }
 
   Future<Position> _determinePosition() async {
@@ -66,7 +77,6 @@ class HospitalsUiController extends GetxController {
 
   void filterHospitals({int? rating, int? clinicId, bool? isNearby}) async {
     debugPrint("Hello $rating $clinicId $isNearby");
-    Map<String, dynamic> data = {};
     if (isNearby != null) {
       if (isNearby) {
         _position = await _determinePosition();
@@ -84,7 +94,7 @@ class HospitalsUiController extends GetxController {
     data.addIf(clinicId != null, "specilism", clinicId);
     data.addIf(rating != null, "order-by-rating", rating);
     Get.close(0);
-    fetchHealthCenters(pageKey: 0, params: data);
+    pagingController.refresh();
   }
 
   List<Wrap> timeslotsWidgets = [];
@@ -113,7 +123,7 @@ class HospitalsUiController extends GetxController {
     scrollController = ScrollController();
 
     pagingController.addPageRequestListener((pageKey) {
-      fetchHealthCenters(pageKey: pageKey);
+      fetchHealthCenters(pageKey: pageKey, params: data);
     });
 
     //activeTimeSlotWidget.value = timeslotsWidgets[0];
@@ -128,6 +138,7 @@ class HospitalsUiController extends GetxController {
       var response = await apiService.fetchHospitals(params: params);
       if (response == null) return;
 
+      data = {};
       for (var healthCenter in response.data['result']['data']) {
         healthCenters.add(HealthCenter.fromJson(healthCenter));
       }

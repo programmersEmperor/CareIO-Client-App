@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:ai_health_assistance/Models/HomeInfo.dart';
+import 'package:ai_health_assistance/Models/Plan.dart';
 import 'package:ai_health_assistance/Models/Specialism.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Models/client.dart';
@@ -13,6 +14,7 @@ import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
 import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:ai_health_assistance/Services/Api/home.dart';
+import 'package:ai_health_assistance/Services/Api/patient.dart';
 import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
@@ -34,6 +36,7 @@ class HomePageController extends GetxController
 
   HomeApiService apiService = Get.find<HomeApiService>();
   WalletsApiService walletsApiService = Get.find<WalletsApiService>();
+  PatientApiService patientApiService = Get.find<PatientApiService>();
   SpecializationApiService specializationApiService =
       Get.find<SpecializationApiService>();
 
@@ -59,6 +62,17 @@ class HomePageController extends GetxController
     await fetchHomeInfo();
     await fetchWallets();
     await fetchSpecializations();
+    await fetchPlans();
+  }
+
+  Future<void> fetchPlans() async {
+    var response = await patientApiService.getPlans();
+    if (response == null) return;
+    debugPrint("Response is ${response.data['result']}");
+
+    List<Plan> plans = [];
+    response.data['result'].forEach((e) => plans.add(Plan.fromJson(e)));
+    Get.find<UserSession>().plans = plans;
   }
 
   void changePage(int index) {

@@ -43,6 +43,9 @@ class Appointment {
     _section = json['section'];
     _clinic = json['clinic'] ?? "";
     _wallet = json['wallet'];
+    _date = json['date'];
+    _rating = json['rating'] ?? 0;
+    _time = json['time'];
     _price = json['price'];
     _doctor = Doctor.fromJson(json['doctor']);
   }
@@ -56,6 +59,9 @@ class Appointment {
   late String? _wallet;
   late int _price;
   late Doctor _doctor;
+  late String _date;
+  late String _time;
+  late int _rating;
 
   int get id => _id;
   int get status => _status;
@@ -65,6 +71,9 @@ class Appointment {
   String get section => _section;
   String get clinic => _clinic;
   String get wallet => _wallet ?? "";
+  String get date => _date;
+  int get rating => _rating;
+  String get time => _time;
   int get price => _price;
   Doctor get doctor => _doctor;
 
@@ -75,7 +84,7 @@ class Appointment {
       return "completed";
     }
     if (status == 6) {
-      return "Rated";
+      return "unattended";
     }
     return "";
   }

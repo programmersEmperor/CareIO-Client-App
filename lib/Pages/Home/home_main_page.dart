@@ -8,7 +8,6 @@ import 'package:ai_health_assistance/Pages/Home/custom/ad_slider_card.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/ai_home_card.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
-import 'package:ai_health_assistance/Pages/Pharmacies/pharmacies_page.dart';
 import 'package:ai_health_assistance/Pages/doctors/doctors_page.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:carousel_animations/carousel_animations.dart';
@@ -80,14 +79,14 @@ class HomeMainPage extends StatelessWidget {
                       iconPath: "assets/svgs/hospital_icon.svg",
                     ),
                   ),
-                  Expanded(
-                    child: CategoryGridElement(
-                      title: AppStrings.pharmacies.tr,
-                      desc: "Explore medicine of your need",
-                      onTap: () => Get.toNamed(PharmaciesPage.id),
-                      iconPath: "assets/svgs/hospital_icon.svg",
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: CategoryGridElement(
+                  //     title: AppStrings.pharmacies.tr,
+                  //     desc: "Explore medicine of your need",
+                  //     onTap: () => Get.toNamed(PharmaciesPage.id),
+                  //     iconPath: "assets/svgs/hospital_icon.svg",
+                  //   ),
+                  // ),
                 ],
               ),
             ),

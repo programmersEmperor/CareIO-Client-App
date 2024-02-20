@@ -14,14 +14,26 @@ class DoctorsPageController extends GetxController {
   List<Doctor> doctors = [];
   Position? _position;
   final _pageSize = 10;
+  Map<String, dynamic> data = {};
   final PagingController<int, Doctor> pagingController =
       PagingController(firstPageKey: 0);
   RxBool get isLoading => apiService.isLoading;
   void showFilter() {
     Get.put(BottomSheetController()).showBottomSheet(
-        FilterBottomSheet(onTapFilter: (rating, clinic, nearby) {
-      filterDoctors(rating: rating, clinicId: clinic, isNearby: nearby);
-    }), 100.h);
+        FilterBottomSheet(
+            isDoctor: true,
+            onTapClearFilter: () {
+              clearFilter();
+            },
+            onTapFilter: (rating, clinic, nearby) {
+              filterDoctors(rating: rating, clinicId: clinic, isNearby: nearby);
+            }),
+        100.h);
+  }
+
+  void clearFilter() {
+    Get.close(0);
+    pagingController.refresh();
   }
 
   Future<Position> _determinePosition() async {
@@ -76,17 +88,17 @@ class DoctorsPageController extends GetxController {
       _position = null;
       debugPrint("Location ${_position?.latitude} ${_position?.longitude}");
     }
-    Map<String, dynamic> data = {};
+
     data.addIf(clinicId != null, "specialism", clinicId);
     data.addIf(rating != null, "order-by-rating", rating);
     Get.close(0);
-    fetchDoctors(pageKey: 0, params: data);
+    pagingController.refresh();
   }
 
   @override
   void onInit() {
     pagingController.addPageRequestListener((pageKey) {
-      fetchDoctors(pageKey: pageKey);
+      fetchDoctors(pageKey: pageKey, params: data);
     });
     super.onInit();
   }
@@ -100,6 +112,7 @@ class DoctorsPageController extends GetxController {
       debugPrint("Fetch doctors");
       var response = await apiService.fetchDoctors(params: params);
       if (response == null) return;
+      data = {};
 
       for (var doctor in response.data['result']['data']) {
         doctors.add(Doctor.fromJson(doctor));

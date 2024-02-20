@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
+import 'package:ai_health_assistance/Models/Plan.dart';
 import 'package:ai_health_assistance/Models/Specialism.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Models/client.dart';
@@ -19,6 +20,14 @@ class UserSession {
   String token = '';
   late Patient patient;
   List<Wallet> wallets = [];
+  List<Plan> plans = [
+    Plan(
+        id: 150,
+        descriptionAr: "Description",
+        price: 1300,
+        titleAr: "برميوم",
+        titleEn: "Premium"),
+  ];
   List<Specialism> specializations = [];
   late Box box;
   bool userOpenedChat = false;

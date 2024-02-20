@@ -1,6 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -58,6 +59,29 @@ class AppointmentCard extends StatelessWidget {
                           ),
                         ),
                       ),
+                      Visibility(
+                        visible: appointment.rating != 0,
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 5.sp),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.orange,
+                                size: 12.sp,
+                              ),
+                              SizedBox(
+                                width: 2.sp,
+                              ),
+                              Text(
+                                "${appointment.rating.toString()}.0",
+                                style: TextStyle(
+                                    color: Colors.orange, fontSize: 10.sp),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   Container(
@@ -92,7 +116,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              appointment.bookedAt,
+                              appointment.date,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -114,7 +138,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              appointment.bookedAt,
+                              appointment.time,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -122,27 +146,7 @@ class AppointmentCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 8.sp, vertical: 2.sp),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.sp),
-                        color:
-                            appointment.status == 5 || appointment.status == 6
-                                ? Colors.green.withOpacity(0.2)
-                                : Colors.orange.withOpacity(0.2),
-                      ),
-                      child: Text(
-                        appointment.appointmentStatusTitle,
-                        style: TextStyle(
-                            color: appointment.status == 5 ||
-                                    appointment.status == 6
-                                ? Colors.green
-                                : Colors.orange,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 10.sp),
-                      ),
-                    ),
+                    AppointmentStateTitle(appointment: appointment),
                   ],
                 ),
               ),
@@ -362,7 +366,7 @@ class AppointmentCard extends StatelessWidget {
                     ),
                   ),
                   Visibility(
-                    visible: appointment.status == 5 || appointment.status == 6,
+                    visible: appointment.status == 5 && appointment.rating == 0,
                     child: Expanded(
                       child: ElevatedButton(
                         onPressed: () => Get.find<AppointmentController>()
