@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -22,7 +23,10 @@ class MainColoredButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: isLoading == true.obs ? () => {} : onPress,
+        onPressed: isLoading == false.obs ||
+                Get.find<ConnectivityHandler>().isOnline.isTrue
+            ? onPress
+            : () => {},
         style: ButtonStyle(
           fixedSize: MaterialStatePropertyAll(
             Size(100.w, 6.h),

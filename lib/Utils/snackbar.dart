@@ -1,9 +1,15 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 void showSnack({required String title, required String description}) {
+  if (Get.find<ConnectivityHandler>().isOnline.isFalse) {
+    title = AppStrings.connectionError.tr;
+    description = AppStrings.connectionErrorDesc.tr;
+  }
   Get.snackbar("", "",
       padding: EdgeInsets.all(10.sp),
       backgroundColor: Colors.white,

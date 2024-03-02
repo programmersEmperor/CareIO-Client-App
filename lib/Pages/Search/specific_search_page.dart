@@ -1,6 +1,8 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/rounded_text_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
@@ -22,54 +24,56 @@ class SpecificSearchPage extends StatelessWidget {
       appBar: mainCategoryAppBar(
           null,
           controller.isDoctor
-              ? "Search in doctors"
-              : "Search in health centers"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RoundedTextField(
-              controller: controller.textEditingController,
-              onChange: controller.filterSearchResults,
-              showAttachment: false,
-              name: "search",
-              hint: "search for anything",
-            ),
-            if (!controller.isDoctor) ...[
-              Expanded(
-                child: PagedListView<int, HealthCenter>(
-                  builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        SpinKitFadingCircle(
-                      color: AppColors.primaryColor,
-                    ),
-                    itemBuilder: (context, item, index) => HospitalCard(
-                      healthCenter: item,
-                    ),
-                  ),
-                  pagingController:
-                      controller.hospitalsUiController.pagingController,
-                ),
+              ? AppStrings.searchInDoctors.tr
+              : AppStrings.searchInHealthCenters.tr),
+      body: ConnectivityWidget(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundedTextField(
+                controller: controller.textEditingController,
+                onChange: controller.filterSearchResults,
+                showAttachment: false,
+                name: "search",
+                hint: AppStrings.searchHint.tr,
               ),
-            ] else ...[
-              Expanded(
-                child: PagedListView<int, Doctor>(
-                  builderDelegate: PagedChildBuilderDelegate<Doctor>(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        SpinKitFadingCircle(
-                      color: AppColors.primaryColor,
+              if (!controller.isDoctor) ...[
+                Expanded(
+                  child: PagedListView<int, HealthCenter>(
+                    builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
+                      firstPageProgressIndicatorBuilder: (_) =>
+                          SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                      ),
+                      itemBuilder: (context, item, index) => HospitalCard(
+                        healthCenter: item,
+                      ),
                     ),
-                    itemBuilder: (context, item, index) => DoctorListWidget(
-                      doctor: item,
-                    ),
+                    pagingController:
+                        controller.hospitalsUiController.pagingController,
                   ),
-                  pagingController:
-                      controller.doctorsPageController.pagingController,
                 ),
-              ),
+              ] else ...[
+                Expanded(
+                  child: PagedListView<int, Doctor>(
+                    builderDelegate: PagedChildBuilderDelegate<Doctor>(
+                      firstPageProgressIndicatorBuilder: (_) =>
+                          SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                      ),
+                      itemBuilder: (context, item, index) => DoctorListWidget(
+                        doctor: item,
+                      ),
+                    ),
+                    pagingController:
+                        controller.doctorsPageController.pagingController,
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

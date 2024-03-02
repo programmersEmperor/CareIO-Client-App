@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,6 @@ class RefreshWidget extends StatelessWidget {
                 color: AppColors.primaryColor,
                 size: 40.0,
               ))
-            : child));
+            : ConnectivityWidget(child: child)));
   }
 }

@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:sizer/sizer.dart';
 
 @pragma('vm:entry-point')
@@ -23,8 +22,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   NotificationServiceHandler.initializeFirebase();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  MapboxOptions.setAccessToken(
-      'pk.eyJ1IjoiaGFpdGhhbTc3MTA1IiwiYSI6ImNsMTBoNjIzdTA2enQzZm1naTZpaTloOXgifQ.fkrpXbokalgV9pXUalDoWg');
+
   await Hive.initFlutter();
   runApp(const MyApp());
 }

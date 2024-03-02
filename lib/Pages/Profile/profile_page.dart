@@ -341,7 +341,7 @@ class ProfilePage extends StatelessWidget {
                                         child: Row(
                                           children: [
                                             Text(
-                                              "Change plan",
+                                              AppStrings.choosePlan.tr,
                                               style: TextStyle(
                                                   color:
                                                       AppColors.primaryColor),
@@ -368,7 +368,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       ProfileItem(
                         icon: Icons.person,
-                        title: "Edit personal information",
+                        title: AppStrings.editPersonalInfo.tr,
                         onTap: () {
                           Get.toNamed(ProfileEditPage.id);
                         },
@@ -378,7 +378,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       ProfileItem(
                         icon: Icons.settings,
-                        title: "Settings",
+                        title: AppStrings.settings.tr,
                         onTap: () => Get.toNamed(SettingsPage.id),
                       ),
                       SizedBox(
@@ -386,7 +386,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       ProfileItem(
                         icon: Icons.assistant,
-                        title: "Help & support",
+                        title: AppStrings.helpAndSupport.tr,
                         onTap: () {},
                       ),
                       Padding(
@@ -423,7 +423,7 @@ class ProfilePage extends StatelessWidget {
                                 width: 5.sp,
                               ),
                               Text(
-                                "Logout",
+                                AppStrings.logout.tr,
                                 style: TextStyle(
                                     fontWeight: FontWeight.w800,
                                     color: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/AppointmentsWidget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -16,7 +17,7 @@ class MyAppointmentsPage extends StatelessWidget {
     AppointmentController controller = Get.put(AppointmentController());
     return Column(
       children: [
-        const PageHeader(heading: "My Appointments"),
+        PageHeader(heading: AppStrings.myAppointments.tr),
         Padding(
           padding: EdgeInsets.only(
             top: 15.sp,

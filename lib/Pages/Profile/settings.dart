@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class SettingsPage extends GetView<ProfilePageController> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  "Settings",
+                  AppStrings.settings.tr,
                   style:
                       TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
                 ),
@@ -38,7 +39,7 @@ class SettingsPage extends GetView<ProfilePageController> {
                   color: AppColors.primaryColor,
                 ),
                 title: Text(
-                  'App language',
+                  AppStrings.appLanguage.tr,
                   style: TextStyle(fontSize: 12.sp),
                 ),
               ),

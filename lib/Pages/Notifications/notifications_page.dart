@@ -1,6 +1,7 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/no_data_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Notifications/custom/notification_card.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notification_controller.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class NotificationsPage extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const PageHeader(heading: "My Notifications"),
+          PageHeader(heading: AppStrings.notification.tr),
           ListView.builder(
             itemCount: controller.notifications.isEmpty
                 ? 1
@@ -30,7 +31,7 @@ class NotificationsPage extends StatelessWidget {
             padding: EdgeInsets.all(10.sp),
             itemBuilder: (_, index) {
               if (controller.notifications.isEmpty) {
-                return const NoDataWidget(message: "No Notifications found");
+                return NoDataWidget(message: AppStrings.noNotification.tr);
               } else {
                 return NotificationCard(
                   notification: controller.notifications[index],

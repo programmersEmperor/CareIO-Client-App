@@ -12,7 +12,7 @@ class DoctorsApiService {
     try {
       isLoading(true);
       var response = await _apiService.getRequest(
-        url: 'patients/doctors&page=$pageSize',
+        url: 'patients/doctors?page=$pageSize',
         params: params,
       );
       isLoading(false);

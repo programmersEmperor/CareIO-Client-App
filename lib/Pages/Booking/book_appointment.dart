@@ -3,6 +3,7 @@ import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_butto
 import 'package:ai_health_assistance/Components/SharedWidgets/payment_method_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
@@ -55,7 +56,7 @@ class BookAppointment extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "Book for",
+                        AppStrings.bookFor.tr,
                         style: TextStyle(
                           fontSize: 10.sp,
                         ),
@@ -109,7 +110,7 @@ class BookAppointment extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
-                          "Available timeslots",
+                          AppStrings.availableTimes.tr,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 10.sp,
@@ -164,7 +165,7 @@ class BookAppointment extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                "Another date",
+                                AppStrings.anotherDate.tr,
                                 style: TextStyle(
                                   color: AppColors.primaryColor,
                                   fontSize: 8.sp,
@@ -215,7 +216,7 @@ class BookAppointment extends StatelessWidget {
               height: 15.sp,
             ),
             AutoSizeText(
-              "Choose payment method",
+              AppStrings.choosePaymentMethod.tr,
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
             ),
             ListView.builder(
@@ -238,7 +239,7 @@ class BookAppointment extends StatelessWidget {
                     height: 20.sp,
                   ),
                   AutoSizeText(
-                    "Reservation in name ",
+                    AppStrings.reservationInName.tr,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 10.sp,
@@ -263,7 +264,7 @@ class BookAppointment extends StatelessWidget {
                       Expanded(
                         child: TextButton(
                           child: Text(
-                            'use my name',
+                            AppStrings.useMyName.tr,
                             style: TextStyle(
                                 color: AppColors.primaryColor, fontSize: 10.sp),
                           ),
@@ -283,22 +284,21 @@ class BookAppointment extends StatelessWidget {
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text:
-                      'when pricing "Confirm booking" button you agree to our',
+                  text: AppStrings.bookingOne.tr,
                   style: TextStyle(color: Colors.black26, fontSize: 8.5.sp),
                   children: [
                     TextSpan(
-                        text: " privacy policy",
+                        text: AppStrings.privacyAndPolicy.tr,
                         style: TextStyle(color: AppColors.primaryColor),
                         recognizer: TapGestureRecognizer()..onTap = () {}),
                     TextSpan(
-                      text: " and ",
+                      text: AppStrings.and.tr,
                       onEnter: (e) {
                         debugPrint('test');
                       },
                     ),
                     TextSpan(
-                        text: "terms of service",
+                        text: AppStrings.termsAndServices.tr,
                         style: TextStyle(color: AppColors.primaryColor),
                         recognizer: TapGestureRecognizer()..onTap = () {}),
                   ],
@@ -306,7 +306,7 @@ class BookAppointment extends StatelessWidget {
               ),
             ),
             MainColoredButton(
-              text: "Confirm booking",
+              text: AppStrings.confirmBook.tr,
               isLoading: controller.bookLoading,
               onPress: () => controller.bookAppointment(
                   doctorId: doctor.id!,

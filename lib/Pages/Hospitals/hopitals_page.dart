@@ -1,6 +1,8 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -18,13 +20,13 @@ class HospitalsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     HospitalsUiController controller = Get.put(HospitalsUiController());
     return Scaffold(
-      appBar: mainCategoryAppBar(controller, 'Hospitals'),
+      appBar: mainCategoryAppBar(controller, AppStrings.hospitals.tr),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.sp),
         child: Column(
           children: [
             CustomSearchBar(
-              title: 'Find your hospital',
+              title: AppStrings.findYourHospital.tr,
               controller: controller,
               isDoctor: false,
             ),
@@ -33,17 +35,19 @@ class HospitalsPage extends StatelessWidget {
                 color: AppColors.primaryColor,
                 onRefresh: () =>
                     Future.sync(() => controller.pagingController.refresh()),
-                child: PagedListView<int, HealthCenter>(
-                  builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        SpinKitFadingCircle(
-                      color: AppColors.primaryColor,
+                child: ConnectivityWidget(
+                  child: PagedListView<int, HealthCenter>(
+                    builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
+                      firstPageProgressIndicatorBuilder: (_) =>
+                          SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                      ),
+                      itemBuilder: (context, item, index) => HospitalCard(
+                        healthCenter: item,
+                      ),
                     ),
-                    itemBuilder: (context, item, index) => HospitalCard(
-                      healthCenter: item,
-                    ),
+                    pagingController: controller.pagingController,
                   ),
-                  pagingController: controller.pagingController,
                 ),
               ),
             ),

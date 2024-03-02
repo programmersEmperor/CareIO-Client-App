@@ -68,6 +68,7 @@ dependencies:
   device_info_plus: ^9.1.1
   unique_identifier: ^0.3.0
   flash: ^3.1.0
+  connectivity_plus: ^5.0.2
   sizer: ^2.0.15
   animated_bottom_navigation_bar: ^1.2.0
   flutter_ringtone_player: ^3.2.0
@@ -77,7 +78,7 @@ dependencies:
   firebase_messaging: ^14.7.9
   flutter_local_notifications: ^16.3.2
   uuid: ^4.3.3
-  mapbox_maps_flutter: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:

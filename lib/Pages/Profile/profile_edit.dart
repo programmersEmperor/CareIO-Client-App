@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,7 +28,7 @@ class ProfileEditPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Text(
-                "Edit personal information",
+                AppStrings.editPersonalInfo.tr,
                 style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
               ),
             ),
@@ -161,7 +162,7 @@ class ProfileEditPage extends StatelessWidget {
                             height: 15.sp,
                           ),
                           MainColoredButton(
-                            text: "Save changes",
+                            text: AppStrings.saveChanges.tr,
                             fontSize: 12.sp,
                             isLoading: controller.isLoading,
                             onPress: controller.editPatient,

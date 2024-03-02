@@ -28,6 +28,7 @@ class HomeMainPage extends StatelessWidget {
       isLoading: controller.isLoading,
       child: ListView(
         padding: const EdgeInsets.only(top: 5),
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
           SizedBox(
             width: double.infinity,

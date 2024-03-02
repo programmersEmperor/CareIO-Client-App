@@ -116,8 +116,8 @@ class DoctorsPageController extends GetxController {
       doctors = [];
       debugPrint("Fetch doctors");
       final pageSize = pageKey ~/ 10;
-      var response =
-          await apiService.fetchDoctors(params: params, pageSize: pageSize);
+      var response = await apiService.fetchDoctors(
+          params: params, pageSize: pageSize == 0 ? 1 : pageSize);
       if (response == null) return;
       data = {};
 

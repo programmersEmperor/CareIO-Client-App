@@ -13,11 +13,13 @@ import 'package:ai_health_assistance/Services/Api/notification.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';
 import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:get/get.dart';
 
 class BindingService extends Bindings {
   @override
   void dependencies() {
+    Get.put(ConnectivityHandler());
     Get.lazyPut(() => AuthenticationApiService(), fenix: true);
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => AiBotApiService(), fenix: true);

@@ -1,5 +1,7 @@
+import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_category_appbar.dart';
 import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
@@ -18,13 +20,13 @@ class DoctorsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     DoctorsPageController controller = Get.put(DoctorsPageController());
     return Scaffold(
-      appBar: mainCategoryAppBar(controller, 'Doctors'),
+      appBar: mainCategoryAppBar(controller, AppStrings.doctors.tr),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.sp),
         child: Column(
           children: [
             CustomSearchBar(
-              title: 'Find your doctor',
+              title: AppStrings.findYourDoctor.tr,
               controller: controller,
               isDoctor: true,
             ),
@@ -34,17 +36,19 @@ class DoctorsPage extends StatelessWidget {
                 onRefresh: () => Future.sync(
                   () => controller.pagingController.refresh(),
                 ),
-                child: PagedListView<int, Doctor>(
-                  builderDelegate: PagedChildBuilderDelegate<Doctor>(
-                    firstPageProgressIndicatorBuilder: (_) =>
-                        SpinKitFadingCircle(
-                      color: AppColors.primaryColor,
+                child: ConnectivityWidget(
+                  child: PagedListView<int, Doctor>(
+                    builderDelegate: PagedChildBuilderDelegate<Doctor>(
+                      firstPageProgressIndicatorBuilder: (_) =>
+                          SpinKitFadingCircle(
+                        color: AppColors.primaryColor,
+                      ),
+                      itemBuilder: (context, item, index) => DoctorListWidget(
+                        doctor: item,
+                      ),
                     ),
-                    itemBuilder: (context, item, index) => DoctorListWidget(
-                      doctor: item,
-                    ),
+                    pagingController: controller.pagingController,
                   ),
-                  pagingController: controller.pagingController,
                 ),
               ),
             ),

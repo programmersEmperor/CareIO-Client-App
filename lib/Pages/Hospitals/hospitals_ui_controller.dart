@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as map;
 import 'package:sizer/sizer.dart';
 
 class HospitalsUiController extends GetxController {
@@ -18,17 +17,13 @@ class HospitalsUiController extends GetxController {
   RxDouble height = 63.h.obs;
   RxBool enableAnimation = false.obs;
   final _pageSize = 10;
-  map.MapboxMap? mapboxMap;
+
   int preSelectedIndex = 0;
   Position? _position;
 
   final apiService = Get.find<HospitalApiService>();
   List<HealthCenter> healthCenters = [];
   Map<String, dynamic> data = {};
-
-  onMapCreated(map.MapboxMap mapboxMap) {
-    mapboxMap = mapboxMap;
-  }
 
   late HealthCenter healthCenter;
   final PagingController<int, HealthCenter> pagingController =
