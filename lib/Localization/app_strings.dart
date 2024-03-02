@@ -39,4 +39,14 @@ class AppStrings {
   static const messageCount = 'messageCount';
   static const appointmentBooked = 'appointmentBooked';
   static const appointmentWaiting = 'appointmentWaiting';
+  static const aiTextHint = 'aiTextHint';
+  static const dear = 'Dear';
+  static const aiNoteText = 'aiNoteText';
+  static const uploadImage = 'uploadImage';
+  static const uploadImageHint = 'uploadImageHint';
+  static const upload = 'upload';
+  static const takeImage = 'takeImage';
+  static const takeImageHint = 'takeImageHint';
+  static const selectImage = 'selectImage';
+  static const selectImageHint = 'selectImageHint';
 }

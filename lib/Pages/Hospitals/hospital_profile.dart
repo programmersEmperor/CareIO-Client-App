@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as map;
 import 'package:sizer/sizer.dart';
 
 class HospitalProfile extends StatelessWidget {
@@ -25,6 +26,7 @@ class HospitalProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     HospitalsUiController controller = Get.put(HospitalsUiController());
     controller.showHealthCenter(Get.arguments[0]['index']);
+
     return Scaffold(
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overflow) {
@@ -267,6 +269,7 @@ class HospitalProfile extends StatelessWidget {
                                               fontWeight: FontWeight.w900,
                                               fontSize: 10.sp),
                                         ),
+
                                         Visibility(
                                           visible: controller
                                               .healthCenter.clinics.isNotEmpty,
@@ -361,17 +364,24 @@ class HospitalProfile extends StatelessWidget {
                                                   .secondaryColor
                                                   .withOpacity(0.4),
                                               shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.sp)),
-                                              child: const Center(
-                                                  child: Text("Map Place")),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        15.sp),
+                                              ),
+                                              child: Center(
+                                                child: map.MapWidget(
+                                                  key: const ValueKey(
+                                                      "mapWidget"),
+                                                  onMapCreated:
+                                                      controller.onMapCreated,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               )
                             ],

@@ -26,6 +26,7 @@ class DoctorsPage extends StatelessWidget {
             CustomSearchBar(
               title: 'Find your doctor',
               controller: controller,
+              isDoctor: true,
             ),
             Expanded(
               child: RefreshIndicator(

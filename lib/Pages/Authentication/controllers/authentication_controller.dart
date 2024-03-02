@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ai_health_assistance/Pages/Authentication/completeSetup/complete_setup.dart';
 import 'package:ai_health_assistance/Pages/Authentication/introduction.dart';
+import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
 import 'package:ai_health_assistance/Pages/Authentication/newPassword/newPassword.dart';
 import 'package:ai_health_assistance/Pages/Authentication/otp/otp.dart';
 import 'package:ai_health_assistance/Pages/Home/home_page.dart';
@@ -32,6 +33,7 @@ class AuthenticationController extends GetxController
   final GlobalKey<FormBuilderState> sendOtpFormKey =
       GlobalKey<FormBuilderState>();
   final apiService = Get.find<AuthenticationApiService>();
+
   String otpCode = '';
   Rx<XFile> image = XFile('').obs;
   late ImagePicker picker;
@@ -173,6 +175,24 @@ class AuthenticationController extends GetxController
     }
   }
 
+  Future<void> resetPassword() async {
+    if (!newPasswordFormKey.currentState!.saveAndValidate()) return;
+    if (newPasswordFormKey.currentState!.value['new password'] !=
+        newPasswordFormKey.currentState!.value['confirm password']) {
+      showSnack(
+          title: "password not match",
+          description: "Password has to be matched to continue");
+
+      return;
+    }
+    String password =
+        newPasswordFormKey.currentState!.value['confirm password'];
+    var response = await apiService.forgetPassword(password: password);
+    if (response != null && response.data['result'] is List) {
+      Get.offAllNamed(LoginPage.id);
+    }
+  }
+
   Future<void> signup() async {
     if (!_isFormValid(signup: true)) return;
     if (formValues['password'] != formValues['confirm Password']) {
@@ -193,24 +213,32 @@ class AuthenticationController extends GetxController
     formValues = sendOtpFormKey.currentState!.value;
     final response = await apiService.sendOtp(body: formValues);
     if (response == null) return;
-    Get.toNamed(NewPasswordPage.id);
+    Get.find<UserSession>().token = response.data['result']['temp-token'];
+    Get.toNamed(OTPPage.id, arguments: true);
+    // Get.toNamed(NewPasswordPage.id);
   }
 
-  Future<void> verifyOtp() async {
+  Future<void> verifyOtp({bool isReset = false}) async {
     if (otpCode.isEmpty || otpCode.length != 6) {
       showSnack(title: "OTP", description: "OTP must be 6 digit");
       return;
     }
 
     final response =
-        await apiService.verifyOtp(otp: int.parse(otpCode), isReset: false);
+        await apiService.verifyOtp(otp: int.parse(otpCode), isReset: isReset);
     if (response == null) return;
-    if (await Get.find<UserSession>().savePatient(response.data['result'])) {
-      if (Get.find<UserSession>().patient.name == "") {
-        Get.toNamed(CompleteSetup.id);
-        return;
+
+    if (response.data['result']['temp-token'] != null) {
+      Get.find<UserSession>().token = response.data['result']['temp-token'];
+      Get.toNamed(NewPasswordPage.id);
+    } else {
+      if (await Get.find<UserSession>().savePatient(response.data['result'])) {
+        if (Get.find<UserSession>().patient.name == "") {
+          Get.toNamed(CompleteSetup.id);
+          return;
+        }
+        Get.toNamed(HomePage.id);
       }
-      Get.toNamed(HomePage.id);
     }
   }
 

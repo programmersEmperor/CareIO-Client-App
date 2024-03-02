@@ -40,6 +40,17 @@ Map<String, String> ar = {
   AppStrings.appointmentBooked: "الحجوزات المكتملة",
   AppStrings.appointmentWaiting: "الحجوزات القادمة",
   AppStrings.messageCount: "الرسائل  \nالمتبقية",
+  AppStrings.aiTextHint: "انا مصاب بالبرد ...",
+  AppStrings.dear: "عزيزي, ",
+  AppStrings.aiNoteText: "تجنب عدم استخدام الرسائل في غير مصلحتك, "
+      "تأكد من حصولك على افضل تجربة ممكنة و استغل قوة نموذجنا الطبي لمصلحتك, تجربة سعيدة :)",
   AppStrings.finalSetupSubtitle:
       "قم بإضافة صورتك الشخصية و اسمك لتجربة مخصصه اكثر ",
+  AppStrings.uploadImage: "تحميل صورة",
+  AppStrings.uploadImageHint: "قم بتحميل صورة عالية الجودة لنتائج ادق",
+  AppStrings.upload: "تحميل",
+  AppStrings.takeImage: "التقط صورة",
+  AppStrings.takeImageHint: "قم بالتقاط الصورة باستخدام كاميرا الهاتف",
+  AppStrings.selectImage: "حدد صورة",
+  AppStrings.selectImageHint: "حدد صورة ذات جودة عالية من معرض الصور",
 };

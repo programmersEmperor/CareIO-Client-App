@@ -1,7 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/section_title.dart';
-import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Pages/Pharmacies/controller/pharmacy_profile.dart';
 import 'package:ai_health_assistance/Pages/Pharmacies/medicine_profile.dart';
@@ -12,6 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../Components/SharedWidgets/section_title.dart';
 
 class PharmacyProfile extends StatelessWidget {
   static const id = "/PharmacyProfile";
@@ -206,10 +206,10 @@ class PharmacyProfile extends StatelessWidget {
                                 SizedBox(
                                   height: 5.sp,
                                 ),
-                                CustomSearchBar(
-                                    title: "find your medicine",
-                                    showFilter: false,
-                                    controller: controller),
+                                // CustomSearchBar(
+                                //     title: "find your medicine",
+                                //     showFilter: false,
+                                //     controller: controller),
                                 SizedBox(
                                   height: 15.sp,
                                 ),

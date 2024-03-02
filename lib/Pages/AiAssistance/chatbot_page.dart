@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/rounded_text_field.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class ChatBotPage extends StatelessWidget {
                       name: "chat",
                       controller: uiController.textController,
                       onChange: (value) {},
-                      hint: "i have a cold ...",
+                      hint: AppStrings.aiTextHint.tr,
                       node: uiController.textFocusNode,
                     ),
                   ),

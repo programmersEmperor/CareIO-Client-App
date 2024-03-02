@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/controller/chat_page_controller.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -45,7 +46,7 @@ class ChatBotNotificationAlert extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Dear, ${Get.find<UserSession>().patient.name}",
+                                '${AppStrings.dear.tr} ${Get.find<UserSession>().patient.name}',
                                 style: TextStyle(
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.bold,
@@ -78,8 +79,7 @@ class ChatBotNotificationAlert extends StatelessWidget {
                             height: 10.sp,
                           ),
                           Text(
-                            "Try to not waste your message on what will not benefit you, "
-                            "Have as much advantage as you can for a better well-being, Have a good Experience :)",
+                            AppStrings.aiNoteText.tr,
                             style: TextStyle(
                                 fontSize: 9.sp,
                                 color: Colors.white.withOpacity(0.7)),

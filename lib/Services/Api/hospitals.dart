@@ -7,11 +7,12 @@ class HospitalApiService {
 
   final isLoading = false.obs;
 
-  Future<dynamic> fetchHospitals({Map<String, dynamic>? params}) async {
+  Future<dynamic> fetchHospitals(
+      {Map<String, dynamic>? params, required int pageSize}) async {
     try {
       isLoading(true);
       var response = await _apiService.getRequest(
-        url: 'patients/health-centers',
+        url: 'patients/health-centers?page=$pageSize',
         params: params,
       );
       isLoading(false);

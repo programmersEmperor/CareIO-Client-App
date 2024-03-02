@@ -73,6 +73,11 @@ class DoctorsPageController extends GetxController {
     return await Geolocator.getCurrentPosition();
   }
 
+  void searchDoctors({required String query}) async {
+    data.addIf(query.isNotEmpty, "name", query);
+    pagingController.refresh();
+  }
+
   void filterDoctors({int? rating, int? clinicId, bool? isNearby}) async {
     debugPrint("Hello $rating $clinicId $isNearby");
 
@@ -110,7 +115,9 @@ class DoctorsPageController extends GetxController {
     try {
       doctors = [];
       debugPrint("Fetch doctors");
-      var response = await apiService.fetchDoctors(params: params);
+      final pageSize = pageKey ~/ 10;
+      var response =
+          await apiService.fetchDoctors(params: params, pageSize: pageSize);
       if (response == null) return;
       data = {};
 

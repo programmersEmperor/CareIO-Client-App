@@ -93,7 +93,8 @@ class OTPPage extends StatelessWidget {
                         text: AppStrings.confirmCode.tr,
                         fontSize: 12.sp,
                         isLoading: controller.isLoading,
-                        onPress: controller.verifyOtp,
+                        onPress: () => controller.verifyOtp(
+                            isReset: Get.arguments ?? false),
                       ),
                       SizedBox(
                         height: 15.sp,

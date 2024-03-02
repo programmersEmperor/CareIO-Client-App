@@ -26,7 +26,7 @@ class ProfilePage extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: EdgeInsets.only(
-                  left: 20.sp, right: 20.sp, bottom: 40.sp, top: 20.sp),
+                  left: 20.sp, right: 20.sp, bottom: 40.sp, top: 0.sp),
             ),
             Positioned(
               top: 0,
@@ -35,7 +35,7 @@ class ProfilePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Container(
-                  height: 75.h,
+                  height: 80.h,
                   width: 95.w,
                   decoration: BoxDecoration(
                     color: AppColors.scaffoldColor,
@@ -389,9 +389,9 @@ class ProfilePage extends StatelessWidget {
                         title: "Help & support",
                         onTap: () {},
                       ),
-                      const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        padding:
+                            const EdgeInsets.only(left: 15, right: 15, top: 50),
                         child: ElevatedButton(
                           onPressed: controller.showLogoutBottomSheet,
                           style: ButtonStyle(

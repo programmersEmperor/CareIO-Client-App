@@ -4,6 +4,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -40,15 +41,20 @@ class HospitalCard extends StatelessWidget {
                       child: healthCenter!.avatar != null
                           ? CachedNetworkImage(
                               imageUrl: healthCenter!.avatar!,
-                              width: 50,
+                              width: 20.w,
+                              height: 10.h,
                               fit: BoxFit.fill,
                             )
-                          : Image.asset(
-                              'assets/images/hosptial.jpg',
-                              fit: BoxFit.fill,
-                              width: 15.w,
-                              height: 7.h,
-                            ),
+                          : Container(
+                              height: 10.h,
+                              width: 20.w,
+                              decoration: BoxDecoration(
+                                  color: AppColors.secondaryColor),
+                              child: Icon(
+                                Boxicons.bx_building_house,
+                                size: 30.sp,
+                                color: AppColors.primaryColor,
+                              )),
                     ),
                   ),
                 ),

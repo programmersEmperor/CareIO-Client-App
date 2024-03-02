@@ -30,6 +30,7 @@ class SearchPage extends StatelessWidget {
             title: "type anything",
             showFilter: false,
             controller: GetxController,
+            isDoctor: false,
           ),
         ),
         Padding(

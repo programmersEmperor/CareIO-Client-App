@@ -25,6 +25,7 @@ class PharmaciesPage extends StatelessWidget {
             CustomSearchBar(
               title: 'Type medicine or pharmacy name ',
               controller: controller,
+              isDoctor: false,
             ),
             SizedBox(
               height: 10.sp,

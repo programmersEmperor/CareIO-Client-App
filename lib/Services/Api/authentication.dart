@@ -40,10 +40,17 @@ class AuthenticationApiService {
   }
 
   Future<dynamic> forgetPassword({required String password}) async {
-    var response = await _apiService.putRequest(
-        url: '/patients/resetPassword',
-        body: dio.FormData.fromMap({"newPassword": password}));
-    return response;
+    try {
+      isLoading(true);
+      var response = await _apiService.postRequest(
+          url: '/patients/resetPassword',
+          body: dio.FormData.fromMap(
+              {"newPassword": password, 'is-forget': true}));
+      isLoading(false);
+      return response;
+    } catch (e) {
+      isLoading(false);
+    }
   }
 
   Future<dynamic> logout() async {
@@ -54,8 +61,8 @@ class AuthenticationApiService {
   Future<dynamic> sendOtp({required Map<String, dynamic> body}) async {
     try {
       isLoading(true);
-      var response =
-          await _apiService.postRequest(url: '/users/SendOTP', body: body);
+      var response = await _apiService.postRequest(
+          url: '/patients/phone/sendOTP', body: body);
       isLoading(false);
       return response;
     } catch (e) {
@@ -66,11 +73,13 @@ class AuthenticationApiService {
   Future<dynamic> verifyOtp({required int otp, required bool isReset}) async {
     try {
       isLoading(true);
-      var response =
-          await _apiService.postRequest(url: 'patients/phone/verifyOTP', body: {
-        'otp': otp,
-        'is-forget': isReset,
-      });
+      var response = await _apiService.postRequest(
+        url: 'patients/phone/verifyOTP',
+        body: {
+          'otp': otp,
+          'is-forget': isReset,
+        },
+      );
       isLoading(false);
       return response;
     } catch (e) {

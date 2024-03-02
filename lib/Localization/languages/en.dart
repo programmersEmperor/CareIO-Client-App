@@ -45,7 +45,19 @@ Map<String, String> en = {
   AppStrings.appointmentBooked: "Completed appointments",
   AppStrings.appointmentWaiting: "Upcoming appointments",
   AppStrings.messageCount: "Remaining messages",
+  AppStrings.aiTextHint: "i have cold ...",
+  AppStrings.dear: "Dear, ",
+  AppStrings.aiNoteText:
+      "Try to not waste your message on what will not benefit you, "
+          "Have as much advantage as you can for a better well-being, Have a good Experience :)",
   AppStrings.finalSetupSubtitle:
       "Add your personal image and name for more personalized experience"
           .capitalize!,
+  AppStrings.uploadImage: "Upload image",
+  AppStrings.uploadImageHint: "Try to make image very clear for better results",
+  AppStrings.upload: "Upload",
+  AppStrings.takeImage: "Take image",
+  AppStrings.takeImageHint: "Take a clear image using camera app",
+  AppStrings.selectImage: "Select image",
+  AppStrings.selectImageHint: "Select a clear image from gallery",
 };

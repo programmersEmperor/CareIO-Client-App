@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
@@ -64,7 +65,7 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Upload image",
+                        AppStrings.uploadImage.tr,
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
@@ -73,7 +74,7 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(top: 5.sp),
                         child: Text(
-                          "Try to make image very clear for better results",
+                          AppStrings.uploadImageHint.tr,
                           style:
                               TextStyle(fontSize: 8.sp, color: Colors.black54),
                         ),
@@ -106,7 +107,7 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                 padding:
                     EdgeInsets.only(bottom: 20.sp, right: 12.sp, left: 12.sp),
                 child: MainColoredButton(
-                  text: 'upload',
+                  text: AppStrings.upload.tr,
                   onPress: uiController.addImageToChat,
                 ),
               ),
@@ -119,9 +120,8 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                     ListTile(
                       onTap: () =>
                           uiController.uploadTheImage(ImageSource.camera),
-                      title: const Text("Take Image"),
-                      subtitle:
-                          const Text("Take a clear image using camera app"),
+                      title: Text(AppStrings.takeImage.tr),
+                      subtitle: Text(AppStrings.takeImageHint.tr),
                       titleTextStyle: TextStyle(
                           fontSize: 11.sp,
                           color: Colors.black87,
@@ -143,9 +143,8 @@ class ImageSelectorBottomSheet extends StatelessWidget {
                     ListTile(
                       onTap: () =>
                           uiController.uploadTheImage(ImageSource.gallery),
-                      title: const Text("Select Image"),
-                      subtitle:
-                          const Text("Select a clear image using camera roll"),
+                      title: Text(AppStrings.selectImage.tr),
+                      subtitle: Text(AppStrings.selectImageHint.tr),
                       titleTextStyle: TextStyle(
                           fontSize: 11.sp,
                           color: Colors.black87,

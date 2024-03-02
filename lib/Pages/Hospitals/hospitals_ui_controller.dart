@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as map;
 import 'package:sizer/sizer.dart';
 
 class HospitalsUiController extends GetxController {
@@ -17,12 +18,17 @@ class HospitalsUiController extends GetxController {
   RxDouble height = 63.h.obs;
   RxBool enableAnimation = false.obs;
   final _pageSize = 10;
+  map.MapboxMap? mapboxMap;
   int preSelectedIndex = 0;
   Position? _position;
 
   final apiService = Get.find<HospitalApiService>();
   List<HealthCenter> healthCenters = [];
   Map<String, dynamic> data = {};
+
+  onMapCreated(map.MapboxMap mapboxMap) {
+    mapboxMap = mapboxMap;
+  }
 
   late HealthCenter healthCenter;
   final PagingController<int, HealthCenter> pagingController =
@@ -73,6 +79,11 @@ class HospitalsUiController extends GetxController {
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+
+  void searchHospital({required String query}) async {
+    data.addIf(query.isNotEmpty, "name", query);
+    pagingController.refresh();
   }
 
   void filterHospitals({int? rating, int? clinicId, bool? isNearby}) async {
@@ -134,8 +145,12 @@ class HospitalsUiController extends GetxController {
       {required int pageKey, Map<String, dynamic>? params}) async {
     try {
       healthCenters = [];
-      debugPrint("Fetch healthCenters");
-      var response = await apiService.fetchHospitals(params: params);
+
+      final pageSize = pageKey ~/ 10;
+      debugPrint(
+          "Fetch healthCenters and the page is $pageSize and pageKey is $pageKey");
+      var response =
+          await apiService.fetchHospitals(params: params, pageSize: pageSize);
       if (response == null) return;
 
       data = {};
@@ -148,6 +163,8 @@ class HospitalsUiController extends GetxController {
         pagingController.appendLastPage(healthCenters);
       } else {
         final nextPageKey = pageKey + healthCenters.length;
+        debugPrint(
+            "The last page is $isLastPage and next page is $nextPageKey");
         pagingController.appendPage(healthCenters, nextPageKey);
       }
     } catch (error) {

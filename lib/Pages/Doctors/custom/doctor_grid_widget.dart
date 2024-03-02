@@ -4,7 +4,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 import 'package:sizer/sizer.dart';
@@ -32,9 +32,11 @@ class DoctorGridWidget extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 10.sp),
+                  padding: EdgeInsets.only(
+                      top: 10.sp, right: 10.sp, left: 10.sp, bottom: 5.sp),
                   child: Container(
                     height: 15.h,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       color: AppColors.secondaryColor,
@@ -42,10 +44,9 @@ class DoctorGridWidget extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: doctor.avatar == null
-                          ? SvgPicture.asset(
-                              'assets/svgs/doctor-male.svg',
-                              height: 80.sp,
-                              width: 80.sp,
+                          ? Icon(
+                              Boxicons.bx_user,
+                              size: 70.sp,
                               color: AppColors.primaryColor,
                             )
                           : CachedNetworkImage(

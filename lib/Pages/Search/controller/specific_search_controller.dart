@@ -1,3 +1,5 @@
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -15,26 +17,31 @@ class SpecificSearchController extends GetxController {
     'Strawberry',
     'Watermelon',
   ];
+  bool isDoctor = false;
 
   RxList<String> filteredData = <String>[].obs;
+
+  late HospitalsUiController hospitalsUiController;
+  late DoctorsPageController doctorsPageController;
+
   @override
   void onInit() {
-    filteredData.value  = data;
+    filteredData.value = data;
+    isDoctor = Get.arguments;
+    if (isDoctor) {
+      doctorsPageController = Get.find<DoctorsPageController>();
+    } else {
+      hospitalsUiController = Get.find<HospitalsUiController>();
+    }
     super.onInit();
   }
 
   void filterSearchResults(String query) {
-    List<String> searchResults = [];
-    if (query.isNotEmpty) {
-      for (var item in data) {
-        if (item.toLowerCase().contains(query.toLowerCase())) {
-          searchResults.add(item);
-        }
-      }
-      filteredData(searchResults);
+    if (query.isEmpty) return;
+    if (isDoctor) {
+      doctorsPageController.searchDoctors(query: query);
     } else {
-      debugPrint("${data.map((element) => element)}");
-      filteredData(data.toList());
+      hospitalsUiController.searchHospital(query: query);
     }
   }
 }

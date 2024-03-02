@@ -7,11 +7,12 @@ class DoctorsApiService {
 
   final isLoading = false.obs;
 
-  Future<dynamic> fetchDoctors({Map<String, dynamic>? params}) async {
+  Future<dynamic> fetchDoctors(
+      {Map<String, dynamic>? params, required int pageSize}) async {
     try {
       isLoading(true);
       var response = await _apiService.getRequest(
-        url: 'patients/doctors',
+        url: 'patients/doctors&page=$pageSize',
         params: params,
       );
       isLoading(false);

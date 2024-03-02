@@ -79,6 +79,7 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                           name: 'new password',
                           inputType: TextInputType.text,
                           password: true,
+                          required: true,
                         ),
                         SizedBox(
                           height: 15.sp,
@@ -95,7 +96,7 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                           text: AppStrings.savePassword.tr,
                           fontSize: 12.sp,
                           isLoading: controller.isLoading,
-                          onPress: controller.login,
+                          onPress: controller.resetPassword,
                         ),
                         SizedBox(
                           height: 15.sp,

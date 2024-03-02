@@ -6,15 +6,16 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomSearchBar extends StatelessWidget {
-  final bool showFilter;
+  final bool showFilter, isDoctor;
   final String title;
   final dynamic controller;
-  const CustomSearchBar({
-    super.key,
-    this.showFilter = true,
-    required this.title,
-    required this.controller,
-  });
+
+  const CustomSearchBar(
+      {super.key,
+      this.showFilter = true,
+      required this.title,
+      required this.controller,
+      required this.isDoctor});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class CustomSearchBar extends StatelessWidget {
       children: [
         Expanded(
           child: InkWell(
-            onTap: () => Get.toNamed(SpecificSearchPage.id),
+            onTap: () =>
+                Get.toNamed(SpecificSearchPage.id, arguments: isDoctor),
             child: Card(
               elevation: 0,
               color: Colors.grey.shade200,

@@ -25,6 +25,9 @@ class RoundedTextField extends StatelessWidget {
     return FormBuilderTextField(
       name: name,
       controller: controller,
+      onChanged: (value) {
+        onChange(value ?? '');
+      },
       cursorRadius: const Radius.circular(15),
       cursorColor: AppColors.primaryColor,
       style: TextStyle(fontSize: 9.sp, color: Colors.black54),
