@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       builder: (BuildContext context, Orientation orientation,
               DeviceType deviceType) =>
           GetMaterialApp(
-        title: 'Health Ai Assistance',
+        title: 'Health AI Assistance',
         theme: ThemeProvider.lightTheme,
         initialBinding: BindingService(),
         scrollBehavior: const ScrollBehaviorModified(),

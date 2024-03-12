@@ -26,7 +26,7 @@ Map<String, String> ar = {
   AppStrings.savePassword: "حفظ كلمة المرور",
   AppStrings.saveAndContinue: "حفظ و متابعة",
   AppStrings.finalSetup: "الخطوة الاخيرة",
-  AppStrings.goodAfternoon: "مساء الخير",
+  AppStrings.goodEvening: "مساء الخير",
   AppStrings.goodMorning: "صباح الخير",
   AppStrings.aiCardTitle: "قم بتجربة ذكائنا الاصطناعي الان",
   AppStrings.startChat: "ابداء المحادثة",

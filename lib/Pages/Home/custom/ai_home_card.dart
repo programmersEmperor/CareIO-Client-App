@@ -75,7 +75,7 @@ class AiHomeCard extends StatelessWidget {
                             const Padding(
                               padding: EdgeInsets.only(top: 15),
                               child: Text(
-                                "Healio Ai",
+                                "Careio",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,

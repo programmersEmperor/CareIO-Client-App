@@ -26,7 +26,7 @@ class AppStrings {
   static const finalSetup = 'finalSetup';
   static const finalSetupSubtitle = 'finalSetupSubtitle';
   static const goodMorning = 'goodMorning';
-  static const goodAfternoon = 'goodAfternoon';
+  static const goodEvening = 'goodEvening';
   static const aiCardTitle = 'aiCardTitle';
   static const startChat = 'startChat';
   static const doctors = 'doctors';
