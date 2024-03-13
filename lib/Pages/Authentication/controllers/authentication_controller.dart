@@ -250,7 +250,7 @@ class AuthenticationController extends GetxController
         avatar: File(image.value.path));
     if (response == null) return;
 
-    Get.find<UserSession>().patient.avatar = response.data['result']['avatar'];
+    Get.find<UserSession>().patient.avatar = response.data['result']['avatar']??"";
     Get.find<UserSession>().patient.name = response.data['result']['name'];
     Get.find<UserSession>().updatePatient();
     Get.toNamed(HomePage.id);

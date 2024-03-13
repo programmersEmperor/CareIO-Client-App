@@ -20,7 +20,7 @@ class ProfileEditPage extends StatelessWidget {
     controller.initControllers();
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 70.0, horizontal: 30.0),
+        padding: const EdgeInsets.only(top: 70.0, left: 30.0, right: 30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +38,7 @@ class ProfileEditPage extends StatelessWidget {
                   horizontal: 20.sp,
                 ),
                 child: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   children: [
                     FormBuilder(
                       key: controller.key,
@@ -46,7 +46,7 @@ class ProfileEditPage extends StatelessWidget {
                         children: [
                           Obx(
                             () => Visibility(
-                              visible: controller.patient.avatar.isEmpty ||
+                              visible: controller.patient.value.avatar.isEmpty ||
                                   controller.changeImage.isTrue,
                               child: GestureDetector(
                                 child: Obx(
@@ -100,7 +100,7 @@ class ProfileEditPage extends StatelessWidget {
                           ),
                           Obx(
                             () => Visibility(
-                                visible: controller.patient.avatar.isNotEmpty &&
+                                visible: controller.patient.value.avatar.isNotEmpty &&
                                     controller.changeImage.isFalse,
                                 child: Stack(
                                   children: [
@@ -109,7 +109,7 @@ class ProfileEditPage extends StatelessWidget {
                                       backgroundColor: AppColors.secondaryColor,
                                       backgroundImage:
                                           CachedNetworkImageProvider(
-                                              controller.patient.avatar),
+                                              controller.patient.value.avatar),
                                     ),
                                     GestureDetector(
                                       onTap: controller.removeImage,
@@ -140,15 +140,15 @@ class ProfileEditPage extends StatelessWidget {
                             required: true,
                             controller: controller.name,
                           ),
-                          SizedBox(
-                            height: 15.sp,
-                          ),
-                          TextInputField(
-                            name: 'phone',
-                            required: true,
-                            inputType: TextInputType.phone,
-                            controller: controller.phone,
-                          ),
+                          // SizedBox(
+                          //   height: 15.sp,
+                          // ),
+                          // TextInputField(
+                          //   name: 'phone',
+                          //   required: true,
+                          //   inputType: TextInputType.phone,
+                          //   controller: controller.phone,
+                          // ),
                           SizedBox(
                             height: 15.sp,
                           ),

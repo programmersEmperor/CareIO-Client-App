@@ -50,9 +50,9 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            MainAppBar(
-              patient: homePageController.patient,
-            ),
+            Obx(() => MainAppBar(
+              patient: homePageController.patient.value,
+            )),
             Expanded(
               child: Obx(
                 () => AnimatedSwitcher(

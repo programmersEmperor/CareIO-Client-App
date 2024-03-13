@@ -36,8 +36,7 @@ class Wallet {
   String? get nameEn => _nameEn;
   String? get logo => _logo;
   RxBool get selected => _selected;
-  String get name =>
-      Get.locale == const Locale('en', 'US') ? _nameEn ?? "" : _nameAr ?? "";
+  String get name => Get.locale == const Locale('en', 'US') ? _nameEn ?? "" : _nameAr ?? "";
 
   set selected(RxBool value) {
     _selected = value;

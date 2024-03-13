@@ -1,7 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:ai_health_assistance/Models/Plan.dart';
 import 'package:ai_health_assistance/Models/client.dart';
+import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/change_language_sheet.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/logout_bottom_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';
@@ -18,7 +21,7 @@ import 'package:sizer/sizer.dart';
 
 class ProfilePageController extends GetxController
     with GetTickerProviderStateMixin {
-  Patient patient = Get.find<UserSession>().patient;
+  Rx<Patient> patient = Get.find<UserSession>().patient.obs;
   final GlobalKey<FormBuilderState> key = GlobalKey<FormBuilderState>();
 
   RxBool isLoading = false.obs;
@@ -40,9 +43,9 @@ class ProfilePageController extends GetxController
   }
 
   void initControllers() {
-    name.text = patient.name;
-    phone.text = patient.phone;
-    email.text = patient.email;
+    name.text = patient.value.name;
+    phone.text = patient.value.phone;
+    email.text = patient.value.email;
   }
 
   void editPatient() async {
@@ -54,11 +57,22 @@ class ProfilePageController extends GetxController
     var response = await Get.find<PatientApiService>().update(
         name: name.text,
         avatar: getImage,
-        phone: phone.text,
         email: email.text);
     isLoading(false);
 
     if (response == null) return;
+    var decodedResponse = json.decode(response.toString());
+    Get.find<UserSession>().patient.name = decodedResponse["result"]["name"];
+    Get.find<UserSession>().patient.email = decodedResponse["result"]["email"] ?? "";
+    Get.find<UserSession>().patient.avatar = decodedResponse["result"]["avatar"];
+    Get.find<UserSession>().updatePatient();
+
+    Get.find<HomePageController>().patient.value = Get.find<UserSession>().patient;
+    Get.find<HomePageController>().patient.refresh();
+
+    Get.find<ProfilePageController>().patient.value = Get.find<UserSession>().patient;
+    Get.find<ProfilePageController>().patient.refresh();
+
 
     showSnack(
         title: "Profile Updated",

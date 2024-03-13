@@ -42,24 +42,21 @@ class DoctorGridWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       color: AppColors.secondaryColor,
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: doctor.avatar == null
-                          ? SizedBox(
-                        height: 10,
-                               width: 10,
-                              child: SvgPicture.asset(
-                                'assets/svgs/doctor_icon.svg',
-                                height: MediaQuery.of(context).size.height * 0.045,
-                                width: MediaQuery.of(context).size.width * 0.03,
-                                color: AppColors.primaryColor,
-                              ),
-                            )
-                          : CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              width: 31.w,
-                              imageUrl: doctor.avatar!,
-                            ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: doctor.avatar == null
+                            ? SvgPicture.asset(
+                          'assets/svgs/doctor_icon.svg',
+                          color: AppColors.primaryColor,
+                        )
+                            : CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          width: 31.w,
+                          imageUrl: doctor.avatar!,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -95,7 +92,7 @@ class DoctorGridWidget extends StatelessWidget {
                 Padding(
                   padding:
                       EdgeInsets.only(top: 3.5.sp, left: 5.sp, right: 5.sp),
-                  child: Row(
+                  child: doctor.rating != null ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
@@ -111,7 +108,7 @@ class DoctorGridWidget extends StatelessWidget {
                         ),
                       ),
                     ],
-                  ),
+                  ) : const SizedBox.shrink(),
                 ),
                 Expanded(
                   child: Padding(

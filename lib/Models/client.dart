@@ -3,7 +3,7 @@ import 'package:ai_health_assistance/Models/Plan.dart';
 class Patient {
   String name;
   final String phone;
-  final String email;
+  String email;
   String avatar;
   final Plan subscription;
   final int messageBalance;

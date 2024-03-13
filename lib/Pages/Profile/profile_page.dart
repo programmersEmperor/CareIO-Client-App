@@ -6,6 +6,7 @@ import 'package:ai_health_assistance/Pages/Profile/settings.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -60,20 +61,23 @@ class ProfilePage extends StatelessWidget {
                       Stack(
                         children: [
                           Lottie.asset('assets/animations/lines.json'),
-                          if (controller.patient.avatar.isEmpty) ...[
+                          if (controller.patient.value.avatar.isEmpty) ...[
                             Align(
                               alignment: Alignment.center,
                               child: Container(
-                                width: 80.sp,
-                                height: 80.sp,
+                                height: 90.sp,
+                                width: 90.sp,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.sp),
-                                  image: const DecorationImage(
-                                    image: AssetImage(
-                                      'assets/images/person.jpg',
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: AppColors.secondaryColor,
+                                ),
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Icon(
+                                      Boxicons.bx_user,
+                                      size: 55.sp,
+                                      color: AppColors.primaryColor,
+                                    )
                                 ),
                               ),
                             ),
@@ -81,13 +85,13 @@ class ProfilePage extends StatelessWidget {
                             Align(
                               alignment: Alignment.center,
                               child: Container(
-                                width: 80.sp,
-                                height: 80.sp,
+                                width: 90.sp,
+                                height: 90.sp,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10.sp),
                                   image: DecorationImage(
                                     image: CachedNetworkImageProvider(
-                                        controller.patient.avatar),
+                                        controller.patient.value.avatar),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -97,7 +101,7 @@ class ProfilePage extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        controller.patient.name,
+                        controller.patient.value.name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                             color: Colors.black87, fontWeight: FontWeight.bold),
@@ -118,7 +122,7 @@ class ProfilePage extends StatelessWidget {
                               width: 5.sp,
                             ),
                             Text(
-                              controller.patient.phone,
+                              controller.patient.value.phone,
                               style: TextStyle(
                                 color: Colors.black38,
                                 fontSize: 10.sp,
@@ -161,7 +165,7 @@ class ProfilePage extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            "${controller.patient.messageBalance}",
+                                            "${controller.patient.value.messageBalance}",
                                             style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20.sp,
@@ -174,7 +178,7 @@ class ProfilePage extends StatelessWidget {
                                             AppStrings.messageCount.tr,
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 10.sp),
+                                                fontSize: 9.sp),
                                           ),
                                         ],
                                       ),
@@ -209,7 +213,7 @@ class ProfilePage extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            "${controller.patient.appointmentBooked}",
+                                            "${controller.patient.value.appointmentBooked}",
                                             style: TextStyle(
                                                 color: AppColors.primaryColor,
                                                 fontSize: 20.sp,
@@ -222,7 +226,7 @@ class ProfilePage extends StatelessWidget {
                                             AppStrings.appointmentBooked.tr,
                                             style: TextStyle(
                                                 color: AppColors.primaryColor,
-                                                fontSize: 10.sp),
+                                                fontSize: 9.sp),
                                           ),
                                         ],
                                       ),
@@ -257,7 +261,7 @@ class ProfilePage extends StatelessWidget {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Text(
-                                            "${controller.patient.appointmentWaiting}",
+                                            "${controller.patient.value.appointmentWaiting}",
                                             style: TextStyle(
                                                 color: AppColors.primaryColor,
                                                 fontSize: 20.sp,
@@ -270,7 +274,7 @@ class ProfilePage extends StatelessWidget {
                                             AppStrings.appointmentWaiting.tr,
                                             style: TextStyle(
                                                 color: AppColors.primaryColor,
-                                                fontSize: 10.sp),
+                                                fontSize: 9.sp),
                                           ),
                                         ],
                                       ),
@@ -292,14 +296,13 @@ class ProfilePage extends StatelessWidget {
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                          child: Padding(padding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 25),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  controller.patient.subscription.titleEn,
+                                  controller.patient.value.subscription.title,
                                   style: TextStyle(
                                       fontSize: 17.sp,
                                       fontWeight: FontWeight.bold,
@@ -309,7 +312,7 @@ class ProfilePage extends StatelessWidget {
                                   height: 15.sp,
                                 ),
                                 Text(controller
-                                    .patient.subscription.descriptionAr),
+                                    .patient.value.subscription.description),
                                 SizedBox(
                                   height: 8.sp,
                                 ),
@@ -325,10 +328,11 @@ class ProfilePage extends StatelessWidget {
                                       padding: EdgeInsets.symmetric(
                                           vertical: 2.sp, horizontal: 10.sp),
                                       child: Text(
-                                        "${controller.patient.subscription.price} YE.R / month",
-                                        style: const TextStyle(
+                                        "${controller.patient.value.subscription.price} YE.R / month",
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
                                             color: Colors.white,
-                                            fontWeight: FontWeight.bold),
+                                            ),
                                       ),
                                     ),
                                     TextButton(
@@ -379,7 +383,8 @@ class ProfilePage extends StatelessWidget {
                       ProfileItem(
                         icon: Icons.settings,
                         title: AppStrings.settings.tr,
-                        onTap: () => Get.toNamed(SettingsPage.id),
+                        // onTap: () => Get.toNamed(SettingsPage.id),
+                        onTap: () => controller.changeLanguageBottomSheet()
                       ),
                       SizedBox(
                         height: 13.sp,

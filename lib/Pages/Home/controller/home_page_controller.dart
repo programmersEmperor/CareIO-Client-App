@@ -26,7 +26,7 @@ import 'package:sizer/sizer.dart';
 class HomePageController extends GetxController
     with GetTickerProviderStateMixin {
   RxInt activePage = 0.obs;
-  Patient patient = Get.find<UserSession>().patient;
+  Rx<Patient> patient = Get.find<UserSession>().patient.obs;
   final List<IconData> icons = [
     Boxicons.bx_home_circle,
     Boxicons.bx_calendar,
