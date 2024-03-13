@@ -210,8 +210,7 @@ class DoctorProfile extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10.sp)),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                         children: [
                                           DoctorStatics(
                                             title: AppStrings.experiences.tr,

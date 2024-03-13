@@ -2,6 +2,7 @@ import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button
 import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/custom/top_requested_doctors_card.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
@@ -208,21 +209,27 @@ class HospitalProfile extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(
-                                      left: 30.sp, right: 30.sp, top: 30.sp),
+                                      left: 50.sp, right: 50.sp, top: 30.sp),
                                   child: Container(
+                                    width: double.infinity,
                                     padding: EdgeInsets.all(10.sp),
                                     decoration: BoxDecoration(
                                         color: AppColors.secondaryColor,
                                         borderRadius:
                                             BorderRadius.circular(10.sp)),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
                                         DoctorStatics(
                                           title: AppStrings.totalBooking.tr,
                                           info: '230 patient',
                                         ),
+                                        // const DoctorStaticsDivider(),
+                                        // DoctorStatics(
+                                        //   title: AppStrings.totalBooking.tr,
+                                        //   info: '230 patient',
+                                        // ),
+
                                       ],
                                     ),
                                   ),
@@ -396,23 +403,23 @@ class HospitalProfile extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: Center(
-                          child: SizedBox(
-                            width: 90.w,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: MainColoredButton(
-                                text: AppStrings.bookNow.tr,
-                                onPress: () {},
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Positioned(
+                      //   bottom: 0,
+                      //   left: 0,
+                      //   right: 0,
+                      //   child: Center(
+                      //     child: SizedBox(
+                      //       width: 90.w,
+                      //       child: Padding(
+                      //         padding: const EdgeInsets.symmetric(vertical: 20),
+                      //         child: MainColoredButton(
+                      //           text: AppStrings.bookNow.tr,
+                      //           onPress: () {},
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
           ),

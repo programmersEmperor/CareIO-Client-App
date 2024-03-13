@@ -170,7 +170,7 @@ class AuthenticationController extends GetxController
           Get.toNamed(CompleteSetup.id);
           return;
         }
-        Get.toNamed(HomePage.id);
+        Get.offAllNamed(HomePage.id);
       }
     }
   }
@@ -237,7 +237,7 @@ class AuthenticationController extends GetxController
           Get.toNamed(CompleteSetup.id);
           return;
         }
-        Get.toNamed(HomePage.id);
+        Get.offAllNamed(HomePage.id);
       }
     }
   }
@@ -253,7 +253,7 @@ class AuthenticationController extends GetxController
     Get.find<UserSession>().patient.avatar = response.data['result']['avatar']??"";
     Get.find<UserSession>().patient.name = response.data['result']['name'];
     Get.find<UserSession>().updatePatient();
-    Get.toNamed(HomePage.id);
+    Get.offAllNamed(HomePage.id);
     isLoading(false);
   }
 
