@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
 import 'package:ai_health_assistance/Pages/Authentication/newPassword/newPassword.dart';
 import 'package:ai_health_assistance/Pages/Authentication/otp/otp.dart';
 import 'package:ai_health_assistance/Pages/Authentication/signup/signupPage.dart';
+import 'package:ai_health_assistance/Pages/Clinics/clinic_profile.dart';
 import 'package:ai_health_assistance/Pages/Home/home_page.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
@@ -49,6 +50,10 @@ class AppRoutes {
       page: () => HospitalProfile(
         index: Get.arguments[0]['index'],
       ),
+    ),
+    GetPage(
+      name: ClinicProfile.id,
+      page: () => const ClinicProfile(),
     ),
     GetPage(
       name: ProfilePage.id,

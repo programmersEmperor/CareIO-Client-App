@@ -2,6 +2,7 @@ import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button
 import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
+import 'package:ai_health_assistance/Pages/Clinics/clinic_profile.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/custom/top_requested_doctors_card.dart';
@@ -220,9 +221,24 @@ class HospitalProfile extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        DoctorStatics(
-                                          title: AppStrings.totalBooking.tr,
-                                          info: '230 patient',
+                                        Column(
+                                          children: [
+                                            Text(
+                                              AppStrings.totalBooking.tr,
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                color: Colors.black87,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 5.sp,
+                                            ),
+                                            Text(
+                                              controller.healthCenter.completedAppointment.toString(),
+                                              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold ),
+                                            ),
+                                          ],
                                         ),
                                         // const DoctorStaticsDivider(),
                                         // DoctorStatics(
@@ -255,8 +271,7 @@ class HospitalProfile extends StatelessWidget {
                                       child: SizedBox(
                                         height: 180,
                                         child: Swiper(
-                                          itemCount: controller
-                                              .healthCenter.doctor.length,
+                                          itemCount: controller.healthCenter.doctor.length,
                                           autoplayDelay: 6000,
                                           duration: 3000,
                                           autoplay: true,
@@ -303,8 +318,9 @@ class HospitalProfile extends StatelessWidget {
                                                     "",
                                                 desc: AppStrings
                                                     .findYourHospital.tr,
-                                                onTap: () => Get.toNamed(
-                                                    HospitalsPage.id),
+                                                onTap: () => Get.toNamed(ClinicProfile.id, arguments: [{
+                                                  'clinic' : controller.healthCenter.clinics[index]
+                                                }]),
                                                 iconPath:
                                                     "assets/svgs/hospital_icon.svg",
                                               ),

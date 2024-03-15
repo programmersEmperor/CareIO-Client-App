@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Constants/HealthCenterTypes.dart';
 import 'package:ai_health_assistance/Models/ActiveTime.dart';
 import 'package:ai_health_assistance/Models/Clinic.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
@@ -9,6 +10,8 @@ class HealthCenter {
     _address = json['address'] ?? "";
     _avatar = json['avatar'];
     _rating = json['rating'];
+    _completedAppointment = json['completedAppointment'] ?? 250;
+    _type = json['type'] is int? HealthCenterTypes.values[json['type'] as int] : null;
     if (json['clinics'] != null) {
       _clinics = [];
       json['clinics'].forEach((v) {
@@ -31,10 +34,13 @@ class HealthCenter {
   late int _id;
   late String _name;
   late String _address;
+  late int? _completedAppointment;
+  late HealthCenterTypes? _type;
   String? _avatar;
   dynamic _rating;
   late List<Clinic> _clinics;
   late List<Doctor> _doctor;
+
 
   List<ActiveTimes>? _activeTimes;
 
@@ -42,7 +48,10 @@ class HealthCenter {
   String? get name => _name;
   String? get address => _address;
   String? get avatar => _avatar;
+  int? get completedAppointment => _completedAppointment;
+  HealthCenterTypes? get type => _type;
   dynamic get rating => _rating;
+
 
   List<ActiveTimes>? get activeTimes => _activeTimes;
   List<Clinic> get clinics => _clinics;
@@ -55,6 +64,8 @@ class HealthCenter {
     map['address'] = _address;
     map['avatar'] = _avatar;
     map['rating'] = _rating;
+    map['completedAppointment'] = _completedAppointment;
+    map['type'] = _type;
 
     if (_activeTimes != null) {
       map['activeTimes'] = _activeTimes?.map((v) => v.toJson()).toList();

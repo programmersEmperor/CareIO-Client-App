@@ -1,8 +1,11 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
+import 'package:ai_health_assistance/Pages/Doctors/doctor_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class TopRequestedDoctorsCard extends StatelessWidget {
@@ -30,21 +33,29 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                 children: [
                   Hero(
                     tag: "doc${doctor.id}",
-                    child: Container(
+                    child: doctor.avatar == null?
+                    SizedBox(
+                      height: 50.sp,
+                      width: 50.sp,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: SvgPicture.asset(
+                            'assets/svgs/doctor_icon.svg',
+                            color: AppColors.primaryColor,
+                          )
+                        ),
+                      ),
+                    )
+                        : Container(
                       height: 50.sp,
                       width: 50.sp,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
                             color: AppColors.scaffoldColor, width: 3.sp),
-                        image: doctor.avatar == null
-                            ? const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  "assets/images/person.jpg",
-                                ),
-                              )
-                            : DecorationImage(
+                        image: DecorationImage(
                                 image: CachedNetworkImageProvider(
                                   '${doctor.avatar}',
                                 ),
@@ -86,7 +97,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Text(
-                              "${doctor.specialism?.name}",
+                              doctor.specialism!.name,
                               style: TextStyle(
                                 color: Colors.black38,
                                 fontSize: 8.sp,
@@ -102,7 +113,9 @@ class TopRequestedDoctorsCard extends StatelessWidget {
               MainColoredButton(
                 text: "Book appointment",
                 elevation: 0,
-                onPress: () {},
+                onPress: ()=> Get.toNamed(DoctorProfile.id, arguments: [
+                  {'index': doctor.id.toString()}
+                ]),
               )
             ],
           ),

@@ -133,7 +133,7 @@ class DoctorsPageController extends GetxController {
         pagingController.appendPage(doctors, nextPageKey);
       }
     } catch (error) {
-      debugPrint("Error in doctors is $error");
+        debugPrint("Error in doctors is $error");
       pagingController.error = error;
     }
   }

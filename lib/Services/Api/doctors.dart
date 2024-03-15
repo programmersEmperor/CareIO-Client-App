@@ -10,15 +10,22 @@ class DoctorsApiService {
   Future<dynamic> fetchDoctors(
       {Map<String, dynamic>? params, required int pageSize}) async {
     try {
-      isLoading(true);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        isLoading(true);
+      });
       var response = await _apiService.getRequest(
         url: 'patients/doctors?page=$pageSize',
         params: params,
       );
-      isLoading(false);
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        isLoading(false);
+      });
       return response;
     } catch (e) {
-      isLoading(false);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        isLoading(false);
+      });
       debugPrint(e.toString());
     }
   }
