@@ -113,7 +113,7 @@ class DoctorsPageController extends GetxController {
   void fetchDoctors(
       {required int pageKey, Map<String, dynamic>? params}) async {
     try {
-      doctors = [];
+      final doctors = <Doctor>[];
       debugPrint("Fetch doctors");
       final pageSize = pageKey ~/ 10;
       var response = await apiService.fetchDoctors(
@@ -122,7 +122,9 @@ params: params, pageSize: pageSize == 0 ? 1 : pageSize);
       data = {};
 
       for (var doctor in response.data['result']['data']) {
+        if(pagingController.itemList == null || pagingController.itemList!.any((element) => element.id == doctor.id)){
         doctors.add(Doctor.fromJson(doctor));
+        }
       }
       final isLastPage = doctors.length < _pageSize;
 

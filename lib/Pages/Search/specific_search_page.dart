@@ -59,6 +59,7 @@ class SpecificSearchPage extends StatelessWidget {
               else ...[
                 PagedSliverList<int, Doctor>(
                   builderDelegate: PagedChildBuilderDelegate<Doctor>(
+                    animateTransitions: true,
                     firstPageProgressIndicatorBuilder: (_) =>
                         SpinKitFadingCircle(
                           color: AppColors.primaryColor,
