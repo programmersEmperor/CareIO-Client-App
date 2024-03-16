@@ -64,13 +64,13 @@ class DoctorProfileUiController extends GetxController {
     }
 
     return Wrap(
-      children: timeslotsItems.isNotEmpty?timeslotsItems: [
-        Expanded(child: Center(
+      children: timeslotsItems.isNotEmpty ? timeslotsItems : [
+        Center(
           child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Text(AppStrings.notActiveOnThisDay.tr)
           ),
-        ))
+        )
       ],
     );
   }
