@@ -98,7 +98,8 @@ class AppointmentController extends GetxController
     }
     await fetchAppointments(
         loading: isLoading[AppointmentStatus.upcoming.index],
-        params: {'page': 1, 'type': 1}).whenComplete(() => fetchAppointments(
+        params: {'page': 1, 'type': 1})
+        .whenComplete(() => fetchAppointments(
             loading: isLoading[AppointmentStatus.completed.index],
             params: {'page': 1, 'type': 2})
         .whenComplete(() => fetchAppointments(
@@ -110,6 +111,7 @@ class AppointmentController extends GetxController
       {required Map<String, dynamic> params, required RxBool loading}) async {
     loading(true);
     var response = await _apiService.fetchAppointments(params: params);
+    loading(false);
 
     debugPrint("Appointments response $response");
     if (response == null) return [];
@@ -120,7 +122,6 @@ class AppointmentController extends GetxController
 
     debugPrint(appointments.length.toString());
 
-    loading(false);
 
     return [];
   }

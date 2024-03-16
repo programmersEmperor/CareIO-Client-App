@@ -345,7 +345,7 @@ class HospitalProfile extends StatelessWidget {
                                                   ),
                                               gridDelegate:
                                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 4,
+                                                crossAxisCount: 3,
                                               ),
                                               shrinkWrap: true,
                                             ),

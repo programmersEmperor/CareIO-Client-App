@@ -22,7 +22,7 @@ class AppointmentCancelButton extends StatelessWidget {
       child: Text(
         "Cancel",
         style: TextStyle(
-            color: Colors.red, fontSize: 9.sp, fontWeight: FontWeight.bold),
+            color: Colors.red, fontSize: 8.sp, fontWeight: FontWeight.bold),
       ),
     );
   }

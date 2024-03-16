@@ -7,6 +7,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -88,13 +89,34 @@ class AppointmentCard extends StatelessWidget {
                     height: 32.sp,
                     width: 32.sp,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/person.jpg"),
-                        fit: BoxFit.cover,
-                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: AppColors.secondaryColor,
+                    ),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: EdgeInsets.all(3.sp),
+                          child: SvgPicture.asset(
+                            'assets/svgs/doctor_icon.svg',
+                            height: 15.sp,
+                            width: 15.sp,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
                     ),
                   ),
+                  // Container(
+                  //   height: 32.sp,
+                  //   width: 32.sp,
+                  //   // decoration: BoxDecoration(
+                  //   //   borderRadius: BorderRadius.circular(10.sp),
+                  //   //   image: const DecorationImage(
+                  //   //     image: AssetImage("assets/images/person.jpg"),
+                  //   //     fit: BoxFit.cover,
+                  //   //   ),
+                  //   // ),
+                  //   child: ,
+                  // ),
                 ],
               ),
               Padding(
@@ -329,7 +351,7 @@ class AppointmentCard extends StatelessWidget {
                         "Show more",
                         style: TextStyle(
                             color: Colors.black54,
-                            fontSize: 9.sp,
+                            fontSize: 8.sp,
                             fontWeight: FontWeight.w500),
                       ),
                     ),
@@ -354,7 +376,7 @@ class AppointmentCard extends StatelessWidget {
                         child: Text(
                           "Reschedule",
                           style: TextStyle(
-                              fontSize: 9.sp, fontWeight: FontWeight.w800),
+                              fontSize: 8.sp, fontWeight: FontWeight.w800),
                         ),
                       ),
                     ),

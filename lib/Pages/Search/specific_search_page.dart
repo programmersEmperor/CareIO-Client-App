@@ -43,7 +43,9 @@ class SpecificSearchPage extends StatelessWidget {
               ),
               if (!controller.isDoctor) ...[
                 PagedSliverList<int, HealthCenter>(
+                  pagingController: controller.hospitalsUiController.pagingController,
                   builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
+                    animateTransitions: true,
                     firstPageProgressIndicatorBuilder: (_) =>
                         SpinKitFadingCircle(
                           color: AppColors.primaryColor,
@@ -52,7 +54,6 @@ class SpecificSearchPage extends StatelessWidget {
                       healthCenter: item,
                     ),
                   ),
-                  pagingController: controller.hospitalsUiController.pagingController,
                 ),
               ]
               else ...[
@@ -66,8 +67,7 @@ class SpecificSearchPage extends StatelessWidget {
                       doctor: item,
                     ),
                   ),
-                  pagingController:
-                  controller.doctorsPageController.pagingController,
+                  pagingController: controller.doctorsPageController.pagingController,
                 ),
               ],
             ],

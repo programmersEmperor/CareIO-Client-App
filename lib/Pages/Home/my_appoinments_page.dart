@@ -87,14 +87,12 @@ class MyAppointmentsPage extends StatelessWidget {
                   onRefresh: () => controller.initializeAppointments(
                     status: AppointmentStatus.completed,
                   ),
-                  isLoading:
-                      controller.isLoading[AppointmentStatus.completed.index],
+                  isLoading: controller.isLoading[AppointmentStatus.completed.index],
                   child: AppointmentsWidget(
                     appointments: controller.completedAppointments,
                     onRefresh: () => controller.initializeAppointments(
                         status: AppointmentStatus.completed),
-                    isLoading:
-                        controller.isLoading[AppointmentStatus.completed.index],
+                    isLoading: controller.isLoading[AppointmentStatus.completed.index],
                   ),
                 ),
               ),
@@ -103,14 +101,11 @@ class MyAppointmentsPage extends StatelessWidget {
                   onRefresh: () => controller.initializeAppointments(
                     status: AppointmentStatus.canceled,
                   ),
-                  isLoading:
-                      controller.isLoading[AppointmentStatus.canceled.index],
+                  isLoading: controller.isLoading[AppointmentStatus.canceled.index],
                   child: AppointmentsWidget(
                     appointments: controller.canceledAppointments,
-                    onRefresh: () => controller.initializeAppointments(
-                        status: AppointmentStatus.canceled),
-                    isLoading:
-                        controller.isLoading[AppointmentStatus.canceled.index],
+                    onRefresh: () => controller.initializeAppointments(status: AppointmentStatus.canceled),
+                    isLoading: controller.isLoading[AppointmentStatus.canceled.index],
                   ),
                 ),
               ),

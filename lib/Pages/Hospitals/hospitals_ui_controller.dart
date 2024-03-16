@@ -79,6 +79,7 @@ class HospitalsUiController extends GetxController {
   void searchHospital({required String query}) async {
     data.addIf(query.isNotEmpty, "name", query);
     pagingController.refresh();
+    debugPrint("search");
   }
 
   void filterHospitals({int? rating, int? clinicId, bool? isNearby}) async {
@@ -143,29 +144,31 @@ class HospitalsUiController extends GetxController {
       final healthCenters = <HealthCenter>[];
 
       final pageSize = pageKey ~/ 10;
-      debugPrint(
-          "Fetch healthCenters and the page is $pageSize and pageKey is $pageKey");
-      var response =
-          await apiService.fetchHospitals(params: params, pageSize: pageSize);
+      debugPrint("Fetch healthCenters and the page is $pageSize and pageKey is $pageKey");
+      var response = await apiService.fetchHospitals(params: params, pageSize: pageSize);
       if (response == null) return;
 
       data = {};
-      debugPrint('health centers: ${healthCenters.length}');
 
       for (var healthCenter in response.data['result']['data']) {
-        healthCenters.add(HealthCenter.fromJson(healthCenter));
+        if(pagingController.itemList == null || pagingController.itemList!.any((element) => element.id == healthCenter.id)){
+          healthCenters.add(HealthCenter.fromJson(healthCenter));
+        }
       }
-      debugPrint('health centers: ${healthCenters.length}');
       final isLastPage = healthCenters.length < _pageSize;
 
       debugPrint("isLastPage: $isLastPage}");
+      debugPrint("nextPageKey: ${pagingController.nextPageKey}");
+      debugPrint('item lists: ${pagingController.itemList}');
 
       if (isLastPage) {
+
         pagingController.appendLastPage(healthCenters);
-      } else {
+        // pagingController.appendLastPage(healthCenters);
+      }
+      else {
         final nextPageKey = pageKey + healthCenters.length;
-        debugPrint(
-            "The last page is $isLastPage and next page is $nextPageKey");
+        debugPrint("The last page is $isLastPage and next page is $nextPageKey");
         pagingController.appendPage(healthCenters, nextPageKey);
       }
     } catch (error) {
