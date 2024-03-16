@@ -127,8 +127,9 @@ class HospitalsUiController extends GetxController {
   void onInit() {
     super.onInit();
     scrollController = ScrollController();
-
+    debugPrint("hospitals_ui_controller");
     pagingController.addPageRequestListener((pageKey) {
+      debugPrint("addPageRequestListener");
       fetchHealthCenters(pageKey: pageKey, params: data);
     });
 
@@ -139,7 +140,7 @@ class HospitalsUiController extends GetxController {
   void fetchHealthCenters(
       {required int pageKey, Map<String, dynamic>? params}) async {
     try {
-      healthCenters = [];
+      final healthCenters = <HealthCenter>[];
 
       final pageSize = pageKey ~/ 10;
       debugPrint(
@@ -149,10 +150,15 @@ class HospitalsUiController extends GetxController {
       if (response == null) return;
 
       data = {};
+      debugPrint('health centers: ${healthCenters.length}');
+
       for (var healthCenter in response.data['result']['data']) {
         healthCenters.add(HealthCenter.fromJson(healthCenter));
       }
+      debugPrint('health centers: ${healthCenters.length}');
       final isLastPage = healthCenters.length < _pageSize;
+
+      debugPrint("isLastPage: $isLastPage}");
 
       if (isLastPage) {
         pagingController.appendLastPage(healthCenters);

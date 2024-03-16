@@ -20,12 +20,12 @@ class ExperienceCard extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.sp)),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                experience.place ?? "",
+                experience.position ?? "",
                 style: TextStyle(
                     color: AppColors.primaryColor,
                     fontSize: 12.sp,
@@ -34,11 +34,11 @@ class ExperienceCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 15),
                 child: Text(
-                  experience.position ?? "",
+                  experience.place ?? "",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              Spacer(),
+              // Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

@@ -31,6 +31,7 @@ class AppStrings {
   static const startChat = 'startChat';
   static const doctors = 'doctors';
   static const healthCenters = 'healthCenters';
+  static const healthCenter = 'healthCenter';
   static const pharmacies = 'pharmacies';
   static const topDoctors = 'topDoctors';
   static const topHospitals = 'topHospitals';
@@ -70,8 +71,10 @@ class AppStrings {
   static const findYourDoctor = 'findYourDoctor';
   static const findYourHospital = 'findYourHospital';
   static const hospitals = 'hospitals';
+  static const hospital = 'hospital';
   static const myAppointments = 'myAppointments';
   static const clinics = 'clinics';
+  static const clinic = 'clinic';
   static const location = 'location';
   static const notification = 'notifications';
   static const noNotification = 'noNotifications';
@@ -86,6 +89,9 @@ class AppStrings {
   static const searchInHealthCenters = 'searchInHealthCenters';
   static const searchHint = 'searchHint';
   static const connectionError = 'No internet';
-  static const connectionErrorDesc =
-      'it seems your not connected to the internet please connect and try again';
+  static const connectionErrorDesc = 'it seems your not connected to the internet please connect and try again';
+  static const notActiveOnThisDay = 'notActiveOnThisDay';
+  static const appointments = 'appointments';
+  static const appointment = 'appointment';
+  static const completedAppointments = 'completedAppointments';
 }

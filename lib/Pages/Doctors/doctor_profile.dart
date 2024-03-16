@@ -14,6 +14,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -78,12 +79,15 @@ class DoctorProfile extends StatelessWidget {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(15.sp),
-                                            child: Image.asset(
-                                              "assets/images/person.jpg",
-                                              fit: BoxFit.cover,
-                                              height: 90.sp,
-                                              width: 90.sp,
-                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(15),
+                                              child: SvgPicture.asset(
+                                                'assets/svgs/doctor_icon.svg',
+                                                height: 90,
+                                                width: 90,
+                                                color: AppColors.primaryColor,
+                                              ),
+                                            )
                                           ),
                                         ),
                                       ),
@@ -106,13 +110,28 @@ class DoctorProfile extends StatelessWidget {
                                             Padding(
                                               padding:
                                                   EdgeInsets.only(top: 4.sp),
-                                              child: Text(
-                                                controller
-                                                    .doctor.specialism!.name,
-                                                style: TextStyle(
-                                                  fontSize: 8.sp,
-                                                  color: Colors.black38,
-                                                ),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    controller
+                                                        .doctor.degree!.name!,
+                                                    style: TextStyle(
+                                                      fontSize: 8.sp,
+                                                      color: Colors.black38,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 1.w,
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                        .doctor.specialism!.name,
+                                                    style: TextStyle(
+                                                      fontSize: 8.sp,
+                                                      color: Colors.black38,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             Padding(
@@ -120,25 +139,29 @@ class DoctorProfile extends StatelessWidget {
                                                   EdgeInsets.only(top: 4.sp),
                                               child: Row(
                                                 children: [
-                                                  Icon(
-                                                    Icons.star,
-                                                    color: Colors.orange,
-                                                    size: 15.sp,
-                                                  ),
-                                                  Text(
-                                                    "${controller.doctor.rating}",
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 9.sp,
+                                                  if(controller.doctor.rating != null)...[
+                                                    Icon(
+                                                      Icons.star,
+                                                      color: Colors.orange,
+                                                      size: 15.sp,
                                                     ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 70.sp,
-                                                  ),
+                                                    Text(
+                                                      "${controller.doctor.rating}",
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 9.sp,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 70.sp,
+                                                    ),
+                                                  ],
+
                                                   InkWell(
                                                     onTap:
                                                         controller.callDoctor,
                                                     child: Container(
+                                                      margin: controller.doctor.rating == null? EdgeInsets.only(top: 1.5.h) : null,
                                                       padding:
                                                           EdgeInsets.all(5.sp),
                                                       decoration: BoxDecoration(
@@ -214,19 +237,18 @@ class DoctorProfile extends StatelessWidget {
                                         children: [
                                           DoctorStatics(
                                             title: AppStrings.experiences.tr,
-                                            info: "+ years",
+                                            info: "${controller.calculateDoctorExperience(controller.doctor) == 0? 1 : '${controller.calculateDoctorExperience(controller.doctor)}+'} years",
                                           ),
-                                          const DoctorStaticsDivider(),
-                                          DoctorStatics(
-                                            title: AppStrings.certificates.tr,
-                                            info:
-                                                '${controller.doctor.rating} ct',
-                                          ),
+                                          // const DoctorStaticsDivider(),
+                                          // DoctorStatics(
+                                          //   title: AppStrings.certificates.tr,
+                                          //   info:
+                                          //       '${controller.doctor} ct',
+                                          // ),
                                           const DoctorStaticsDivider(),
                                           DoctorStatics(
                                             title: AppStrings.totalBooking.tr,
-                                            info:
-                                                '${controller.doctor.completedAppointments} patient',
+                                            info: '${controller.doctor.completedAppointments} ${AppStrings.appointments}',
                                           ),
                                         ],
                                       ),
@@ -247,46 +269,46 @@ class DoctorProfile extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 15.sp),
-                                    child: Text(
-                                      "${controller.doctor.description}",
+                                  if(controller.doctor.description != null) ...[
+                                    Padding(
+                                      padding:
+                                      EdgeInsets.symmetric(vertical: 15.sp),
+                                      child: Text(
+                                        "${controller.doctor.description}",
+                                        style: TextStyle(
+                                            fontSize: 9.2.sp,
+                                            color: Colors.black45),
+                                      ),
+                                    ),
+                                  ],
+                                  if(controller.doctor.experience.isNotEmpty)...[
+                                    AutoSizeText(
+                                      AppStrings.experiences.tr,
                                       style: TextStyle(
-                                          fontSize: 9.2.sp,
-                                          color: Colors.black45),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12.sp,
+                                      ),
                                     ),
-                                  ),
-                                  AutoSizeText(
-                                    AppStrings.experiences.tr,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible:
-                                        controller.doctor.experience.isNotEmpty,
-                                    child: Container(
+                                    Container(
                                       height: 24.h,
                                       padding:
-                                          EdgeInsets.symmetric(vertical: 10.sp),
+                                      EdgeInsets.symmetric(vertical: 10.sp),
                                       child: GridView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemCount:
-                                            controller.doctor.experience.length,
+                                        controller.doctor.experience.length,
                                         gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 1,
-                                                mainAxisExtent: 60.w,
-                                                mainAxisSpacing: 10),
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 1,
+                                            mainAxisExtent: 60.w,
+                                            mainAxisSpacing: 10),
                                         itemBuilder: (_, index) =>
                                             ExperienceCard(
                                                 experience: controller
                                                     .doctor.experience[index]),
                                       ),
-                                    ),
-                                  ),
+                                    )
+                                  ],
                                   Container(
                                     padding: EdgeInsets.all(12.sp),
                                     decoration: BoxDecoration(
@@ -367,8 +389,7 @@ class DoctorProfile extends StatelessWidget {
                                                   child: child,
                                                 );
                                               },
-                                              child: controller
-                                                  .activeTimeSlotWidget.value,
+                                              child: controller.activeTimeSlotWidget.value,
                                             ),
                                           ),
                                         ),

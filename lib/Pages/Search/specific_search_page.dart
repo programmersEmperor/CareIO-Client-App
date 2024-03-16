@@ -29,47 +29,45 @@ class SpecificSearchPage extends StatelessWidget {
       body: ConnectivityWidget(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              RoundedTextField(
-                controller: controller.textEditingController,
-                onChange: controller.filterSearchResults,
-                showAttachment: false,
-                name: "search",
-                hint: AppStrings.searchHint.tr,
+          child: CustomScrollView(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            slivers: [
+              SliverToBoxAdapter(
+                child: RoundedTextField(
+                  controller: controller.textEditingController,
+                  onChange: controller.filterSearchResults,
+                  showAttachment: false,
+                  name: "search",
+                  hint: AppStrings.searchHint.tr,
+                ),
               ),
               if (!controller.isDoctor) ...[
-                Expanded(
-                  child: PagedListView<int, HealthCenter>(
-                    builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
-                      firstPageProgressIndicatorBuilder: (_) =>
-                          SpinKitFadingCircle(
-                        color: AppColors.primaryColor,
-                      ),
-                      itemBuilder: (context, item, index) => HospitalCard(
-                        healthCenter: item,
-                      ),
+                PagedSliverList<int, HealthCenter>(
+                  builderDelegate: PagedChildBuilderDelegate<HealthCenter>(
+                    firstPageProgressIndicatorBuilder: (_) =>
+                        SpinKitFadingCircle(
+                          color: AppColors.primaryColor,
+                        ),
+                    itemBuilder: (context, item, index) => HospitalCard(
+                      healthCenter: item,
                     ),
-                    pagingController:
-                        controller.hospitalsUiController.pagingController,
                   ),
+                  pagingController: controller.hospitalsUiController.pagingController,
                 ),
-              ] else ...[
-                Expanded(
-                  child: PagedListView<int, Doctor>(
-                    builderDelegate: PagedChildBuilderDelegate<Doctor>(
-                      firstPageProgressIndicatorBuilder: (_) =>
-                          SpinKitFadingCircle(
-                        color: AppColors.primaryColor,
-                      ),
-                      itemBuilder: (context, item, index) => DoctorListWidget(
-                        doctor: item,
-                      ),
+              ]
+              else ...[
+                PagedSliverList<int, Doctor>(
+                  builderDelegate: PagedChildBuilderDelegate<Doctor>(
+                    firstPageProgressIndicatorBuilder: (_) =>
+                        SpinKitFadingCircle(
+                          color: AppColors.primaryColor,
+                        ),
+                    itemBuilder: (context, item, index) => DoctorListWidget(
+                      doctor: item,
                     ),
-                    pagingController:
-                        controller.doctorsPageController.pagingController,
                   ),
+                  pagingController:
+                  controller.doctorsPageController.pagingController,
                 ),
               ],
             ],

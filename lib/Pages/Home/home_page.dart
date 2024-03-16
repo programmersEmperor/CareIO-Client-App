@@ -59,7 +59,7 @@ class HomePage extends StatelessWidget {
                   duration: 400.milliseconds,
                   switchOutCurve: Curves.linearToEaseOut,
                   switchInCurve: Curves.linearToEaseOut,
-                  reverseDuration: 400.milliseconds,
+                  reverseDuration: 50.milliseconds,
                   transitionBuilder: (child, animation) {
                     return FadeTransition(
                       opacity: Tween<double>(end: 1.0, begin: 0.0)

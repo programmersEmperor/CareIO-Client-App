@@ -128,18 +128,20 @@ class HospitalProfile extends StatelessWidget {
                                                   mainAxisSize:
                                                       MainAxisSize.min,
                                                   children: [
-                                                    Icon(
-                                                      Icons.star,
-                                                      color: Colors.orange,
-                                                      size: 15.sp,
-                                                    ),
-                                                    Text(
-                                                      "${controller.healthCenter.rating}",
-                                                      style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 9.sp,
+                                                    if(controller.healthCenter.rating != null)...[
+                                                      Icon(
+                                                        Icons.star,
+                                                        color: Colors.orange,
+                                                        size: 15.sp,
                                                       ),
-                                                    ),
+                                                      Text(
+                                                        "${controller.healthCenter.rating}",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 9.sp,
+                                                        ),
+                                                      ),
+                                                    ],
                                                     SizedBox(
                                                       width: 20.sp,
                                                     ),
@@ -178,9 +180,9 @@ class HospitalProfile extends StatelessWidget {
                                                 SizedBox(
                                                   height: 4.sp,
                                                 ),
-                                                Row(
+                                                Padding(padding: const EdgeInsets.symmetric(horizontal: 20), child: Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.center,
+                                                  MainAxisAlignment.center,
                                                   children: [
                                                     Icon(
                                                       Icons.location_pin,
@@ -189,14 +191,35 @@ class HospitalProfile extends StatelessWidget {
                                                           .primaryColor,
                                                     ),
                                                     SizedBox(
-                                                      width: 5.sp,
+                                                      width: 2.sp,
                                                     ),
-                                                    Text(
-                                                      "${controller.healthCenter.address}",
-                                                      style: TextStyle(
-                                                          fontSize: 10.sp,
-                                                          color:
-                                                              Colors.black38),
+                                                    Flexible(
+                                                      child: Text(
+                                                        "${controller.healthCenter.address}",
+                                                        textAlign: TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 10.sp,
+                                                            color:
+                                                            Colors.black38),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),),
+                                                SizedBox(
+                                                  height: 2.h,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: AppColors.secondaryColor,
+                                                        borderRadius: BorderRadius.circular(5.sp)
+                                                      ),
+                                                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                                      child: Text(
+                                                          controller.healthCenter.type!.value.tr,
+                                                      ),
                                                     )
                                                   ],
                                                 )
@@ -208,67 +231,67 @@ class HospitalProfile extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 50.sp, right: 50.sp, top: 30.sp),
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: EdgeInsets.all(10.sp),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.secondaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10.sp)),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              AppStrings.totalBooking.tr,
-                                              style: TextStyle(
-                                                fontSize: 10.sp,
-                                                color: Colors.black87,
-                                                fontWeight: FontWeight.w500,
+                                if(controller.healthCenter.completedAppointment > 0)...[
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 50.sp, right: 50.sp, top: 15.sp),
+                                    child: Container(
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(10.sp),
+                                      decoration: BoxDecoration(
+                                          color: AppColors.secondaryColor,
+                                          borderRadius:
+                                          BorderRadius.circular(10.sp)),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Text(
+                                                AppStrings.totalBooking.tr,
+                                                style: TextStyle(
+                                                  fontSize: 10.sp,
+                                                  color: Colors.black87,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: 5.sp,
-                                            ),
-                                            Text(
-                                              controller.healthCenter.completedAppointment.toString(),
-                                              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold ),
-                                            ),
-                                          ],
-                                        ),
-                                        // const DoctorStaticsDivider(),
-                                        // DoctorStatics(
-                                        //   title: AppStrings.totalBooking.tr,
-                                        //   info: '230 patient',
-                                        // ),
+                                              SizedBox(
+                                                height: 5.sp,
+                                              ),
+                                              Text(
+                                                controller.healthCenter.completedAppointment.toString(),
+                                                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold ),
+                                              ),
+                                            ],
+                                          ),
+                                          // const DoctorStaticsDivider(),
+                                          // DoctorStatics(
+                                          //   title: AppStrings.totalBooking.tr,
+                                          //   info: '230 patient',
+                                          // ),
 
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          top: 15.sp,
-                                          left: 10.sp,
-                                          right: 10.sp),
-                                      child: AutoSizeText(
-                                        AppStrings.topDoctors.tr,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w900,
-                                            fontSize: 10.sp),
+                                    if(controller.healthCenter.doctor.isNotEmpty)...[
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            top: 15.sp,
+                                            left: 10.sp,
+                                            right: 10.sp),
+                                        child: AutoSizeText(
+                                          AppStrings.topDoctors.tr,
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w900,
+                                              fontSize: 10.sp),
+                                        ),
                                       ),
-                                    ),
-                                    Visibility(
-                                      visible: controller
-                                          .healthCenter.doctor.isNotEmpty,
-                                      child: SizedBox(
+                                      SizedBox(
                                         height: 180,
                                         child: Swiper(
                                           itemCount: controller.healthCenter.doctor.length,
@@ -277,12 +300,11 @@ class HospitalProfile extends StatelessWidget {
                                           autoplay: true,
                                           itemBuilder: (_, index) =>
                                               TopRequestedDoctorsCard(
-                                            doctor: controller
-                                                .healthCenter.doctor[index],
-                                          ),
+                                                doctor: controller.healthCenter.doctor[index],
+                                              ),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                     Padding(
                                       padding: EdgeInsets.only(
                                         left: 10.sp,
@@ -294,91 +316,43 @@ class HospitalProfile extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          AutoSizeText(
-                                            AppStrings.clinics.tr,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 10.sp),
-                                          ),
-
-                                          Visibility(
-                                            visible: controller.healthCenter
-                                                .clinics.isNotEmpty,
-                                            child: GridView.builder(
+                                          if(controller.healthCenter.clinics.isNotEmpty)...[
+                                            AutoSizeText(
+                                              AppStrings.clinics.tr,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 10.sp),
+                                            ),
+                                            GridView.builder(
                                               itemCount: controller
                                                   .healthCenter.clinics.length,
                                               padding: EdgeInsets.symmetric(
                                                   vertical: 10.sp),
                                               physics:
-                                                  const NeverScrollableScrollPhysics(),
+                                              const NeverScrollableScrollPhysics(),
                                               itemBuilder: (_, index) =>
                                                   CategoryGridElement(
-                                                title: controller.healthCenter
+                                                    title: controller.healthCenter
                                                         .clinics[index].name ??
-                                                    "",
-                                                desc: AppStrings
-                                                    .findYourHospital.tr,
-                                                onTap: () => Get.toNamed(ClinicProfile.id, arguments: [{
-                                                  'clinic' : controller.healthCenter.clinics[index]
-                                                }]),
-                                                iconPath:
+                                                        "",
+                                                    desc: AppStrings
+                                                        .findYourHospital.tr,
+                                                    onTap: () => Get.toNamed(ClinicProfile.id, arguments: [{
+                                                      'clinic' : controller.healthCenter.clinics[index]
+                                                    }]),
+                                                    iconPath:
                                                     "assets/svgs/hospital_icon.svg",
-                                              ),
+                                                  ),
                                               gridDelegate:
-                                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                              const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 4,
                                               ),
                                               shrinkWrap: true,
                                             ),
-                                          ),
-
-                                          // AutoSizeText(
-                                          //   "Timeslots",
-                                          //   style: TextStyle(
-                                          //       fontWeight: FontWeight.w900,
-                                          //       fontSize: 10.sp),
-                                          // ),
-                                          // Padding(
-                                          //   padding: EdgeInsets.only(top: 8.sp),
-                                          //   child: SizedBox(
-                                          //     height: 5.h,
-                                          //     child: ListView.builder(
-                                          //       scrollDirection: Axis.horizontal,
-                                          //       itemCount: controller
-                                          //           .dayTimeSlotList.length,
-                                          //       itemBuilder: (_, index) =>
-                                          //           DayTimeSLotItem(
-                                          //         dayTimeSlot: controller
-                                          //             .dayTimeSlotList[index],
-                                          //         onTap: () => controller
-                                          //             .onTapDayTimeSlot(index),
-                                          //       ),
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                          // Padding(
-                                          //   padding: EdgeInsets.only(top: 10.sp),
-                                          //   child: Obx(
-                                          //     () => AnimatedSwitcher(
-                                          //       duration: 300.milliseconds,
-                                          //       layoutBuilder: (child, list) {
-                                          //         return Align(
-                                          //           alignment:
-                                          //               AlignmentDirectional
-                                          //                   .centerStart,
-                                          //           child: child,
-                                          //         );
-                                          //       },
-                                          //       child: controller
-                                          //           .activeTimeSlotWidget.value,
-                                          //     ),
-                                          //   ),
-                                          // ),
-                                          //
-
+                                          ],
                                           Padding(
                                             padding:
-                                                EdgeInsets.only(top: 18.sp),
+                                            EdgeInsets.only(top: 18.sp),
                                             child: AutoSizeText(
                                               AppStrings.location.tr,
                                               style: TextStyle(
@@ -388,7 +362,7 @@ class HospitalProfile extends StatelessWidget {
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsets.only(top: 18.sp),
+                                            EdgeInsets.only(top: 18.sp),
                                             child: SizedBox(
                                               width: 100.w,
                                               height: 25.h,
@@ -400,11 +374,15 @@ class HospitalProfile extends StatelessWidget {
                                                     .withOpacity(0.4),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.sp),
+                                                  BorderRadius.circular(
+                                                      15.sp),
                                                 ),
                                                 child: Center(
-                                                  child: Text('data'),
+                                                  child: Image.asset(
+                                                    'assets/images/map.jpg',
+                                                    fit: BoxFit.cover,
+                                                    height: 300,
+                                                  ),
                                                 ),
                                               ),
                                             ),

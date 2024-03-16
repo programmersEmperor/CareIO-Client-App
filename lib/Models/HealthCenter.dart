@@ -10,7 +10,7 @@ class HealthCenter {
     _address = json['address'] ?? "";
     _avatar = json['avatar'];
     _rating = json['rating'];
-    _completedAppointment = json['completedAppointment'] ?? 250;
+    _completedAppointment = json['completedAppointment'] ?? 0;
     _type = json['type'] is int? HealthCenterTypes.values[json['type'] as int] : null;
     if (json['clinics'] != null) {
       _clinics = [];
@@ -30,11 +30,12 @@ class HealthCenter {
         _activeTimes?.add(ActiveTimes.fromJson(v));
       });
     }
+    print("health center name: ${_name}");
   }
   late int _id;
   late String _name;
   late String _address;
-  late int? _completedAppointment;
+  late int _completedAppointment;
   late HealthCenterTypes? _type;
   String? _avatar;
   dynamic _rating;
@@ -48,7 +49,7 @@ class HealthCenter {
   String? get name => _name;
   String? get address => _address;
   String? get avatar => _avatar;
-  int? get completedAppointment => _completedAppointment;
+  int get completedAppointment => _completedAppointment;
   HealthCenterTypes? get type => _type;
   dynamic get rating => _rating;
 

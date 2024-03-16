@@ -1,5 +1,10 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
+
 enum HealthCenterTypes{
-  hospital,
-  healthCenter,
-  clinic
+  hospital(AppStrings.hospital),
+  healthCenter(AppStrings.healthCenter),
+  clinic(AppStrings.clinic);
+
+  final String value;
+  const HealthCenterTypes(this.value);
 }

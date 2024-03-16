@@ -52,13 +52,16 @@ class DoctorListWidget extends StatelessWidget {
                             : null,
                       ),
                       child: doctor.avatar == null
-                          ? SvgPicture.asset(
-                              'assets/svgs/doctor-male.svg',
-                              height: 80.sp,
-                              width: 80.sp,
-                              color: AppColors.primaryColor,
-                            )
-                          : null,
+                          ? Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: SvgPicture.asset(
+                          'assets/svgs/doctor_icon.svg',
+                          height: 70.sp,
+                          width: 70.sp,
+                          color: AppColors.primaryColor,
+                        ),
+                      )
+                          : const SizedBox.shrink(),
                     ),
                   ),
                   Expanded(
@@ -77,29 +80,45 @@ class DoctorListWidget extends StatelessWidget {
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                  size: 10.sp,
+                                if(doctor.rating != null)...[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.orange,
+                                    size: 10.sp,
+                                  ),
+                                  Text(
+                                    doctor.rating.toString(),
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 8.sp,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 3.5.sp),
+                            child: Row(
+                              children: [
+                                Text(
+                                  doctor.degree!.name!,
+                                  style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 1.w,
                                 ),
                                 Text(
-                                  doctor.rating.toString(),
+                                  doctor.specialism!.name,
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 8.sp,
                                   ),
                                 ),
                               ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3.5.sp),
-                            child: Text(
-                              doctor.specialism!.name,
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontSize: 8.sp,
-                              ),
                             ),
                           ),
                         ],

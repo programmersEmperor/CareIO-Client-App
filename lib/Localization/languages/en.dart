@@ -30,12 +30,13 @@ Map<String, String> en = {
       "Try to use a password that you can easily remember".capitalize!,
   AppStrings.savePassword: "Save Password",
   AppStrings.saveAndContinue: "Save & Continue",
-  AppStrings.goodEvening: "Good afternoon",
+  AppStrings.goodEvening: "Good evening",
   AppStrings.goodMorning: "Good morning",
   AppStrings.finalSetup: "Final Setup",
   AppStrings.pharmacies: "Pharmacies",
   AppStrings.doctors: "Doctors",
   AppStrings.healthCenters: "Health Centers",
+  AppStrings.healthCenter: "Health Center",
   AppStrings.startChat: "Start Chat",
   AppStrings.viewAll: "View All",
   AppStrings.topDoctors: "Top doctors",
@@ -45,7 +46,7 @@ Map<String, String> en = {
   AppStrings.appointmentBooked: "Completed appointments",
   AppStrings.appointmentWaiting: "Upcoming appointments",
   AppStrings.messageCount: "Remaining messages",
-  AppStrings.aiTextHint: "i have cold ...",
+  AppStrings.aiTextHint: "I have cold ...",
   AppStrings.dear: "Dear, ",
   AppStrings.aiNoteText:
       "Try to not waste your message on what will not benefit you, "
@@ -83,7 +84,9 @@ Map<String, String> en = {
   AppStrings.findYourHospital: 'Find your health center',
   AppStrings.myAppointments: 'My Appointments',
   AppStrings.hospitals: 'Health centers',
+  AppStrings.hospital: 'Hospital',
   AppStrings.clinics: 'Clinics',
+  AppStrings.clinic: 'Clinic',
   AppStrings.location: 'Location',
   AppStrings.notification: 'Notifications',
   AppStrings.noNotification: 'No notifications yet',
@@ -97,4 +100,9 @@ Map<String, String> en = {
   AppStrings.searchInDoctors: 'Search in doctors',
   AppStrings.searchInHealthCenters: 'Search in health centers',
   AppStrings.searchHint: 'Search...',
+  AppStrings.notActiveOnThisDay: 'Not available on this day',
+  AppStrings.appointments: 'Appointments',
+  AppStrings.appointment: 'Appointment',
+  AppStrings.completedAppointments: 'Completed Appointments',
+
 };

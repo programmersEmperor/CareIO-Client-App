@@ -98,7 +98,7 @@ class HospitalCard extends StatelessWidget {
                           child: Row(
                             children: [
                               Icon(
-                                Icons.location_on_outlined,
+                                Icons.local_hospital_outlined,
                                 color: AppColors.primaryColor,
                                 size: 12.sp,
                               ),
@@ -107,7 +107,7 @@ class HospitalCard extends StatelessWidget {
                               ),
                               Expanded(
                                 child: AutoSizeText(
-                                  "${healthCenter!.address}",
+                                  healthCenter!.type!.value.tr,
                                   textAlign: TextAlign.start,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.w400,
@@ -124,22 +124,24 @@ class HospitalCard extends StatelessWidget {
                           ),
                           child: Row(
                             children: [
-                              Icon(
-                                Icons.star,
-                                color: Colors.orange,
-                                size: 10.sp,
-                              ),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                              Text(
-                                "${healthCenter!.rating}",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 10.sp,
-                                    color: Colors.black45),
-                              ),
+                              if(healthCenter!.rating != null)...[
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.orange,
+                                  size: 10.sp,
+                                ),
+                                const SizedBox(
+                                  width: 2,
+                                ),
+                                Text(
+                                  "${healthCenter!.rating}",
+                                  textAlign: TextAlign.start,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 10.sp,
+                                      color: Colors.black45),
+                                ),
+                              ],
                             ],
                           ),
                         ),

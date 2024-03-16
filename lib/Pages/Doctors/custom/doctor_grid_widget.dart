@@ -67,7 +67,7 @@ class DoctorGridWidget extends StatelessWidget {
                     child: AutoSizeText(
                       doctor.name!,
                       style: TextStyle(
-                        fontSize: 11.sp,
+                        fontSize: 8.sp,
                         fontWeight: FontWeight.w400,
                       ),
                       overflowReplacement: Marquee(
@@ -82,7 +82,7 @@ class DoctorGridWidget extends StatelessWidget {
                         fadingEdgeStartFraction: 0.5.sp,
                         pauseAfterRound: 5.seconds,
                         style: TextStyle(
-                          fontSize: 10.sp,
+                          fontSize: 8.sp,
                           fontWeight: FontWeight.w400,
                         ),
                       ),

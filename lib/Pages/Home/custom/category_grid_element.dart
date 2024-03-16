@@ -2,6 +2,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class CategoryGridElement extends StatelessWidget {
   final String title, desc, iconPath;
@@ -31,7 +32,7 @@ class CategoryGridElement extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 iconPath,
-                height: MediaQuery.of(context).size.height * 0.045,
+                height: MediaQuery.of(context).size.height  * 0.055,
                 width: MediaQuery.of(context).size.width * 0.03,
                 color: AppColors.primaryColor,
               ),
@@ -40,9 +41,9 @@ class CategoryGridElement extends StatelessWidget {
               ),
               Text(
                 title.capitalize!,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 10,
+                  fontSize: 9.sp,
                 ),
               ),
             ],

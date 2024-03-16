@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:ai_health_assistance/Components/SharedWidgets/timeslot_item.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/ActiveTime.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
+import 'package:ai_health_assistance/Models/Experience.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Models/WidgetModels/day_time_slot.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment.dart';
@@ -62,14 +64,31 @@ class DoctorProfileUiController extends GetxController {
     }
 
     return Wrap(
-      children: timeslotsItems,
+      children: timeslotsItems.isNotEmpty?timeslotsItems: [
+        Expanded(child: Center(
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text(AppStrings.notActiveOnThisDay.tr)
+          ),
+        ))
+      ],
     );
+  }
+
+  int calculateDoctorExperience(DoctorDetails doctor){
+    int experienceTotal = 0;
+    for(Experience experience in doctor.experience){
+      DateTime from = DateTime.parse(experience.from);
+      DateTime to = DateTime.parse(experience.to);
+      experienceTotal += (to.difference(from).inDays/365).round();
+    }
+    return experienceTotal;
   }
 
   void onTapDayTimeSlot(int index) {
     //if (preSelectedIndex == index) return;
     debugPrint("it is clicked");
-
+    DateTime;
     activeTimeSlotWidget(setTimeSlots(index));
     if (preSelectedIndex == index) return;
     dayTimeSlotList[index].setIsSelected = true;

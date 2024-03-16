@@ -38,7 +38,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                       height: 50.sp,
                       width: 50.sp,
                       child: Padding(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(12),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: SvgPicture.asset(
@@ -79,18 +79,20 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                  size: 10.sp,
-                                ),
-                                Text(
-                                  "${doctor.rating}",
-                                  style: TextStyle(
-                                    color: Colors.black38,
-                                    fontSize: 8.sp,
+                                if(doctor.rating != null)...[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.orange,
+                                    size: 10.sp,
                                   ),
-                                ),
+                                  Text(
+                                    "${doctor.rating}",
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 8.sp,
+                                    ),
+                                  ),
+                                ],
                               ],
                             ),
                           ),
