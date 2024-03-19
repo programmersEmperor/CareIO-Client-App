@@ -26,11 +26,6 @@ class AppointmentCard extends StatelessWidget {
     required this.appointment,
   });
 
-  String timeConvertor(String timeString){
-    DateTime dateTime = DateFormat("HH:mm:ss").parse(timeString);
-    return DateFormat("h:mm:ss a").format(dateTime);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -83,7 +78,7 @@ class AppointmentCard extends StatelessWidget {
                                 width: 2.sp,
                               ),
                               Text(
-                                appointment.rating.toString(),
+                                appointment.rating!.toStringAsFixed(1),
                                 style: TextStyle(
                                     color: Colors.orange, fontSize: 10.sp),
                               ),
@@ -117,18 +112,6 @@ class AppointmentCard extends StatelessWidget {
                       ),
                     ) : const SizedBox.shrink(),
                   ),
-                  // Container(
-                  //   height: 32.sp,
-                  //   width: 32.sp,
-                  //   // decoration: BoxDecoration(
-                  //   //   borderRadius: BorderRadius.circular(10.sp),
-                  //   //   image: const DecorationImage(
-                  //   //     image: AssetImage("assets/images/person.jpg"),
-                  //   //     fit: BoxFit.cover,
-                  //   //   ),
-                  //   // ),
-                  //   child: ,
-                  // ),
                 ],
               ),
               Padding(
@@ -172,7 +155,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              timeConvertor(appointment.time),
+                              appointment.time12,
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -392,20 +375,20 @@ class AppointmentCard extends StatelessWidget {
                           shape: MaterialStatePropertyAll(
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.sp)))),
-                      child: Text(
-                        "Show more",
+                      child: Obx(()=>Text(
+                        showDetails.isTrue ? "Show less" : "Show more",
                         style: TextStyle(
                             color: Colors.black54,
                             fontSize: 8.sp,
                             fontWeight: FontWeight.w500),
-                      ),
+                      )),
                     ),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
                   Visibility(
-                    visible: appointment.status < 3,
+                    visible: appointment.status != AppointmentStatus.completed.index && appointment.status != AppointmentStatus.canceled.index,
                     child: Expanded(
                       child: ElevatedButton(
                         onPressed: () => Get.find<AppointmentController>()
@@ -455,21 +438,17 @@ class AppointmentCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Visibility(
-                    visible: appointment.status < 3,
-                    child: const SizedBox(
+                  if(appointment.status <= AppointmentStatus.accepted.index)...[
+                    const SizedBox(
                       width: 10,
                     ),
-                  ),
-                  Visibility(
-                    visible: appointment.status < 3,
-                    child: Expanded(
+                    Expanded(
                       child: AppointmentCancelButton(
                         onTap: () => Get.find<AppointmentController>()
                             .confirmCancelAppointment(id: appointment.id),
                       ),
                     ),
-                  ),
+                  ],
                 ],
               ),
               SizedBox(

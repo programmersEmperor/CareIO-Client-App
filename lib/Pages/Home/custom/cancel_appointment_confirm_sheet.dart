@@ -1,9 +1,12 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
+import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -46,14 +49,14 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AutoSizeText(
-                    "Dr ${appointment.doctor.name}",
+                    appointment.doctor.name!,
                     style:
                         TextStyle(fontSize: 11.sp, fontWeight: FontWeight.w600),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 5.sp),
                     child: Text(
-                      appointment.doctor.specialism!.name,
+                      appointment.healthCenter.name!,
                       style: TextStyle(
                         fontSize: 9.5.sp,
                         color: Colors.black38,
@@ -66,12 +69,25 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
                 height: 32.sp,
                 width: 32.sp,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.sp),
-                  image: const DecorationImage(
-                    image: AssetImage("assets/images/person.jpg"),
+                  borderRadius: BorderRadius.circular(10),
+                  image: appointment.doctor.avatar == null? null : DecorationImage(
+                    image: CachedNetworkImageProvider(appointment.doctor.avatar!),
                     fit: BoxFit.cover,
                   ),
+                  color: AppColors.secondaryColor,
                 ),
+                child: appointment.doctor.avatar == null ? ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Padding(
+                    padding: EdgeInsets.all(3.sp),
+                    child: SvgPicture.asset(
+                      'assets/svgs/doctor_icon.svg',
+                      height: 15.sp,
+                      width: 15.sp,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ) : const SizedBox.shrink(),
               ),
             ],
           ),
@@ -91,10 +107,10 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
                         size: 12.sp,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.only(top: 2.sp, left: 2.sp, right: 2.sp),
+                        padding: EdgeInsets.only(
+                            top: 2.sp, left: 2.sp, right: 2.sp),
                         child: Text(
-                          appointment.bookedAt,
+                          appointment.date,
                           style: TextStyle(
                               color: Colors.black54, fontSize: 8.5.sp),
                         ),
@@ -113,10 +129,10 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
                         size: 12.sp,
                       ),
                       Padding(
-                        padding:
-                            EdgeInsets.only(top: 2.sp, left: 2.sp, right: 2.sp),
+                        padding: EdgeInsets.only(
+                            top: 2.sp, left: 2.sp, right: 2.sp),
                         child: Text(
-                          appointment.bookedAt,
+                          appointment.time12,
                           style: TextStyle(
                               color: Colors.black54, fontSize: 8.5.sp),
                         ),
@@ -124,25 +140,7 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 8.sp, vertical: 2.sp),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.sp),
-                    color: appointment.status == 1
-                        ? Colors.green.withOpacity(0.2)
-                        : Colors.orange.withOpacity(0.2),
-                  ),
-                  child: Text(
-                    appointment.status == 1 ? "confirmed" : "in review",
-                    style: TextStyle(
-                        color: appointment.status == 1
-                            ? Colors.green
-                            : Colors.orange,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 10.sp),
-                  ),
-                ),
+                AppointmentStateTitle(appointment: appointment),
               ],
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
+import 'package:intl/intl.dart';
 
 /// id : 10
 /// status : 10
@@ -69,6 +70,7 @@ class Appointment {
 
   int get id => _id;
   int get status => _status;
+  set status(value) => _status = value;
   String get bookedAt => _bookedAt;
   String get patientName => _patientName;
   HealthCenter get healthCenter => _healthCenter;
@@ -78,12 +80,15 @@ class Appointment {
   String get date => _date;
   num? get rating => _rating;
   String get time => _time;
+  String get time12 {
+    DateTime dateTime = DateFormat("HH:mm:ss").parse(_time);
+    return DateFormat("h:mm:ss a").format(dateTime);
+  }
   num get price => _price;
   Doctor get doctor => _doctor;
   String? get rejectionMessage => _rejectionMessage;
 
   String get appointmentStatusTitle => AppointmentStatus.values[status].value;
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

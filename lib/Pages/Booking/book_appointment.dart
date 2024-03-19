@@ -261,19 +261,18 @@ class BookAppointment extends StatelessWidget {
                           required: true,
                         ),
                       ),
-                      Expanded(
-                        child: TextButton(
-                          child: Text(
-                            AppStrings.useMyName.tr,
-                            style: TextStyle(
-                                color: AppColors.primaryColor, fontSize: 10.sp),
-                          ),
-                          onPressed: () {
-                            controller.nameController.text =
-                                Get.find<UserSession>().patient.name;
-                          },
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: TextButton(
+                      //     child: Text(
+                      //       AppStrings.useMyName.tr,
+                      //       style: TextStyle(
+                      //           color: AppColors.primaryColor, fontSize: 10.sp),
+                      //     ),
+                      //     onPressed: () {
+                      //       controller.nameController.text = Get.find<UserSession>().patient.name;
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

@@ -78,6 +78,8 @@ class AppointmentController extends GetxController
       if (response == null) return;
 
       if (response.data['result'].isEmpty) {
+        initializeAppointments(status: AppointmentTypes.completed);
+
         Get.close(0);
         showSnack(
             title: "Rating posted",
@@ -88,7 +90,7 @@ class AppointmentController extends GetxController
     }
   }
 
-  void initializeAppointments({AppointmentTypes? status}) async {
+  Future<void> initializeAppointments({AppointmentTypes? status}) async {
     if (status != null) {
       appointments.removeWhere((element) => status.value.contains(AppointmentStatus.values[element.status]));
       await fetchAppointments(
@@ -137,27 +139,35 @@ class AppointmentController extends GetxController
     Get.bottomSheet(
       RescheduleAppointmentConfirmSheet(
           loading: cancelLoading,
-          onTap: (date, time) =>
-              rescheduleAppointment(id: id, date: date, time: time),
+          onTap: (date, time) => rescheduleAppointment(id: id, date: date, time: time),
           appointment: appointments.where((p0) => id == p0.id).first),
       isScrollControlled: true,
     );
   }
 
   void cancelAppointment({required int id}) async {
-    if (cancelLoading.isTrue) return;
+    try{
+      if (cancelLoading.isTrue) return;
 
-    cancelLoading(true);
-    var response = await _apiService.cancelAppointment(id: id);
-    cancelLoading(false);
-    if (response == null) return;
+      cancelLoading(true);
+      var response = await _apiService.cancelAppointment(id: id);
+      cancelLoading(false);
+      if (response == null) return;
 
-    if (response.data['result'].isEmpty) {
-      appointments.removeWhere((element) => element.id == id);
-      Get.close(0);
-      showSnack(
-          title: "Appointment canceled",
-          description: "Your appointment has been canceled");
+      if (response.data['result'].isEmpty) {
+
+        appointments.removeWhere((element) => element.id == id);
+        initializeAppointments(status: AppointmentTypes.canceled);
+
+        Get.close(0);
+        showSnack(
+            title: "Appointment canceled",
+            description: "Your appointment has been canceled");
+
+      }
+    }
+    catch(e){
+      cancelLoading(false);
     }
   }
 
@@ -181,6 +191,16 @@ class AppointmentController extends GetxController
       if (response == null) return;
 
       if (response.data['result'].isEmpty) {
+        final AppointmentStatus appointmentStatus = AppointmentStatus.values[appointments.firstWhere((element) => element.id == id).status];
+        initializeAppointments(status: AppointmentTypes.upcoming).whenComplete(() {
+          if(AppointmentTypes.canceled.value.contains(appointmentStatus)){
+            initializeAppointments(status: AppointmentTypes.canceled);
+          }
+          else if(AppointmentTypes.completed.value.contains(appointmentStatus)){
+          initializeAppointments(status: AppointmentTypes.completed);
+          }
+        });
+
         Get.close(0);
         showSnack(
             title: "Appointment Rescheduled",

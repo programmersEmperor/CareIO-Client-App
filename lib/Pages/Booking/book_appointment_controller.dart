@@ -77,14 +77,10 @@ class BookAppointmentController extends GetxController {
     required int clinicId,
   }) async {
     try {
-      if (nameController.text.isEmpty) {
-        showSnack(title: "Name Field ", description: "Name Field is Required");
-        return;
-      }
       if (!key.currentState!.saveAndValidate()) return;
 
       var body = {
-        "name": nameController.text,
+        "name": nameController.text.isEmpty? Get.find<UserSession>().patient.name : nameController.text,
         "doctorId": doctorId,
         "clinicId": clinicId,
         "time": selectedTime.value.time,
