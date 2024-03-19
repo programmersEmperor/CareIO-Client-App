@@ -1,5 +1,7 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
+import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 
 /// id : 10
 /// status : 10
@@ -21,7 +23,7 @@ class Appointment {
     required String section,
     required String clinic,
     required String wallet,
-    required int price,
+    required num price,
   }) {
     _id = id;
     _status = status;
@@ -44,10 +46,11 @@ class Appointment {
     _clinic = json['clinic'] ?? "";
     _wallet = json['wallet'];
     _date = json['date'];
-    _rating = json['rating'] ?? 0;
+    _rating = json['rating'];
     _time = json['time'];
     _price = json['price'];
     _doctor = Doctor.fromJson(json['doctor']);
+    _rejectionMessage = json['rejectionMessage'];
   }
   late int _id;
   late int _status;
@@ -57,11 +60,12 @@ class Appointment {
   late String _section;
   late String _clinic;
   late String? _wallet;
-  late int _price;
+  late num _price;
   late Doctor _doctor;
   late String _date;
   late String _time;
-  late int _rating;
+  late num? _rating;
+  late String? _rejectionMessage;
 
   int get id => _id;
   int get status => _status;
@@ -72,22 +76,14 @@ class Appointment {
   String get clinic => _clinic;
   String get wallet => _wallet ?? "";
   String get date => _date;
-  int get rating => _rating;
+  num? get rating => _rating;
   String get time => _time;
-  int get price => _price;
+  num get price => _price;
   Doctor get doctor => _doctor;
+  String? get rejectionMessage => _rejectionMessage;
 
-  String get appointmentStatusTitle => _getAppointment();
+  String get appointmentStatusTitle => AppointmentStatus.values[status].value;
 
-  String _getAppointment() {
-    if (status == 5) {
-      return "completed";
-    }
-    if (status == 6) {
-      return "unattended";
-    }
-    return "";
-  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

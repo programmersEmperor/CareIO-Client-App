@@ -4,11 +4,14 @@ import 'package:ai_health_assistance/Pages/Home/controller/appointment_controlle
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
+import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sizer/sizer.dart';
 
 import 'appointment_cancel_button.dart';
@@ -22,6 +25,11 @@ class AppointmentCard extends StatelessWidget {
     required this.index,
     required this.appointment,
   });
+
+  String timeConvertor(String timeString){
+    DateTime dateTime = DateFormat("HH:mm:ss").parse(timeString);
+    return DateFormat("h:mm:ss a").format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,14 +54,14 @@ class AppointmentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        "Dr ${appointment.doctor.name}",
+                        "${appointment.doctor.name}",
                         style: TextStyle(
                             fontSize: 11.sp, fontWeight: FontWeight.w600),
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 5.sp),
                         child: Text(
-                          appointment.doctor.specialism!.name,
+                          appointment.healthCenter.name!,
                           style: TextStyle(
                             fontSize: 9.5.sp,
                             color: Colors.black38,
@@ -61,7 +69,7 @@ class AppointmentCard extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: appointment.rating != 0,
+                        visible: appointment.rating != null,
                         child: Padding(
                           padding: EdgeInsets.only(top: 5.sp),
                           child: Row(
@@ -75,7 +83,7 @@ class AppointmentCard extends StatelessWidget {
                                 width: 2.sp,
                               ),
                               Text(
-                                "${appointment.rating.toString()}.0",
+                                appointment.rating.toString(),
                                 style: TextStyle(
                                     color: Colors.orange, fontSize: 10.sp),
                               ),
@@ -90,20 +98,24 @@ class AppointmentCard extends StatelessWidget {
                     width: 32.sp,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
+                      image: appointment.doctor.avatar == null? null : DecorationImage(
+                              image: CachedNetworkImageProvider(appointment.doctor.avatar!),
+                              fit: BoxFit.cover,
+                            ),
                       color: AppColors.secondaryColor,
                     ),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Padding(
-                          padding: EdgeInsets.all(3.sp),
-                          child: SvgPicture.asset(
-                            'assets/svgs/doctor_icon.svg',
-                            height: 15.sp,
-                            width: 15.sp,
-                            color: AppColors.primaryColor,
-                          ),
+                    child: appointment.doctor.avatar == null ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Padding(
+                        padding: EdgeInsets.all(3.sp),
+                        child: SvgPicture.asset(
+                          'assets/svgs/doctor_icon.svg',
+                          height: 15.sp,
+                          width: 15.sp,
+                          color: AppColors.primaryColor,
                         ),
-                    ),
+                      ),
+                    ) : const SizedBox.shrink(),
                   ),
                   // Container(
                   //   height: 32.sp,
@@ -160,7 +172,7 @@ class AppointmentCard extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: 2.sp, left: 2.sp, right: 2.sp),
                             child: Text(
-                              appointment.time,
+                              timeConvertor(appointment.time),
                               style: TextStyle(
                                   color: Colors.black54, fontSize: 8.5.sp),
                             ),
@@ -178,62 +190,70 @@ class AppointmentCard extends StatelessWidget {
                   curve: Curves.linearToEaseOut,
                   child: Container(
                     width: 100.w,
-                    padding: EdgeInsets.only(top: 15.sp, bottom: 5.sp),
+                    padding: EdgeInsets.only(top: 15.sp),
                     child: showDetails.isFalse
                         ? null
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              AutoSizeText(
-                                "Reservation in name",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w900,
-                                    color: Colors.black26,
-                                    fontSize: 10.sp),
-                              ),
-                              SizedBox(
-                                height: 3.sp,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  AutoSizeText(
-                                    appointment.patientName,
-                                    style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 7.sp, vertical: 5.sp),
-                                    decoration: BoxDecoration(
-                                        color: AppColors.secondaryColor,
-                                        borderRadius:
-                                            BorderRadius.circular(8.sp)),
-                                    child: AutoSizeText(
-                                      appointment.price.toString(),
-                                      style: TextStyle(
-                                        fontSize: 10.sp,
-                                        color: AppColors.primaryColor,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
                               Padding(
                                 padding:
-                                    EdgeInsets.only(top: 10.sp, bottom: 10.sp),
+                                EdgeInsets.only(top: 10.sp, bottom: 10.sp),
                                 child: Container(
                                   width: double.infinity,
                                   padding: EdgeInsets.all(15.sp),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15.sp),
-                                    color: appointment.wallet.isEmpty &&
-                                            appointment.status < 3
+                                    color: Colors.grey.withOpacity(0.1),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      PositionedDirectional(
+                                        end: 0,
+                                        child: Opacity(
+                                          opacity: 0.2,
+                                          child: Icon(Icons.person,
+                                            color: AppColors.primaryColor,
+                                            size: 45.sp,
+                                          ),
+                                        ),
+                                      ),
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              AutoSizeText(
+                                                "Reservation in name",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: AppColors.primaryColor,
+                                                    fontSize: 12.sp),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 4.sp,
+                                          ),
+                                          AutoSizeText(
+                                            appointment.patientName,
+                                            style: TextStyle(fontSize: 9.sp),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(top: 10.sp, bottom: 10.sp),
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: EdgeInsets.all(15.sp),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15.sp),
+                                    color: appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
                                         ? Colors.orangeAccent.withOpacity(0.5)
                                         : AppColors.secondaryColor,
                                   ),
@@ -244,12 +264,10 @@ class AppointmentCard extends StatelessWidget {
                                         child: Opacity(
                                           opacity: 0.2,
                                           child: Icon(
-                                            appointment.wallet.isEmpty &&
-                                                    appointment.status < 3
+                                            appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
                                                 ? Icons.timer
                                                 : Icons.check,
-                                            color: appointment.wallet.isEmpty &&
-                                                    appointment.status < 3
+                                            color: appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
                                                 ? Colors.orange
                                                 : AppColors.primaryColor,
                                             size: 55.sp,
@@ -257,35 +275,48 @@ class AppointmentCard extends StatelessWidget {
                                         ),
                                       ),
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          AutoSizeText(
-                                            appointment.wallet.isEmpty &&
-                                                    appointment.status < 3
-                                                ? 'Unpaid'
-                                                : "Paid",
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: appointment
-                                                            .wallet.isEmpty &&
-                                                        appointment.status < 3
-                                                    ? Colors.orange
-                                                    : AppColors.primaryColor,
-                                                fontSize: 15.sp),
+                                          Row(
+                                            children: [
+                                              AutoSizeText(
+                                                "${appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
+                                                    ? 'Unpaid'
+                                                    : "Paid"} Price",
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
+                                                        ? Colors.orange
+                                                        : AppColors.primaryColor,
+                                                    fontSize: 12.sp),
+                                              ),
+                                              SizedBox(
+                                                width: 70.sp,
+                                              ),
+                                              AutoSizeText(
+                                                appointment.price.toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
+                                                        ? Colors.orange
+                                                        : AppColors.primaryColor,
+                                                    fontSize: 12.sp),
+                                              ),
+
+                                            ],
                                           ),
                                           SizedBox(
                                             height: 4.sp,
                                           ),
                                           AutoSizeText(
-                                            appointment.status < 3
-                                                ? appointment.wallet.isEmpty
-                                                    ? "You have completed the payment using"
-                                                    : "You have completed the payment using the wallet ${appointment.wallet}"
-                                                : appointment.wallet.isEmpty
-                                                    ? "Payment will be when visit"
-                                                    : "",
-                                            style: TextStyle(fontSize: 10.sp),
+                                          appointment.status != AppointmentStatus.completed.index
+                                              ? appointment.wallet.isEmpty
+                                                ? "Payment will be in cash"
+                                                : "You have completed the payment using the wallet ${appointment.wallet}"
+                                              : appointment.wallet.isEmpty
+                                                ? "You have completed the payment using cash"
+                                                : "You have completed the payment using ${appointment.wallet} Wallet",
+                                            style: TextStyle(fontSize: 9.sp),
                                           ),
                                         ],
                                       ),
@@ -293,47 +324,61 @@ class AppointmentCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5.sp),
-                                child: AutoSizeText(
-                                  "Also find doctor at",
-                                  style: TextStyle(
-                                      color: Colors.black26,
-                                      fontWeight: FontWeight.w900,
-                                      fontSize: 10.sp),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  top: 10.0.sp,
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: AppColors.primaryColor
-                                          .withOpacity(0.2),
-                                      borderRadius:
-                                          BorderRadius.circular(15.sp)),
-                                  child: InkWell(
-                                    onTap: () => Get.toNamed(HospitalProfile.id,
-                                        arguments: [
-                                          {
-                                            'index': appointment.healthCenter.id
-                                                .toString()
-                                          }
-                                        ]),
-                                    child: HospitalCard(
-                                      healthCenter: appointment.healthCenter,
+                              if(AppointmentStatus.rejected.index == appointment.status && appointment.rejectionMessage != null)...[
+                                Padding(
+                                  padding:
+                                  EdgeInsets.only(top: 10.sp, bottom: 10.sp),
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: EdgeInsets.all(15.sp),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(15.sp),
+                                      color: Colors.grey.withOpacity(0.1),
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        PositionedDirectional(
+                                          end: 0,
+                                          child: Opacity(
+                                            opacity: 0.2,
+                                            child: Icon(Icons.email,
+                                              color: AppColors.primaryColor,
+                                              size: 55.sp,
+                                            ),
+                                          ),
+                                        ),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                AutoSizeText(
+                                                  "Rejection Reason",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      color: AppColors.primaryColor,
+                                                      fontSize: 12.sp),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 4.sp,
+                                            ),
+                                            AutoSizeText(
+                                              appointment.rejectionMessage!,
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ],
                           ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10.sp,
               ),
               Row(
                 children: [
@@ -388,7 +433,7 @@ class AppointmentCard extends StatelessWidget {
                     ),
                   ),
                   Visibility(
-                    visible: appointment.status == 5 && appointment.rating == 0,
+                    visible: appointment.status == AppointmentStatus.completed.index && appointment.rating == null,
                     child: Expanded(
                       child: ElevatedButton(
                         onPressed: () => Get.find<AppointmentController>()

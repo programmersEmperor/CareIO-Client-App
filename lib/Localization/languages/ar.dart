@@ -96,4 +96,11 @@ Map<String, String> ar = {
   AppStrings.appointments: 'مواعيد',
   AppStrings.appointment: 'موعد',
   AppStrings.completedAppointments: 'مواعيد ناجحة',
+  AppStrings.pending: "قيد المعالجة",
+  AppStrings.confirmed: "مواكدة",
+  AppStrings.accepted: "مقبولة",
+  AppStrings.rejected: "مرفوضة",
+  AppStrings.canceled: "ملغية",
+  AppStrings.completed: "مكتمل",
+  AppStrings.unattended: "متغيب",
 };

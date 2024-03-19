@@ -1,5 +1,9 @@
+import 'dart:ffi';
+
 import 'package:ai_health_assistance/Models/Appointment.dart';
+import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class AppointmentStateTitle extends StatelessWidget {
@@ -12,37 +16,61 @@ class AppointmentStateTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (appointment.status == 6) {
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 2.sp),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.sp),
-          color: Colors.orange.withOpacity(0.2),
-        ),
-        child: Text(
-          appointment.appointmentStatusTitle,
-          style: TextStyle(
-              color: Colors.orange,
-              fontWeight: FontWeight.bold,
-              fontSize: 10.sp),
-        ),
-      );
+
+    var backgroundColor = Colors.grey.withOpacity(0.4);
+    var textColor = Colors.black54;
+
+    switch(AppointmentStatus.values[appointment.status]){
+      case AppointmentStatus.pending: {
+
+      } break;
+      case AppointmentStatus.confirmed: {
+
+      } break;
+      case AppointmentStatus.accepted: {
+          backgroundColor = Colors.green.withOpacity(0.2);
+          textColor = Colors.orange;
+      } break;
+      case AppointmentStatus.rejected: {
+        backgroundColor = Colors.red.withOpacity(0.2);
+        textColor = Colors.redAccent;
+      } break;
+      case AppointmentStatus.canceled: {
+
+      } break;
+      case AppointmentStatus.completed: {
+        backgroundColor = Colors.blue.withOpacity(0.2);
+        textColor = Colors.teal;
+      } break;
+      case AppointmentStatus.unattended: {
+
+      } break;
     }
-    if (appointment.status == 5) {
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 2.sp),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15.sp),
-            color: Colors.green.withOpacity(0.2)),
-        child: Text(
-          appointment.appointmentStatusTitle,
-          style: TextStyle(
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-              fontSize: 10.sp),
+
+    return Row(
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(horizontal: 2.sp),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100.sp),
+            color: textColor,
+          ),
+          height: 10.sp,
+          width: 10.sp,
         ),
-      );
-    }
+        Padding(
+          padding: EdgeInsets.only(
+              top: 2.sp, left: 2.sp, right: 2.sp),
+          child: Text(
+              appointment.appointmentStatusTitle.tr,
+              style: TextStyle(
+                  color: textColor,
+                  fontSize: 8.5.sp,
+              )
+          ),
+        ),
+      ],
+    );
     return const SizedBox();
   }
 }

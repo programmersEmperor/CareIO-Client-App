@@ -38,7 +38,7 @@ class HealthCenter {
   late int _completedAppointment;
   late HealthCenterTypes? _type;
   String? _avatar;
-  dynamic _rating;
+  num? _rating;
   late List<Clinic> _clinics;
   late List<Doctor> _doctor;
 
@@ -51,7 +51,7 @@ class HealthCenter {
   String? get avatar => _avatar;
   int get completedAppointment => _completedAppointment;
   HealthCenterTypes? get type => _type;
-  dynamic get rating => _rating;
+  num? get rating => _rating;
 
 
   List<ActiveTimes>? get activeTimes => _activeTimes;

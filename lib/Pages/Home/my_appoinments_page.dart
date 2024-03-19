@@ -70,42 +70,42 @@ class MyAppointmentsPage extends StatelessWidget {
               Obx(
                 () => RefreshWidget(
                   onRefresh: () => controller.initializeAppointments(
-                      status: AppointmentStatus.upcoming),
+                      status: AppointmentTypes.upcoming),
                   isLoading:
-                      controller.isLoading[AppointmentStatus.upcoming.index],
+                      controller.isLoading[AppointmentTypes.upcoming.index],
                   child: AppointmentsWidget(
                     appointments: controller.upcomingAppointments,
                     onRefresh: () => controller.initializeAppointments(
-                        status: AppointmentStatus.upcoming),
+                        status: AppointmentTypes.upcoming),
                     isLoading:
-                        controller.isLoading[AppointmentStatus.upcoming.index],
+                        controller.isLoading[AppointmentTypes.upcoming.index],
                   ),
                 ),
               ),
               Obx(
                 () => RefreshWidget(
                   onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.completed,
+                    status: AppointmentTypes.completed,
                   ),
-                  isLoading: controller.isLoading[AppointmentStatus.completed.index],
+                  isLoading: controller.isLoading[AppointmentTypes.completed.index],
                   child: AppointmentsWidget(
                     appointments: controller.completedAppointments,
                     onRefresh: () => controller.initializeAppointments(
-                        status: AppointmentStatus.completed),
-                    isLoading: controller.isLoading[AppointmentStatus.completed.index],
+                        status: AppointmentTypes.completed),
+                    isLoading: controller.isLoading[AppointmentTypes.completed.index],
                   ),
                 ),
               ),
               Obx(
                 () => RefreshWidget(
                   onRefresh: () => controller.initializeAppointments(
-                    status: AppointmentStatus.canceled,
+                    status: AppointmentTypes.canceled,
                   ),
-                  isLoading: controller.isLoading[AppointmentStatus.canceled.index],
+                  isLoading: controller.isLoading[AppointmentTypes.canceled.index],
                   child: AppointmentsWidget(
                     appointments: controller.canceledAppointments,
-                    onRefresh: () => controller.initializeAppointments(status: AppointmentStatus.canceled),
-                    isLoading: controller.isLoading[AppointmentStatus.canceled.index],
+                    onRefresh: () => controller.initializeAppointments(status: AppointmentTypes.canceled),
+                    isLoading: controller.isLoading[AppointmentTypes.canceled.index],
                   ),
                 ),
               ),

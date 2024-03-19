@@ -43,7 +43,7 @@ class DoctorGridWidget extends StatelessWidget {
                       color: AppColors.secondaryColor,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: doctor.avatar == null? const EdgeInsets.all(20) : const EdgeInsets.all(0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: doctor.avatar == null

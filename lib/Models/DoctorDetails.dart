@@ -69,7 +69,7 @@ class DoctorDetails {
   int? _id;
   String? _name;
   String? _avatar;
-  dynamic _rating;
+  num? _rating;
   String? _phone;
   late bool _isRecommended;
   String? _description;
@@ -83,7 +83,7 @@ class DoctorDetails {
   int? get id => _id;
   String? get name => _name;
   String? get avatar => _avatar;
-  dynamic get rating => _rating;
+  num? get rating => _rating;
   String? get phone => _phone;
   bool get isRecommended => _isRecommended;
   String? get description => _description;

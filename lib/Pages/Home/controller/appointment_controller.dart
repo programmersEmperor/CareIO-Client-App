@@ -88,22 +88,22 @@ class AppointmentController extends GetxController
     }
   }
 
-  void initializeAppointments({AppointmentStatus? status}) async {
+  void initializeAppointments({AppointmentTypes? status}) async {
     if (status != null) {
-      appointments.removeWhere((element) => element.status == status.index);
+      appointments.removeWhere((element) => status.value.contains(AppointmentStatus.values[element.status]));
       await fetchAppointments(
           loading: isLoading[status.index],
           params: {'page': 1, 'type': status.index + 1});
       return;
     }
     await fetchAppointments(
-        loading: isLoading[AppointmentStatus.upcoming.index],
+        loading: isLoading[AppointmentTypes.upcoming.index],
         params: {'page': 1, 'type': 1})
         .whenComplete(() => fetchAppointments(
-            loading: isLoading[AppointmentStatus.completed.index],
+            loading: isLoading[AppointmentTypes.completed.index],
             params: {'page': 1, 'type': 2})
         .whenComplete(() => fetchAppointments(
-            loading: isLoading[AppointmentStatus.canceled.index],
+            loading: isLoading[AppointmentTypes.canceled.index],
             params: {'page': 1, 'type': 3})));
   }
 

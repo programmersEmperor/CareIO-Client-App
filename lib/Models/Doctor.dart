@@ -6,7 +6,7 @@ class Doctor {
     int? id,
     String? name,
     String? avatar,
-    dynamic rating,
+    num? rating,
     int? completedAppointments,
   }) {
     _id = id;
@@ -32,7 +32,7 @@ class Doctor {
   int? _id;
   String? _name;
   String? _avatar;
-  dynamic _rating;
+  num? _rating;
   int? _completedAppointments;
   Specialism? _specialism;
   Degree? _degree;
@@ -40,7 +40,7 @@ class Doctor {
   int? get id => _id;
   String? get name => _name;
   String? get avatar => _avatar;
-  dynamic get rating => _rating;
+  num? get rating => _rating;
   int? get completedAppointments => _completedAppointments;
   Specialism? get specialism => _specialism;
   Degree? get degree => _degree;

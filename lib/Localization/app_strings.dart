@@ -94,4 +94,12 @@ class AppStrings {
   static const appointments = 'appointments';
   static const appointment = 'appointment';
   static const completedAppointments = 'completedAppointments';
+  static const pending = 'pending';
+  static const confirmed = 'confirmed';
+  static const accepted = 'accepted';
+  static const rejected = 'rejected';
+  static const canceled = 'canceled';
+  static const completed = 'completed';
+  static const unattended = 'unattended';
+
 }

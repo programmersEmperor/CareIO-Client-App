@@ -104,5 +104,11 @@ Map<String, String> en = {
   AppStrings.appointments: 'Appointments',
   AppStrings.appointment: 'Appointment',
   AppStrings.completedAppointments: 'Completed Appointments',
-
+  AppStrings.pending: "Pending",
+  AppStrings.confirmed: "Confirmed",
+  AppStrings.accepted: "Accepted",
+  AppStrings.rejected: "Rejected",
+  AppStrings.canceled: "Canceled",
+  AppStrings.completed: "Completed",
+  AppStrings.unattended: "Unattended",
 };
