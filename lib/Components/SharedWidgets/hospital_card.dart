@@ -134,7 +134,7 @@ class HospitalCard extends StatelessWidget {
                                   width: 2,
                                 ),
                                 Text(
-                                  "${healthCenter!.rating}",
+                                  healthCenter!.rating!.toStringAsFixed(1),
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w400,

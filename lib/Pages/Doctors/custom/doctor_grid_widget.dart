@@ -101,7 +101,7 @@ class DoctorGridWidget extends StatelessWidget {
                         size: 10.sp,
                       ),
                       Text(
-                        "${doctor.rating}",
+                        doctor.rating!.toStringAsFixed(1),
                         style: TextStyle(
                           color: Colors.black38,
                           fontSize: 8.sp,

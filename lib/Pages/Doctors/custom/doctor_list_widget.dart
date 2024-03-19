@@ -87,7 +87,7 @@ class DoctorListWidget extends StatelessWidget {
                                     size: 10.sp,
                                   ),
                                   Text(
-                                    doctor.rating.toString(),
+                                    doctor.rating!.toStringAsFixed(1),
                                     style: TextStyle(
                                       color: Colors.black38,
                                       fontSize: 8.sp,

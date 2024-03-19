@@ -146,7 +146,7 @@ class DoctorProfile extends StatelessWidget {
                                                       size: 15.sp,
                                                     ),
                                                     Text(
-                                                      "${controller.doctor.rating}",
+                                                      controller.doctor.rating!.toStringAsFixed(1),
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 9.sp,

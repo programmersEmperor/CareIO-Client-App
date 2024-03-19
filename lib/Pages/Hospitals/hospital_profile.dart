@@ -135,7 +135,7 @@ class HospitalProfile extends StatelessWidget {
                                                         size: 15.sp,
                                                       ),
                                                       Text(
-                                                        "${controller.healthCenter.rating}",
+                                                        controller.healthCenter.rating!.toStringAsFixed(1),
                                                         style: TextStyle(
                                                           color: Colors.black,
                                                           fontSize: 9.sp,
