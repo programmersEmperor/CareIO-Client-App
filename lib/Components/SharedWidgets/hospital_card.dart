@@ -118,32 +118,47 @@ class HospitalCard extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            top: 2,
-                          ),
-                          child: Row(
-                            children: [
-                              if(healthCenter!.rating != null)...[
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.orange,
-                                  size: 10.sp,
-                                ),
-                                const SizedBox(
-                                  width: 2,
-                                ),
-                                Text(
-                                  healthCenter!.rating!.toStringAsFixed(1),
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 10.sp,
-                                      color: Colors.black45),
-                                ),
-                              ],
+                        Row(
+                          children: [
+                            if(healthCenter!.rating != null)...[
+                              Icon(
+                                Icons.star,
+                                color: Colors.orange,
+                                size: 10.sp,
+                              ),
+                              const SizedBox(
+                                width: 2,
+                              ),
+                              Text(
+                                healthCenter!.rating!.toStringAsFixed(1),
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 8.sp,
+                                    color: Colors.black45),
+                              ),
                             ],
-                          ),
+                            SizedBox(
+                              width: 10.sp,
+                            ),
+                            if(healthCenter!.completedAppointment != 0)...[
+                              Icon(
+                                Icons.timer,
+                                color: AppColors.primaryColor,
+                                size: 10.sp,
+                              ),
+                              SizedBox(
+                                width: 2.sp,
+                              ),
+                              Text(
+                                healthCenter!.completedAppointment.toString(),
+                                style: TextStyle(
+                                  color: Colors.black38,
+                                  fontSize: 8.sp,
+                                ),
+                              ),
+                            ],
+                          ],
                         ),
                       ],
                     ),

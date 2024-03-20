@@ -11,6 +11,7 @@ import 'package:ai_health_assistance/Pages/Doctors/custom/experience_card.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -71,7 +72,7 @@ class DoctorProfile extends StatelessWidget {
                                       Hero(
                                         tag: "doc$index",
                                         child: Card(
-                                          elevation: 10.sp,
+                                          elevation: 1.sp,
                                           shadowColor: Colors.blueGrey,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -79,14 +80,21 @@ class DoctorProfile extends StatelessWidget {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(15.sp),
-                                            child: Padding(
+                                            child: controller.doctor.avatar == null
+                                                ? Padding(
                                               padding: EdgeInsets.all(15),
                                               child: SvgPicture.asset(
                                                 'assets/svgs/doctor_icon.svg',
-                                                height: 90,
-                                                width: 90,
+                                                height: 90.sp,
+                                                width: 90.sp,
                                                 color: AppColors.primaryColor,
                                               ),
+                                            )
+                                                : CachedNetworkImage(
+                                              imageUrl: controller.doctor.avatar!,
+                                              width: 90.sp,
+                                              height: 90.sp,
+                                              fit: BoxFit.fill,
                                             )
                                           ),
                                         ),

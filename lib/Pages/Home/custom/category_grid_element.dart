@@ -25,28 +25,32 @@ class CategoryGridElement extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         color: AppColors.secondaryColor,
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                iconPath,
-                height: MediaQuery.of(context).size.height  * 0.055,
-                width: MediaQuery.of(context).size.width * 0.03,
-                color: AppColors.primaryColor,
-              ),
-              const SizedBox(
-                height: 7,
-              ),
-              Text(
-                title.capitalize!,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 9.sp,
+        child: Padding(
+          padding: EdgeInsets.all(10.sp),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  iconPath,
+                  height: MediaQuery.of(context).size.height  * 0.055,
+                  width: MediaQuery.of(context).size.width * 0.03,
+                  color: AppColors.primaryColor,
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 7,
+                ),
+                Text(
+                  title.capitalize!,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 9.sp,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

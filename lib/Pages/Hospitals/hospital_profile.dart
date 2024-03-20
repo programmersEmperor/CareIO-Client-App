@@ -216,7 +216,7 @@ class HospitalProfile extends StatelessWidget {
                                                         color: AppColors.secondaryColor,
                                                         borderRadius: BorderRadius.circular(5.sp)
                                                       ),
-                                                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                                                      padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
                                                       child: Text(
                                                           controller.healthCenter.type!.value.tr,
                                                       ),

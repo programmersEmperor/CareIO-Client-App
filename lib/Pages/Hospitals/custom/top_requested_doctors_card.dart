@@ -79,11 +79,38 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Row(
                               children: [
+                                Text(
+                                  doctor.specialism!.name,
+                                  style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 1.w,
+                                ),
+                                Text(
+                                  doctor.degree!.name!,
+                                  style: TextStyle(
+                                    color: Colors.black38,
+                                    fontSize: 8.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 3.5.sp),
+                            child: Row(
+                              children: [
                                 if(doctor.rating != null)...[
                                   Icon(
                                     Icons.star,
                                     color: Colors.orange,
                                     size: 10.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 2.sp,
                                   ),
                                   Text(
                                     doctor.rating!.toStringAsFixed(1),
@@ -93,17 +120,27 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                                     ),
                                   ),
                                 ],
+                                SizedBox(
+                                  width: 10.sp,
+                                ),
+                                if(doctor.completedAppointments != null)...[
+                                  Icon(
+                                    Icons.timer,
+                                    color: AppColors.primaryColor,
+                                    size: 10.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 2.sp,
+                                  ),
+                                  Text(
+                                    doctor.completedAppointments!.toString(),
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 8.sp,
+                                    ),
+                                  ),
+                                ],
                               ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3.5.sp),
-                            child: Text(
-                              doctor.specialism!.name,
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontSize: 8.sp,
-                              ),
                             ),
                           ),
                         ],

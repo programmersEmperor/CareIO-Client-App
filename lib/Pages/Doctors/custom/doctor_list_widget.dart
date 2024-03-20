@@ -80,29 +80,8 @@ class DoctorListWidget extends StatelessWidget {
                             padding: EdgeInsets.only(top: 3.5.sp),
                             child: Row(
                               children: [
-                                if(doctor.rating != null)...[
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.orange,
-                                    size: 10.sp,
-                                  ),
-                                  Text(
-                                    doctor.rating!.toStringAsFixed(1),
-                                    style: TextStyle(
-                                      color: Colors.black38,
-                                      fontSize: 8.sp,
-                                    ),
-                                  ),
-                                ],
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 3.5.sp),
-                            child: Row(
-                              children: [
                                 Text(
-                                  doctor.degree!.name!,
+                                  doctor.specialism!.name,
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 8.sp,
@@ -112,12 +91,56 @@ class DoctorListWidget extends StatelessWidget {
                                   width: 1.w,
                                 ),
                                 Text(
-                                  doctor.specialism!.name,
+                                  doctor.degree!.name!,
                                   style: TextStyle(
                                     color: Colors.black38,
                                     fontSize: 8.sp,
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 3.5.sp),
+                            child: Row(
+                              children: [
+                                if(doctor.rating != null)...[
+                                  Icon(
+                                    Icons.star,
+                                    color: Colors.orange,
+                                    size: 10.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 2.sp,
+                                  ),
+                                  Text(
+                                    doctor.rating!.toStringAsFixed(1),
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 8.sp,
+                                    ),
+                                  ),
+                                ],
+                                SizedBox(
+                                  width: 10.sp,
+                                ),
+                                if(doctor.completedAppointments != null)...[
+                                  Icon(
+                                    Icons.timer,
+                                    color: AppColors.primaryColor,
+                                    size: 10.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 2.sp,
+                                  ),
+                                  Text(
+                                    doctor.completedAppointments!.toString(),
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                      fontSize: 8.sp,
+                                    ),
+                                  ),
+                                ],
                               ],
                             ),
                           ),

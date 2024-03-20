@@ -11,7 +11,7 @@
 
     </queries>
    <application
-        android:label="ai_health_assistance"
+        android:label="careio"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

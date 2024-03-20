@@ -101,5 +101,7 @@ class AppStrings {
   static const canceled = 'canceled';
   static const completed = 'completed';
   static const unattended = 'unattended';
+  static const internalClinic = 'internalClinic';
+  static const externalClinic = 'externalClinic';
 
 }

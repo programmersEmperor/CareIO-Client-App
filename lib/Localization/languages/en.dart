@@ -111,4 +111,6 @@ Map<String, String> en = {
   AppStrings.canceled: "Canceled",
   AppStrings.completed: "Completed",
   AppStrings.unattended: "Unattended",
+  AppStrings.internalClinic: "Internal Clinic",
+  AppStrings.externalClinic: "External Clinic",
 };

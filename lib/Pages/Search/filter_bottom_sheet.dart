@@ -26,6 +26,7 @@ class FilterBottomSheet extends StatelessWidget {
     var selectedRatingIndex = RxInt(-1);
 
     RxBool showNearby = false.obs;
+    RxBool showRatingBy = false.obs;
     return SizedBox(
       width: 100.w,
       child:
@@ -85,7 +86,9 @@ class FilterBottomSheet extends StatelessWidget {
                               Colors.transparent),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5.sp)),
-                          onChanged: (newValue) {},
+                          onChanged: (newValue) {
+                            showNearby(!showNearby.value);
+                          },
                         ),
                       ),
                     ],
@@ -95,64 +98,104 @@ class FilterBottomSheet extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: 10.sp,
-        ),
-        Visibility(
-          visible: isDoctor,
-          child: Text(
-            "By clinic",
-            style: TextStyle(fontSize: 12.sp),
-          ),
-        ),
-        Visibility(
-          visible: isDoctor,
-          child: Wrap(
-            key: const ValueKey<int>(5),
-            spacing: 7.sp,
-            children: [
-              for (var i = 0;
-                  i < Get.find<UserSession>().specializations.length;
-                  i++) ...[
-                Obx(
-                  () => ClinicChip(
-                    isSelected: (selectedIdIndex.value == i).obs,
-                    title: Get.find<UserSession>().specializations[i].name,
-                    onTap: () {
-                      selectedIdIndex(i);
-                      clinicId = Get.find<UserSession>().specializations[i].id;
-                    },
+          if(isDoctor)...[
+            SizedBox(
+              height: 10.sp,
+            ),
+            Text(
+              "By clinic",
+              style: TextStyle(fontSize: 12.sp),
+            ),
+            Wrap(
+              key: const ValueKey<int>(5),
+              spacing: 7.sp,
+              children: [
+                for (var i = 0;
+                i < Get.find<UserSession>().specializations.length;
+                i++) ...[
+                  Obx(
+                        () => ClinicChip(
+                      isSelected: (selectedIdIndex.value == i).obs,
+                      title: Get.find<UserSession>().specializations[i].name,
+                      onTap: () {
+                        selectedIdIndex(i);
+                        clinicId = Get.find<UserSession>().specializations[i].id;
+                      },
+                    ),
+                  ),
+                ]
+              ],
+            ),
+            SizedBox(
+              height: 10.sp,
+            ),
+          ],
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.sp),
+              child: InkWell(
+                onTap: () {
+                  showRatingBy(!showRatingBy.value);
+                },
+                child: Container(
+                  height: 7.h,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10.sp)),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0.sp),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            "order by rating",
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ),
+                        Obx(
+                              () => Checkbox(
+                            value: showRatingBy.value,
+                            activeColor: AppColors.primaryColor,
+                            overlayColor: const MaterialStatePropertyAll(
+                                Colors.transparent),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.sp)),
+                            onChanged: (newValue) {
+                              showRatingBy(!showRatingBy.value);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ]
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 10.sp,
-        ),
-        Text(
-          "By rating",
-          style: TextStyle(fontSize: 12.sp),
-        ),
-        SizedBox(
-          height: 8.h,
-          child: ListView.builder(
-            itemCount: 5,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) => Obx(
-              () => RatingChip(
-                title: "+${index + 1}",
-                onTap: () {
-                  selectedRatingIndex(index);
-                  rating = index + 1;
-                },
-                isSelected: (selectedRatingIndex.value == index).obs,
               ),
             ),
-          ),
-        ),
+
+        // Text(
+        //   "By rating",
+        //   style: TextStyle(fontSize: 12.sp),
+        // ),
+        // SizedBox(
+        //   height: 8.h,
+        //   child: ListView.builder(
+        //     itemCount: 5,
+        //     shrinkWrap: true,
+        //     scrollDirection: Axis.horizontal,
+        //     itemBuilder: (_, index) => Obx(
+        //       () => RatingChip(
+        //         title: "+${index + 1}",
+        //         onTap: () {
+        //           selectedRatingIndex(index);
+        //           rating = index + 1;
+        //         },
+        //         isSelected: (selectedRatingIndex.value == index).obs,
+        //       ),
+        //     ),
+        //   ),
+        // ),
         SizedBox(
           height: 10.sp,
         ),
@@ -163,7 +206,7 @@ class FilterBottomSheet extends StatelessWidget {
                 text: "See results",
                 onPress: () {
                   onTapFilter(
-                    rating != 0 ? rating : null,
+                    showRatingBy.isTrue? 1: 0,
                     clinicId != 0 ? clinicId : null,
                     showNearby.isTrue ? showNearby.value : null,
                   );

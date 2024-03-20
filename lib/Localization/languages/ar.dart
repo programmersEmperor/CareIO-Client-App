@@ -103,4 +103,7 @@ Map<String, String> ar = {
   AppStrings.canceled: "ملغية",
   AppStrings.completed: "مكتمل",
   AppStrings.unattended: "متغيب",
+  AppStrings.internalClinic: "عيادة داخلية",
+  AppStrings.externalClinic: "عيادة خارجية",
+
 };

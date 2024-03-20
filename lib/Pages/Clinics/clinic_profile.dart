@@ -134,6 +134,24 @@ class ClinicProfile extends StatelessWidget {
                                     ],
                                   ),
                                 ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          color: AppColors.secondaryColor,
+                                          borderRadius: BorderRadius.circular(5.sp)
+                                      ),
+                                      padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
+                                      child: Text(
+                                        AppStrings.internalClinic.tr,
+                                      ),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                           ),
