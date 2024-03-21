@@ -87,12 +87,11 @@ class BookAppointmentController extends GetxController {
     required int clinicId,
   }) async {
     try {
-      if (!key.currentState!.saveAndValidate()) return;
 
-      final int? wallet = wallets.map((e) {
-        if (e.selected.isTrue) {
-          return e.id;
-        }}).first;
+      final Wallet? wallet = wallets.firstWhereOrNull((wallet) => wallet.selected.isTrue);
+
+      if(wallet == null) return;
+      if (wallet.id != -1 && !key.currentState!.saveAndValidate()) return;
 
       var body = {
         "name": nameController.text.isEmpty? Get.find<UserSession>().patient.name : nameController.text,
@@ -100,8 +99,8 @@ class BookAppointmentController extends GetxController {
         "clinicId": clinicId,
         "time": selectedTime.value.time,
         "date": selectDate,
-        if(wallet != -1)...{
-          "walletId": wallet,
+        if(wallet.id != -1)...{
+          "walletId": wallet.id,
           "walletNumber": key.currentState!.value['phone'],
           "paymentCode": key.currentState!.value['code']
         },
