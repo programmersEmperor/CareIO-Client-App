@@ -113,4 +113,6 @@ Map<String, String> en = {
   AppStrings.unattended: "Unattended",
   AppStrings.internalClinic: "Internal Clinic",
   AppStrings.externalClinic: "External Clinic",
+  AppStrings.chooseClinic: "Choose Health Center",
+
 };

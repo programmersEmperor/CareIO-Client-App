@@ -54,6 +54,7 @@ class AppStrings {
   static const availableTimes = 'availableTimes';
   static const anotherDate = 'anotherDate';
   static const choosePaymentMethod = 'choosePaymentMethod';
+  static const chooseClinic = 'chooseClinic';
   static const reservationInName = 'reservationInName';
   static const useMyName = 'useMyName';
   static const bookingOne = 'bookingOne';

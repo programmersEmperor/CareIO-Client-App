@@ -1,4 +1,7 @@
 import 'package:ai_health_assistance/Models/BookAvailableTime.dart';
+import 'package:ai_health_assistance/Models/Clinic.dart';
+import 'package:ai_health_assistance/Models/DoctorDetails.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Services/Api/book_appintment.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
@@ -9,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class BookAppointmentController extends GetxController {
-  List<Wallet> wallets = Get.find<UserSession>().wallets;
+  List<Wallet> wallets = [Wallet(id: -1, nameAr: 'نقدي', nameEn: 'Cash'), ...Get.find<UserSession>().wallets];
   List<BookAvailableTime> times = [];
   List<String> selectedTimes = [];
   Rx<BookAvailableTime> selectedTime = BookAvailableTime().obs;
@@ -21,6 +24,7 @@ class BookAppointmentController extends GetxController {
 
   RxBool get isLoading => _apiService.isLoading;
   RxBool bookLoading = false.obs;
+  RxInt selectedClinicId = (-1).obs;
 
   var day = "Today".obs;
 
@@ -56,6 +60,12 @@ class BookAppointmentController extends GetxController {
     }
   }
 
+  void selectClinic(Clinic clinic, DoctorDetails doctor) {
+    selectedClinicId.value = clinic.id!;
+    var date = DateFormat('yyyy-MM-dd').parse(selectDate);
+    getTimes(day: date, id: doctor.id!, clinicId: clinic.id!);
+  }
+
   void getTimes({DateTime? day, required int id, required int clinicId}) async {
     times.clear();
     selectedTimes.clear();
@@ -79,19 +89,22 @@ class BookAppointmentController extends GetxController {
     try {
       if (!key.currentState!.saveAndValidate()) return;
 
+      final int? wallet = wallets.map((e) {
+        if (e.selected.isTrue) {
+          return e.id;
+        }}).first;
+
       var body = {
         "name": nameController.text.isEmpty? Get.find<UserSession>().patient.name : nameController.text,
         "doctorId": doctorId,
         "clinicId": clinicId,
         "time": selectedTime.value.time,
         "date": selectDate,
-        "walletId": wallets.map((e) {
-          if (e.selected.isTrue) {
-            return e.id;
-          }
-        }).first,
-        "walletNumber": key.currentState!.value['phone'],
-        "paymentCode": key.currentState!.value['code']
+        if(wallet != -1)...{
+          "walletId": wallet,
+          "walletNumber": key.currentState!.value['phone'],
+          "paymentCode": key.currentState!.value['code']
+        },
       };
       debugPrint(body.toString());
 
@@ -103,6 +116,9 @@ class BookAppointmentController extends GetxController {
       debugPrint(response.data['result'].toString());
 
       if (response.data['result'] is List) {
+        selectedClinicId.value = -1;
+        selectDate = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+
         Get.close(0);
         showSnack(
             title: "Payment completed",

@@ -3,8 +3,10 @@ import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widge
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/day_timeslot_item.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_healthCenter_active_times_widget.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/experience_card.dart';
@@ -94,7 +96,7 @@ class DoctorProfile extends StatelessWidget {
                                               imageUrl: controller.doctor.avatar!,
                                               width: 90.sp,
                                               height: 90.sp,
-                                              fit: BoxFit.fill,
+                                              fit: BoxFit.cover,
                                             )
                                           ),
                                         ),
@@ -333,38 +335,16 @@ class DoctorProfile extends StatelessWidget {
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12.sp),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            top: 10.0.sp,
-                                            bottom: 10.0.sp,
-                                          ),
-                                          child: SizedBox(
-                                            child: InkWell(
-                                              onTap: () => Get.toNamed(
-                                                  HospitalProfile.id,
-                                                  arguments: [
-                                                    {'index': '1'}
-                                                  ]),
-                                              child: controller.doctor
-                                                      .healthCenters.isNotEmpty
-                                                  ? HospitalCard(
-                                                      healthCenter: controller
-                                                          .doctor
-                                                          .healthCenters![0],
-                                                    )
-                                                  : const SizedBox(),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(top: 2.sp),
-                                          child: AutoSizeText(
-                                            AppStrings.atTheseTimes.tr,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 10.sp),
-                                          ),
-                                        ),
+
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(top: 2.sp),
+                                        //   child: AutoSizeText(
+                                        //     AppStrings.atTheseTimes.tr,
+                                        //     style: TextStyle(
+                                        //         fontWeight: FontWeight.w900,
+                                        //         fontSize: 10.sp),
+                                        //   ),
+                                        // ),
                                         Padding(
                                           padding: EdgeInsets.symmetric(
                                               vertical: 10.sp),
@@ -376,10 +356,8 @@ class DoctorProfile extends StatelessWidget {
                                                   .dayTimeSlotList.length,
                                               itemBuilder: (_, index) =>
                                                   DayTimeSLotItem(
-                                                dayTimeSlot: controller
-                                                    .dayTimeSlotList[index],
-                                                onTap: () => controller
-                                                    .onTapDayTimeSlot(index),
+                                                    dayTimeSlot: controller.dayTimeSlotList[index],
+                                                    onTap: () => controller.onTapDayTimeSlot(index),
                                               ),
                                             ),
                                           ),
@@ -387,18 +365,25 @@ class DoctorProfile extends StatelessWidget {
                                         Padding(
                                           padding: EdgeInsets.only(top: 5.sp),
                                           child: Obx(
-                                            () => AnimatedSwitcher(
-                                              duration: 300.milliseconds,
-                                              layoutBuilder: (child, list) {
-                                                return Align(
-                                                  alignment:
-                                                      AlignmentDirectional
-                                                          .centerStart,
-                                                  child: child,
+                                              (){
+                                                final List<HealthCenter> healthCenters = controller.filterHealthCentersByDay(healthCenters: controller.doctor.healthCenters, day: controller.currentSelectedIndex.value);
+                                                return AnimatedSwitcher(
+                                                  duration: 300.milliseconds,
+                                                  child: Column(
+                                                    children: [
+                                                      if(healthCenters.isEmpty)...[
+                                                        Center(
+                                                          child: Padding(
+                                                              padding: const EdgeInsets.symmetric(vertical: 15),
+                                                              child: Text(AppStrings.notActiveOnThisDay.tr)
+                                                          ),
+                                                        )
+                                                      ]
+                                                      else ...healthCenters.map((healthCenter) => DoctorHealthCenterActiveTimeWidget(healthCenter: healthCenter, day: controller.currentSelectedIndex.value)).toList(),
+                                                    ],
+                                                  ),
                                                 );
-                                              },
-                                              child: controller.activeTimeSlotWidget.value,
-                                            ),
+                                              }
                                           ),
                                         ),
                                       ],

@@ -7,13 +7,16 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
+import 'package:ai_health_assistance/Pages/Doctors/custom/clinic_selection_card.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
@@ -23,11 +26,9 @@ class BookAppointment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BookAppointmentController controller =
-        Get.find<BookAppointmentController>();
-    controller.getTimes(
-        id: doctor.id!,
-        clinicId: doctor.healthCenters!.first.clinics.first.id!);
+    BookAppointmentController controller = Get.find<BookAppointmentController>();
+    controller.selectedClinicId.value = doctor.healthCenters!.first.clinics.first.id!;
+    controller.getTimes(id: doctor.id!, clinicId: doctor.healthCenters!.first.clinics.first.id!);
     return Scaffold(
       body: SizedBox(
         height: 100.h,
@@ -39,14 +40,28 @@ class BookAppointment extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  height: 32.sp,
+                  width: 32.sp,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.sp),
-                      image: const DecorationImage(
-                        image: AssetImage("assets/images/person.jpg"),
-                        fit: BoxFit.cover,
-                      )),
-                  height: 30.sp,
-                  width: 30.sp,
+                    borderRadius: BorderRadius.circular(10),
+                    image: doctor.avatar == null? null : DecorationImage(
+                      image: CachedNetworkImageProvider(doctor.avatar!),
+                      fit: BoxFit.cover,
+                    ),
+                    color: AppColors.secondaryColor,
+                  ),
+                  child: doctor.avatar == null ? ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Padding(
+                      padding: EdgeInsets.all(3.sp),
+                      child: SvgPicture.asset(
+                        'assets/svgs/doctor_icon.svg',
+                        height: 15.sp,
+                        width: 15.sp,
+                        color: AppColors.primaryColor,
+                      ),
+                    ),
+                  ) : const SizedBox.shrink(),
                 ),
                 SizedBox(
                   width: 10.sp,
@@ -85,14 +100,38 @@ class BookAppointment extends StatelessWidget {
                     iconColor: AppColors.primaryColor),
               ],
             ),
+            // SizedBox(
+            //   height: 30.sp,
+            // ),
             SizedBox(
-              height: 30.sp,
+              height: 20.sp,
+            ),
+            AutoSizeText(
+              AppStrings.choosePaymentMethod.tr,
+              style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
+            ),
+            Obx(() => ListView(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              children: doctor.healthCenters.map((healthCenter) => Column (
+                  children: healthCenter.clinics.map((clinic) => ClinicSelectionCard(
+                      healthCenter: healthCenter,
+                      clinic: clinic,
+                      isSelected: clinic.id == controller.selectedClinicId.value,
+                      onTap: ()=> controller.selectClinic(clinic, doctor)
+                  )).toList()
+              )
+              ).toList(),
+            )),
+            SizedBox(
+              height: 15.sp,
             ),
             Container(
               decoration: BoxDecoration(
                 color: AppColors.secondaryColor,
                 borderRadius: BorderRadius.circular(15.sp),
               ),
+
               child: Stack(
                 children: [
                   Positioned(
@@ -155,8 +194,8 @@ class BookAppointment extends StatelessWidget {
                                       controller.getTimes(
                                           day: date,
                                           id: doctor.id!,
-                                          clinicId: doctor.healthCenters!.first
-                                              .clinics.first.id!);
+                                          clinicId: controller.selectedClinicId.value
+                                      );
 
                                       Get.close(0);
                                     },
@@ -227,6 +266,7 @@ class BookAppointment extends StatelessWidget {
                   PaymentMethodCard(
                 wallet: controller.wallets[index],
                 selected: controller.wallets[index].selected,
+                isExpandable: controller.wallets[index].id != -1,
                 onTap: () => controller.selectWallet(index),
               ),
             ),
@@ -309,7 +349,8 @@ class BookAppointment extends StatelessWidget {
               isLoading: controller.bookLoading,
               onPress: () => controller.bookAppointment(
                   doctorId: doctor.id!,
-                  clinicId: doctor.healthCenters!.first.clinics.first.id!),
+                  clinicId: controller.selectedClinicId.value
+              ),
             )
           ],
         ),

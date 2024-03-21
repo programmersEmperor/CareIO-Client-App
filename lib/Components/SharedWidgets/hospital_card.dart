@@ -43,7 +43,7 @@ class HospitalCard extends StatelessWidget {
                               imageUrl: healthCenter!.avatar!,
                               width: 20.w,
                               height: 10.h,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.cover,
                             )
                           : Container(
                               height: 10.h,

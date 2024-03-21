@@ -63,9 +63,8 @@ class AppointmentCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Visibility(
-                        visible: appointment.rating != null,
-                        child: Padding(
+                      if(appointment.rating != null) ...[
+                        Padding(
                           padding: EdgeInsets.only(top: 5.sp),
                           child: Row(
                             children: [
@@ -84,8 +83,8 @@ class AppointmentCard extends StatelessWidget {
                               ),
                             ],
                           ),
-                        ),
-                      ),
+                        )
+                      ],
                     ],
                   ),
                   Container(

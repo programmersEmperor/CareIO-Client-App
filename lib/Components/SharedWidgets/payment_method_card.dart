@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -13,11 +14,13 @@ class PaymentMethodCard extends StatelessWidget {
   final Wallet wallet;
   final RxBool selected;
   final Function onTap;
+  final bool isExpandable;
   const PaymentMethodCard({
     super.key,
     required this.wallet,
     required this.selected,
-    required this.onTap,
+    required this.isExpandable,
+    required this.onTap
   });
 
   @override
@@ -48,12 +51,19 @@ class PaymentMethodCard extends StatelessWidget {
                               ? DecorationImage(
                                   image: CachedNetworkImageProvider(
                                       wallet.logo ?? ""))
-                              : const DecorationImage(
-                                  image: AssetImage("assets/images/person.jpg"),
-                                  fit: BoxFit.cover,
-                                )),
+                              : null),
                       height: 30.sp,
                       width: 30.sp,
+                      child:wallet.logo == null
+                        ? ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Icon(
+                            Icons.money_outlined,
+                            size: 22.sp,
+                            color: selected.value ? Colors.white : AppColors.primaryColor,
+                          )
+                      )
+                          : const SizedBox.shrink()
                     ),
                     SizedBox(
                       width: 10.sp,
@@ -99,53 +109,55 @@ class PaymentMethodCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  child: selected.isTrue
-                      ? Padding(
-                          padding: EdgeInsets.only(top: 10.sp),
-                          child: FormBuilder(
-                              key: Get.find<BookAppointmentController>().key,
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Please fill the fields with required details to complete the process successfully",
-                                    style: TextStyle(
-                                      fontSize: 9.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ).animate().fade().slideY(
-                                      curve: Curves.ease,
-                                      duration: GetNumUtils(400).milliseconds),
-                                  SizedBox(
-                                    height: 2.h,
-                                  ),
-                                  const TextInputField(
-                                    backgroundColor: Colors.white,
-                                    inputType: TextInputType.phone,
-                                    enableLabel: false,
-                                    name: 'phone',
-                                    required: true,
-                                  ).animate().fade().slideY(
-                                      curve: Curves.ease,
-                                      duration: GetNumUtils(500).milliseconds),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  const TextInputField(
-                                    backgroundColor: Colors.white,
-                                    name: 'code',
-                                    inputType: TextInputType.number,
-                                    required: true,
-                                    enableLabel: false,
-                                  ).animate().fade().slideY(
-                                      curve: Curves.ease,
-                                      duration: GetNumUtils(600).milliseconds),
-                                ],
-                              )),
-                        )
-                      : SizedBox(),
-                ),
+                if(isExpandable)...[
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: selected.isTrue
+                        ? Padding(
+                      padding: EdgeInsets.only(top: 10.sp),
+                      child: FormBuilder(
+                          key: Get.find<BookAppointmentController>().key,
+                          child: Column(
+                            children: [
+                              Text(
+                                "Please fill the fields with required details to complete the process successfully",
+                                style: TextStyle(
+                                  fontSize: 9.sp,
+                                  color: Colors.white,
+                                ),
+                              ).animate().fade().slideY(
+                                  curve: Curves.ease,
+                                  duration: GetNumUtils(400).milliseconds),
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              TextInputField(
+                                backgroundColor: Colors.white,
+                                inputType: TextInputType.phone,
+                                enableLabel: false,
+                                name: 'phone',
+                                required: isExpandable,
+                              ).animate().fade().slideY(
+                                  curve: Curves.ease,
+                                  duration: GetNumUtils(500).milliseconds),
+                              SizedBox(
+                                height: 1.h,
+                              ),
+                              TextInputField(
+                                backgroundColor: Colors.white,
+                                name: 'code',
+                                inputType: TextInputType.number,
+                                required: isExpandable,
+                                enableLabel: false,
+                              ).animate().fade().slideY(
+                                  curve: Curves.ease,
+                                  duration: GetNumUtils(600).milliseconds),
+                            ],
+                          )),
+                    )
+                        : const SizedBox(),
+                  ),
+                ]
               ],
             ),
           ),

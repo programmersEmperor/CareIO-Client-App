@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:ai_health_assistance/Components/SharedWidgets/timeslot_item.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/ActiveTime.dart';
+import 'package:ai_health_assistance/Models/Clinic.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Models/Experience.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
@@ -23,7 +24,7 @@ class DoctorProfileUiController extends GetxController {
   late DoctorDetails doctor;
   final apiService = Get.find<DoctorsApiService>();
 
-  int preSelectedIndex = 0;
+  RxInt currentSelectedIndex = 0.obs;
 
   RxBool isLoading = false.obs;
 
@@ -90,10 +91,10 @@ class DoctorProfileUiController extends GetxController {
     debugPrint("it is clicked");
     DateTime;
     activeTimeSlotWidget(setTimeSlots(index));
-    if (preSelectedIndex == index) return;
+    if (currentSelectedIndex.value == index) return;
     dayTimeSlotList[index].setIsSelected = true;
-    dayTimeSlotList[preSelectedIndex].setIsSelected = false;
-    preSelectedIndex = index;
+    dayTimeSlotList[currentSelectedIndex.value].setIsSelected = false;
+    currentSelectedIndex(index);
   }
 
   @override
@@ -112,6 +113,17 @@ class DoctorProfileUiController extends GetxController {
     if (healthCenter.activeTimes == null) return;
   }
 
+  List<HealthCenter> filterHealthCentersByDay({required List<HealthCenter> healthCenters, required int day}){
+    final List<HealthCenter> filteredHealthCenters = [];
+    for(HealthCenter healthCenter in healthCenters){
+      final bool succeeded = healthCenter.clinics.any((clinic) => clinic.activeTimes.any((activeTime) => activeTime.day == day));
+      if(succeeded){
+        filteredHealthCenters.add(healthCenter);
+      }
+    }
+    return filteredHealthCenters;
+  }
+
   void getData() async {
     await showDoctor();
     onTapDayTimeSlot(0);
@@ -124,13 +136,13 @@ class DoctorProfileUiController extends GetxController {
     if (response == null) return;
     doctor = DoctorDetails.fromJson(response.data['result']);
     debugPrint("experience length ${doctor.experience.length}");
-    for (var healthCenter in doctor.healthCenters) {
-      for (var clinic in healthCenter.clinics) {
-        for (var timeSlot in clinic.activeTimes) {
-          timeSlots.add(timeSlot);
-        }
-      }
-    }
+    // for (var healthCenter in doctor.healthCenters) {
+    //   for (var clinic in healthCenter.clinics) {
+    //     for (var timeSlot in clinic.activeTimes) {
+    //       timeSlots.add(timeSlot);
+    //     }
+    //   }
+    // }
 
     isLoading(false);
   }

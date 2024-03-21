@@ -105,5 +105,7 @@ Map<String, String> ar = {
   AppStrings.unattended: "متغيب",
   AppStrings.internalClinic: "عيادة داخلية",
   AppStrings.externalClinic: "عيادة خارجية",
+  AppStrings.chooseClinic: "اختار المركز الصحي",
+
 
 };

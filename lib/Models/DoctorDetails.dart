@@ -93,6 +93,13 @@ class DoctorDetails {
   List<Experience> get experience => _experience ?? [];
   List<Qualifications>? get qualifications => _qualifications;
   List<HealthCenter> get healthCenters => _healthCenters ?? [];
+  int get clinicsTotal  {
+    int total = 0;
+    for(HealthCenter healthCenter in healthCenters){
+      total += healthCenter.clinics.length;
+    }
+    return total;
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

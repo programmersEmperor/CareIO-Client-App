@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Models/ActiveTime.dart';
+import 'package:get/get.dart';
 
 class Clinic {
   Clinic({
@@ -28,6 +29,7 @@ class Clinic {
   String? _name;
   String? _description;
   List<ActiveTimes>? _activeTimes;
+  RxBool selected  = false.obs;
 
   int? get id => _id;
   String? get name => _name;
