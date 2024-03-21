@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "485495987350",
-    "project_id": "otp-phone-63290",
-    "storage_bucket": "otp-phone-63290.appspot.com"
+    "project_number": "967628853159",
+    "project_id": "careio-1af77",
+    "storage_bucket": "careio-1af77.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:485495987350:android:3d0d35d4625c6d32f876b7",
+        "mobilesdk_app_id": "1:967628853159:android:eadebecf050601e8107082",
         "android_client_info": {
           "package_name": "com.aihealthassistance.ai_health_assistance"
         }
@@ -15,26 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCx6Z-0DqiR-B_z14ZPHCPyJEjZOxEoGoM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:485495987350:android:f96710dd90472232f876b7",
-        "android_client_info": {
-          "package_name": "com.aihealthassistance.ai_health_assistance.ai_health_assistance"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCx6Z-0DqiR-B_z14ZPHCPyJEjZOxEoGoM"
+          "current_key": "AIzaSyCZQqG02TVaCrmp4qkoxSU47o-0pT3TOWs"
         }
       ],
       "services": {

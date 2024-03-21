@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCx6Z-0DqiR-B_z14ZPHCPyJEjZOxEoGoM',
-    appId: '1:485495987350:android:3d0d35d4625c6d32f876b7',
-    messagingSenderId: '485495987350',
-    projectId: 'otp-phone-63290',
-    storageBucket: 'otp-phone-63290.appspot.com',
+    apiKey: 'AIzaSyCZQqG02TVaCrmp4qkoxSU47o-0pT3TOWs',
+    appId: '1:967628853159:android:eadebecf050601e8107082',
+    messagingSenderId: '967628853159',
+    projectId: 'careio-1af77',
+    storageBucket: 'careio-1af77.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAqV5K1yaIYYgyAvfUSuBAQD8XwH4Rvo7A',
-    appId: '1:485495987350:ios:0b7a26039f79fe9af876b7',
-    messagingSenderId: '485495987350',
-    projectId: 'otp-phone-63290',
-    storageBucket: 'otp-phone-63290.appspot.com',
+    apiKey: 'AIzaSyAmHtscEk8RY44ixHiceGYpIh9X5KQ3o6o',
+    appId: '1:967628853159:ios:0d3e5478906762ec107082',
+    messagingSenderId: '967628853159',
+    projectId: 'careio-1af77',
+    storageBucket: 'careio-1af77.appspot.com',
     iosBundleId: 'com.aihealthassistance.aiHealthAssistance',
   );
 }
