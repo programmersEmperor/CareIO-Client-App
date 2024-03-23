@@ -69,7 +69,7 @@ class DoctorProfileUiController extends GetxController {
         Center(
           child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Text(AppStrings.notActiveOnThisDay.tr)
+              child: Text(AppStrings.notActiveOnThisDay.tr, style: TextStyle(fontSize: 8.sp),)
           ),
         )
       ],
@@ -87,9 +87,6 @@ class DoctorProfileUiController extends GetxController {
   }
 
   void onTapDayTimeSlot(int index) {
-    //if (preSelectedIndex == index) return;
-    debugPrint("it is clicked");
-    DateTime;
     activeTimeSlotWidget(setTimeSlots(index));
     if (currentSelectedIndex.value == index) return;
     dayTimeSlotList[index].setIsSelected = true;

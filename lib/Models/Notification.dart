@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:get/get.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 
 Notification notificationFromJson(String str) =>
     Notification.fromJson(json.decode(str));
@@ -24,7 +27,7 @@ class Notification {
     _title = json['title'];
     _body = json['body'];
     _createdAt = json['createdAt'];
-    _isRead = json['isRead'];
+    _isRead = json['isRead'] == 1;
   }
   int? _id;
   String? _title;
@@ -35,7 +38,12 @@ class Notification {
   int? get id => _id;
   String? get title => _title;
   String? get body => _body;
-  String? get createdAt => _createdAt;
+  String? get createdAt => _createdAt == null
+      ? null
+      : Get.locale.toString() == 'ar_AR'
+        ? timeago.format(DateTime.parse(_createdAt!), locale: 'ar')
+        : timeago.format(DateTime.parse(_createdAt!), locale: 'en');
+
   bool get isRead => _isRead ?? false;
 
   Map<String, dynamic> toJson() {

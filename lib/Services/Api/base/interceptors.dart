@@ -15,8 +15,7 @@ class ApiInterceptors extends Interceptor {
   Future<String> getFingerPrint() async {
     deviceInfoPlugin = DeviceInfoPlugin();
     AndroidDeviceInfo android = await deviceInfoPlugin.androidInfo;
-    debugPrint(
-        "FingerPrint: ${android.fingerprint}${await UniqueIdentifier.serial}");
+    debugPrint("FingerPrint: ${android.fingerprint}${await UniqueIdentifier.serial}");
     return "${android.fingerprint}${await UniqueIdentifier.serial}";
   }
 

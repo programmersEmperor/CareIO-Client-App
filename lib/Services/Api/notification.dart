@@ -7,12 +7,12 @@ class NotificationApiService {
   final isLoading = false.obs;
 
   Future<dynamic> fetchNotifications(
-      {required Map<String, dynamic> body}) async {
+      {required Map<String, dynamic> params}) async {
     try {
       isLoading(true);
       var response = await _apiService.getRequest(
         url: '/patients/notifications',
-        params: body,
+        params: params,
       );
       isLoading(false);
       debugPrint('Status Code : ${response.statusCode}');

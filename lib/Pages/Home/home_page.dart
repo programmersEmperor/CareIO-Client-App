@@ -67,8 +67,7 @@ class HomePage extends StatelessWidget {
                       child: child,
                     );
                   },
-                  child: homePageController
-                      .pages[homePageController.activePage.value],
+                  child: homePageController.pages[homePageController.activePage.value],
                 ),
               ),
             ),

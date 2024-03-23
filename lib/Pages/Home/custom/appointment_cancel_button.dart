@@ -1,4 +1,6 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class AppointmentCancelButton extends StatelessWidget {
@@ -20,7 +22,7 @@ class AppointmentCancelButton extends StatelessWidget {
           shape: MaterialStatePropertyAll(RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.sp)))),
       child: Text(
-        "Cancel",
+        AppStrings.cancel.tr,
         style: TextStyle(
             color: Colors.red, fontSize: 8.sp, fontWeight: FontWeight.bold),
       ),

@@ -14,7 +14,7 @@ class PageHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 10.sp, left: 10.sp, right: 10.sp),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: Get.locale.toString() == 'ar_AR'? Alignment.centerRight : Alignment.centerLeft,
         child: Text(
           heading.capitalize!,
           style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),

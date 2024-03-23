@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/doctor_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -150,7 +151,7 @@ class TopRequestedDoctorsCard extends StatelessWidget {
                 ],
               ),
               MainColoredButton(
-                text: "Book appointment",
+                text: AppStrings.bookNow.tr,
                 elevation: 0,
                 onPress: ()=> Get.toNamed(DoctorProfile.id, arguments: [
                   {'index': doctor.id.toString()}

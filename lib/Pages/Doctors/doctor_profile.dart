@@ -247,7 +247,7 @@ class DoctorProfile extends StatelessWidget {
                                         children: [
                                           DoctorStatics(
                                             title: AppStrings.experiences.tr,
-                                            info: "${controller.calculateDoctorExperience(controller.doctor) == 0? 1 : '${controller.calculateDoctorExperience(controller.doctor)}+'} years",
+                                            info: "${controller.calculateDoctorExperience(controller.doctor) == 0? 1 : '${controller.calculateDoctorExperience(controller.doctor)}+'} ${AppStrings.years.tr}",
                                           ),
                                           // const DoctorStaticsDivider(),
                                           // DoctorStatics(
@@ -255,11 +255,13 @@ class DoctorProfile extends StatelessWidget {
                                           //   info:
                                           //       '${controller.doctor} ct',
                                           // ),
-                                          const DoctorStaticsDivider(),
-                                          DoctorStatics(
-                                            title: AppStrings.totalBooking.tr,
-                                            info: '${controller.doctor.completedAppointments} ${AppStrings.appointments}',
-                                          ),
+                                          if(controller.doctor.completedAppointments != null && controller.doctor.completedAppointments != 0 )...[
+                                            const DoctorStaticsDivider(),
+                                            DoctorStatics(
+                                              title: AppStrings.totalBooking.tr,
+                                              info: '${controller.doctor.completedAppointments} ${AppStrings.appointment.tr}',
+                                            ),
+                                          ],
                                         ],
                                       ),
                                     ),
@@ -300,15 +302,12 @@ class DoctorProfile extends StatelessWidget {
                                       ),
                                     ),
                                     Container(
-                                      height: 24.h,
-                                      padding:
-                                      EdgeInsets.symmetric(vertical: 10.sp),
+                                      height: 21.h,
+                                      padding: EdgeInsets.symmetric(vertical: 5.sp),
                                       child: GridView.builder(
                                         scrollDirection: Axis.horizontal,
-                                        itemCount:
-                                        controller.doctor.experience.length,
-                                        gridDelegate:
-                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                        itemCount: controller.doctor.experience.length,
+                                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 1,
                                             mainAxisExtent: 60.w,
                                             mainAxisSpacing: 10),
@@ -375,7 +374,7 @@ class DoctorProfile extends StatelessWidget {
                                                         Center(
                                                           child: Padding(
                                                               padding: const EdgeInsets.symmetric(vertical: 15),
-                                                              child: Text(AppStrings.notActiveOnThisDay.tr)
+                                                              child: Text(AppStrings.notActiveOnThisDay.tr, style: TextStyle(fontSize: 8.sp),)
                                                           ),
                                                         )
                                                       ]

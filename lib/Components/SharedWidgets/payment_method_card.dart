@@ -71,8 +71,8 @@ class PaymentMethodCard extends StatelessWidget {
                     Expanded(
                       child: Stack(
                         children: [
-                          Positioned(
-                            right: 0,
+                          PositionedDirectional(
+                            end: 0,
                             bottom: 0,
                             top: 0,
                             child: AnimatedSlide(

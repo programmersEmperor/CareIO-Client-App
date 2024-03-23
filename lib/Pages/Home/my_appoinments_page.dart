@@ -7,6 +7,7 @@ import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
 
 class MyAppointmentsPage extends StatelessWidget {
@@ -53,7 +54,7 @@ class MyAppointmentsPage extends StatelessWidget {
                     labelPadding: EdgeInsets.zero,
                     labelColor: Colors.white,
                     padding: EdgeInsets.zero,
-                    labelStyle: TextStyle(fontSize: 10.sp),
+                    labelStyle: TextStyle(fontSize: 10.sp, fontFamily: GoogleFonts.rubik().fontFamily),
                     enableFeedback: false,
                     indicatorPadding: EdgeInsets.all(4.sp),
                     unselectedLabelColor: Colors.black54,

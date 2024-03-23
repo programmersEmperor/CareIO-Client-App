@@ -15,8 +15,7 @@ class DoctorsPageController extends GetxController {
   Position? _position;
   final _pageSize = 10;
   Map<String, dynamic> data = {};
-  final PagingController<int, Doctor> pagingController =
-      PagingController(firstPageKey: 0);
+  final PagingController<int, Doctor> pagingController = PagingController(firstPageKey: 0);
   RxBool get isLoading => apiService.isLoading;
   void showFilter() {
     Get.put(BottomSheetController()).showBottomSheet(
@@ -105,19 +104,18 @@ class DoctorsPageController extends GetxController {
     pagingController.addPageRequestListener((pageKey) {
       fetchDoctors(pageKey: pageKey, params: data);
     });
+    pagingController.refresh();
     super.onInit();
   }
 
   void refreshDoctors() {}
 
-  void fetchDoctors(
-      {required int pageKey, Map<String, dynamic>? params}) async {
+  void fetchDoctors({required int pageKey, Map<String, dynamic>? params}) async {
     try {
       final doctors = <Doctor>[];
       debugPrint("Fetch doctors");
       final pageSize = pageKey ~/ 10;
-      var response = await apiService.fetchDoctors(
-params: params, pageSize: pageSize == 0 ? 1 : pageSize);
+      var response = await apiService.fetchDoctors(params: params, pageSize: pageSize == 0 ? 1 : pageSize);
       if (response == null) return;
       data = {};
 

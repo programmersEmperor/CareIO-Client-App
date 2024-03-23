@@ -104,5 +104,21 @@ class AppStrings {
   static const unattended = 'unattended';
   static const internalClinic = 'internalClinic';
   static const externalClinic = 'externalClinic';
-
+  static const upcoming = 'upcoming';
+  static const cancel = 'cancel';
+  static const reschedule = 'reschedule';
+  static const showMore = 'showMore';
+  static const showLess = 'showLess';
+  static const price = 'price';
+  static const paymentWillBeInCash = 'paymentWillBeInCash';
+  static const paymentCompletedUsingCash = 'paymentCompletedUsingCash';
+  static const paymentCompletedUsing= 'paymentCompletedUsing';
+  static const wallet = 'wallet';
+  static const years = 'years';
+  static const searchFilter = 'searchFilter';
+  static const seeResult = 'seeResult';
+  static const clearFilter = 'clearFilter';
+  static const showNearBy = 'showNearBy';
+  static const orderByRating = 'orderByRating ';
+  static const byClinic = 'byClinic';
 }

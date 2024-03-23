@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/cancel_appointment_confirm_sheet.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/rating_bottom_sheet_widget.dart';
@@ -40,17 +41,17 @@ class AppointmentController extends GetxController
 
   @override
   void onInit() async {
-    tabs = const [
+    tabs = [
       Tab(
-        text: "Upcoming",
+        text: AppStrings.upcoming.tr,
         //  height: 30.sp,
       ),
       Tab(
-        text: "Completed",
+        text: AppStrings.completed.tr,
         //    height: 30.sp,
       ),
       Tab(
-        text: "Canceled",
+        text: AppStrings.canceled.tr,
         //    height: 30.sp,
       ),
     ];
@@ -98,6 +99,7 @@ class AppointmentController extends GetxController
           params: {'page': 1, 'type': status.index + 1});
       return;
     }
+    appointments.clear();
     await fetchAppointments(
         loading: isLoading[AppointmentTypes.upcoming.index],
         params: {'page': 1, 'type': 1})

@@ -17,28 +17,29 @@ class ExperienceCard extends StatelessWidget {
       width: 50.w,
       child: Card(
         elevation: 0,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.sp)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.sp)),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
                 experience.position ?? "",
                 style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
                     color: AppColors.primaryColor,
-                    fontSize: 12.sp,
+                    fontSize: 11.sp,
                     fontWeight: FontWeight.w700),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Text(
-                  experience.place ?? "",
-                  style: TextStyle(color: Colors.black),
+              Text(
+                experience.place ?? "",
+                style: TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 9.sp,
+                  color: Colors.black,
                 ),
               ),
-              // Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

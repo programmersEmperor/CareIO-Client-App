@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Search/custom/clinic_chip.dart';
 import 'package:ai_health_assistance/Pages/Search/custom/rating_chip.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
@@ -35,7 +36,7 @@ class FilterBottomSheet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Search filter",
+              AppStrings.searchFilter.tr,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
@@ -71,7 +72,7 @@ class FilterBottomSheet extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                          "Show nearby results",
+                          AppStrings.showNearBy.tr,
                           style: TextStyle(
                             fontSize: 10.sp,
                             color: Colors.black54,
@@ -103,7 +104,7 @@ class FilterBottomSheet extends StatelessWidget {
               height: 10.sp,
             ),
             Text(
-              "By clinic",
+              AppStrings.byClinic.tr,
               style: TextStyle(fontSize: 12.sp),
             ),
             Wrap(
@@ -147,7 +148,7 @@ class FilterBottomSheet extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            "order by rating",
+                            AppStrings.orderByRating.tr,
                             style: TextStyle(
                               fontSize: 10.sp,
                               color: Colors.black54,
@@ -203,7 +204,7 @@ class FilterBottomSheet extends StatelessWidget {
           children: [
             Expanded(
               child: MainColoredButton(
-                text: "See results",
+                text: AppStrings.seeResult.tr,
                 onPress: () {
                   onTapFilter(
                     showRatingBy.isTrue? 1: 0,
@@ -218,7 +219,7 @@ class FilterBottomSheet extends StatelessWidget {
             ),
             Expanded(
               child: MainColoredButton(
-                text: "clear filter",
+                text: AppStrings.clearFilter.tr,
                 onPress: () {
                   onTapClearFilter();
                 },

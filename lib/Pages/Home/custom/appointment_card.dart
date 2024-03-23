@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
@@ -207,7 +208,7 @@ class AppointmentCard extends StatelessWidget {
                                           Row(
                                             children: [
                                               AutoSizeText(
-                                                "Reservation in name",
+                                                AppStrings.reservationInName.tr,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: AppColors.primaryColor,
@@ -262,9 +263,7 @@ class AppointmentCard extends StatelessWidget {
                                           Row(
                                             children: [
                                               AutoSizeText(
-                                                "${appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
-                                                    ? 'Unpaid'
-                                                    : "Paid"} Price",
+                                                AppStrings.price.tr,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: appointment.wallet.isEmpty && appointment.status != AppointmentStatus.completed.index
@@ -293,11 +292,15 @@ class AppointmentCard extends StatelessWidget {
                                           AutoSizeText(
                                           appointment.status != AppointmentStatus.completed.index
                                               ? appointment.wallet.isEmpty
-                                                ? "Payment will be in cash"
-                                                : "You have completed the payment using the wallet ${appointment.wallet}"
+                                                ? AppStrings.paymentWillBeInCash.tr
+                                                : Get.locale.toString() == "ar_AR"
+                                                  ? '${AppStrings.paymentCompletedUsing.tr} ${appointment.wallet} ${AppStrings.wallet.tr}'
+                                                  : '${AppStrings.paymentCompletedUsing.tr} ${AppStrings.wallet.tr} ${appointment.wallet}'
                                               : appointment.wallet.isEmpty
-                                                ? "You have completed the payment using cash"
-                                                : "You have completed the payment using ${appointment.wallet} Wallet",
+                                                ? AppStrings.paymentWillBeInCash.tr
+                                                : Get.locale.toString() == "ar_AR"
+                                                  ? '${AppStrings.paymentCompletedUsing.tr} ${appointment.wallet} ${AppStrings.wallet.tr}'
+                                                  : '${AppStrings.paymentCompletedUsing.tr} ${AppStrings.wallet.tr} ${appointment.wallet}',
                                             style: TextStyle(fontSize: 9.sp),
                                           ),
                                         ],
@@ -375,7 +378,7 @@ class AppointmentCard extends StatelessWidget {
                               RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.sp)))),
                       child: Obx(()=>Text(
-                        showDetails.isTrue ? "Show less" : "Show more",
+                        showDetails.isTrue ? AppStrings.showLess.tr : AppStrings.showMore.tr,
                         style: TextStyle(
                             color: Colors.black54,
                             fontSize: 8.sp,
@@ -401,7 +404,7 @@ class AppointmentCard extends StatelessWidget {
                                     borderRadius:
                                         BorderRadius.circular(10.sp)))),
                         child: Text(
-                          "Reschedule",
+                          AppStrings.reschedule.tr,
                           style: TextStyle(
                               fontSize: 8.sp, fontWeight: FontWeight.w800),
                         ),
