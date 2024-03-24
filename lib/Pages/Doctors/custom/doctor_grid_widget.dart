@@ -60,72 +60,40 @@ class DoctorGridWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding:
-                        EdgeInsets.only(left: 5.sp, right: 5.sp, top: 2.sp),
-                    child: AutoSizeText(
-                      doctor.name!,
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: 5.sp, right: 5.sp, top: 2.sp),
+                  child: AutoSizeText(
+                    doctor.name!,
+                    style: TextStyle(
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    overflowReplacement: Marquee(
+                      text: doctor.name!,
+                      blankSpace: 20.0,
+                      accelerationCurve: Curves.easeOut,
+                      velocity: 50.0,
+                      startPadding: 2.0,
+                      showFadingOnlyWhenScrolling: true,
+                      startAfter: 5.seconds,
+                      fadingEdgeEndFraction: 0.5.sp,
+                      fadingEdgeStartFraction: 0.5.sp,
+                      pauseAfterRound: 5.seconds,
                       style: TextStyle(
                         fontSize: 8.sp,
                         fontWeight: FontWeight.w400,
                       ),
-                      overflowReplacement: Marquee(
-                        text: doctor.name!,
-                        blankSpace: 20.0,
-                        accelerationCurve: Curves.easeOut,
-                        velocity: 50.0,
-                        startPadding: 2.0,
-                        showFadingOnlyWhenScrolling: true,
-                        startAfter: 5.seconds,
-                        fadingEdgeEndFraction: 0.5.sp,
-                        fadingEdgeStartFraction: 0.5.sp,
-                        pauseAfterRound: 5.seconds,
-                        style: TextStyle(
-                          fontSize: 8.sp,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: 3.5.sp, left: 5.sp, right: 5.sp),
-                  child: doctor.rating != null ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: Colors.orange,
-                        size: 10.sp,
-                      ),
-                      Text(
-                        doctor.rating!.toStringAsFixed(1),
-                        style: TextStyle(
-                          color: Colors.black38,
-                          fontSize: 8.sp,
-                        ),
-                      ),
-                    ],
-                  ) : const SizedBox.shrink(),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 5.sp,
-                      right: 5.sp,
-                      top: 2.sp,
-                    ),
-                    child: Text(
-                      doctor.specialism?.name ?? "",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 8.sp,
-                          color: Colors.black45),
-                    ),
-                  ),
+                Text(
+                  (doctor.degree?.name ?? "") + " " + (doctor.specialism?.name ?? ""),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 7.sp,
+                      color: Colors.black45),
                 ),
               ],
             ),

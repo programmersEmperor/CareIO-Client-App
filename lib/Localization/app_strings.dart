@@ -121,4 +121,9 @@ class AppStrings {
   static const showNearBy = 'showNearBy';
   static const orderByRating = 'orderByRating ';
   static const byClinic = 'byClinic';
+  static const rial = 'rial';
+  static const selectPaymentMethod = 'selectPaymentMethod';
+  static const selectTime = 'selectTime';
+  static const insufficientData = "insufficientData";
+  static const cannotCompleteOperation = "cannotCompleteOperation";
 }

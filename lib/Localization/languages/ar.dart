@@ -35,8 +35,8 @@ Map<String, String> ar = {
   AppStrings.pickYourPreferredLanguage: "حدد لغتك المناسبة",
   AppStrings.healthCenters: "المراكز الصحية",
   AppStrings.healthCenter: "مركز صحي",
-  AppStrings.topDoctors: "الدكاترة الاعلى تقييماً",
-  AppStrings.topHospitals: "المستشفيات الاعلى تقييماً",
+  AppStrings.topDoctors: "الاطباء الاعلى تقييماً",
+  AppStrings.topHospitals: "المراكز الصحية الاعلى تقييماً",
   AppStrings.viewAll: "عرض الكل",
   AppStrings.appointmentBooked: "الحجوزات المكتملة",
   AppStrings.appointmentWaiting: "الحجوزات القادمة",
@@ -123,5 +123,10 @@ Map<String, String> ar = {
   AppStrings.showNearBy : "ترتيب على حسب الاقرب مسافة",
   AppStrings.orderByRating : "ترتيب على حسب التقييم",
   AppStrings.byClinic : "على حسب العيادة",
+  AppStrings.rial: "ريال",
+  AppStrings.selectPaymentMethod: "الرجاء تحديد طريقة دفع",
+  AppStrings.selectTime: "الرجاء تحديد وقت الموعد",
+  AppStrings.insufficientData: "البيانات غير مكتلمة",
+  AppStrings.cannotCompleteOperation: "لايمكن اكمال العملية",
 
 };

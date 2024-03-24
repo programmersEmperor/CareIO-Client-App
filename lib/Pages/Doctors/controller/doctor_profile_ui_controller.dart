@@ -110,10 +110,13 @@ class DoctorProfileUiController extends GetxController {
     if (healthCenter.activeTimes == null) return;
   }
 
-  List<HealthCenter> filterHealthCentersByDay({required List<HealthCenter> healthCenters, required int day}){
+  List<HealthCenter> filterHealthCentersByDay({required List<HealthCenter> healthCenters, required int day, int? clinicId}){
     final List<HealthCenter> filteredHealthCenters = [];
     for(HealthCenter healthCenter in healthCenters){
-      final bool succeeded = healthCenter.clinics.any((clinic) => clinic.activeTimes.any((activeTime) => activeTime.day == day));
+      final bool succeeded = healthCenter.clinics.any((clinic) {
+        if(clinicId == null) return clinic.activeTimes.any((activeTime) => activeTime.day == day);
+        else return clinic.id! == clinicId! && clinic.activeTimes.any((activeTime) => activeTime.day == day) ;
+      });
       if(succeeded){
         filteredHealthCenters.add(healthCenter);
       }
@@ -132,15 +135,6 @@ class DoctorProfileUiController extends GetxController {
     log(response.data['result'].toString());
     if (response == null) return;
     doctor = DoctorDetails.fromJson(response.data['result']);
-    debugPrint("experience length ${doctor.experience.length}");
-    // for (var healthCenter in doctor.healthCenters) {
-    //   for (var clinic in healthCenter.clinics) {
-    //     for (var timeSlot in clinic.activeTimes) {
-    //       timeSlots.add(timeSlot);
-    //     }
-    //   }
-    // }
-
     isLoading(false);
   }
 

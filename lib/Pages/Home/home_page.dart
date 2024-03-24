@@ -56,10 +56,10 @@ class HomePage extends StatelessWidget {
             Expanded(
               child: Obx(
                 () => AnimatedSwitcher(
-                  duration: 400.milliseconds,
-                  switchOutCurve: Curves.linearToEaseOut,
-                  switchInCurve: Curves.linearToEaseOut,
-                  reverseDuration: 50.milliseconds,
+                  duration: 300.milliseconds,
+                  switchOutCurve: Curves.linear,
+                  switchInCurve: Curves.linear,
+                  reverseDuration: 300.milliseconds,
                   transitionBuilder: (child, animation) {
                     return FadeTransition(
                       opacity: Tween<double>(end: 1.0, begin: 0.0)

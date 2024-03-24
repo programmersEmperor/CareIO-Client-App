@@ -131,5 +131,11 @@ Map<String, String> en = {
   AppStrings.showNearBy : "Order by distance",
   AppStrings.orderByRating : "Order by rating",
   AppStrings.byClinic : "by clinic",
+  AppStrings.rial : "Rial",
+  AppStrings.selectPaymentMethod: "Please select a payment method",
+  AppStrings.selectTime: "Please select the appointment time",
+  AppStrings.insufficientData: "Insufficient Data",
+  AppStrings.cannotCompleteOperation: "Cannot complete the operation",
+
 
 };

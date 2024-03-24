@@ -10,7 +10,7 @@ class HealthCenter {
     _address = json['address'] ?? "";
     _avatar = json['avatar'];
     _rating = json['rating'];
-    _completedAppointment = json['completedAppointment'] ?? 0;
+    _completedAppointment = json['completedAppointments'] ?? 0;
     _type = json['type'] is int? HealthCenterTypes.values[json['type'] as int] : null;
     if (json['clinics'] != null) {
       _clinics = [];
@@ -65,7 +65,7 @@ class HealthCenter {
     map['address'] = _address;
     map['avatar'] = _avatar;
     map['rating'] = _rating;
-    map['completedAppointment'] = _completedAppointment;
+    map['completedAppointments'] = _completedAppointment;
     map['type'] = _type;
 
     if (_activeTimes != null) {

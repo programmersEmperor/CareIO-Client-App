@@ -1,8 +1,12 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/custom_datepicker.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
+import 'package:ai_health_assistance/Models/DoctorDetails.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -29,9 +33,9 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BookAppointmentController controller =
-        Get.put(BookAppointmentController(), tag: "reschedule");
-    controller.getTimes(id: appointment.doctor.id!, clinicId: 2);
+    BookAppointmentController controller = Get.put(BookAppointmentController(), tag: "reschedule");
+    controller.getTimes(id: appointment.doctor.id!, clinicId: appointment.healthCenter.clinics.first.id!);
+    controller.getDoctorDetails(id: appointment.doctor.id!);
 
     return AnimatedSize(
       duration: const Duration(milliseconds: 1500),
@@ -222,16 +226,28 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                       EdgeInsets.zero)),
                               onPressed: () {
                                 Get.dialog(
-                                  CustomDatePicker(
+                                  Obx(() => controller.isLoading.isTrue
+                                      ? Center(
+                                        child: SpinKitFadingCircle(
+                                          color: AppColors.primaryColor,
+                                        ),
+                                  )   : CustomDatePicker(
+                                    selectableDayPredicate: (date){
+                                      if(date.isBefore(DateTime.now().toLocal())){
+                                        return false;
+                                      }
+                                      final List<HealthCenter> healthCenters = controller.filterHealthCentersByDay(healthCenters: controller.doctorDetails!.healthCenters, day: date.weekday, clinicId: appointment.healthCenter.clinics.first.id!);
+                                      return healthCenters.isNotEmpty;
+                                    },
                                     onDateChange: (date) {
                                       controller.handleDayTitle(date: date);
                                       controller.getTimes(
                                           day: date,
                                           id: appointment.doctor.id!,
-                                          clinicId: 2);
+                                          clinicId: appointment.healthCenter.clinics.first.id!);
                                       Get.close(0);
                                     },
-                                  ),
+                                  )),
                                   useSafeArea: false,
                                 );
                               },
@@ -256,7 +272,13 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                     color: AppColors.primaryColor,
                                   ),
                                 )
-                              : Wrap(
+                              : controller.times.isEmpty
+                              ? Center(
+                                child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 15),
+                                child: Text(AppStrings.notActiveOnThisDay.tr, style: TextStyle(fontSize: 8.sp),)
+                              ),
+                            ) : Wrap(
                                   key: const ValueKey<int>(5),
                                   spacing: 7.sp,
                                   children: [
@@ -295,8 +317,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
               isLoading: loading,
               text: "Confirm reschedule",
               onPress: () {
-                onTap(
-                    controller.selectDate, controller.selectedTime.value.time);
+                onTap(controller.selectDate, controller.selectedTime.value.time);
               },
             ),
           ],

@@ -34,7 +34,7 @@ class CategoryGridElement extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   iconPath,
-                  height: MediaQuery.of(context).size.height  * 0.055,
+                  height: MediaQuery.of(context).size.height  * 0.050,
                   width: MediaQuery.of(context).size.width * 0.03,
                   color: AppColors.primaryColor,
                 ),
@@ -46,7 +46,7 @@ class CategoryGridElement extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
-                    fontSize: 9.sp,
+                    fontSize: 8.sp,
                   ),
                 ),
               ],

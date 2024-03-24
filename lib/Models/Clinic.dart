@@ -15,6 +15,7 @@ class Clinic {
   Clinic.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
+    _price = json['price'];
     _description = json['description'];
     if (json['activeTimes'] != null) {
       _activeTimes = [];
@@ -27,12 +28,14 @@ class Clinic {
   }
   int? _id;
   String? _name;
+  num? _price;
   String? _description;
   List<ActiveTimes>? _activeTimes;
   RxBool selected  = false.obs;
 
   int? get id => _id;
   String? get name => _name;
+  num? get price => _price;
   String? get description => _description;
   List<ActiveTimes> get activeTimes => _activeTimes ?? [];
 

@@ -1,9 +1,11 @@
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/BookAvailableTime.dart';
 import 'package:ai_health_assistance/Models/Clinic.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Models/Wallet.dart';
 import 'package:ai_health_assistance/Services/Api/book_appintment.dart';
+import 'package:ai_health_assistance/Services/Api/doctors.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Utils/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,7 @@ class BookAppointmentController extends GetxController {
   Rx<BookAvailableTime> selectedTime = BookAvailableTime().obs;
   GlobalKey<FormBuilderState> key = GlobalKey<FormBuilderState>();
   TextEditingController nameController = TextEditingController();
+  DoctorDetails? doctorDetails;
 
   final BookAppointmentApiService _apiService =
       Get.find<BookAppointmentApiService>();
@@ -25,18 +28,47 @@ class BookAppointmentController extends GetxController {
   RxBool get isLoading => _apiService.isLoading;
   RxBool bookLoading = false.obs;
   RxInt selectedClinicId = (-1).obs;
-
-  var day = "Today".obs;
+  RxnDouble selectedClinicPrice = new RxnDouble(null);
 
   var selectDate = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+  var day = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString().obs;
+  bool nearestAvailableDateSelected = false;
+
 
   void handleDayTitle({required DateTime date}) {
     selectDate = DateFormat('yyyy-MM-dd').format(date).toString();
-    var _isToday = DateFormat('yyyy-MM-dd').format(DateTime.now()) ==
-        DateFormat('yyyy-MM-dd').format(date);
+    var _isToday = DateFormat('yyyy-MM-dd').format(DateTime.now()) == DateFormat('yyyy-MM-dd').format(date);
     debugPrint("is Today $_isToday");
     day(_isToday ? "Today" : DateFormat('yyyy-MM-dd').format(date).toString());
   }
+
+  Future<void> getDoctorDetails({required int id}) async{
+    try{
+      isLoading(true);
+      var response = await Get.find<DoctorsApiService>().showDoctor(id: id.toString());
+      if (response == null) return null;
+      doctorDetails = DoctorDetails.fromJson(response.data['result']);
+      isLoading(false);
+    }
+    catch(e){
+      isLoading(false);
+    }
+  }
+
+  List<HealthCenter> filterHealthCentersByDay({required List<HealthCenter> healthCenters, required int day, int? clinicId}){
+    final List<HealthCenter> filteredHealthCenters = [];
+    for(HealthCenter healthCenter in healthCenters){
+      final bool succeeded = healthCenter.clinics.any((clinic) {
+        if(clinicId == null) return clinic.activeTimes.any((activeTime) => activeTime.day == day);
+        else return clinic.id! == clinicId! && clinic.activeTimes.any((activeTime) => activeTime.day == day) ;
+      });
+      if(succeeded){
+        filteredHealthCenters.add(healthCenter);
+      }
+    }
+    return filteredHealthCenters;
+  }
+
 
   void onTapTime(BookAvailableTime time) {
     selectedTime(time);
@@ -62,6 +94,7 @@ class BookAppointmentController extends GetxController {
 
   void selectClinic(Clinic clinic, DoctorDetails doctor) {
     selectedClinicId.value = clinic.id!;
+    selectedClinicPrice.value = clinic.price == null ? null : clinic.price!.toDouble();
     var date = DateFormat('yyyy-MM-dd').parse(selectDate);
     getTimes(day: date, id: doctor.id!, clinicId: clinic.id!);
   }
@@ -90,7 +123,16 @@ class BookAppointmentController extends GetxController {
 
       final Wallet? wallet = wallets.firstWhereOrNull((wallet) => wallet.selected.isTrue);
 
-      if(wallet == null) return;
+      if(selectedTime.value.time == ""){
+        showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.selectTime.tr);
+        return;
+      }
+
+      if(wallet == null) {
+        showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.selectPaymentMethod.tr);
+        return;
+      };
+
       if (wallet.id != -1 && !key.currentState!.saveAndValidate()) return;
 
       var body = {
@@ -116,6 +158,7 @@ class BookAppointmentController extends GetxController {
 
       if (response.data['result'] is List) {
         selectedClinicId.value = -1;
+        selectedClinicPrice.value = null;
         selectDate = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
 
         Get.close(0);

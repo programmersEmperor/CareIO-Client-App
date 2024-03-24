@@ -24,13 +24,10 @@ class ApiInterceptors extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     debugPrint('REQUEST [${options.method}] => PATH: ${options.path}');
 
-    options.headers.putIfAbsent(
-        'Authorization', () => 'Bearer ${Get.find<UserSession>().token}');
-    options.headers['Accept-Language'] =
-        Get.find<LocalizationHelper>().appliedLocale.value!.languageCode;
+    options.headers.putIfAbsent('Authorization', () => 'Bearer ${Get.find<UserSession>().token}');
+    options.headers['Accept-Language'] = Get.find<LocalizationHelper>().appliedLocale.value!.languageCode;
     options.headers['fingerprint'] = await getFingerprint;
-    options.headers['deviceToken'] =
-        Get.find<UserSession>().firebaseDeviceToken;
+    options.headers['deviceToken'] = Get.find<UserSession>().firebaseDeviceToken;
     options.headers['Content-Type'] = "application/json";
     handler.next(options);
 

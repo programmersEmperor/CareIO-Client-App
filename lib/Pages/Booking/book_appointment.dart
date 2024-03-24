@@ -5,10 +5,11 @@ import 'package:ai_health_assistance/Components/SharedWidgets/text_input_field.d
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
+import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
+import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/clinic_selection_card.dart';
-import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,8 +28,9 @@ class BookAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BookAppointmentController controller = Get.find<BookAppointmentController>();
-    controller.selectedClinicId.value = doctor.healthCenters!.first.clinics.first.id!;
-    controller.getTimes(id: doctor.id!, clinicId: doctor.healthCenters!.first.clinics.first.id!);
+    controller.selectClinic(doctor.healthCenters!.first.clinics.first, doctor);
+    // controller.selectedClinicId.value = doctor.healthCenters!.first.clinics.first.id!;
+    // controller.getTimes(id: doctor.id!, clinicId: doctor.healthCenters!.first.clinics.first.id!);
     return Scaffold(
       body: SizedBox(
         height: 100.h,
@@ -100,14 +102,11 @@ class BookAppointment extends StatelessWidget {
                     iconColor: AppColors.primaryColor),
               ],
             ),
-            // SizedBox(
-            //   height: 30.sp,
-            // ),
             SizedBox(
               height: 20.sp,
             ),
             AutoSizeText(
-              AppStrings.choosePaymentMethod.tr,
+              AppStrings.chooseClinic.tr,
               style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
             ),
             Obx(() => ListView(
@@ -180,15 +179,21 @@ class BookAppointment extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(8.sp),
                                     ),
                                   ),
-                                  maximumSize:
-                                      MaterialStatePropertyAll(Size(25.w, 4.h)),
-                                  minimumSize:
-                                      MaterialStatePropertyAll(Size(25.w, 4.h)),
+                                  maximumSize: MaterialStatePropertyAll(Size(25.w, 4.h)),
+                                  minimumSize: MaterialStatePropertyAll(Size(25.w, 4.h)),
                                   padding: const MaterialStatePropertyAll(
                                       EdgeInsets.zero)),
                               onPressed: () {
                                 Get.dialog(
                                   CustomDatePicker(
+                                    selectableDayPredicate: (date){
+                                      if(date.isBefore(DateTime.now().toLocal())){
+                                        return false;
+                                      }
+
+                                      final List<HealthCenter> healthCenters = Get.find<DoctorProfileUiController>().filterHealthCentersByDay(healthCenters: doctor.healthCenters, day: date.weekday);
+                                      return healthCenters.isNotEmpty;
+                                    },
                                     onDateChange: (date) {
                                       controller.handleDayTitle(date: date);
                                       controller.getTimes(
@@ -224,26 +229,32 @@ class BookAppointment extends StatelessWidget {
                                     color: AppColors.primaryColor,
                                   ),
                                 )
-                              : Wrap(
-                                  key: const ValueKey<int>(5),
-                                  spacing: 7.sp,
-                                  children: [
-                                    for (var i = 0;
-                                        i < controller.times.length;
-                                        i++) ...[
-                                      BookTimeSlot(
-                                        time: controller.times[i],
-                                        onTapTime: (time) =>
-                                            controller.onTapTime(time),
-                                        isSelected:
-                                            (controller.selectedTime.value ==
-                                                    controller.times[i])
-                                                .obs,
-                                      ),
-                                    ]
-                                  ],
-                                ).animate().fade(
-                                  duration: const Duration(milliseconds: 500)),
+                              : controller.times.isEmpty
+                                ? Center(
+                                    child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 15),
+                                        child: Text(AppStrings.notActiveOnThisDay.tr, style: TextStyle(fontSize: 8.sp),)
+                                    ),
+                                  )
+                                : Wrap(
+                            key: const ValueKey<int>(5),
+                            spacing: 7.sp,
+                            children: [
+                              for (var i = 0;
+                              i < controller.times.length;
+                              i++) ...[
+                                BookTimeSlot(
+                                  time: controller.times[i],
+                                  onTapTime: (time) =>
+                                      controller.onTapTime(time),
+                                  isSelected:
+                                  (controller.selectedTime.value ==
+                                      controller.times[i])
+                                      .obs,
+                                ),
+                              ]
+                            ],
+                          ).animate().fade(duration: const Duration(milliseconds: 500)),
                         ),
                       ],
                     ),
@@ -254,9 +265,23 @@ class BookAppointment extends StatelessWidget {
             SizedBox(
               height: 15.sp,
             ),
-            AutoSizeText(
-              AppStrings.choosePaymentMethod.tr,
-              style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                AutoSizeText(
+                  AppStrings.choosePaymentMethod.tr,
+                  style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
+                ),
+                Obx(() =>
+                    Visibility(
+                      visible: controller.selectedClinicPrice.value != null,
+                      child: AutoSizeText(
+                        "${controller.selectedClinicPrice.value.toString()} ${AppStrings.rial.tr}",
+                        style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                ),
+              ],
             ),
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
@@ -301,18 +326,6 @@ class BookAppointment extends StatelessWidget {
                           required: true,
                         ),
                       ),
-                      // Expanded(
-                      //   child: TextButton(
-                      //     child: Text(
-                      //       AppStrings.useMyName.tr,
-                      //       style: TextStyle(
-                      //           color: AppColors.primaryColor, fontSize: 10.sp),
-                      //     ),
-                      //     onPressed: () {
-                      //       controller.nameController.text = Get.find<UserSession>().patient.name;
-                      //     },
-                      //   ),
-                      // ),
                     ],
                   ),
                 ],

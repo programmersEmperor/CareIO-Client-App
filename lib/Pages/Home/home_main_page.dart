@@ -61,7 +61,7 @@ class HomeMainPage extends StatelessWidget {
             height: 14.h,
             width: double.infinity,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
                   Expanded(
