@@ -15,8 +15,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  NotificationServiceHandler.showLocalNotification(
-      message.notification!.toMap());
+  // NotificationServiceHandler.showLocalNotification(message.notification!.toMap());
   debugPrint("Handling a background message: ${message.messageId}");
 }
 

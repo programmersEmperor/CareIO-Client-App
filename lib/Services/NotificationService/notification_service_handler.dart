@@ -51,11 +51,12 @@ abstract class NotificationServiceHandler {
   static void _configureFirebaseMessaging() {
     FirebaseMessaging.onMessage.listen((event) {
       Get.find<AppointmentController>().initializeAppointments(status: AppointmentTypes.upcoming);
-      showLocalNotification(event.notification!.toMap());
+      debugPrint("notification data: ${event.data.toString()}");
+      showLocalNotification(event.notification!.toMap(), event.data);
     });
   }
 
-  static void showLocalNotification(Map<String, dynamic> message) async {
+  static void showLocalNotification(Map<String, dynamic> message, Map<String, dynamic> data) async {
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
       'all-notifications-channel',
       'all-notifications',
@@ -64,8 +65,11 @@ abstract class NotificationServiceHandler {
       priority: Priority.high,
       icon: '@drawable/careio_launcher',
       largeIcon: DrawableResourceAndroidBitmap('@drawable/careio_launcher'),
+      channelShowBadge: true,
+      enableLights: true,
+      enableVibration: true,
+      playSound: true,
     );
-
     var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
     );
@@ -73,10 +77,22 @@ abstract class NotificationServiceHandler {
     Random random = Random();
     int uniqueId = random.nextInt(999999);
 
+    // if(data['status'] != null && data['status'] == AppointmentStatus.accepted){
+    //   await flutterLocalNotificationsPlugin.zonedSchedule(
+    //       0,
+    //       'scheduled title',
+    //       'scheduled body',
+    //       tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
+    //       platformChannelSpecifics,
+    //       androidAllowWhileIdle: true,
+    //       uiLocalNotificationDateInterpretation:
+    //       UILocalNotificationDateInterpretation.absoluteTime);
+    // }
+
     await flutterLocalNotificationsPlugin.show(
       uniqueId, // Notification ID
-      message['title'], // Notification title
-      message['body'], // Notification body
+      data['titleAr'], // Notification title
+      data['bodyAr'], // Notification body
       platformChannelSpecifics,
       payload: 'Default_Sound',
     );
