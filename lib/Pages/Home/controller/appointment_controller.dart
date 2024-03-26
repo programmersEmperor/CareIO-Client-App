@@ -4,6 +4,7 @@ import 'package:ai_health_assistance/Pages/Home/custom/cancel_appointment_confir
 import 'package:ai_health_assistance/Pages/Home/custom/rating_bottom_sheet_widget.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/reschedule_appointment_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/appointment.dart';
+import 'package:ai_health_assistance/Services/NotificationService/notification_service_handler.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:ai_health_assistance/Utils/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -162,10 +163,8 @@ class AppointmentController extends GetxController
         initializeAppointments(status: AppointmentTypes.canceled);
 
         Get.close(0);
-        showSnack(
-            title: "Appointment canceled",
-            description: "Your appointment has been canceled");
-
+        showSnack(title: "Appointment canceled", description: "Your appointment has been canceled");
+        NotificationServiceHandler.unscheduleLocalNotification(id);
       }
     }
     catch(e){
@@ -204,10 +203,8 @@ class AppointmentController extends GetxController
         });
 
         Get.close(0);
-        showSnack(
-            title: "Appointment Rescheduled",
-            description:
-                "Your appointment has been rescheduled to $date at $time");
+        showSnack(title: "Appointment Rescheduled", description: "Your appointment has been rescheduled to $date at $time");
+        NotificationServiceHandler.unscheduleLocalNotification(id);
       }
     } catch (e) {
       cancelLoading(false);

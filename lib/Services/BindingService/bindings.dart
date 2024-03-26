@@ -24,7 +24,7 @@ class BindingService extends Bindings {
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => AiBotApiService(), fenix: true);
     Get.lazyPut(() => PatientApiService(), fenix: true);
-    Get.lazyPut(() => AppointmentApiService(), fenix: true);
+    Get.put(AppointmentApiService(), permanent: true);
     Get.lazyPut(() => DoctorsApiService(), fenix: true);
     Get.lazyPut(() => HospitalApiService(), fenix: true);
     Get.lazyPut(() => NotificationApiService(), fenix: true);
@@ -33,7 +33,7 @@ class BindingService extends Bindings {
     Get.lazyPut(() => BookAppointmentApiService(), fenix: true);
     Get.lazyPut(() => WalletsApiService(), fenix: true);
     Get.lazyPut(() => BookAppointmentController(), fenix: true);
-    Get.lazyPut(() => SpecializationApiService(), fenix: true);
+    Get.put(SpecializationApiService() , permanent: true);
     Get.put(LocalizationHelper());
   }
 }
