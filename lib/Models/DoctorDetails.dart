@@ -24,7 +24,7 @@ class DoctorDetails {
     _avatar = avatar;
     _rating = rating;
     _phone = phone;
-    _isRecommended = isRecommended;
+    _isRecommended = isRecommended == 1;
     _description = description;
     _completedAppointments = completedAppointments;
     _degree = degree;
@@ -39,7 +39,7 @@ class DoctorDetails {
     _avatar = json['avatar'];
     _rating = json['rating'];
     _phone = json['phone'];
-    _isRecommended = json['isRecommended'];
+    _isRecommended = json['isRecommended'] == 1;
     _description = json['description'];
     _completedAppointments = json['completedAppointments'];
     _degree = json['degree'] != null ? Degree.fromJson(json['degree']) : null;
