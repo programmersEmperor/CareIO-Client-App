@@ -386,15 +386,13 @@ class AppointmentCard extends StatelessWidget {
                       )),
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Visibility(
-                    visible: appointment.status != AppointmentStatus.completed.index && appointment.status != AppointmentStatus.canceled.index,
-                    child: Expanded(
+                  if(appointment.status != AppointmentStatus.completed.index && appointment.status != AppointmentStatus.canceled.index)...[
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
                       child: ElevatedButton(
-                        onPressed: () => Get.find<AppointmentController>()
-                            .confirmRescheduleAppointment(id: appointment.id),
+                        onPressed: () => Get.find<AppointmentController>().confirmRescheduleAppointment(appointment: appointment),
                         style: ButtonStyle(
                             elevation: const MaterialStatePropertyAll(0),
                             backgroundColor: MaterialStatePropertyAll(
@@ -402,7 +400,7 @@ class AppointmentCard extends StatelessWidget {
                             shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.circular(10.sp)))),
+                                    BorderRadius.circular(10.sp)))),
                         child: Text(
                           AppStrings.reschedule.tr,
                           style: TextStyle(
@@ -410,20 +408,16 @@ class AppointmentCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  Visibility(
-                    visible: appointment.status < 3,
-                    child: const SizedBox(
+                  ],
+                  if(appointment.status == AppointmentStatus.completed.index && appointment.rating == null) ...[
+                    const SizedBox(
                       width: 10,
                     ),
-                  ),
-                  Visibility(
-                    visible: appointment.status == AppointmentStatus.completed.index && appointment.rating == null,
-                    child: Expanded(
+                    Expanded(
                       child: ElevatedButton(
                         onPressed: () => Get.find<AppointmentController>()
                             .showRatingBottomSheet(
-                                appointmentId: appointment.id),
+                            appointmentId: appointment.id),
                         style: ButtonStyle(
                             elevation: const MaterialStatePropertyAll(0),
                             backgroundColor: MaterialStatePropertyAll(
@@ -431,7 +425,7 @@ class AppointmentCard extends StatelessWidget {
                             shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
                                     borderRadius:
-                                        BorderRadius.circular(10.sp)))),
+                                    BorderRadius.circular(10.sp)))),
                         child: Text(
                           "Rate",
                           style: TextStyle(
@@ -439,7 +433,7 @@ class AppointmentCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
+                  ],
                   if(appointment.status <= AppointmentStatus.accepted.index)...[
                     const SizedBox(
                       width: 10,
@@ -447,7 +441,7 @@ class AppointmentCard extends StatelessWidget {
                     Expanded(
                       child: AppointmentCancelButton(
                         onTap: () => Get.find<AppointmentController>()
-                            .confirmCancelAppointment(id: appointment.id),
+                            .confirmCancelAppointment(appointment: appointment),
                       ),
                     ),
                   ],
