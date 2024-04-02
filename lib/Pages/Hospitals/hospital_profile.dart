@@ -378,11 +378,12 @@ class HospitalProfile extends StatelessWidget {
                                                       15.sp),
                                                 ),
                                                 child: Center(
-                                                  child: Image.asset(
+                                                  child: InteractiveViewer(
+                                                    child: Image.asset(
                                                     'assets/images/map.jpg',
                                                     fit: BoxFit.cover,
                                                     height: 300,
-                                                  ),
+                                                  ),)
                                                 ),
                                               ),
                                             ),

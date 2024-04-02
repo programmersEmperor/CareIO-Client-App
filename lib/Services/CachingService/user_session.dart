@@ -38,9 +38,11 @@ class UserSession {
     patient = Patient.fromJsonMap(data['patient']);
     debugPrint("UserPhone is ${patient.phone}");
     await box.put(_patientKey, jsonEncode(data['patient']));
-    debugPrint("Saved token $token");
-    token = data['token'];
-    await box.put(_tokenKey, token);
+    if(data['token'] != null){
+      debugPrint("Saved token $token");
+      token = data['token'];
+      await box.put(_tokenKey, token);
+    }
     await box.close();
     return true;
   }

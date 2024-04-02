@@ -1,5 +1,6 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_app_bar.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
+import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProfilePageController profilePageController = Get.put(ProfilePageController());
+    profilePageController.refreshPatientData();
     HomePageController homePageController = Get.put(HomePageController());
     return Scaffold(
       extendBody: true,

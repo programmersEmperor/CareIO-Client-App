@@ -17,7 +17,7 @@ class Patient {
         avatar = map["avatar"] ?? "",
         subscription = Plan.fromJson(map["subscription"]),
         messageBalance = map["messageBalance"] ?? 0,
-        appointmentWaiting = map["appointmentWating"] ?? 0,
+        appointmentWaiting = map["appointmentWaiting"] ?? 0,
         appointmentBooked = map["appointmentBooked"] ?? 0;
 
   Map<String, dynamic> toJson() {

@@ -11,7 +11,9 @@ class PatientApiService {
       {required String name,
       required File avatar,
       String? phone,
-      String? email}) async {
+      String? email,
+        bool removeAvatar = false,
+      }) async {
     try {
       var response = await _apiService.postRequest(
           url: 'patients/update',
@@ -20,7 +22,9 @@ class PatientApiService {
             'avatar': avatar.path.isNotEmpty
                 ? await dio.MultipartFile.fromFile(avatar.path)
                 : null,
-          }));
+          }),
+        params: removeAvatar ? {"removeAvatar": 1} : null,
+      );
 
       return response;
     } catch (e) {
@@ -45,5 +49,17 @@ class PatientApiService {
         url: 'patients/resetPassword',
         body: {"oldPassword": oldPassword, "newPassword": password});
     return response;
+  }
+
+  Future<dynamic> getPatientData() async {
+    try {
+      var response = await _apiService.getRequest(
+        url: '/patients/auther-data',
+      );
+      debugPrint('Status Code : ${response.statusCode}');
+      return response;
+    } catch (e) {
+        throw e;
+    }
   }
 }

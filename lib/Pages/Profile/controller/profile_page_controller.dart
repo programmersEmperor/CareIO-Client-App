@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Plan.dart';
 import 'package:ai_health_assistance/Models/client.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePageController extends GetxController
     with GetTickerProviderStateMixin {
@@ -57,22 +59,19 @@ class ProfilePageController extends GetxController
     var response = await Get.find<PatientApiService>().update(
         name: name.text,
         avatar: getImage,
-        email: email.text);
+        email: email.text,
+      removeAvatar: changeImage.isTrue && image.value.path.isEmpty,
+    );
     isLoading(false);
 
     if (response == null) return;
     var decodedResponse = json.decode(response.toString());
     Get.find<UserSession>().patient.name = decodedResponse["result"]["name"];
     Get.find<UserSession>().patient.email = decodedResponse["result"]["email"] ?? "";
-    Get.find<UserSession>().patient.avatar = decodedResponse["result"]["avatar"];
+    Get.find<UserSession>().patient.avatar = decodedResponse["result"]["avatar"] ?? "";
     Get.find<UserSession>().updatePatient();
 
-    Get.find<HomePageController>().patient.value = Get.find<UserSession>().patient;
-    Get.find<HomePageController>().patient.refresh();
-
-    Get.find<ProfilePageController>().patient.value = Get.find<UserSession>().patient;
-    Get.find<ProfilePageController>().patient.refresh();
-
+    refreshPatientDataInOtherPages();
 
     showSnack(
         title: "Profile Updated",
@@ -177,4 +176,45 @@ class ProfilePageController extends GetxController
     Get.put(BottomSheetController())
         .showBottomSheet(const ChangeLanguageSheet(), 100.h);
   }
+
+  void refreshPatientDataInOtherPages(){
+    Get.find<HomePageController>().patient.value = Get.find<UserSession>().patient;
+    Get.find<HomePageController>().patient.refresh();
+
+    Get.find<ProfilePageController>().patient.value = Get.find<UserSession>().patient;
+    Get.find<ProfilePageController>().patient.refresh();
+  }
+
+  Future<void> refreshPatientData() async {
+    try{
+
+      var response = await Get.find<PatientApiService>().getPatientData();
+      if(response.statusCode != 200) return;
+      final patientData = {"patient": response.data['result']};
+      await Get.find<UserSession>().savePatient(patientData);
+
+      refreshPatientDataInOtherPages();
+    }
+    catch(e){
+        showSnack(title: "Error", description: e.toString());
+    }
+  }
+
+  void openWhatsapp() async {
+      String contact = "+967774569423";
+      String message = Get.locale.toString() == 'ar_Ar' ? 'مربحا! احتاج الى مساعدة' : 'Hi, I need some help';
+      var androidUrl = "whatsapp://send?phone=$contact&text=$message";
+      var iosUrl = "https://wa.me/$contact?text=${Uri.parse(message)}";
+
+      try{
+        if(Platform.isIOS){
+          await launchUrl(Uri.parse(iosUrl));
+        }
+        else{
+          await launchUrl(Uri.parse(androidUrl));
+        }
+      } on Exception{
+        showSnack(title: "Error", description: "Whatsapp is not installed");
+      }
+    }
 }

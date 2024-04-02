@@ -12,6 +12,7 @@ import 'package:ai_health_assistance/Pages/Home/custom/map_bottom_sheet.dart';
 import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Home/my_appoinments_page.dart';
 import 'package:ai_health_assistance/Pages/Notifications/notifications_page.dart';
+import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Profile/profile_page.dart';
 import 'package:ai_health_assistance/Services/Api/home.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';
@@ -61,7 +62,6 @@ class HomePageController extends GetxController
 
     await fetchHomeInfo();
     await fetchWallets();
-    await fetchSpecializations();
     await fetchPlans();
   }
 
