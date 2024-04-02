@@ -76,6 +76,8 @@ class ProfilePageController extends GetxController
     showSnack(
         title: "Profile Updated",
         description: "Your data has been updated successfully");
+
+    Get.close(0);
   }
 
   void showImageSelector(BuildContext context) {
