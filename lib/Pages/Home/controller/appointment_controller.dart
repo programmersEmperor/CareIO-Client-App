@@ -18,32 +18,11 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
 
   final List<PagingController<int, Appointment>> appointmentsPagingControllers = [];
   final List<RxBool> appointmentsPageLoadings = [];
-  //
-  // final isUpcomingAppointmentsLoading = false.obs;
-  // final isCompletedAppointmentsLoading = false.obs;
-  // final isCanceledAppointmentsLoading = false.obs;
+
 
   RxBool cancelLoading = false.obs;
   RxBool ratingLoading = false.obs;
-  //
-  // RxList<Appointment> get upcomingAppointments => appointments
-  //     .where((element) =>
-  //         element.status == 0 || element.status == 2 || element.status == 1)
-  //     .toList()
-  //     .obs;
 
-  // RxList<Appointment> get completedAppointments => appointments
-  //     .where((element) => element.status == 5 || element.status == 6)
-  //     .toList()
-  //     .obs;
-
-  // RxList<Appointment> get canceledAppointments => appointments
-  //     .where((element) => element.status == 4 || element.status == 3)
-  //     .toList()
-  //     .obs;
-
-  // List<int> pages = [1, 1, 1];
-  // List<RxBool> isLoading = [false.obs, false.obs, false.obs];
 
   @override
   void onInit() async {
