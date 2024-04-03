@@ -14,7 +14,7 @@
 
     </queries>
    <application
-        android:label="careio"
+        android:label="Careio"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
