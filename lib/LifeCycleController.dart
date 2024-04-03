@@ -25,7 +25,7 @@ class LifeCycleController extends SuperController {
   @override
   void onResumed() {
     log("LifeCycleController onResumed ");
-    BindingService().dependencies();
+    Get.find<ConnectivityHandler>().refreshOnline();
 
     // final bool isConnectivityDeleted = Get.isRegistered<ConnectivityHandler>();
     // if(isConnectivityDeleted){
