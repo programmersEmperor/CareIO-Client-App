@@ -6,14 +6,15 @@ Map<String, String> ar = {
   AppStrings.phone: "رقم الهاتف",
   AppStrings.password: "كلمة المرور",
   AppStrings.forgetPassword: "هل نسيت كلمة المرور؟",
-  AppStrings.createNewAccount: " ليس لديك حساب ؟ انشاء حساب جديد",
+  AppStrings.createNewAccount: "انشاء حساب جديد",
+  AppStrings.dontHaveAccount: "ليس لديك حساب؟",
   AppStrings.register: "انشاء حساب",
   AppStrings.introductionSubHeading:
       "اسأل, تصفح و احجز جميع الخدمات الصحية الممكنة متوفرة بلمسة زر",
   AppStrings.introductionHeading: "صحتك في ايادي رقمية",
   AppStrings.createNewAccountSubtitle:
       "قم بانشاء حساب جديد لتتمكن من تصفح جميع مزايا التطبيق",
-  AppStrings.alreadyHaveAccount: "لديك حساب مسبق ؟ تسجيل الدخول",
+  AppStrings.alreadyHaveAccount: "لديك حساب مسبق ؟",
   AppStrings.forgetPasswordSubtitle:
       "ادخل رقم الهاتف الخاص بك من ثم سيتم ارسال اليك رمز التأكيد عن طريق رسالة نصية ",
   AppStrings.sendOtp: "ارسل الرمز",
@@ -123,6 +124,7 @@ Map<String, String> ar = {
   AppStrings.showNearBy : "ترتيب على حسب الاقرب مسافة",
   AppStrings.orderByRating : "ترتيب على حسب التقييم",
   AppStrings.byClinic : "على حسب العيادة",
+  AppStrings.bySpecialism : "على حسب التخصص",
   AppStrings.rial: "ريال",
   AppStrings.selectPaymentMethod: "الرجاء تحديد طريقة دفع",
   AppStrings.selectTime: "الرجاء تحديد وقت الموعد",

@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 30.h,
+            height: 25.h,
             width: double.infinity,
             child: Stack(
               children: [
@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
@@ -48,11 +48,15 @@ class LoginPage extends StatelessWidget {
                             fontSize: 22.sp),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 12.0.sp),
+                        padding: EdgeInsets.only(
+                            top: 12.0.sp, left: 40.sp, right: 40.sp),
                         child: Text(
                           AppStrings.loginSubtitle.tr,
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontSize: 11.sp, fontWeight: FontWeight.bold),
+                              color: Colors.black87,
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600),
                         ),
                       )
                     ],
@@ -62,98 +66,86 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Padding(
+            child: ListView(
               padding: EdgeInsets.symmetric(
                 horizontal: 20.sp,
+                vertical: 10.sp,
               ),
-              child: ListView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  FormBuilder(
-                    key: controller.loginFormKey,
-                    child: Column(
-                      children: [
-                        const TextInputField(
-                          name: 'phone',
-                          inputType: TextInputType.phone,
-                        ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        const TextInputField(
-                          name: 'password',
-                          inputType: TextInputType.text,
-                          password: true,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: () => Get.toNamed(ForgetPasswordPage.id),
-                            child: Text(
-                              AppStrings.forgetPassword.tr,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 9.sp,
-                                  color: AppColors.primaryColor),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10.sp,
-                        ),
-                        MainColoredButton(
-                          text: AppStrings.login.tr,
-                          fontSize: 12.sp,
-                          isLoading: controller.isLoading,
-                          onPress: () => controller.login(),
-                        ),
-                        SizedBox(
-                          height: 15.sp,
-                        ),
-                        TextButton(
-                          onPressed: () => Get.toNamed(SignupPage.id),
+              children: [
+                FormBuilder(
+                  key: controller.loginFormKey,
+                  child: Column(
+                    children: [
+                      const TextInputField(
+                        name: 'phone',
+                        inputType: TextInputType.phone,
+                      ),
+                      SizedBox(
+                        height: 15.sp,
+                      ),
+                      const TextInputField(
+                        name: 'password',
+                        inputType: TextInputType.text,
+                        password: true,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () => Get.toNamed(ForgetPasswordPage.id),
                           child: Text(
-                            AppStrings.createNewAccount.tr,
+                            AppStrings.forgetPassword.tr,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10.sp,
-                                color: Colors.black54),
+                                fontWeight: FontWeight.w600,
+                                fontSize: 9.sp,
+                                color: AppColors.primaryColor),
                           ),
                         ),
-                        SizedBox(
-                          height: 10.h,
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      MainColoredButton(
+                        text: AppStrings.login.tr,
+                        fontSize: 12.sp,
+                        isLoading: controller.isLoading,
+                        onPress: () => controller.login(),
+                      ),
+                      SizedBox(
+                        height: 15.sp,
+                      ),
+                      TextButton(
+                        onPressed: () => Get.offNamed(SignupPage.id),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppStrings.dontHaveAccount.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10.sp,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 6.sp,
+                            ),
+                            Text(
+                              AppStrings.createNewAccount.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10.sp,
+                                  color: AppColors.primaryColor
+                              ),
+                            ),
+                          ],
                         ),
-                        // Text(
-                        //   "or continue with",
-                        //   style: TextStyle(
-                        //       fontSize: 10.sp,
-                        //       fontWeight: FontWeight.w600,
-                        //       color: AppColors.primaryColor),
-                        // ),
-                        // SizedBox(
-                        //   height: 15.sp,
-                        // ),
-                        // Row(
-                        //   mainAxisSize: MainAxisSize.min,
-                        //   children: [
-                        //     SocialMediaButton(
-                        //       icon: Boxicons.bxl_google,
-                        //       onTap: () {},
-                        //     ),
-                        //     SizedBox(
-                        //       width: 10.sp,
-                        //     ),
-                        //     SocialMediaButton(
-                        //       icon: Boxicons.bxl_facebook,
-                        //       onTap: () {},
-                        //     ),
-                        //   ],
-                        // ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )
         ],

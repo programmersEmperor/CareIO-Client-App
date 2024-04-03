@@ -7,19 +7,20 @@ Map<String, String> en = {
   AppStrings.phone: "Phone",
   AppStrings.password: "Password",
   AppStrings.forgetPassword: "Forget your password ? ",
-  AppStrings.createNewAccount: "Don`t Have Account ? Create New Account",
+  AppStrings.createNewAccount: "Create New Account",
+  AppStrings.dontHaveAccount: "Don`t Have Account ?",
   AppStrings.register: "Register",
   AppStrings.introductionSubHeading:
       "Ask, explore and book all online health services right in your fingertip"
           .capitalize!,
   AppStrings.introductionHeading: "\"Your Health In Digital Hands\"",
   AppStrings.createNewAccountSubtitle:
-      "Create account so you can explore and use all features of Healio app",
-  AppStrings.alreadyHaveAccount: "Already Have Account ? Login",
+      "Create account so you can explore and use all features of Careio app",
+  AppStrings.alreadyHaveAccount: "Already Have Account ?",
   AppStrings.forgetPasswordSubtitle:
       "fill in your phone number and an OTP will be sent to your phone via SMS"
           .capitalize!,
-  AppStrings.sendOtp: "Send Otp",
+  AppStrings.sendOtp: "Send Code",
   AppStrings.codeSent: "Code Sent",
   AppStrings.codeSentSubtitle:
       "Code Has Been Sent To Your Phone Number Via SMS ",
@@ -30,8 +31,8 @@ Map<String, String> en = {
       "Try to use a password that you can easily remember".capitalize!,
   AppStrings.savePassword: "Save Password",
   AppStrings.saveAndContinue: "Save & Continue",
-  AppStrings.goodEvening: "Good evening",
-  AppStrings.goodMorning: "Good morning",
+  AppStrings.goodEvening: "Good Evening",
+  AppStrings.goodMorning: "Good Morning",
   AppStrings.finalSetup: "Final Setup",
   AppStrings.pharmacies: "Pharmacies",
   AppStrings.doctors: "Doctors",
@@ -131,6 +132,7 @@ Map<String, String> en = {
   AppStrings.showNearBy : "Order by distance",
   AppStrings.orderByRating : "Order by rating",
   AppStrings.byClinic : "by clinic",
+  AppStrings.bySpecialism : "by specialism",
   AppStrings.rial : "Rial",
   AppStrings.selectPaymentMethod: "Please select a payment method",
   AppStrings.selectTime: "Please select the appointment time",

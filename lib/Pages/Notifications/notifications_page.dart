@@ -32,7 +32,18 @@ class NotificationsPage extends StatelessWidget {
                 ),
                 child: ConnectivityWidget(
                   child: PagedListView<int, model.Notification>(
+
                     builderDelegate: PagedChildBuilderDelegate<model.Notification>(
+                      newPageProgressIndicatorBuilder: (_)=> Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: SpinKitFadingCircle(
+                          color: AppColors.primaryColor,
+                        ),
+                      ),
+                      animateTransitions: true,
+                      noItemsFoundIndicatorBuilder: (_)=> Center(
+                        child: NoDataWidget(message: "No Notifications Yet!", top: 0),
+                      ),
                       firstPageProgressIndicatorBuilder: (_) =>
                           SpinKitFadingCircle(
                             color: AppColors.primaryColor,

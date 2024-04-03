@@ -48,7 +48,7 @@ class DoctorHealthCenterActiveTimeWidget extends StatelessWidget{
             Align(
               alignment: AlignmentDirectional.centerStart,
               child: Wrap(
-                children: activeTimes.map((time) => TimeSlotItem(time: "${time.from} - ${time.to}")).toList(),
+                children: activeTimes.map((time) => TimeSlotItem(time: "${time.time12(time.from)} - ${time.time12(time.to)}")).toList(),
               ),
             )
           ],

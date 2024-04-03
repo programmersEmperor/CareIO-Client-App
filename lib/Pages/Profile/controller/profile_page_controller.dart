@@ -81,8 +81,7 @@ class ProfilePageController extends GetxController
   }
 
   void showImageSelector(BuildContext context) {
-    AnimationController controller =
-        BottomSheet.createAnimationController(this);
+    AnimationController controller = BottomSheet.createAnimationController(this);
     controller.duration = 500.milliseconds;
     controller.reverseDuration = 300.milliseconds;
     controller.drive(CurveTween(curve: Curves.fastEaseInToSlowEaseOut));

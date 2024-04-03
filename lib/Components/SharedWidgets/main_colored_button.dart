@@ -10,6 +10,7 @@ class MainColoredButton extends StatelessWidget {
   final VoidCallback? onPress;
   final double? elevation;
   final double fontSize;
+  Color? color;
   RxBool? isLoading = false.obs;
   MainColoredButton({
     super.key,
@@ -17,8 +18,11 @@ class MainColoredButton extends StatelessWidget {
     this.onPress,
     this.elevation,
     this.isLoading,
+    this.color,
     this.fontSize = 14,
-  });
+  }) {
+    this.color = this.color ?? AppColors.primaryColor;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +37,8 @@ class MainColoredButton extends StatelessWidget {
           ),
           elevation:
               MaterialStatePropertyAll(onPress == null ? 0 : elevation ?? 15),
-          shadowColor: MaterialStatePropertyAll(AppColors.primaryColor),
-          backgroundColor: MaterialStatePropertyAll(
-              onPress == null ? Colors.black26 : AppColors.primaryColor),
+          shadowColor: MaterialStatePropertyAll(this.color),
+          backgroundColor: MaterialStatePropertyAll(onPress == null ? Colors.black26 : this.color),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.sp),

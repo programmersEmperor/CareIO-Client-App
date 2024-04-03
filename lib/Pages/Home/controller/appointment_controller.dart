@@ -70,12 +70,6 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
     }
   }
 
-  void showRatingBottomSheet({required int appointmentId}) {
-    Get.bottomSheet(RatingWidget(
-      appointmentId: appointmentId,
-    ));
-  }
-
   // actions
   void rateAppointment({required int appointmentId, required int rating}) async {
     try {
@@ -159,6 +153,12 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
         loading: cancelLoading,
         onTap: () => cancelAppointment(id: appointment.id),
         appointment: appointment));
+  }
+
+  void showRatingBottomSheet({required int appointmentId}) {
+    Get.bottomSheet(RatingWidget(
+      appointmentId: appointmentId,
+    ));
   }
 
   void confirmRescheduleAppointment({required Appointment appointment}) {

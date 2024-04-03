@@ -80,15 +80,14 @@ class DoctorProfile extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(15.sp)),
                                           child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15.sp),
+                                            borderRadius: BorderRadius.circular(15.sp),
                                             child: controller.doctor.avatar == null
                                                 ? Padding(
-                                              padding: EdgeInsets.all(15),
+                                              padding: EdgeInsets.all(15.sp),
                                               child: SvgPicture.asset(
                                                 'assets/svgs/doctor_icon.svg',
-                                                height: 90.sp,
-                                                width: 90.sp,
+                                                height: 50.sp,
+                                                width: 50.sp,
                                                 color: AppColors.primaryColor,
                                               ),
                                             )
@@ -152,7 +151,7 @@ class DoctorProfile extends StatelessWidget {
                                                   if(controller.doctor.rating != null)...[
                                                     Icon(
                                                       Icons.star,
-                                                      color: Colors.orange,
+                                                      color: Colors.amber,
                                                       size: 15.sp,
                                                     ),
                                                     Text(

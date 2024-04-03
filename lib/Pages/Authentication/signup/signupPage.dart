@@ -108,13 +108,29 @@ class SignupPage extends StatelessWidget {
                         height: 15.sp,
                       ),
                       TextButton(
-                        onPressed: () => Get.toNamed(LoginPage.id),
-                        child: Text(
-                          AppStrings.alreadyHaveAccount.tr,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10.sp,
-                              color: Colors.black54),
+                        onPressed: () => Get.offNamed(LoginPage.id),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppStrings.alreadyHaveAccount.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10.sp,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 6.sp,
+                            ),
+                            Text(
+                              AppStrings.login.tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10.sp,
+                                  color: AppColors.primaryColor,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(

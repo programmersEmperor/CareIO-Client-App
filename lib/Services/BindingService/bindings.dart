@@ -19,7 +19,7 @@ import 'package:get/get.dart';
 class BindingService extends Bindings {
   @override
   void dependencies() {
-    Get.put(ConnectivityHandler());
+    Get.put(ConnectivityHandler(), permanent: true);
     Get.lazyPut(() => AuthenticationApiService(), fenix: true);
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => AiBotApiService(), fenix: true);
@@ -34,6 +34,6 @@ class BindingService extends Bindings {
     Get.lazyPut(() => WalletsApiService(), fenix: true);
     Get.lazyPut(() => BookAppointmentController(), fenix: true);
     Get.put(SpecializationApiService() , permanent: true);
-    Get.put(LocalizationHelper());
+    Get.put(LocalizationHelper(), permanent: true);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,17 @@ class RatingWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 15.sp,
+            ),
+            decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(100.h)
+            ),
+            height: 4.sp,
+            width: 80.sp,
+          ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15.sp),
             child: Text(
@@ -38,11 +50,11 @@ class RatingWidget extends StatelessWidget {
             direction: Axis.horizontal,
             itemCount: 5,
             glow: true,
-            glowColor: AppColors.primaryColor,
+            glowColor: Colors.amber,
             itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
             itemBuilder: (context, _) => Icon(
               Icons.star,
-              color: AppColors.primaryColor,
+              color: Colors.amber,
             ),
             onRatingUpdate: (value) {
               rating = int.parse(value.toString().split('.').first);
@@ -52,7 +64,7 @@ class RatingWidget extends StatelessWidget {
             padding: EdgeInsets.all(15.sp),
             child: MainColoredButton(
               isLoading: controller.ratingLoading,
-              text: "Save",
+              text: "Rate",
               onPress: () {
                 controller.rateAppointment(
                     appointmentId: appointmentId, rating: rating);

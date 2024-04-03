@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
@@ -25,7 +26,11 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.sp, vertical: 25.sp),
+      padding: EdgeInsets.only(
+          right: 20.sp,
+          left: 20.sp,
+          bottom: 20.sp
+      ),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
@@ -33,11 +38,25 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
               topRight: Radius.circular(15.sp))),
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AutoSizeText(
-            "Cancel appointment for",
-            style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
+          Container(
+            margin: EdgeInsets.symmetric(
+              vertical: 15.sp,
+            ),
+            decoration: BoxDecoration(
+                color: Colors.black26,
+                borderRadius: BorderRadius.circular(100.h)
+            ),
+            height: 4.sp,
+            width: 80.sp,
+          ),
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: AutoSizeText(
+              "Cancel appointment for",
+              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
+            ),
           ),
           SizedBox(
             height: 4.h,
@@ -149,8 +168,9 @@ class CancelAppointmentConfirmSheet extends StatelessWidget {
           ),
           MainColoredButton(
             isLoading: loading,
-            text: "Confirm cancellation",
+            text: AppStrings.cancel.tr,
             onPress: onTap,
+            color: Colors.red,
           ),
         ],
       ),

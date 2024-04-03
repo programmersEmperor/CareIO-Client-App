@@ -1,3 +1,4 @@
+import 'package:ai_health_assistance/LifeCycleController.dart';
 import 'package:ai_health_assistance/Localization/localization_helper.dart';
 import 'package:ai_health_assistance/Pages/splash/splashPage.dart';
 import 'package:ai_health_assistance/Routing/app_routes.dart';
@@ -35,6 +36,7 @@ void main() async {
   timeago.setLocaleMessages('ar', timeago.ArMessages());
   timeago.setLocaleMessages('ar_short', timeago.ArShortMessages());
 
+  Get.put(LifeCycleController(), permanent: true);
   await Hive.initFlutter();
   runApp(const MyApp());
 }

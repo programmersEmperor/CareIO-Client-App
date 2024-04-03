@@ -5,6 +5,7 @@ class AppStrings {
   static const password = 'password';
   static const forgetPassword = 'forgetPassword';
   static const createNewAccount = 'createNewAccount';
+  static const dontHaveAccount = 'dontHaveAccount';
   static const createNewAccountSubtitle = 'createNewAccountSubtitle';
   static const name = 'name';
   static const confirmPassword = 'confirm password';
@@ -121,6 +122,7 @@ class AppStrings {
   static const showNearBy = 'showNearBy';
   static const orderByRating = 'orderByRating ';
   static const byClinic = 'byClinic';
+  static const bySpecialism = 'bySpecialism';
   static const rial = 'rial';
   static const selectPaymentMethod = 'selectPaymentMethod';
   static const selectTime = 'selectTime';

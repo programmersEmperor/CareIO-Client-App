@@ -77,7 +77,7 @@ class IntroductionPage extends StatelessWidget {
                       Expanded(
                         child: MainColoredButton(
                           text: AppStrings.login.tr,
-                          onPress: () => Get.toNamed(LoginPage.id),
+                          onPress: () => Get.offNamed(LoginPage.id),
                         ),
                       ),
                       Expanded(
