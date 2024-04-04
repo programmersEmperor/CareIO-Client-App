@@ -42,7 +42,7 @@ class AiIntroBottomSheet extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: 20.sp, vertical: 20.sp),
                     child: Text(
-                      'Introducing our new Healio AI assistance',
+                      'Introducing our new Careio AI assistance',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20.0.sp,
