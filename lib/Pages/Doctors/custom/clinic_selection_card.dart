@@ -2,10 +2,8 @@ import 'package:ai_health_assistance/Models/Clinic.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'package:sizer/sizer.dart';
 
 class ClinicSelectionCard extends StatelessWidget{
@@ -39,14 +37,9 @@ class ClinicSelectionCard extends StatelessWidget{
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.sp),
-                        image: healthCenter.avatar != null
-                            ? DecorationImage(
+                        image: DecorationImage(
                             image: CachedNetworkImageProvider(
-                                healthCenter.avatar ?? ""))
-                            : const DecorationImage(
-                          image: AssetImage("assets/images/hosptial.jpg"),
-                          fit: BoxFit.cover,
-                        )),
+                                healthCenter.avatar ?? ""))),
                     height: 30.sp,
                     width: 30.sp,
                   ),

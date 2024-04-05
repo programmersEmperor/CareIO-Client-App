@@ -1,6 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/hospital_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
@@ -10,7 +9,6 @@ import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_healthCenter_ac
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/experience_card.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/hospital_profile.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';

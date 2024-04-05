@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:ai_health_assistance/Components/SharedWidgets/timeslot_item.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/ActiveTime.dart';
-import 'package:ai_health_assistance/Models/Clinic.dart';
 import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Models/Experience.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';

@@ -1,18 +1,8 @@
-import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:intl/intl.dart';
 
-/// id : 10
-/// status : 10
-/// bookedAt : ""
-/// patientName : "string"
-/// healthCenter : "string"
-/// section : "string"
-/// clinic : "string"
-/// wallet : "string"
-/// price : 10.5
 
 class Appointment {
   Appointment({

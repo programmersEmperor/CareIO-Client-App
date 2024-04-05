@@ -1,14 +1,10 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/back_circle_button.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Clinics/clinic_profile.dart';
-import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_statics_divider.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/category_grid_element.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/custom/top_requested_doctors_card.dart';
-import 'package:ai_health_assistance/Pages/Hospitals/hopitals_page.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
-import 'package:ai_health_assistance/Pages/doctors/custom/doctor_statics.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -98,22 +94,34 @@ class HospitalProfile extends StatelessWidget {
                                               child: Hero(
                                                 tag:
                                                     "hospital${controller.healthCenter.id}",
-                                                child: controller.healthCenter
-                                                            .avatar !=
-                                                        null
+                                                child: controller.healthCenter.avatar != null
                                                     ? CachedNetworkImage(
-                                                        imageUrl:
-                                                            '${controller.healthCenter.avatar}',
-                                                        fit: BoxFit.cover,
-                                                        height: 90.sp,
-                                                        width: 90.sp,
-                                                      )
-                                                    : Image.asset(
-                                                        "assets/images/hosptial.jpg",
-                                                        fit: BoxFit.cover,
-                                                        height: 90.sp,
-                                                        width: 90.sp,
-                                                      ),
+                                                  fadeInCurve: Curves.linear,
+                                                  placeholder: (context, string) => Container(
+                                                      height: 90.sp,
+                                                      width: 90.sp,
+                                                      decoration: BoxDecoration(
+                                                          color: AppColors.secondaryColor),
+                                                      child: Icon(
+                                                        Boxicons.bx_building_house,
+                                                        size: 50.sp,
+                                                        color: AppColors.primaryColor,
+                                                      )),
+                                                  imageUrl: controller.healthCenter.avatar!,
+                                                  width: 90.sp,
+                                                  height: 90.sp,
+                                                  fit: BoxFit.cover,
+                                                )
+                                                    : Container(
+                                                    height: 90.sp,
+                                                    width: 90.sp,
+                                                    decoration: BoxDecoration(
+                                                        color: AppColors.secondaryColor),
+                                                    child: Icon(
+                                                      Boxicons.bx_building_house,
+                                                      size: 50.sp,
+                                                      color: AppColors.primaryColor,
+                                                    )),
                                               ),
                                             ),
                                           ),

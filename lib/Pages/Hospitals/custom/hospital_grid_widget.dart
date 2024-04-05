@@ -43,11 +43,7 @@ class HospitalGridWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       child: Hero(
                         tag: "hospital${healthCenter.id}",
-                        child: Image.asset(
-                          'assets/images/hosptial.jpg',
-                          fit: BoxFit.cover,
-                          width: 35.w,
-                        ),
+                        child: SizedBox.shrink()
                       ),
                     ),
                   ),

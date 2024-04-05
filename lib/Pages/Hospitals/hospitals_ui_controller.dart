@@ -52,16 +52,11 @@ class HospitalsUiController extends GetxController {
   }
 
   Future<Position> _determinePosition() async {
-    debugPrint("mutasim");
-    bool serviceEnabled;
+    late bool serviceEnabled;
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-    // if (!serviceEnabled) {
-    //
-    //   return Future.error('Location services are disabled.');
-    // }
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {

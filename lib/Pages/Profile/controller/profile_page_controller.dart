@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Plan.dart';
 import 'package:ai_health_assistance/Models/client.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/home_page_controller.dart';
-import 'package:ai_health_assistance/Pages/Home/home_main_page.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/change_language_sheet.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/logout_bottom_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';

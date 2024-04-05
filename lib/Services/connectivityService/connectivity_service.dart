@@ -8,7 +8,6 @@ class ConnectivityHandler extends GetxController {
   Connectivity connectivity = Connectivity();
   Rx<bool> isOnline = true.obs;
   Function(bool isOnline) connectionChange = (isOnline) {
-    // debugPrint('screen event in onInit');
   };
   Future<void> refreshOnline() async {
     ConnectivityResult result = await connectivity.checkConnectivity();
@@ -28,29 +27,8 @@ class ConnectivityHandler extends GetxController {
       debugPrint('internet connection is : ${isOnline.value}');
 
       if (isOnline.isFalse) {
-        // Flushbar(
-        //   message: 'noInternetConnection'.tr,
-        //   icon: const Icon(CupertinoIcons.info_circle,
-        //       color: AppColors.primaryColor),
-        //   duration: const Duration(seconds: 6),
-        // ).show(Get.context!);
-      }
 
-      debugPrint('current route: ${Get.currentRoute}');
-      if (isOnline.isTrue && Get.currentRoute.isNotEmpty) {
-        // Flushbar(
-        //   message: 'nowOnline'.tr,
-        //   icon: const Icon(CupertinoIcons.checkmark_circle,
-        //       color: AppColors.greenColor),
-        //   duration: const Duration(seconds: 6),
-        // ).show(Get.context!);
       }
-
-      // if (isOnline.isTrue && Get.find<UserSession>().user != null) {
-      //   debugPrint('network listen');
-      //   initApp();
-      //   Get.find<ProfileController>().updateUserBalance();
-      // }
     });
 
     super.onInit();

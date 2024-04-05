@@ -29,12 +29,7 @@ class TopRatedPharmacyCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12.sp),
-                  child: Image.asset(
-                    "assets/images/hosptial.jpg",
-                    height: 15.h,
-                    fit: BoxFit.cover,
-                    width: 33.w,
-                  ),
+                  child: SizedBox.shrink()
                 ),
                 SizedBox(
                   height: 5.sp,

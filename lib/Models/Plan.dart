@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 Plan planFromJson(String str) => Plan.fromJson(json.decode(str));
 String planToJson(Plan data) => json.encode(data.toJson());

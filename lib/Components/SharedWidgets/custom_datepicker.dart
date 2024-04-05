@@ -1,8 +1,5 @@
-import 'package:ai_health_assistance/Models/HealthCenter.dart';
-import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 typedef SelectableDayPredicate = bool Function(DateTime day);

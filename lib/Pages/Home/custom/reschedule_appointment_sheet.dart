@@ -2,11 +2,9 @@ import 'package:ai_health_assistance/Components/SharedWidgets/custom_datepicker.
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
-import 'package:ai_health_assistance/Models/DoctorDetails.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Booking/book_appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Booking/custom/book_timeslot_chip.dart';
-import 'package:ai_health_assistance/Pages/Doctors/controller/doctor_profile_ui_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_state_title_widget.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -305,10 +303,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                                 time: controller.times[i],
                                                 onTapTime: (time) =>
                                                     controller.onTapTime(time),
-                                                isSelected:
-                                                    controller.selectedTime == null
-                                                        ? false.obs
-                                                        : (controller.selectedTime!
+                                                isSelected: (controller.selectedTime
                                                                     .value ==
                                                                 controller.times[i])
                                                             .obs,

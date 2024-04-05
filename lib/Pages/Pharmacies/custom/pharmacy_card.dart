@@ -39,12 +39,12 @@ class PharmacyCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.sp),
                         border: Border.all(
                             color: AppColors.scaffoldColor, width: 3.sp),
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            "assets/images/hosptial.jpg",
-                          ),
-                        ),
+                        // image: const DecorationImage(
+                        //   fit: BoxFit.cover,
+                        //   image: AssetImage(
+                        //     "assets/images/hosptial.jpg",
+                        //   ),
+                        // ),
                       ),
                     ),
                   ),

@@ -148,12 +148,6 @@ class ChatUiController extends GetxController with GetTickerProviderStateMixin {
       appendToChat(content: response.data['result']['response'], role: 'dr');
     } on DioException catch (e) {
       addOrRemoveChatLoading(delete: true);
-
-      // if (e.response != null) {
-      //   appendToChat(content: e.response?.data['message'], role: 'dr');
-      // }
-      // appendToChat(content: e.message ?? "Error $e", role: 'dr');
-
       textController.clear();
     }
   }

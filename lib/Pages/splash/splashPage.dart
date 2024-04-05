@@ -10,7 +10,7 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SplashUiPageController controller = Get.put(SplashUiPageController());
+    Get.put(SplashUiPageController());
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
       appBar: PreferredSize(

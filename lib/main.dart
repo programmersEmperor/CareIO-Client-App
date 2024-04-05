@@ -19,11 +19,9 @@ import 'package:timezone/standalone.dart' as tz;
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // NotificationServiceHandler.showLocalNotification(message.notification!.toMap());
   if(message.data['status'] != null && message.data['status'] == AppointmentStatus.accepted){
     NotificationServiceHandler.scheduleLocalNotification(message.data);
   }
-
 }
 
 void main() async {

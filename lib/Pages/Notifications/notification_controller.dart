@@ -5,13 +5,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class NotificationController extends GetxController {
-  // List<noti.Notification> notifications = [
-  //   noti.Notification(
-  //       id: 1, title: 'Hello', body: "Hello", createdAt: "now", isRead: false),
-  //   noti.Notification(
-  //       id: 2, title: 'Hi', body: "Hi", createdAt: "2 min ago", isRead: true)
-  // ];
-  final _pageSize = 10;
+
   final PagingController<int, model.Notification> pagingController = PagingController(firstPageKey: 1);
   final NotificationApiService _apiService = Get.find<NotificationApiService>();
 

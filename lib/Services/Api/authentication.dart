@@ -53,11 +53,6 @@ class AuthenticationApiService {
     }
   }
 
-  Future<dynamic> logout() async {
-    // var response = await _apiService.getRequest(url: '/patients/logout');
-    // return response;
-  }
-
   Future<dynamic> sendOtp({required Map<String, dynamic> body}) async {
     try {
       isLoading(true);

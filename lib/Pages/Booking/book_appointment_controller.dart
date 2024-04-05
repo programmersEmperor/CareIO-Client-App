@@ -59,7 +59,7 @@ class BookAppointmentController extends GetxController {
     for(HealthCenter healthCenter in healthCenters){
       final bool succeeded = healthCenter.clinics.any((clinic) {
         if(clinicId == null) return clinic.activeTimes.any((activeTime) => activeTime.day == day);
-        else return clinic.id! == clinicId! && clinic.activeTimes.any((activeTime) => activeTime.day == day) ;
+        else return clinic.id! == clinicId && clinic.activeTimes.any((activeTime) => activeTime.day == day) ;
       });
       if(succeeded){
         filteredHealthCenters.add(healthCenter);
@@ -72,13 +72,6 @@ class BookAppointmentController extends GetxController {
   void onTapTime(BookAvailableTime time) {
     selectedTime(time);
     debugPrint(selectedTime.value.time);
-    // if (selectedTimes.contains(time.time)) {
-    //   selectedTimes.remove(time.time);
-    // } else {
-    //   selectedTimes.add(time.time);
-    // }
-
-    // debugPrint(selectedTimes.length.toString());
   }
 
   void selectWallet(int index) {

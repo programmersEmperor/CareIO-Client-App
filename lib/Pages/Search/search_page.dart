@@ -107,12 +107,7 @@ class SearchPage extends StatelessWidget {
                                       color: Theme.of(context)
                                           .scaffoldBackgroundColor,
                                       width: 3.sp),
-                                  image: const DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      "assets/images/person.jpg",
-                                    ),
-                                  )),
+                                  ),
                             ),
                           ),
                           Expanded(

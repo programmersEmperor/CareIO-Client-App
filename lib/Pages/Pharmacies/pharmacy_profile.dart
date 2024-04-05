@@ -20,8 +20,7 @@ class PharmacyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PharmacyUiProfileController controller =
-        Get.put(PharmacyUiProfileController());
+    Get.put(PharmacyUiProfileController());
     return Scaffold(
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (overflow) {
@@ -80,12 +79,7 @@ class PharmacyProfile extends StatelessWidget {
                                           BorderRadius.circular(15.sp),
                                       child: Hero(
                                         tag: "medicine$index",
-                                        child: Image.asset(
-                                          "assets/images/hosptial.jpg",
-                                          fit: BoxFit.cover,
-                                          height: 90.sp,
-                                          width: 90.sp,
-                                        ),
+                                        child: SizedBox.shrink()
                                       ),
                                     ),
                                   ),

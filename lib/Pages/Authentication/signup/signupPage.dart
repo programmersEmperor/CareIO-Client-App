@@ -136,65 +136,6 @@ class SignupPage extends StatelessWidget {
                       SizedBox(
                         height: 7.h,
                       ),
-                      // Text(
-                      //   "or continue with",
-                      //   style: TextStyle(
-                      //       fontSize: 10.sp,
-                      //       fontWeight: FontWeight.w600,
-                      //       color: AppColors.primaryColor),
-                      // ),
-                      // SizedBox(
-                      //   height: 15.sp,
-                      // ),
-                      // Row(
-                      //   mainAxisSize: MainAxisSize.min,
-                      //   children: [
-                      //     SocialMediaButton(
-                      //       icon: Boxicons.bxl_google,
-                      //       onTap: () {},
-                      //     ),
-                      //     SizedBox(
-                      //       width: 10.sp,
-                      //     ),
-                      //     SocialMediaButton(
-                      //       icon: Boxicons.bxl_facebook,
-                      //       onTap: () {},
-                      //     ),
-                      //   ],
-                      // ),
-                      // Padding(
-                      //   padding: EdgeInsets.symmetric(
-                      //       horizontal: 10.sp, vertical: 20.sp),
-                      //   child: RichText(
-                      //     textAlign: TextAlign.center,
-                      //     text: TextSpan(
-                      //       text:
-                      //           'By clicking the button "Sign up" you agree to all our ',
-                      //       style: TextStyle(
-                      //           color: Colors.black26, fontSize: 8.sp),
-                      //       children: [
-                      //         TextSpan(
-                      //             text: " Terms of service",
-                      //             style: TextStyle(
-                      //                 color: AppColors.primaryColor),
-                      //             recognizer: TapGestureRecognizer()
-                      //               ..onTap = () {}),
-                      //         TextSpan(
-                      //           text: " and",
-                      //           onEnter: (e) {
-                      //             debugPrint('test');
-                      //           },
-                      //         ),
-                      //         TextSpan(
-                      //             text: " Privacy policy",
-                      //             style: TextStyle(
-                      //                 color: AppColors.primaryColor),
-                      //             recognizer: TapGestureRecognizer()
-                      //               ..onTap = () {}),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

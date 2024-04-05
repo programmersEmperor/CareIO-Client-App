@@ -1,11 +1,9 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/connectivity_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/no_data_widget.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/page_header.dart';
-import 'package:ai_health_assistance/Components/SharedWidgets/refresh_indicator_widget.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
-import 'package:ai_health_assistance/Pages/Home/custom/AppointmentsWidget.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_card.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';

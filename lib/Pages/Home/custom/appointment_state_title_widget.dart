@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +69,5 @@ class AppointmentStateTitle extends StatelessWidget {
         ),
       ],
     );
-    return const SizedBox();
   }
 }

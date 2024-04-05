@@ -2,7 +2,6 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Profile/controller/profile_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Profile/custom/profile_item.dart';
 import 'package:ai_health_assistance/Pages/Profile/profile_edit.dart';
-import 'package:ai_health_assistance/Pages/Profile/settings.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

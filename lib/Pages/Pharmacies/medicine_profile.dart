@@ -68,12 +68,7 @@ class MedicineProfile extends StatelessWidget {
                                           BorderRadius.circular(15.sp)),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15.sp),
-                                    child: Image.asset(
-                                      "assets/images/hosptial.jpg",
-                                      fit: BoxFit.cover,
-                                      height: 90.sp,
-                                      width: 90.sp,
-                                    ),
+                                    child: SizedBox.shrink()
                                   ),
                                 ),
                                 SizedBox(

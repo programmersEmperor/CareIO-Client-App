@@ -1,5 +1,4 @@
 import 'package:ai_health_assistance/Services/Api/base/base.dart';
-import 'package:get/get.dart';
 
 class AppointmentApiService {
   final BaseApi _apiService = BaseApi();

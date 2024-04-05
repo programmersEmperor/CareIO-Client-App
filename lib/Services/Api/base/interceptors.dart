@@ -25,7 +25,7 @@ class ApiInterceptors extends Interceptor {
     debugPrint('REQUEST [${options.method}] => PATH: ${options.path}');
 
     options.headers.putIfAbsent('Authorization', () => 'Bearer ${Get.find<UserSession>().token}');
-    options.headers['Accept-Language'] = Get.find<LocalizationHelper>().appliedLocale.value!.languageCode;
+    options.headers['Accept-Language'] = Get.find<LocalizationHelper>().appliedLocale.value.languageCode;
     options.headers['fingerprint'] = await getFingerprint;
     options.headers['deviceToken'] = Get.find<UserSession>().firebaseDeviceToken;
     options.headers['Content-Type'] = "application/json";
@@ -39,10 +39,7 @@ class ApiInterceptors extends Interceptor {
     try {
       debugPrint(
           'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}');
-      // Get.snackbar(
-      //     'Error ${err.response?.statusCode}',
-      //     duration: 5.seconds,
-      //     "In Path ${err.requestOptions.path} \n Message : ${err.message}");
+
 
       var response;
       if (err.message != null) {

@@ -2,7 +2,6 @@ import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_butto
 import 'package:ai_health_assistance/Constants/circular_icon_button.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Search/custom/clinic_chip.dart';
-import 'package:ai_health_assistance/Pages/Search/custom/rating_chip.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +20,8 @@ class FilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int rating = 0;
     int specialismId = 0;
     var selectedIdIndex = RxInt(-1);
-    var selectedRatingIndex = RxInt(-1);
 
     RxBool showNearby = false.obs;
     RxBool showRatingBy = false.obs;
