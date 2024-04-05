@@ -130,5 +130,32 @@ Map<String, String> ar = {
   AppStrings.selectTime: "الرجاء تحديد وقت الموعد",
   AppStrings.insufficientData: "البيانات غير مكتلمة",
   AppStrings.cannotCompleteOperation: "لايمكن اكمال العملية",
+  AppStrings.name: "الاسم",
+  AppStrings.email: "الايميل",
+  AppStrings.confirmLogout: "تاكيد تسجيل الخروج",
+  AppStrings.noDoctorsYet: "لا يوجد اطباء بعد!",
+  AppStrings.noHealthCentersYet: "لا يوجد مراكز صحية بعد!",
+  AppStrings.confirmRescheduling: "تاكيد اعادة الجدولة",
+  AppStrings.ratingAppointments: "قييم الموعد الطبي",
+  AppStrings.rate: "تقييم",
+  AppStrings.aiIntro: "نقدم لكم مساعدنا الطبي الجديد Careio",
+  AppStrings.checkYourHealth: "افحص صحتك",
+  AppStrings.askCareioAboutYourHealth: "اسئل Careio عن صحتك",
+  AppStrings.DoctorAndHealthCenter: "الاطباء والمراكز الصحية",
+  AppStrings.GetInfoAboutOurDoctorsAndHealthCenters: "احصل على معلومات عن اطبائنا ومراكزنا الصحية",
+  AppStrings.medicine: "الادوية",
+  AppStrings.getInfoAboutYourMedicine: "احصل على معلومات عن دوائك",
+  AppStrings.coolLetsStart: "حسنا, لنبدا!",
+
+  AppStrings.appointmentCanceled: "تم الغاء الموعد",
+  AppStrings.passwordIsNotIdentical: "كلمات المرور غير متطابقة",
+  AppStrings.codeMustBe6Digits: "يجب ان يحتوي الكود على 6 ارقام",
+  AppStrings.ratingPosted: "تم التقييم بنجاح",
+  AppStrings.appointmentReschedule: "تم تغيير وقت الموعد",
+  AppStrings.timeNotSelected: "يجب اختيار وقت الموعد",
+  AppStrings.today: "اليوم",
+  AppStrings.appointmentAdded: "تم ارسال طلب الموعد",
+
+
 
 };

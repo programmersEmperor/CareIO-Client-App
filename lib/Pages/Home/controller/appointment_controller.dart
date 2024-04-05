@@ -72,6 +72,7 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
 
   // actions
   void rateAppointment({required int appointmentId, required int rating}) async {
+    String message= "";
     try {
       ratingLoading(true);
       var response = await _apiService.rateAppointment(id: appointmentId, rating: rating);
@@ -83,15 +84,17 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
 
         Get.close(0);
         showSnack(
-            title: "Rating posted",
-            description: "We appreciate your feedback thank you :)");
+            title: AppStrings.ratingPosted.tr,
+            description: message);
       }
     } catch (e) {
       ratingLoading(false);
+      showSnack(title: AppStrings.cannotCompleteOperation, description: message);
     }
   }
 
   void cancelAppointment({required int id}) async {
+    String message = "";
     try{
       if (cancelLoading.isTrue) return;
 
@@ -99,35 +102,38 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
       var response = await _apiService.cancelAppointment(id: id);
       cancelLoading(false);
       if (response == null) return;
+      message = response.data['message'];
 
       if (response.data['result'].isEmpty) {
         appointmentsPagingControllers[AppointmentTypes.canceled.index].refresh();
         appointmentsPagingControllers[AppointmentTypes.upcoming.index].refresh();
 
         Get.close(0);
-        showSnack(title: "Appointment canceled", description: "Your appointment has been canceled");
+        showSnack(title: AppStrings.appointmentCanceled.tr, description: message);
         NotificationServiceHandler.unscheduleLocalNotification(id);
       }
     }
     catch(e){
       cancelLoading(false);
+      showSnack(title: AppStrings.cannotCompleteOperation.tr, description: message);
+
     }
   }
 
   void rescheduleAppointment({required Appointment appointment, required String date, required String time}) async {
+    String message = "";
     try {
       if (cancelLoading.isTrue) return;
 
       if (time.isEmpty) {
-        showSnack(
-            title: "Time not selected",
-            description: "Please select a time slot to reschedule");
+        showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.timeNotSelected.tr);
         return;
       }
       cancelLoading(true);
       var response = await _apiService.rescheduleAppointment(id: appointment.id, date: date, time: time);
       cancelLoading(false);
       if (response == null) return;
+      message = response.data['message'];
 
       if (response.data['result'].isEmpty) {
         appointmentsPagingControllers[AppointmentTypes.upcoming.index].refresh();
@@ -139,11 +145,12 @@ class AppointmentController extends GetxController with GetTickerProviderStateMi
         }
 
         Get.close(0);
-        showSnack(title: "Appointment Rescheduled", description: "Your appointment has been rescheduled to $date at $time");
+        showSnack(title: AppStrings.appointmentReschedule.tr, description: message);
         NotificationServiceHandler.unscheduleLocalNotification(appointment.id);
       }
     } catch (e) {
       cancelLoading(false);
+      showSnack(title: AppStrings.cannotCompleteOperation.tr, description: message);
     }
   }
 

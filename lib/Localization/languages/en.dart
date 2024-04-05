@@ -138,6 +138,34 @@ Map<String, String> en = {
   AppStrings.selectTime: "Please select the appointment time",
   AppStrings.insufficientData: "Insufficient Data",
   AppStrings.cannotCompleteOperation: "Cannot complete the operation",
+  AppStrings.name: "name",
+  AppStrings.email: "email",
+  AppStrings.confirmLogout: "Confirm Logout",
+  AppStrings.noDoctorsYet: "No Doctors Yet!",
+  AppStrings.noHealthCentersYet: "No Health Centers Yet!",
+  AppStrings.confirmRescheduling: "Confirm Rescheduling",
+  AppStrings.ratingAppointments: "Rate the Appointment",
+  AppStrings.rate: "Rate",
+  AppStrings.aiIntro: "Introducing our new Careio AI assistance",
+  AppStrings.checkYourHealth: "Check Your Health",
+  AppStrings.askCareioAboutYourHealth: "Ask Careio about your health",
+  AppStrings.DoctorAndHealthCenter: "Doctor & Health Centers",
+  AppStrings.GetInfoAboutOurDoctorsAndHealthCenters: "Get Information about our doctors and health centers",
+  AppStrings.medicine: "medicine",
+  AppStrings.getInfoAboutYourMedicine: "Get information about your medicine",
+  AppStrings.coolLetsStart: "Cool, Let's start!",
+
+  AppStrings.appointmentCanceled: "Appointment Canceled",
+  AppStrings.passwordIsNotIdentical: "password is not identical",
+  AppStrings.codeMustBe6Digits: "Code Must be 6 digits",
+  AppStrings.ratingPosted: "Rating Posted",
+  AppStrings.appointmentReschedule: "Appointment Reschedule",
+  AppStrings.timeNotSelected: "You must select time for the appointment",
+  AppStrings.today: "Today",
+  AppStrings.appointmentAdded: "Appointment Requested",
+
+
+
 
 
 };

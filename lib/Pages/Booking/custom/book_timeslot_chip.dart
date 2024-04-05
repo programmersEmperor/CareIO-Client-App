@@ -42,6 +42,7 @@ class BookTimeSlot extends StatelessWidget {
               ),
               Text(
                 time.time12,
+                textDirection: TextDirection.ltr,
               ),
               SizedBox(
                 width: 8.sp,

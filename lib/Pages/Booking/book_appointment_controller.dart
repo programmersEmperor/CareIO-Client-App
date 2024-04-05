@@ -38,8 +38,7 @@ class BookAppointmentController extends GetxController {
   void handleDayTitle({required DateTime date}) {
     selectDate = DateFormat('yyyy-MM-dd').format(date).toString();
     var _isToday = DateFormat('yyyy-MM-dd').format(DateTime.now()) == DateFormat('yyyy-MM-dd').format(date);
-    debugPrint("is Today $_isToday");
-    day(_isToday ? "Today" : DateFormat('yyyy-MM-dd').format(date).toString());
+    day(_isToday ? AppStrings.today.tr : DateFormat.MEd(Get.locale?.languageCode).format(date).toString());
   }
 
   Future<void> getDoctorDetails({required int id}) async{
@@ -119,6 +118,7 @@ class BookAppointmentController extends GetxController {
     required int doctorId,
     required int clinicId,
   }) async {
+    String message = "";
     try {
 
       final Wallet? wallet = wallets.firstWhereOrNull((wallet) => wallet.selected.isTrue);
@@ -153,6 +153,7 @@ class BookAppointmentController extends GetxController {
       var response = await _apiService.bookAppointment(body: body);
       bookLoading(false);
       if (response == null) return;
+      message = response.data['message'];
 
       debugPrint(response.data['result'].toString());
 
@@ -163,22 +164,13 @@ class BookAppointmentController extends GetxController {
 
         Get.close(0);
         showSnack(
-            title: "Payment completed",
-            description:
-                "You have booked new appointment in $selectDate at ${selectedTime.value.time}  ");
+            title: AppStrings.appointmentAdded.tr,
+            description: message);
       }
-    } catch (e) {
+    }
+    catch (e) {
       bookLoading(false);
-      if (selectedTime.value.time.isEmpty) {
-        showSnack(
-            title: "No time selected",
-            description: "you have to pick at least one time ");
-        return;
-      }
-
-      showSnack(title: "Payment method", description: "Select payment method");
-
-      debugPrint(e.toString());
+      showSnack(title: AppStrings.cannotCompleteOperation, description: message);
     }
   }
 }

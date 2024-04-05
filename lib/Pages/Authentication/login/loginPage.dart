@@ -76,15 +76,15 @@ class LoginPage extends StatelessWidget {
                   key: controller.loginFormKey,
                   child: Column(
                     children: [
-                      const TextInputField(
-                        name: 'phone',
+                      TextInputField(
+                        name: AppStrings.phone,
                         inputType: TextInputType.phone,
                       ),
                       SizedBox(
                         height: 15.sp,
                       ),
-                      const TextInputField(
-                        name: 'password',
+                      TextInputField(
+                        name: AppStrings.password,
                         inputType: TextInputType.text,
                         password: true,
                       ),

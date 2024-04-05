@@ -136,7 +136,7 @@ class ProfileEditPage extends StatelessWidget {
                             height: 15.sp,
                           ),
                           TextInputField(
-                            name: 'name',
+                            name: AppStrings.name.tr,
                             required: true,
                             controller: controller.name,
                           ),

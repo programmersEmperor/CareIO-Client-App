@@ -128,4 +128,33 @@ class AppStrings {
   static const selectTime = 'selectTime';
   static const insufficientData = "insufficientData";
   static const cannotCompleteOperation = "cannotCompleteOperation";
+  static const email = "email";
+  static const confirmLogout = "confirmLogout";
+  static const noDoctorsYet = "noDoctorsYet";
+  static const noHealthCentersYet = "noHealthCentersYet";
+  static const confirmRescheduling = "confirmRescheduling";
+  static const ratingAppointments = "ratingAppointments";
+  static const rate = "rate";
+  static const aiIntro = "aiIntro"; //Introducing our new Careio AI assistance
+  static const checkYourHealth = "CheckYourHealth";
+  static const askCareioAboutYourHealth = "askCareioAboutYourHealth";
+  static const DoctorAndHealthCenter = "DoctorAndHealthCenter";
+  static const GetInfoAboutOurDoctorsAndHealthCenters = "GetInfoAboutOurDoctorsAndHealthCenters";
+  static const medicine = "medicine";
+  static const getInfoAboutYourMedicine = "getInfoAboutYourMedicine";
+  static const coolLetsStart = "coolLetsStart";
+
+  static const appointmentCanceled = 'appointmentCanceled';
+  static const passwordIsNotIdentical = 'passwordIsNotIdentical';
+  static const codeMustBe6Digits = 'codeMustBe6Digits';
+  static const ratingPosted = 'ratingPosted';
+  static const appointmentReschedule = 'appointmentReschedule';
+  static const timeNotSelected = 'timeNotSelected';
+  static const today = 'today';
+  static const appointmentAdded = 'appointmentAdded';
+
+
+
+
+
 }

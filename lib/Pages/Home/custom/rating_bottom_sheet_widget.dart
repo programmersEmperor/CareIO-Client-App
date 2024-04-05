@@ -40,7 +40,7 @@ class RatingWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15.sp),
             child: Text(
-              "Rate your appointment",
+              AppStrings.ratingAppointments.tr,
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
           ),
@@ -64,7 +64,7 @@ class RatingWidget extends StatelessWidget {
             padding: EdgeInsets.all(15.sp),
             child: MainColoredButton(
               isLoading: controller.ratingLoading,
-              text: "Rate",
+              text: AppStrings.rate.tr,
               onPress: () {
                 controller.rateAppointment(
                     appointmentId: appointmentId, rating: rating);

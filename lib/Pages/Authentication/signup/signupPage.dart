@@ -75,23 +75,23 @@ class SignupPage extends StatelessWidget {
                   key: controller.signupFormKey,
                   child: Column(
                     children: [
-                      const TextInputField(
-                        name: 'phone',
+                      TextInputField(
+                        name: AppStrings.phone,
                         inputType: TextInputType.phone,
                       ),
                       SizedBox(
                         height: 15.sp,
                       ),
-                      const TextInputField(
-                        name: 'password',
+                      TextInputField(
+                        name: AppStrings.password,
                         inputType: TextInputType.text,
                         password: true,
                       ),
                       SizedBox(
                         height: 15.sp,
                       ),
-                      const TextInputField(
-                        name: 'confirm Password',
+                      TextInputField(
+                        name: AppStrings.confirmPassword,
                         inputType: TextInputType.text,
                         password: true,
                       ),
@@ -99,7 +99,7 @@ class SignupPage extends StatelessWidget {
                         height: 20.sp,
                       ),
                       MainColoredButton(
-                        text: "Sign up",
+                        text: AppStrings.signup.tr,
                         fontSize: 12.sp,
                         isLoading: controller.isLoading,
                         onPress: controller.signup,

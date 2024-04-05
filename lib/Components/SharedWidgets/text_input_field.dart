@@ -106,7 +106,7 @@ class TextInputField extends StatelessWidget {
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.sp),
                 borderSide: const BorderSide(color: Colors.redAccent)),
-            labelText: enableLabel ? name.capitalize : null,
+            labelText: enableLabel ? name.tr.capitalize : null,
             errorStyle: TextStyle(
               fontSize: 10.sp,
             ),

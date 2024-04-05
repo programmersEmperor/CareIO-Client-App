@@ -36,7 +36,7 @@ class DoctorProfileUiController extends GetxController {
         100.h);
   }
 
-  var activeTimeSlotWidget = const Wrap().obs;
+  // var activeTimeSlotWidget = const Wrap().obs;
 
   List<Wrap> timeslotsWidgets = [];
   List<TimeSlotItem> timeslotsItems = [];
@@ -60,7 +60,7 @@ class DoctorProfileUiController extends GetxController {
     timeslotsItems.clear();
     for (var time in timeSlots) {
       if (time.day == index) {
-        timeslotsItems.add(TimeSlotItem(time: "${time.from} - ${time.to}"));
+        timeslotsItems.add(TimeSlotItem(from: time.time12(time.from), to:time.time12(time.to)));
       }
     }
 
@@ -87,7 +87,7 @@ class DoctorProfileUiController extends GetxController {
   }
 
   void onTapDayTimeSlot(int index) {
-    activeTimeSlotWidget(setTimeSlots(index));
+    // activeTimeSlotWidget(setTimeSlots(index));
     if (currentSelectedIndex.value == index) return;
     dayTimeSlotList[index].setIsSelected = true;
     dayTimeSlotList[currentSelectedIndex.value].setIsSelected = false;

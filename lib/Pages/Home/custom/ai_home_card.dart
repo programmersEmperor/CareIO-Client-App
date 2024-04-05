@@ -32,9 +32,8 @@ class AiHomeCard extends StatelessWidget {
                   height: 18.h,
                   child: Stack(
                     children: [
-                      Positioned(
-                        left:
-                            Get.locale == const Locale('ar', 'AR') ? 290 : -50,
+                      PositionedDirectional(
+                        start: -40,
                         top: -20,
                         child: Opacity(
                             opacity: 0.3,
@@ -49,9 +48,8 @@ class AiHomeCard extends StatelessWidget {
                                       MediaQuery.of(context).size.width * 0.30,
                                 ))),
                       ),
-                      Positioned(
-                        right:
-                            Get.locale == const Locale('ar', 'AR') ? 110 : -90,
+                      PositionedDirectional(
+                        end: -90,
                         top: -40,
                         child: Opacity(
                           opacity: 0.3,

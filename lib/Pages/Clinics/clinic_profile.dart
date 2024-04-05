@@ -191,7 +191,7 @@ class ClinicProfile extends StatelessWidget {
                                         ),
                                         animateTransitions: true,
                                         noItemsFoundIndicatorBuilder: (_)=> Center(
-                                          child: NoDataWidget(message: "No Doctors Yet!", top: 0),
+                                          child: NoDataWidget(message: AppStrings.noDoctorsYet.tr, top: 0),
                                         ),
                                     firstPageProgressIndicatorBuilder: (_) =>
                                         SpinKitFadingCircle(

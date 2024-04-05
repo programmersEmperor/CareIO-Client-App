@@ -75,8 +75,8 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                     key: controller.newPasswordFormKey,
                     child: Column(
                       children: [
-                        const TextInputField(
-                          name: 'new password',
+                        TextInputField(
+                          name: AppStrings.newPassword,
                           inputType: TextInputType.text,
                           password: true,
                           required: true,
@@ -85,7 +85,7 @@ class NewPasswordPage extends GetView<AuthenticationController> {
                           height: 15.sp,
                         ),
                         const TextInputField(
-                          name: 'confirm password',
+                          name: AppStrings.confirmPassword,
                           inputType: TextInputType.text,
                           password: true,
                         ),

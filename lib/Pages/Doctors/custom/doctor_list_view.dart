@@ -1,4 +1,5 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/no_data_widget.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
@@ -34,7 +35,7 @@ class DoctorsListView extends StatelessWidget {
             ),
             animateTransitions: true,
             noItemsFoundIndicatorBuilder: (_)=> Center(
-              child: NoDataWidget(message: "No Doctors Yet!", top: 0),
+              child: NoDataWidget(message: AppStrings.noDoctorsYet.tr, top: 0),
             ),
             itemBuilder: (context, item, index) => DoctorListWidget(
               doctor: item,

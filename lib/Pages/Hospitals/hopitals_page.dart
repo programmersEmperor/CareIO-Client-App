@@ -47,7 +47,7 @@ class HospitalsPage extends StatelessWidget {
                       ),
                       animateTransitions: true,
                       noItemsFoundIndicatorBuilder: (_)=> Center(
-                        child: NoDataWidget(message: "No health centers Yet!", top: 0),
+                        child: NoDataWidget(message: AppStrings.noHealthCentersYet.tr, top: 0),
                       ),
                       firstPageProgressIndicatorBuilder: (_) =>
                           SpinKitFadingCircle(

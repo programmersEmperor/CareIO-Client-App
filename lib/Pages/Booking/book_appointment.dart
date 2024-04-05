@@ -29,6 +29,7 @@ class BookAppointment extends StatelessWidget {
   Widget build(BuildContext context) {
     BookAppointmentController controller = Get.find<BookAppointmentController>();
     controller.selectClinic(doctor.healthCenters.first.clinics.first, doctor);
+    controller.handleDayTitle(date: DateTime.now());
     // controller.selectedClinicId.value = doctor.healthCenters!.first.clinics.first.id!;
     // controller.getTimes(id: doctor.id!, clinicId: doctor.healthCenters!.first.clinics.first.id!);
     return SizedBox(
@@ -204,7 +205,7 @@ class BookAppointment extends StatelessWidget {
                                     Get.dialog(
                                       CustomDatePicker(
                                         selectableDayPredicate: (date){
-                                          if(date.isBefore(DateTime.now().toLocal())){
+                                          if(date.isBefore(DateTime.now().subtract(Duration(days: 1)).toLocal())){
                                             return false;
                                           }
 
@@ -282,23 +283,31 @@ class BookAppointment extends StatelessWidget {
                 SizedBox(
                   height: 15.sp,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AutoSizeText(
-                      AppStrings.choosePaymentMethod.tr,
-                      style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
-                    ),
-                    Obx(() =>
-                        Visibility(
-                          visible: controller.selectedClinicPrice.value != null,
-                          child: AutoSizeText(
-                            "${controller.selectedClinicPrice.value.toString()} ${AppStrings.rial.tr}",
-                            style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                    ),
-                  ],
+                AutoSizeText(
+                  AppStrings.price.tr,
+                  style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 15.sp,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10.sp),
+                  alignment: AlignmentDirectional.centerStart,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.sp)),
+                  height: 50.sp,
+                  child: AutoSizeText(
+                    '${controller.selectedClinicPrice.value!.toString()} ${AppStrings.rial.tr}' ,
+                    style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.sp,
+                ),
+                AutoSizeText(
+                  AppStrings.choosePaymentMethod.tr,
+                  style: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.bold),
                 ),
                 ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),

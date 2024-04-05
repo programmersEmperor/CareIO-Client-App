@@ -36,6 +36,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
     BookAppointmentController controller = Get.put(BookAppointmentController(), tag: "reschedule");
     controller.getTimes(id: appointment.doctor.id!, clinicId: appointment.healthCenter.clinics.first.id!);
     controller.getDoctorDetails(id: appointment.doctor.id!);
+    controller.handleDayTitle(date: DateTime.now());
 
     return AnimatedSize(
       duration: const Duration(milliseconds: 1500),
@@ -201,7 +202,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               AutoSizeText(
-                                "Available timeslots",
+                                AppStrings.availableTimes.tr,
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 10.sp,
@@ -247,7 +248,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                               ),
                                         )   : CustomDatePicker(
                                           selectableDayPredicate: (date){
-                                            if(date.isBefore(DateTime.now().toLocal())){
+                                            if(date.isBefore(DateTime.now().subtract(Duration(days: 1)).toLocal())){
                                               return false;
                                             }
                                             final List<HealthCenter> healthCenters = controller.filterHealthCentersByDay(healthCenters: controller.doctorDetails!.healthCenters, day: date.weekday, clinicId: appointment.healthCenter.clinics.first.id!);
@@ -266,7 +267,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                                       );
                                     },
                                     child: Text(
-                                      "Another date",
+                                      AppStrings.anotherDate.tr,
                                       style: TextStyle(
                                         color: AppColors.primaryColor,
                                         fontSize: 8.sp,
@@ -329,7 +330,7 @@ class RescheduleAppointmentConfirmSheet extends StatelessWidget {
                   ),
                   MainColoredButton(
                     isLoading: loading,
-                    text: "Confirm reschedule",
+                    text: AppStrings.confirmRescheduling.tr,
                     onPress: () {
                       onTap(controller.selectDate, controller.selectedTime.value.time);
                     },

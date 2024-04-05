@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/Authentication/completeSetup/complete_setup.dart';
 import 'package:ai_health_assistance/Pages/Authentication/introduction.dart';
 import 'package:ai_health_assistance/Pages/Authentication/login/loginPage.dart';
@@ -179,9 +180,7 @@ class AuthenticationController extends GetxController
     if (!newPasswordFormKey.currentState!.saveAndValidate()) return;
     if (newPasswordFormKey.currentState!.value['new password'] !=
         newPasswordFormKey.currentState!.value['confirm password']) {
-      showSnack(
-          title: "password not match",
-          description: "Password has to be matched to continue");
+      showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.passwordIsNotIdentical.tr);
 
       return;
     }
@@ -196,7 +195,7 @@ class AuthenticationController extends GetxController
   Future<void> signup() async {
     if (!_isFormValid(signup: true)) return;
     if (formValues['password'] != formValues['confirm Password']) {
-      showSnack(title: "Password", description: "Password is not identical");
+      showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.passwordIsNotIdentical.tr);
       return;
     }
 
@@ -220,7 +219,7 @@ class AuthenticationController extends GetxController
 
   Future<void> verifyOtp({bool isReset = false}) async {
     if (otpCode.isEmpty || otpCode.length != 6) {
-      showSnack(title: "OTP", description: "OTP must be 6 digit");
+      showSnack(title: AppStrings.cannotCompleteOperation, description: AppStrings.codeMustBe6Digits.tr);
       return;
     }
 

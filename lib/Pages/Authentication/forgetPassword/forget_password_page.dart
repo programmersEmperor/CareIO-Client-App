@@ -78,8 +78,8 @@ class ForgetPasswordPage extends GetView<AuthenticationController> {
                     key: controller.sendOtpFormKey,
                     child: Column(
                       children: [
-                        const TextInputField(
-                          name: 'phone',
+                        TextInputField(
+                          name: AppStrings.phone,
                           inputType: TextInputType.phone,
                         ),
                         SizedBox(

@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Services/Api/base/interceptors.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as getx;
 
 class BaseApi {
   late Dio _dio;
@@ -33,12 +34,20 @@ class BaseApi {
 
   Future<Response> getRequest(
       {required String url, Map<String, dynamic>? params}) async {
-    Response response = await _dio.get(url, queryParameters: params ?? {});
+    final query = {
+      ...params ?? {},
+      'Accept-Language': getx.Get.locale?.languageCode
+    };
+    Response response = await _dio.get(url, queryParameters: query);
     return response;
   }
 
   Future<Response> postRequest({required url, required dynamic body,Map<String, dynamic>? params}) async {
-    Response response = await _dio.post(url, data: body, queryParameters: params);
+    final query = {
+      ...params ?? {},
+      'Accept-Language': getx.Get.locale?.languageCode
+    };
+    Response response = await _dio.post(url, data: body, queryParameters: query);
     return response;
   }
 

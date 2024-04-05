@@ -1,10 +1,12 @@
 import 'package:ai_health_assistance/Components/SharedWidgets/ai_introduction_card.dart';
 import 'package:ai_health_assistance/Components/SharedWidgets/main_colored_button.dart';
+import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Pages/AiAssistance/chatbot_page.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
@@ -17,8 +19,7 @@ class AiIntroBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-          EdgeInsets.only(top: 30.sp, left: 10.sp, right: 10.sp, bottom: 20.sp),
+      padding: EdgeInsets.only(top: 30.sp, left: 10.sp, right: 10.sp, bottom: 20.sp),
       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(15.sp)),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -42,7 +43,7 @@ class AiIntroBottomSheet extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: 20.sp, vertical: 20.sp),
                     child: Text(
-                      'Introducing our new Careio AI assistance',
+                      AppStrings.aiIntro.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 20.0.sp,
@@ -56,22 +57,22 @@ class AiIntroBottomSheet extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.sp, vertical: 10.sp),
-            child: const Column(
+            child: Column(
               children: [
                 AiIntroductionCard(
-                  icon: Icons.check_outlined,
-                  header: 'Heading one',
-                  subtitle: 'Subtitle one ',
+                  icon: Icons.health_and_safety,
+                  header: AppStrings.checkYourHealth.tr,
+                  subtitle: AppStrings.askCareioAboutYourHealth.tr,
                 ),
                 AiIntroductionCard(
-                  icon: Icons.safety_check_outlined,
-                  header: 'Heading one',
-                  subtitle: 'Subtitle one ',
+                  icon: Icons.healing,
+                  header: AppStrings.DoctorAndHealthCenter.tr,
+                  subtitle: AppStrings.GetInfoAboutOurDoctorsAndHealthCenters.tr,
                 ),
                 AiIntroductionCard(
-                  icon: Icons.lens_blur_outlined,
-                  header: 'Heading one',
-                  subtitle: 'Subtitle one ',
+                  icon: Icons.medical_services_rounded,
+                  header: AppStrings.medicine.tr,
+                  subtitle: AppStrings.getInfoAboutYourMedicine.tr,
                 ),
               ],
             ),
@@ -100,7 +101,7 @@ class AiIntroBottomSheet extends StatelessWidget {
           ),
           const Spacer(),
           MainColoredButton(
-              text: "Cool, Let's start !",
+              text: AppStrings.coolLetsStart.tr,
               onPress: () {
                 Get.close(0);
                 Get.find<UserSession>().setUserOpenChat();
