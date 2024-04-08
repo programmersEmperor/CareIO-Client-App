@@ -194,7 +194,7 @@ class AuthenticationController extends GetxController
 
   Future<void> signup() async {
     if (!_isFormValid(signup: true)) return;
-    if (formValues['password'] != formValues['confirm Password']) {
+    if (formValues[AppStrings.password] != formValues[AppStrings.confirmPassword]) {
       showSnack(title: AppStrings.cannotCompleteOperation.tr, description: AppStrings.passwordIsNotIdentical.tr);
       return;
     }

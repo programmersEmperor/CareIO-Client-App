@@ -163,7 +163,7 @@ Map<String, String> en = {
   AppStrings.timeNotSelected: "You must select time for the appointment",
   AppStrings.today: "Today",
   AppStrings.appointmentAdded: "Appointment Requested",
-
+  AppStrings.signup: "Sign up"
 
 
 
