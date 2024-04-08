@@ -155,6 +155,7 @@ Map<String, String> ar = {
   AppStrings.timeNotSelected: "يجب اختيار وقت الموعد",
   AppStrings.today: "اليوم",
   AppStrings.appointmentAdded: "تم ارسال طلب الموعد",
-  AppStrings.signup: "انشاء الحساب"
+  AppStrings.signup: "انشاء الحساب",
+  AppStrings.confirmPassword: "تاكيد كلمة المرور"
 
 };
