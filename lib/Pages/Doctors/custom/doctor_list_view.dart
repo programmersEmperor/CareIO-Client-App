@@ -3,6 +3,7 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Doctors/controller/doctors_page_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -23,8 +24,10 @@ class DoctorsListView extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 0.sp),
       child: RefreshIndicator(
-        onRefresh: () =>
-            Future.sync(() => controller.pagingController.refresh()),
+        onRefresh: () async {
+          await Get.find<ConnectivityHandler>().refreshOnline();
+          controller.pagingController.refresh();
+        },
         child: PagedListView<int, Doctor>(
           builderDelegate: PagedChildBuilderDelegate<Doctor>(
             newPageProgressIndicatorBuilder: (_)=> Padding(

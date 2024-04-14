@@ -6,6 +6,7 @@ import 'package:ai_health_assistance/Constants/custom_search_bar.dart';
 import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/HealthCenter.dart';
 import 'package:ai_health_assistance/Pages/Hospitals/hospitals_ui_controller.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -34,8 +35,10 @@ class HospitalsPage extends StatelessWidget {
             Expanded(
               child: RefreshIndicator(
                 color: AppColors.primaryColor,
-                onRefresh: () =>
-                    Future.sync(() => controller.pagingController.refresh()),
+                onRefresh: () async {
+                  await Get.find<ConnectivityHandler>().refreshOnline();
+                  controller.pagingController.refresh();
+                },
                 child: ConnectivityWidget(
                   child: PagedListView<int, HealthCenter>(
                     builderDelegate: PagedChildBuilderDelegate<HealthCenter>(

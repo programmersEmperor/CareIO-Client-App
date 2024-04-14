@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Doctor.dart';
 import 'package:ai_health_assistance/Pages/Clinics/clinics_ui_controller.dart';
 import 'package:ai_health_assistance/Pages/Doctors/custom/doctor_list_widget.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -154,9 +155,11 @@ class ClinicProfile extends StatelessWidget {
                     delegate: SliverChildListDelegate([
                   RefreshIndicator(
                     color: AppColors.primaryColor,
-                    onRefresh: () => Future.sync(
-                      () => controller.pagingController.refresh(),
-                    ),
+                    onRefresh: () async {
+                      await Get.find<ConnectivityHandler>().refreshOnline();
+                      controller.pagingController.refresh();
+                    },
+
                     child: Obx(() => ConnectivityWidget(
                           child: controller.isLoading.isTrue
                               ? SizedBox(

@@ -8,6 +8,7 @@ import 'package:ai_health_assistance/Pages/Profile/custom/change_language_sheet.
 import 'package:ai_health_assistance/Pages/Profile/custom/logout_bottom_sheet.dart';
 import 'package:ai_health_assistance/Services/Api/patient.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:ai_health_assistance/Utils/bottom_sheet_handle.dart';
 import 'package:ai_health_assistance/Utils/snackbar.dart';
@@ -186,7 +187,7 @@ class ProfilePageController extends GetxController
 
   Future<void> refreshPatientData() async {
     try{
-
+      await Get.find<ConnectivityHandler>().refreshOnline();
       var response = await Get.find<PatientApiService>().getPatientData();
       if(response.statusCode != 200) return;
       final patientData = {"patient": response.data['result']};

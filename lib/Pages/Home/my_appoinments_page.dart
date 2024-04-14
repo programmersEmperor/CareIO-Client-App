@@ -5,6 +5,7 @@ import 'package:ai_health_assistance/Localization/app_strings.dart';
 import 'package:ai_health_assistance/Models/Appointment.dart';
 import 'package:ai_health_assistance/Pages/Home/controller/appointment_controller.dart';
 import 'package:ai_health_assistance/Pages/Home/custom/appointment_card.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:ai_health_assistance/Theme/app_colors.dart';
 import 'package:ai_health_assistance/Utils/appointment_enum.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +76,10 @@ class MyAppointmentsPage extends StatelessWidget {
             controller: controller.tabController,
             children: AppointmentTypes.values.map((type) => RefreshIndicator(
               color: AppColors.primaryColor,
-              onRefresh:  () => Future.sync(
-                    () => controller.appointmentsPagingControllers[type.index].refresh(),
-              ),
+              onRefresh: () async {
+                await Get.find<ConnectivityHandler>().refreshOnline();
+                controller.appointmentsPagingControllers[type.index].refresh();
+              },
               child: ConnectivityWidget(
                 child: PagedListView<int, Appointment>(
                   builderDelegate: PagedChildBuilderDelegate<Appointment>(

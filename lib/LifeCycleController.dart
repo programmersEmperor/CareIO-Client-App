@@ -7,16 +7,19 @@ class LifeCycleController extends SuperController {
   @override
   void onDetached() {
     log("LifeCycleController onDetached ");
+    Get.find<ConnectivityHandler>().refreshOnline();
   }
 
   @override
   void onInactive() {
     log("LifeCycleController onInactive ");
+    Get.find<ConnectivityHandler>().refreshOnline();
   }
 
   @override
   void onPaused() {
     log("LifeCycleController OnPaused ");
+    Get.find<ConnectivityHandler>().refreshOnline();
   }
 
   @override

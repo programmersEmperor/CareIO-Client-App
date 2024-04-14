@@ -209,7 +209,7 @@ class BookAppointment extends StatelessWidget {
                                             return false;
                                           }
 
-                                          final List<HealthCenter> healthCenters = Get.find<DoctorProfileUiController>().filterHealthCentersByDay(healthCenters: doctor.healthCenters, day: date.weekday);
+                                          final List<HealthCenter> healthCenters = Get.find<DoctorProfileUiController>().filterHealthCentersByDay(healthCenters: doctor.healthCenters, day: date.weekday, clinicId: controller.selectedClinicId.value);
                                           return healthCenters.isNotEmpty;
                                         },
                                         onDateChange: (date) {

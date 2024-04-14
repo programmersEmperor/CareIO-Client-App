@@ -31,13 +31,12 @@ abstract class NotificationServiceHandler {
     Get.find<UserSession>().firebaseDeviceToken =
         await messaging.getToken() ?? "";
 
-    if (await flutterLocalNotificationsPlugin
+    await flutterLocalNotificationsPlugin
             .resolvePlatformSpecificImplementation<
                 AndroidFlutterLocalNotificationsPlugin>()
-            ?.requestNotificationsPermission() ??
-        false) {
+            ?.requestNotificationsPermission();
+
       _configureLocalNotifications();
-    }
   }
 
   static Future<void> _configureLocalNotifications() async {

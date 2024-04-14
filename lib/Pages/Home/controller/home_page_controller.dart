@@ -18,6 +18,7 @@ import 'package:ai_health_assistance/Services/Api/patient.dart';
 import 'package:ai_health_assistance/Services/Api/specializations.dart';
 import 'package:ai_health_assistance/Services/Api/wallets.dart';
 import 'package:ai_health_assistance/Services/CachingService/user_session.dart';
+import 'package:ai_health_assistance/Services/connectivityService/connectivity_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_boxicons/flutter_boxicons.dart';
 import 'package:get/get.dart';
@@ -80,6 +81,7 @@ class HomePageController extends GetxController
   }
 
   Future<void> fetchHomeInfo() async {
+    await Get.find<ConnectivityHandler>().refreshOnline();
     var response = await apiService.fetchHomeInfo(body: {'page': 1});
     if (response == null) return;
     debugPrint("Response is ${response.data['result']}");

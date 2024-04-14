@@ -53,6 +53,7 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingService(),
         scrollBehavior: const ScrollBehaviorModified(),
         getPages: AppRoutes.allRoutes,
+        locale: Get.deviceLocale,
         fallbackLocale: const Locale("en", "US"),
         debugShowCheckedModeBanner: false,
         translations: LocalizationHelper(),
