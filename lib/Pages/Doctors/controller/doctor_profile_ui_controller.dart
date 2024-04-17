@@ -92,7 +92,7 @@ class DoctorProfileUiController extends GetxController {
     dayTimeSlotList[currentSelectedIndex.value].setIsSelected = false;
     currentSelectedIndex(index);
   }
-
+  //
   @override
   void onInit() {
     scrollController = ScrollController();
