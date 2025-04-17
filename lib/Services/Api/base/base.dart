@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 class BaseApi {
   late Dio _dio;
   final String _apiVersion = 'v1';
+  // final String _domain = 'https://api.careio.app';
+  final String _domain = 'http://195.94.20.60:8000';
   BaseApi() {
     _dio = _configureClient();
     (_dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
@@ -21,7 +23,7 @@ class BaseApi {
     Dio client = Dio();
 
     client.options = BaseOptions(
-      baseUrl: 'https://api.careio.app/api/$_apiVersion/app/',
+      baseUrl: '$_domain/api/$_apiVersion/app/',
     );
     client.interceptors.add(ApiInterceptors());
     client.interceptors.add(LogInterceptor(
